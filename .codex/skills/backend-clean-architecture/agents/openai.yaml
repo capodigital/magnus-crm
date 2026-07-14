@@ -1,0 +1,2 @@
+display_name: backend-clean-architecture
+summary: Use this when modifying backend routes, services, repositories, validation, errors, auth, database logic, or API architecture.

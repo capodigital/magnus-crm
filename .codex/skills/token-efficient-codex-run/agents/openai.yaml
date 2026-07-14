@@ -1,0 +1,2 @@
+display_name: token-efficient-codex-run
+summary: Use this when working in large repositories where Codex should minimize context usage and avoid unnecessary file scanning.

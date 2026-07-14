@@ -1,0 +1,2 @@
+display_name: refactor-large-file
+summary: Use this when a file or module is too large, mixes responsibilities, duplicates logic, or needs safe incremental refactoring.
