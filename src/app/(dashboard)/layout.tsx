@@ -1,6 +1,3 @@
-// Next Imports
-import { redirect } from 'next/navigation'
-
 import Button from '@mui/material/Button'
 
 // Type Imports
@@ -20,8 +17,8 @@ import VerticalFooter from '@components/layout/vertical/Footer'
 import HorizontalFooter from '@components/layout/horizontal/Footer'
 import ScrollToTop from '@core/components/scroll-to-top'
 
-// Auth Imports
-import { auth } from '@/lib/auth'
+// App Context Imports
+import { requireTenantAccess } from '@/lib/app-context'
 
 // Util Imports
 import { getMode, getSystemMode } from '@core/utils/serverHelpers'
@@ -35,11 +32,8 @@ const Layout = async (props: ChildrenType) => {
   const direction = 'ltr'
   const mode = await getMode()
   const systemMode = await getSystemMode()
-  const session = await auth()
 
-  if (!session?.user) {
-    redirect('/login')
-  }
+  await requireTenantAccess()
 
   return (
     <Providers direction={direction}>
