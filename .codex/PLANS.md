@@ -4,7 +4,7 @@
 
 1. Confirm the product shape from `deep-research-report.md` and lock the execution assumptions. Completed.
 2. Map the real repo surface area that will host the CRM shell, tenant routing, and auth. Completed.
-3. Implement the first CRM foundation slice as a verifiable goal, not as a broad rewrite. In progress.
+3. Implement the auth and multi-tenant persistence foundation as a verifiable goal, not as a broad rewrite. Completed.
 4. Expand into WhatsApp, billing, white-label, and hardening only after the foundation is stable. Next.
 
 ## Assumed defaults until overridden
@@ -53,14 +53,16 @@
 - Deliverables:
   - Tenant resolution strategy.
   - Domain strategy.
-  - Prisma schema draft.
+  - Prisma schema and generated client for the tenant core.
   - Security model draft.
-- Skills:
+  - Skills:
   - `backend-clean-architecture`
   - `refactor-large-file`
   - `deep-code-review`
 - Goal output:
   - An architecture spec that developers can implement without guessing.
+- Status:
+  - The first multi-tenant persistence slice now exists in Prisma with tenants, tenant domains, tenant branding, and memberships.
 
 ### Phase 3: App shell and tenant routing
 - Objective: make the app resolve host, tenant, and branding cleanly.
@@ -90,6 +92,8 @@
   - `deep-code-review`
 - Goal output:
   - A secure boundary around private CRM data.
+- Status:
+  - Login, session helpers, proxy guards, and NextAuth type augmentation are in place. Tenant membership enforcement is the next layer.
 
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.
@@ -169,10 +173,10 @@
 
 ## Open questions
 
-1. Which environment keys and provider details are needed to turn on NextAuth in this repo?
+1. Which Google OAuth client ID and secret should we use to enable the Google provider?
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
-3. Do you want a dedicated tenant resolver file or should we infer it from the existing layout and middleware surface first?
-4. Should the first backend slice be auth/session storage or tenant tables and Prisma schema?
+3. Do you want the first tenant-aware query helper to resolve by host only, or also by slug for platform-admin tooling?
+4. Should the first CRM backend slice after auth be WhatsApp webhook ingestion or tenant-aware RBAC checks?
 
 ## Deferred for now
 - Any destructive or broad refactors.

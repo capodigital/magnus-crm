@@ -6,6 +6,8 @@
 - Current package name: `vuexy-mui-nextjs-admin-template`.
 - The repo is a UI-heavy admin template with shared layout, menu, theme, and utility layers already in place.
 - The shell now contains a CRM-oriented home page and route placeholders for inbox, leads, pipeline, billing, and settings.
+- Auth is wired with NextAuth + Prisma, a `proxy.ts` guard, and a credential-plus-Google login surface.
+- Prisma now carries the first tenant core: tenants, tenant domains, tenant branding, and memberships.
 
 ## Key files
 
@@ -22,8 +24,14 @@
 - `src/app/(dashboard)/settings/page.tsx` - workspace settings shell.
 - `src/app/(blank-layout-pages)/login/page.tsx` - login route entry point.
 - `src/views/Login.tsx` - login view component.
+- `src/app/api/auth/[...nextauth]/route.ts` - NextAuth route handler.
+- `src/lib/auth.ts` - NextAuth options, callbacks, and session helper.
+- `src/lib/tenant.ts` - host-based tenant context helper.
+- `src/proxy.ts` - request guard and auth context injector.
 - `src/views/NotFound.tsx` - not-found view component.
 - `src/components/crm/SectionPage.tsx` - shared route shell for CRM sections.
+- `prisma/schema.prisma` - tenant-aware data model and NextAuth tables.
+- `prisma/generated/prisma/` - generated Prisma client for the current schema.
 
 ## Important directories
 
@@ -49,3 +57,4 @@
 
 - A `git status` check was not available from the current workspace view, so this index is based on the filesystem and package metadata.
 - The dashboard home now frames the workspace around leads, conversations, pipeline, billing, and settings instead of generic template content.
+- The remaining external values we still need from the user are the final Google OAuth pair and the Meta WhatsApp / Embedded Signup credentials.
