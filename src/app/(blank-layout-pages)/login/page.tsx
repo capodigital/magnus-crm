@@ -1,6 +1,7 @@
 // Next Imports
-import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+
+import type { Metadata } from 'next'
 
 // Component Imports
 import Login from '@views/Login'
@@ -25,8 +26,10 @@ const LoginPage = async ({ searchParams }: Props) => {
   const mode = await getServerMode()
   const session = await auth()
   const resolvedSearchParams = searchParams ?? {}
+
   const callbackUrl =
     typeof resolvedSearchParams.callbackUrl === 'string' ? resolvedSearchParams.callbackUrl : '/home'
+
   const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
 
   if (session?.user) {

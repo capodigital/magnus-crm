@@ -13,6 +13,7 @@ export const resolveTenantContext = (hostHeader: string | null): TenantContext =
   const host = (hostHeader?.trim().toLowerCase() || platformHost).replace(/\/+$/, '')
   const hostWithoutPort = stripPort(host)
   const platformHostWithoutPort = stripPort(platformHost)
+
   const isPlatformHost =
     host === platformHost ||
     hostWithoutPort === platformHostWithoutPort ||

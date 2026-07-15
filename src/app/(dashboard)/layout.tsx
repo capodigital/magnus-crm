@@ -1,8 +1,7 @@
-// MUI Imports
-import Button from '@mui/material/Button'
-
 // Next Imports
 import { redirect } from 'next/navigation'
+
+import Button from '@mui/material/Button'
 
 // Type Imports
 import type { ChildrenType } from '@core/types'
