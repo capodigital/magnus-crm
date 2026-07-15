@@ -14,6 +14,7 @@
 10. Keep Google OAuth and Meta WhatsApp credentials out of the repo until the user provides the final values.
 11. Resolve tenant access by exact host first, and only fall back to slug matching for platform-managed wildcard subdomains.
 12. Add the first CRM workflow entities directly to Prisma before implementing WhatsApp ingestion routes.
+13. Bootstrap the first real workspace through a reusable CLI-backed service instead of waiting for a settings UI.
 
 ## Rationale
 
@@ -24,3 +25,4 @@
 - A dedicated tenant model keeps auth, membership, and branding concerns separated and makes white-label/domain control easier later.
 - Exact-host-first resolution avoids accidentally treating arbitrary custom domains as trusted tenant slugs.
 - Adding the CRM entities early gives the webhook and inbox work a stable contract to build against.
+- A scriptable bootstrap path unblocks database provisioning, local testing, and early QA while the admin UI is still under construction.

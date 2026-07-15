@@ -13,6 +13,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - A server-only app context helper now resolves request host, session, tenant, and membership in one place.
 - Dashboard access is now tenant-aware: platform-host requests still work with session auth, while tenant-scoped hosts require both a resolved tenant and a matching membership.
 - The Prisma schema and generated client now include the tenant core plus the first CRM domain slice: contacts, leads, conversations, messages, pipelines, and pipeline stages.
+- The repo now includes a reusable workspace bootstrap service and a CLI script to provision the first tenant, owner membership, branding, primary domain, and default pipeline.
 - The repo now has an expanded `.env.example` that lists the initial App, Database, NextAuth, Google, and Meta placeholders we will need.
 - Google OAuth and Meta WhatsApp values are still pending from the user, as requested.
 
@@ -30,11 +31,15 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `.codex/PLANS.md`
 - `.codex/DECISIONS.md`
 - `.codex/PROJECT_INDEX.md`
+- `.env.example`
+- `package.json`
 - `src/app/(dashboard)/layout.tsx`
 - `src/lib/app-context.ts`
 - `src/lib/tenant.ts`
+- `src/lib/workspace-bootstrap.ts`
+- `scripts/bootstrap-workspace.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Add the first repository and bootstrap layer on top of the CRM models so we can create an initial tenant workspace, seed a default pipeline, and prepare for WhatsApp event ingestion.
+Use the bootstrap layer to create the first workspace in the real database, then build the repository and route layer for WhatsApp inbound events and conversation upserts.

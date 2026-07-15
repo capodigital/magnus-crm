@@ -117,6 +117,22 @@
 - Status:
   - The initial CRM data slice now exists in Prisma and the generated client has been refreshed.
 
+### Phase 4.6: Workspace bootstrap
+- Objective: provision the first real tenant workspace against the new schema without depending on unfinished UI.
+- Deliverables:
+  - Reusable bootstrap service.
+  - CLI command for local provisioning.
+  - Owner membership creation.
+  - Branding + primary domain creation.
+  - Default commercial pipeline and stages.
+- Skills:
+  - `backend-clean-architecture`
+  - `codex-progress-journal`
+- Goal output:
+  - A repeatable way to create the first workspace and prepare the database for inbox and webhook work.
+- Status:
+  - A bootstrap service and `npm run bootstrap:workspace` command now exist and are typechecked.
+
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.
 - Deliverables:
@@ -197,8 +213,8 @@
 
 1. Which Google OAuth client ID and secret should we use to enable the Google provider?
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
-3. Should we bootstrap the first tenant and default pipeline through a seed script, an admin route, or a manual SQL/Prisma Studio pass?
-4. Do you want the next backend slice after this data foundation to be WhatsApp webhook ingestion or tenant/workspace bootstrap tooling?
+3. Which concrete tenant slug, tenant name, owner email, and optional owner password should we use when we run the first workspace bootstrap?
+4. Do you want the next backend slice after this bootstrap capability to be WhatsApp webhook ingestion or repository-level CRM upsert services first?
 
 ## Deferred for now
 - Any destructive or broad refactors.

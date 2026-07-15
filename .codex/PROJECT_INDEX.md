@@ -29,12 +29,14 @@
 - `src/lib/auth.ts` - NextAuth options, callbacks, and session helper.
 - `src/lib/app-context.ts` - server-only resolver for request tenant, session, and membership.
 - `src/lib/tenant.ts` - host-based tenant context helper.
+- `src/lib/workspace-bootstrap.ts` - reusable tenant/workspace provisioning service.
 - `src/proxy.ts` - request guard and auth context injector.
 - `src/views/NotFound.tsx` - not-found view component.
 - `src/components/crm/SectionPage.tsx` - shared route shell for CRM sections.
 - `prisma/schema.prisma` - tenant-aware data model and NextAuth tables.
 - `prisma/schema.prisma` - tenant-aware data model, auth tables, and CRM workflow entities.
 - `prisma/generated/prisma/` - generated Prisma client for the current schema.
+- `scripts/bootstrap-workspace.ts` - CLI entry point for creating the first tenant workspace.
 
 ## Important directories
 
@@ -53,6 +55,7 @@
 - `npm run build` - build production output.
 - `npm run lint` - run ESLint across the repo.
 - `npm run lint:fix` - apply automatic lint fixes.
+- `npm run bootstrap:workspace` - provision a tenant, owner membership, branding, primary domain, and default pipeline from env vars.
 - `npm run format` - format `src/**/*.{js,jsx,ts,tsx}` with Prettier.
 - `npm run build:icons` - regenerate the icon CSS bundle.
 
