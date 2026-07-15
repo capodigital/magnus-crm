@@ -33,6 +33,26 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  * 
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
+/**
+ * Model Tenant
+ * 
+ */
+export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
+/**
+ * Model TenantDomain
+ * 
+ */
+export type TenantDomain = $Result.DefaultSelection<Prisma.$TenantDomainPayload>
+/**
+ * Model TenantBranding
+ * 
+ */
+export type TenantBranding = $Result.DefaultSelection<Prisma.$TenantBrandingPayload>
+/**
+ * Model Membership
+ * 
+ */
+export type Membership = $Result.DefaultSelection<Prisma.$MembershipPayload>
 
 /**
  * Enums
@@ -46,11 +66,76 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const TenantMode: {
+  SAAS: 'SAAS',
+  WHITE_LABEL: 'WHITE_LABEL'
+};
+
+export type TenantMode = (typeof TenantMode)[keyof typeof TenantMode]
+
+
+export const TenantBillingMode: {
+  PLATFORM_PLUS_META: 'PLATFORM_PLUS_META',
+  META_ONLY: 'META_ONLY'
+};
+
+export type TenantBillingMode = (typeof TenantBillingMode)[keyof typeof TenantBillingMode]
+
+
+export const TenantStatus: {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type TenantStatus = (typeof TenantStatus)[keyof typeof TenantStatus]
+
+
+export const TenantRole: {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER',
+  AGENT: 'AGENT',
+  VIEWER: 'VIEWER'
+};
+
+export type TenantRole = (typeof TenantRole)[keyof typeof TenantRole]
+
+
+export const DomainKind: {
+  PLATFORM_SUBDOMAIN: 'PLATFORM_SUBDOMAIN',
+  CUSTOM_DOMAIN: 'CUSTOM_DOMAIN',
+  WILDCARD_DOMAIN: 'WILDCARD_DOMAIN'
+};
+
+export type DomainKind = (typeof DomainKind)[keyof typeof DomainKind]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type TenantMode = $Enums.TenantMode
+
+export const TenantMode: typeof $Enums.TenantMode
+
+export type TenantBillingMode = $Enums.TenantBillingMode
+
+export const TenantBillingMode: typeof $Enums.TenantBillingMode
+
+export type TenantStatus = $Enums.TenantStatus
+
+export const TenantStatus: typeof $Enums.TenantStatus
+
+export type TenantRole = $Enums.TenantRole
+
+export const TenantRole: typeof $Enums.TenantRole
+
+export type DomainKind = $Enums.DomainKind
+
+export const DomainKind: typeof $Enums.DomainKind
 
 /**
  * ##  Prisma Client ʲˢ
@@ -212,6 +297,46 @@ export class PrismaClient<
     * ```
     */
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenant`: Exposes CRUD operations for the **Tenant** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tenants
+    * const tenants = await prisma.tenant.findMany()
+    * ```
+    */
+  get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenantDomain`: Exposes CRUD operations for the **TenantDomain** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TenantDomains
+    * const tenantDomains = await prisma.tenantDomain.findMany()
+    * ```
+    */
+  get tenantDomain(): Prisma.TenantDomainDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenantBranding`: Exposes CRUD operations for the **TenantBranding** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TenantBrandings
+    * const tenantBrandings = await prisma.tenantBranding.findMany()
+    * ```
+    */
+  get tenantBranding(): Prisma.TenantBrandingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.membership`: Exposes CRUD operations for the **Membership** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Memberships
+    * const memberships = await prisma.membership.findMany()
+    * ```
+    */
+  get membership(): Prisma.MembershipDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -649,7 +774,11 @@ export namespace Prisma {
     User: 'User',
     Account: 'Account',
     Session: 'Session',
-    VerificationToken: 'VerificationToken'
+    VerificationToken: 'VerificationToken',
+    Tenant: 'Tenant',
+    TenantDomain: 'TenantDomain',
+    TenantBranding: 'TenantBranding',
+    Membership: 'Membership'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -665,7 +794,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -965,6 +1094,302 @@ export namespace Prisma {
           }
         }
       }
+      Tenant: {
+        payload: Prisma.$TenantPayload<ExtArgs>
+        fields: Prisma.TenantFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          findMany: {
+            args: Prisma.TenantFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          create: {
+            args: Prisma.TenantCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          createMany: {
+            args: Prisma.TenantCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          update: {
+            args: Prisma.TenantUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenant>
+          }
+          groupBy: {
+            args: Prisma.TenantGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
+      TenantDomain: {
+        payload: Prisma.$TenantDomainPayload<ExtArgs>
+        fields: Prisma.TenantDomainFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantDomainFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantDomainFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantDomainFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantDomainFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          findMany: {
+            args: Prisma.TenantDomainFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>[]
+          }
+          create: {
+            args: Prisma.TenantDomainCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          createMany: {
+            args: Prisma.TenantDomainCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantDomainCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantDomainDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          update: {
+            args: Prisma.TenantDomainUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantDomainDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantDomainUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantDomainUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantDomainUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantDomainPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantDomainAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenantDomain>
+          }
+          groupBy: {
+            args: Prisma.TenantDomainGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantDomainGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantDomainCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantDomainCountAggregateOutputType> | number
+          }
+        }
+      }
+      TenantBranding: {
+        payload: Prisma.$TenantBrandingPayload<ExtArgs>
+        fields: Prisma.TenantBrandingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantBrandingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantBrandingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantBrandingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantBrandingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          findMany: {
+            args: Prisma.TenantBrandingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+          }
+          create: {
+            args: Prisma.TenantBrandingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          createMany: {
+            args: Prisma.TenantBrandingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantBrandingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantBrandingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          update: {
+            args: Prisma.TenantBrandingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantBrandingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantBrandingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantBrandingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantBrandingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantBrandingPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantBrandingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenantBranding>
+          }
+          groupBy: {
+            args: Prisma.TenantBrandingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantBrandingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantBrandingCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantBrandingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Membership: {
+        payload: Prisma.$MembershipPayload<ExtArgs>
+        fields: Prisma.MembershipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MembershipFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MembershipFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          findFirst: {
+            args: Prisma.MembershipFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MembershipFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          findMany: {
+            args: Prisma.MembershipFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>[]
+          }
+          create: {
+            args: Prisma.MembershipCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          createMany: {
+            args: Prisma.MembershipCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MembershipCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>[]
+          }
+          delete: {
+            args: Prisma.MembershipDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          update: {
+            args: Prisma.MembershipUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          deleteMany: {
+            args: Prisma.MembershipDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MembershipUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MembershipUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>[]
+          }
+          upsert: {
+            args: Prisma.MembershipUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MembershipPayload>
+          }
+          aggregate: {
+            args: Prisma.MembershipAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMembership>
+          }
+          groupBy: {
+            args: Prisma.MembershipGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MembershipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MembershipCountArgs<ExtArgs>
+            result: $Utils.Optional<MembershipCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1077,6 +1502,10 @@ export namespace Prisma {
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
+    tenant?: TenantOmit
+    tenantDomain?: TenantDomainOmit
+    tenantBranding?: TenantBrandingOmit
+    membership?: MembershipOmit
   }
 
   /* Types for Logging */
@@ -1159,11 +1588,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     sessions: number
+    memberships: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   }
 
   // Custom InputTypes
@@ -1191,6 +1622,53 @@ export namespace Prisma {
     where?: SessionWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MembershipWhereInput
+  }
+
+
+  /**
+   * Count Type TenantCountOutputType
+   */
+
+  export type TenantCountOutputType = {
+    domains: number
+    memberships: number
+  }
+
+  export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    domains?: boolean | TenantCountOutputTypeCountDomainsArgs
+    memberships?: boolean | TenantCountOutputTypeCountMembershipsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCountOutputType
+     */
+    select?: TenantCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountDomainsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantDomainWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MembershipWhereInput
+  }
+
 
   /**
    * Models
@@ -1211,6 +1689,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     createdAt: Date | null
+    updatedAt: Date | null
     image: string | null
     role: $Enums.Role | null
     emailVerified: Date | null
@@ -1223,6 +1702,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     createdAt: Date | null
+    updatedAt: Date | null
     image: string | null
     role: $Enums.Role | null
     emailVerified: Date | null
@@ -1235,6 +1715,7 @@ export namespace Prisma {
     email: number
     password: number
     createdAt: number
+    updatedAt: number
     image: number
     role: number
     emailVerified: number
@@ -1249,6 +1730,7 @@ export namespace Prisma {
     email?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     image?: true
     role?: true
     emailVerified?: true
@@ -1261,6 +1743,7 @@ export namespace Prisma {
     email?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     image?: true
     role?: true
     emailVerified?: true
@@ -1273,6 +1756,7 @@ export namespace Prisma {
     email?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     image?: true
     role?: true
     emailVerified?: true
@@ -1358,6 +1842,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     createdAt: Date
+    updatedAt: Date
     image: string | null
     role: $Enums.Role
     emailVerified: Date | null
@@ -1387,6 +1872,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     image?: boolean
     role?: boolean
     emailVerified?: boolean
@@ -1394,6 +1880,7 @@ export namespace Prisma {
     phone?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1402,6 +1889,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     image?: boolean
     role?: boolean
     emailVerified?: boolean
@@ -1414,6 +1902,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     image?: boolean
     role?: boolean
     emailVerified?: boolean
@@ -1426,6 +1915,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     image?: boolean
     role?: boolean
     emailVerified?: boolean
@@ -1433,10 +1923,11 @@ export namespace Prisma {
     phone?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "image" | "role" | "emailVerified" | "name" | "phone", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "updatedAt" | "image" | "role" | "emailVerified" | "name" | "phone", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    memberships?: boolean | User$membershipsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1447,12 +1938,14 @@ export namespace Prisma {
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
+      memberships: Prisma.$MembershipPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string | null
       password: string | null
       createdAt: Date
+      updatedAt: Date
       image: string | null
       role: $Enums.Role
       emailVerified: Date | null
@@ -1854,6 +2347,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    memberships<T extends User$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1887,6 +2381,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly emailVerified: FieldRef<"User", 'DateTime'>
@@ -2115,7 +2610,7 @@ export namespace Prisma {
     /**
      * The data needed to create a User.
      */
-    data?: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
   /**
@@ -2330,6 +2825,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.memberships
+   */
+  export type User$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    where?: MembershipWhereInput
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    cursor?: MembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
   }
 
   /**
@@ -5564,6 +6083,4615 @@ export namespace Prisma {
 
 
   /**
+   * Model Tenant
+   */
+
+  export type AggregateTenant = {
+    _count: TenantCountAggregateOutputType | null
+    _min: TenantMinAggregateOutputType | null
+    _max: TenantMaxAggregateOutputType | null
+  }
+
+  export type TenantMinAggregateOutputType = {
+    id: string | null
+    slug: string | null
+    name: string | null
+    mode: $Enums.TenantMode | null
+    billingMode: $Enums.TenantBillingMode | null
+    status: $Enums.TenantStatus | null
+    timezone: string | null
+    locale: string | null
+    planCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantMaxAggregateOutputType = {
+    id: string | null
+    slug: string | null
+    name: string | null
+    mode: $Enums.TenantMode | null
+    billingMode: $Enums.TenantBillingMode | null
+    status: $Enums.TenantStatus | null
+    timezone: string | null
+    locale: string | null
+    planCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantCountAggregateOutputType = {
+    id: number
+    slug: number
+    name: number
+    mode: number
+    billingMode: number
+    status: number
+    timezone: number
+    locale: number
+    planCode: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantMinAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    mode?: true
+    billingMode?: true
+    status?: true
+    timezone?: true
+    locale?: true
+    planCode?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantMaxAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    mode?: true
+    billingMode?: true
+    status?: true
+    timezone?: true
+    locale?: true
+    planCode?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantCountAggregateInputType = {
+    id?: true
+    slug?: true
+    name?: true
+    mode?: true
+    billingMode?: true
+    status?: true
+    timezone?: true
+    locale?: true
+    planCode?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tenant to aggregate.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tenants
+    **/
+    _count?: true | TenantCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantMaxAggregateInputType
+  }
+
+  export type GetTenantAggregateType<T extends TenantAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenant]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenant[P]>
+      : GetScalarType<T[P], AggregateTenant[P]>
+  }
+
+
+
+
+  export type TenantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantWhereInput
+    orderBy?: TenantOrderByWithAggregationInput | TenantOrderByWithAggregationInput[]
+    by: TenantScalarFieldEnum[] | TenantScalarFieldEnum
+    having?: TenantScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantCountAggregateInputType | true
+    _min?: TenantMinAggregateInputType
+    _max?: TenantMaxAggregateInputType
+  }
+
+  export type TenantGroupByOutputType = {
+    id: string
+    slug: string
+    name: string
+    mode: $Enums.TenantMode
+    billingMode: $Enums.TenantBillingMode
+    status: $Enums.TenantStatus
+    timezone: string | null
+    locale: string | null
+    planCode: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantCountAggregateOutputType | null
+    _min: TenantMinAggregateOutputType | null
+    _max: TenantMaxAggregateOutputType | null
+  }
+
+  type GetTenantGroupByPayload<T extends TenantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    mode?: boolean
+    billingMode?: boolean
+    status?: boolean
+    timezone?: boolean
+    locale?: boolean
+    planCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    domains?: boolean | Tenant$domainsArgs<ExtArgs>
+    branding?: boolean | Tenant$brandingArgs<ExtArgs>
+    memberships?: boolean | Tenant$membershipsArgs<ExtArgs>
+    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    mode?: boolean
+    billingMode?: boolean
+    status?: boolean
+    timezone?: boolean
+    locale?: boolean
+    planCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    mode?: boolean
+    billingMode?: boolean
+    status?: boolean
+    timezone?: boolean
+    locale?: boolean
+    planCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectScalar = {
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    mode?: boolean
+    billingMode?: boolean
+    status?: boolean
+    timezone?: boolean
+    locale?: boolean
+    planCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "mode" | "billingMode" | "status" | "timezone" | "locale" | "planCode" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    domains?: boolean | Tenant$domainsArgs<ExtArgs>
+    branding?: boolean | Tenant$brandingArgs<ExtArgs>
+    memberships?: boolean | Tenant$membershipsArgs<ExtArgs>
+    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TenantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TenantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tenant"
+    objects: {
+      domains: Prisma.$TenantDomainPayload<ExtArgs>[]
+      branding: Prisma.$TenantBrandingPayload<ExtArgs> | null
+      memberships: Prisma.$MembershipPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      slug: string
+      name: string
+      mode: $Enums.TenantMode
+      billingMode: $Enums.TenantBillingMode
+      status: $Enums.TenantStatus
+      timezone: string | null
+      locale: string | null
+      planCode: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenant"]>
+    composites: {}
+  }
+
+  type TenantGetPayload<S extends boolean | null | undefined | TenantDefaultArgs> = $Result.GetResult<Prisma.$TenantPayload, S>
+
+  type TenantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantCountAggregateInputType | true
+    }
+
+  export interface TenantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tenant'], meta: { name: 'Tenant' } }
+    /**
+     * Find zero or one Tenant that matches the filter.
+     * @param {TenantFindUniqueArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantFindUniqueArgs>(args: SelectSubset<T, TenantFindUniqueArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tenant that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantFindUniqueOrThrowArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tenant that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindFirstArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantFindFirstArgs>(args?: SelectSubset<T, TenantFindFirstArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tenant that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindFirstOrThrowArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tenants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tenants
+     * const tenants = await prisma.tenant.findMany()
+     * 
+     * // Get first 10 Tenants
+     * const tenants = await prisma.tenant.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantWithIdOnly = await prisma.tenant.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantFindManyArgs>(args?: SelectSubset<T, TenantFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tenant.
+     * @param {TenantCreateArgs} args - Arguments to create a Tenant.
+     * @example
+     * // Create one Tenant
+     * const Tenant = await prisma.tenant.create({
+     *   data: {
+     *     // ... data to create a Tenant
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantCreateArgs>(args: SelectSubset<T, TenantCreateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tenants.
+     * @param {TenantCreateManyArgs} args - Arguments to create many Tenants.
+     * @example
+     * // Create many Tenants
+     * const tenant = await prisma.tenant.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantCreateManyArgs>(args?: SelectSubset<T, TenantCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tenants and returns the data saved in the database.
+     * @param {TenantCreateManyAndReturnArgs} args - Arguments to create many Tenants.
+     * @example
+     * // Create many Tenants
+     * const tenant = await prisma.tenant.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tenants and only return the `id`
+     * const tenantWithIdOnly = await prisma.tenant.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tenant.
+     * @param {TenantDeleteArgs} args - Arguments to delete one Tenant.
+     * @example
+     * // Delete one Tenant
+     * const Tenant = await prisma.tenant.delete({
+     *   where: {
+     *     // ... filter to delete one Tenant
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantDeleteArgs>(args: SelectSubset<T, TenantDeleteArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tenant.
+     * @param {TenantUpdateArgs} args - Arguments to update one Tenant.
+     * @example
+     * // Update one Tenant
+     * const tenant = await prisma.tenant.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantUpdateArgs>(args: SelectSubset<T, TenantUpdateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tenants.
+     * @param {TenantDeleteManyArgs} args - Arguments to filter Tenants to delete.
+     * @example
+     * // Delete a few Tenants
+     * const { count } = await prisma.tenant.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantDeleteManyArgs>(args?: SelectSubset<T, TenantDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tenants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tenants
+     * const tenant = await prisma.tenant.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantUpdateManyArgs>(args: SelectSubset<T, TenantUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tenants and returns the data updated in the database.
+     * @param {TenantUpdateManyAndReturnArgs} args - Arguments to update many Tenants.
+     * @example
+     * // Update many Tenants
+     * const tenant = await prisma.tenant.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tenants and only return the `id`
+     * const tenantWithIdOnly = await prisma.tenant.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tenant.
+     * @param {TenantUpsertArgs} args - Arguments to update or create a Tenant.
+     * @example
+     * // Update or create a Tenant
+     * const tenant = await prisma.tenant.upsert({
+     *   create: {
+     *     // ... data to create a Tenant
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tenant we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantUpsertArgs>(args: SelectSubset<T, TenantUpsertArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tenants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCountArgs} args - Arguments to filter Tenants to count.
+     * @example
+     * // Count the number of Tenants
+     * const count = await prisma.tenant.count({
+     *   where: {
+     *     // ... the filter for the Tenants we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantCountArgs>(
+      args?: Subset<T, TenantCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tenant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantAggregateArgs>(args: Subset<T, TenantAggregateArgs>): Prisma.PrismaPromise<GetTenantAggregateType<T>>
+
+    /**
+     * Group by Tenant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantGroupByArgs['orderBy'] }
+        : { orderBy?: TenantGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tenant model
+   */
+  readonly fields: TenantFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tenant.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    domains<T extends Tenant$domainsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$domainsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    branding<T extends Tenant$brandingArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandingArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    memberships<T extends Tenant$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tenant model
+   */
+  interface TenantFieldRefs {
+    readonly id: FieldRef<"Tenant", 'String'>
+    readonly slug: FieldRef<"Tenant", 'String'>
+    readonly name: FieldRef<"Tenant", 'String'>
+    readonly mode: FieldRef<"Tenant", 'TenantMode'>
+    readonly billingMode: FieldRef<"Tenant", 'TenantBillingMode'>
+    readonly status: FieldRef<"Tenant", 'TenantStatus'>
+    readonly timezone: FieldRef<"Tenant", 'String'>
+    readonly locale: FieldRef<"Tenant", 'String'>
+    readonly planCode: FieldRef<"Tenant", 'String'>
+    readonly createdAt: FieldRef<"Tenant", 'DateTime'>
+    readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tenant findUnique
+   */
+  export type TenantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant findUniqueOrThrow
+   */
+  export type TenantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant findFirst
+   */
+  export type TenantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant findFirstOrThrow
+   */
+  export type TenantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant findMany
+   */
+  export type TenantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenants to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant create
+   */
+  export type TenantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tenant.
+     */
+    data: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+  }
+
+  /**
+   * Tenant createMany
+   */
+  export type TenantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tenants.
+     */
+    data: TenantCreateManyInput | TenantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tenant createManyAndReturn
+   */
+  export type TenantCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tenants.
+     */
+    data: TenantCreateManyInput | TenantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tenant update
+   */
+  export type TenantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tenant.
+     */
+    data: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+    /**
+     * Choose, which Tenant to update.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant updateMany
+   */
+  export type TenantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tenants.
+     */
+    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    /**
+     * Filter which Tenants to update
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant updateManyAndReturn
+   */
+  export type TenantUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * The data used to update Tenants.
+     */
+    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    /**
+     * Filter which Tenants to update
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant upsert
+   */
+  export type TenantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tenant to update in case it exists.
+     */
+    where: TenantWhereUniqueInput
+    /**
+     * In case the Tenant found by the `where` argument doesn't exist, create a new Tenant with this data.
+     */
+    create: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+    /**
+     * In case the Tenant was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+  }
+
+  /**
+   * Tenant delete
+   */
+  export type TenantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter which Tenant to delete.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant deleteMany
+   */
+  export type TenantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tenants to delete
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant.domains
+   */
+  export type Tenant$domainsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    where?: TenantDomainWhereInput
+    orderBy?: TenantDomainOrderByWithRelationInput | TenantDomainOrderByWithRelationInput[]
+    cursor?: TenantDomainWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TenantDomainScalarFieldEnum | TenantDomainScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.branding
+   */
+  export type Tenant$brandingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    where?: TenantBrandingWhereInput
+  }
+
+  /**
+   * Tenant.memberships
+   */
+  export type Tenant$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    where?: MembershipWhereInput
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    cursor?: MembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant without action
+   */
+  export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TenantDomain
+   */
+
+  export type AggregateTenantDomain = {
+    _count: TenantDomainCountAggregateOutputType | null
+    _min: TenantDomainMinAggregateOutputType | null
+    _max: TenantDomainMaxAggregateOutputType | null
+  }
+
+  export type TenantDomainMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    host: string | null
+    kind: $Enums.DomainKind | null
+    isPrimary: boolean | null
+    verifiedAt: Date | null
+    sslStatus: string | null
+    dnsTarget: string | null
+    redirectToHost: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantDomainMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    host: string | null
+    kind: $Enums.DomainKind | null
+    isPrimary: boolean | null
+    verifiedAt: Date | null
+    sslStatus: string | null
+    dnsTarget: string | null
+    redirectToHost: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantDomainCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    host: number
+    kind: number
+    isPrimary: number
+    verifiedAt: number
+    sslStatus: number
+    dnsTarget: number
+    redirectToHost: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantDomainMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    host?: true
+    kind?: true
+    isPrimary?: true
+    verifiedAt?: true
+    sslStatus?: true
+    dnsTarget?: true
+    redirectToHost?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantDomainMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    host?: true
+    kind?: true
+    isPrimary?: true
+    verifiedAt?: true
+    sslStatus?: true
+    dnsTarget?: true
+    redirectToHost?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantDomainCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    host?: true
+    kind?: true
+    isPrimary?: true
+    verifiedAt?: true
+    sslStatus?: true
+    dnsTarget?: true
+    redirectToHost?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantDomainAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantDomain to aggregate.
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantDomains to fetch.
+     */
+    orderBy?: TenantDomainOrderByWithRelationInput | TenantDomainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantDomainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantDomains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantDomains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TenantDomains
+    **/
+    _count?: true | TenantDomainCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantDomainMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantDomainMaxAggregateInputType
+  }
+
+  export type GetTenantDomainAggregateType<T extends TenantDomainAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenantDomain]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenantDomain[P]>
+      : GetScalarType<T[P], AggregateTenantDomain[P]>
+  }
+
+
+
+
+  export type TenantDomainGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantDomainWhereInput
+    orderBy?: TenantDomainOrderByWithAggregationInput | TenantDomainOrderByWithAggregationInput[]
+    by: TenantDomainScalarFieldEnum[] | TenantDomainScalarFieldEnum
+    having?: TenantDomainScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantDomainCountAggregateInputType | true
+    _min?: TenantDomainMinAggregateInputType
+    _max?: TenantDomainMaxAggregateInputType
+  }
+
+  export type TenantDomainGroupByOutputType = {
+    id: string
+    tenantId: string
+    host: string
+    kind: $Enums.DomainKind
+    isPrimary: boolean
+    verifiedAt: Date | null
+    sslStatus: string | null
+    dnsTarget: string | null
+    redirectToHost: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantDomainCountAggregateOutputType | null
+    _min: TenantDomainMinAggregateOutputType | null
+    _max: TenantDomainMaxAggregateOutputType | null
+  }
+
+  type GetTenantDomainGroupByPayload<T extends TenantDomainGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantDomainGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantDomainGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantDomainGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantDomainGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantDomainSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    host?: boolean
+    kind?: boolean
+    isPrimary?: boolean
+    verifiedAt?: boolean
+    sslStatus?: boolean
+    dnsTarget?: boolean
+    redirectToHost?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantDomain"]>
+
+  export type TenantDomainSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    host?: boolean
+    kind?: boolean
+    isPrimary?: boolean
+    verifiedAt?: boolean
+    sslStatus?: boolean
+    dnsTarget?: boolean
+    redirectToHost?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantDomain"]>
+
+  export type TenantDomainSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    host?: boolean
+    kind?: boolean
+    isPrimary?: boolean
+    verifiedAt?: boolean
+    sslStatus?: boolean
+    dnsTarget?: boolean
+    redirectToHost?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantDomain"]>
+
+  export type TenantDomainSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    host?: boolean
+    kind?: boolean
+    isPrimary?: boolean
+    verifiedAt?: boolean
+    sslStatus?: boolean
+    dnsTarget?: boolean
+    redirectToHost?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantDomainOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "host" | "kind" | "isPrimary" | "verifiedAt" | "sslStatus" | "dnsTarget" | "redirectToHost" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantDomain"]>
+  export type TenantDomainInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantDomainIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantDomainIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $TenantDomainPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TenantDomain"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      host: string
+      kind: $Enums.DomainKind
+      isPrimary: boolean
+      verifiedAt: Date | null
+      sslStatus: string | null
+      dnsTarget: string | null
+      redirectToHost: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenantDomain"]>
+    composites: {}
+  }
+
+  type TenantDomainGetPayload<S extends boolean | null | undefined | TenantDomainDefaultArgs> = $Result.GetResult<Prisma.$TenantDomainPayload, S>
+
+  type TenantDomainCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantDomainFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantDomainCountAggregateInputType | true
+    }
+
+  export interface TenantDomainDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantDomain'], meta: { name: 'TenantDomain' } }
+    /**
+     * Find zero or one TenantDomain that matches the filter.
+     * @param {TenantDomainFindUniqueArgs} args - Arguments to find a TenantDomain
+     * @example
+     * // Get one TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantDomainFindUniqueArgs>(args: SelectSubset<T, TenantDomainFindUniqueArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TenantDomain that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantDomainFindUniqueOrThrowArgs} args - Arguments to find a TenantDomain
+     * @example
+     * // Get one TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantDomainFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantDomainFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantDomain that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainFindFirstArgs} args - Arguments to find a TenantDomain
+     * @example
+     * // Get one TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantDomainFindFirstArgs>(args?: SelectSubset<T, TenantDomainFindFirstArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantDomain that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainFindFirstOrThrowArgs} args - Arguments to find a TenantDomain
+     * @example
+     * // Get one TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantDomainFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantDomainFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TenantDomains that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TenantDomains
+     * const tenantDomains = await prisma.tenantDomain.findMany()
+     * 
+     * // Get first 10 TenantDomains
+     * const tenantDomains = await prisma.tenantDomain.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantDomainWithIdOnly = await prisma.tenantDomain.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantDomainFindManyArgs>(args?: SelectSubset<T, TenantDomainFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TenantDomain.
+     * @param {TenantDomainCreateArgs} args - Arguments to create a TenantDomain.
+     * @example
+     * // Create one TenantDomain
+     * const TenantDomain = await prisma.tenantDomain.create({
+     *   data: {
+     *     // ... data to create a TenantDomain
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantDomainCreateArgs>(args: SelectSubset<T, TenantDomainCreateArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TenantDomains.
+     * @param {TenantDomainCreateManyArgs} args - Arguments to create many TenantDomains.
+     * @example
+     * // Create many TenantDomains
+     * const tenantDomain = await prisma.tenantDomain.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantDomainCreateManyArgs>(args?: SelectSubset<T, TenantDomainCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TenantDomains and returns the data saved in the database.
+     * @param {TenantDomainCreateManyAndReturnArgs} args - Arguments to create many TenantDomains.
+     * @example
+     * // Create many TenantDomains
+     * const tenantDomain = await prisma.tenantDomain.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TenantDomains and only return the `id`
+     * const tenantDomainWithIdOnly = await prisma.tenantDomain.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantDomainCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantDomainCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TenantDomain.
+     * @param {TenantDomainDeleteArgs} args - Arguments to delete one TenantDomain.
+     * @example
+     * // Delete one TenantDomain
+     * const TenantDomain = await prisma.tenantDomain.delete({
+     *   where: {
+     *     // ... filter to delete one TenantDomain
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantDomainDeleteArgs>(args: SelectSubset<T, TenantDomainDeleteArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TenantDomain.
+     * @param {TenantDomainUpdateArgs} args - Arguments to update one TenantDomain.
+     * @example
+     * // Update one TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantDomainUpdateArgs>(args: SelectSubset<T, TenantDomainUpdateArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TenantDomains.
+     * @param {TenantDomainDeleteManyArgs} args - Arguments to filter TenantDomains to delete.
+     * @example
+     * // Delete a few TenantDomains
+     * const { count } = await prisma.tenantDomain.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantDomainDeleteManyArgs>(args?: SelectSubset<T, TenantDomainDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantDomains.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TenantDomains
+     * const tenantDomain = await prisma.tenantDomain.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantDomainUpdateManyArgs>(args: SelectSubset<T, TenantDomainUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantDomains and returns the data updated in the database.
+     * @param {TenantDomainUpdateManyAndReturnArgs} args - Arguments to update many TenantDomains.
+     * @example
+     * // Update many TenantDomains
+     * const tenantDomain = await prisma.tenantDomain.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TenantDomains and only return the `id`
+     * const tenantDomainWithIdOnly = await prisma.tenantDomain.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantDomainUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantDomainUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TenantDomain.
+     * @param {TenantDomainUpsertArgs} args - Arguments to update or create a TenantDomain.
+     * @example
+     * // Update or create a TenantDomain
+     * const tenantDomain = await prisma.tenantDomain.upsert({
+     *   create: {
+     *     // ... data to create a TenantDomain
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TenantDomain we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantDomainUpsertArgs>(args: SelectSubset<T, TenantDomainUpsertArgs<ExtArgs>>): Prisma__TenantDomainClient<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TenantDomains.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainCountArgs} args - Arguments to filter TenantDomains to count.
+     * @example
+     * // Count the number of TenantDomains
+     * const count = await prisma.tenantDomain.count({
+     *   where: {
+     *     // ... the filter for the TenantDomains we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantDomainCountArgs>(
+      args?: Subset<T, TenantDomainCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantDomainCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TenantDomain.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantDomainAggregateArgs>(args: Subset<T, TenantDomainAggregateArgs>): Prisma.PrismaPromise<GetTenantDomainAggregateType<T>>
+
+    /**
+     * Group by TenantDomain.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantDomainGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantDomainGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantDomainGroupByArgs['orderBy'] }
+        : { orderBy?: TenantDomainGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantDomainGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantDomainGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TenantDomain model
+   */
+  readonly fields: TenantDomainFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TenantDomain.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantDomainClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TenantDomain model
+   */
+  interface TenantDomainFieldRefs {
+    readonly id: FieldRef<"TenantDomain", 'String'>
+    readonly tenantId: FieldRef<"TenantDomain", 'String'>
+    readonly host: FieldRef<"TenantDomain", 'String'>
+    readonly kind: FieldRef<"TenantDomain", 'DomainKind'>
+    readonly isPrimary: FieldRef<"TenantDomain", 'Boolean'>
+    readonly verifiedAt: FieldRef<"TenantDomain", 'DateTime'>
+    readonly sslStatus: FieldRef<"TenantDomain", 'String'>
+    readonly dnsTarget: FieldRef<"TenantDomain", 'String'>
+    readonly redirectToHost: FieldRef<"TenantDomain", 'String'>
+    readonly createdAt: FieldRef<"TenantDomain", 'DateTime'>
+    readonly updatedAt: FieldRef<"TenantDomain", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TenantDomain findUnique
+   */
+  export type TenantDomainFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantDomain to fetch.
+     */
+    where: TenantDomainWhereUniqueInput
+  }
+
+  /**
+   * TenantDomain findUniqueOrThrow
+   */
+  export type TenantDomainFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantDomain to fetch.
+     */
+    where: TenantDomainWhereUniqueInput
+  }
+
+  /**
+   * TenantDomain findFirst
+   */
+  export type TenantDomainFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantDomain to fetch.
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantDomains to fetch.
+     */
+    orderBy?: TenantDomainOrderByWithRelationInput | TenantDomainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantDomains.
+     */
+    cursor?: TenantDomainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantDomains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantDomains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantDomains.
+     */
+    distinct?: TenantDomainScalarFieldEnum | TenantDomainScalarFieldEnum[]
+  }
+
+  /**
+   * TenantDomain findFirstOrThrow
+   */
+  export type TenantDomainFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantDomain to fetch.
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantDomains to fetch.
+     */
+    orderBy?: TenantDomainOrderByWithRelationInput | TenantDomainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantDomains.
+     */
+    cursor?: TenantDomainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantDomains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantDomains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantDomains.
+     */
+    distinct?: TenantDomainScalarFieldEnum | TenantDomainScalarFieldEnum[]
+  }
+
+  /**
+   * TenantDomain findMany
+   */
+  export type TenantDomainFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantDomains to fetch.
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantDomains to fetch.
+     */
+    orderBy?: TenantDomainOrderByWithRelationInput | TenantDomainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TenantDomains.
+     */
+    cursor?: TenantDomainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantDomains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantDomains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantDomains.
+     */
+    distinct?: TenantDomainScalarFieldEnum | TenantDomainScalarFieldEnum[]
+  }
+
+  /**
+   * TenantDomain create
+   */
+  export type TenantDomainCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TenantDomain.
+     */
+    data: XOR<TenantDomainCreateInput, TenantDomainUncheckedCreateInput>
+  }
+
+  /**
+   * TenantDomain createMany
+   */
+  export type TenantDomainCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TenantDomains.
+     */
+    data: TenantDomainCreateManyInput | TenantDomainCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TenantDomain createManyAndReturn
+   */
+  export type TenantDomainCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * The data used to create many TenantDomains.
+     */
+    data: TenantDomainCreateManyInput | TenantDomainCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantDomain update
+   */
+  export type TenantDomainUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TenantDomain.
+     */
+    data: XOR<TenantDomainUpdateInput, TenantDomainUncheckedUpdateInput>
+    /**
+     * Choose, which TenantDomain to update.
+     */
+    where: TenantDomainWhereUniqueInput
+  }
+
+  /**
+   * TenantDomain updateMany
+   */
+  export type TenantDomainUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TenantDomains.
+     */
+    data: XOR<TenantDomainUpdateManyMutationInput, TenantDomainUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantDomains to update
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * Limit how many TenantDomains to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantDomain updateManyAndReturn
+   */
+  export type TenantDomainUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * The data used to update TenantDomains.
+     */
+    data: XOR<TenantDomainUpdateManyMutationInput, TenantDomainUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantDomains to update
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * Limit how many TenantDomains to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantDomain upsert
+   */
+  export type TenantDomainUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TenantDomain to update in case it exists.
+     */
+    where: TenantDomainWhereUniqueInput
+    /**
+     * In case the TenantDomain found by the `where` argument doesn't exist, create a new TenantDomain with this data.
+     */
+    create: XOR<TenantDomainCreateInput, TenantDomainUncheckedCreateInput>
+    /**
+     * In case the TenantDomain was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantDomainUpdateInput, TenantDomainUncheckedUpdateInput>
+  }
+
+  /**
+   * TenantDomain delete
+   */
+  export type TenantDomainDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+    /**
+     * Filter which TenantDomain to delete.
+     */
+    where: TenantDomainWhereUniqueInput
+  }
+
+  /**
+   * TenantDomain deleteMany
+   */
+  export type TenantDomainDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantDomains to delete
+     */
+    where?: TenantDomainWhereInput
+    /**
+     * Limit how many TenantDomains to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantDomain without action
+   */
+  export type TenantDomainDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantDomain
+     */
+    select?: TenantDomainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantDomain
+     */
+    omit?: TenantDomainOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantDomainInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TenantBranding
+   */
+
+  export type AggregateTenantBranding = {
+    _count: TenantBrandingCountAggregateOutputType | null
+    _min: TenantBrandingMinAggregateOutputType | null
+    _max: TenantBrandingMaxAggregateOutputType | null
+  }
+
+  export type TenantBrandingMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    appName: string | null
+    logoUrl: string | null
+    faviconUrl: string | null
+    primaryColor: string | null
+    secondaryColor: string | null
+    supportEmail: string | null
+    fromName: string | null
+    emailDomain: string | null
+    customCss: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantBrandingMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    appName: string | null
+    logoUrl: string | null
+    faviconUrl: string | null
+    primaryColor: string | null
+    secondaryColor: string | null
+    supportEmail: string | null
+    fromName: string | null
+    emailDomain: string | null
+    customCss: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantBrandingCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    appName: number
+    logoUrl: number
+    faviconUrl: number
+    primaryColor: number
+    secondaryColor: number
+    supportEmail: number
+    fromName: number
+    emailDomain: number
+    customCss: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantBrandingMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    appName?: true
+    logoUrl?: true
+    faviconUrl?: true
+    primaryColor?: true
+    secondaryColor?: true
+    supportEmail?: true
+    fromName?: true
+    emailDomain?: true
+    customCss?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantBrandingMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    appName?: true
+    logoUrl?: true
+    faviconUrl?: true
+    primaryColor?: true
+    secondaryColor?: true
+    supportEmail?: true
+    fromName?: true
+    emailDomain?: true
+    customCss?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantBrandingCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    appName?: true
+    logoUrl?: true
+    faviconUrl?: true
+    primaryColor?: true
+    secondaryColor?: true
+    supportEmail?: true
+    fromName?: true
+    emailDomain?: true
+    customCss?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantBrandingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantBranding to aggregate.
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantBrandings to fetch.
+     */
+    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TenantBrandings
+    **/
+    _count?: true | TenantBrandingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantBrandingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantBrandingMaxAggregateInputType
+  }
+
+  export type GetTenantBrandingAggregateType<T extends TenantBrandingAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenantBranding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenantBranding[P]>
+      : GetScalarType<T[P], AggregateTenantBranding[P]>
+  }
+
+
+
+
+  export type TenantBrandingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantBrandingWhereInput
+    orderBy?: TenantBrandingOrderByWithAggregationInput | TenantBrandingOrderByWithAggregationInput[]
+    by: TenantBrandingScalarFieldEnum[] | TenantBrandingScalarFieldEnum
+    having?: TenantBrandingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantBrandingCountAggregateInputType | true
+    _min?: TenantBrandingMinAggregateInputType
+    _max?: TenantBrandingMaxAggregateInputType
+  }
+
+  export type TenantBrandingGroupByOutputType = {
+    id: string
+    tenantId: string
+    appName: string
+    logoUrl: string | null
+    faviconUrl: string | null
+    primaryColor: string | null
+    secondaryColor: string | null
+    supportEmail: string | null
+    fromName: string | null
+    emailDomain: string | null
+    customCss: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantBrandingCountAggregateOutputType | null
+    _min: TenantBrandingMinAggregateOutputType | null
+    _max: TenantBrandingMaxAggregateOutputType | null
+  }
+
+  type GetTenantBrandingGroupByPayload<T extends TenantBrandingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantBrandingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantBrandingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantBrandingGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantBrandingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantBrandingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    appName?: boolean
+    logoUrl?: boolean
+    faviconUrl?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    supportEmail?: boolean
+    fromName?: boolean
+    emailDomain?: boolean
+    customCss?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantBranding"]>
+
+  export type TenantBrandingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    appName?: boolean
+    logoUrl?: boolean
+    faviconUrl?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    supportEmail?: boolean
+    fromName?: boolean
+    emailDomain?: boolean
+    customCss?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantBranding"]>
+
+  export type TenantBrandingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    appName?: boolean
+    logoUrl?: boolean
+    faviconUrl?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    supportEmail?: boolean
+    fromName?: boolean
+    emailDomain?: boolean
+    customCss?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantBranding"]>
+
+  export type TenantBrandingSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    appName?: boolean
+    logoUrl?: boolean
+    faviconUrl?: boolean
+    primaryColor?: boolean
+    secondaryColor?: boolean
+    supportEmail?: boolean
+    fromName?: boolean
+    emailDomain?: boolean
+    customCss?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantBrandingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "appName" | "logoUrl" | "faviconUrl" | "primaryColor" | "secondaryColor" | "supportEmail" | "fromName" | "emailDomain" | "customCss" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantBranding"]>
+  export type TenantBrandingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantBrandingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantBrandingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $TenantBrandingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TenantBranding"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      appName: string
+      logoUrl: string | null
+      faviconUrl: string | null
+      primaryColor: string | null
+      secondaryColor: string | null
+      supportEmail: string | null
+      fromName: string | null
+      emailDomain: string | null
+      customCss: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenantBranding"]>
+    composites: {}
+  }
+
+  type TenantBrandingGetPayload<S extends boolean | null | undefined | TenantBrandingDefaultArgs> = $Result.GetResult<Prisma.$TenantBrandingPayload, S>
+
+  type TenantBrandingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantBrandingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantBrandingCountAggregateInputType | true
+    }
+
+  export interface TenantBrandingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantBranding'], meta: { name: 'TenantBranding' } }
+    /**
+     * Find zero or one TenantBranding that matches the filter.
+     * @param {TenantBrandingFindUniqueArgs} args - Arguments to find a TenantBranding
+     * @example
+     * // Get one TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantBrandingFindUniqueArgs>(args: SelectSubset<T, TenantBrandingFindUniqueArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TenantBranding that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantBrandingFindUniqueOrThrowArgs} args - Arguments to find a TenantBranding
+     * @example
+     * // Get one TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantBrandingFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantBrandingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantBranding that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingFindFirstArgs} args - Arguments to find a TenantBranding
+     * @example
+     * // Get one TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantBrandingFindFirstArgs>(args?: SelectSubset<T, TenantBrandingFindFirstArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantBranding that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingFindFirstOrThrowArgs} args - Arguments to find a TenantBranding
+     * @example
+     * // Get one TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantBrandingFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantBrandingFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TenantBrandings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TenantBrandings
+     * const tenantBrandings = await prisma.tenantBranding.findMany()
+     * 
+     * // Get first 10 TenantBrandings
+     * const tenantBrandings = await prisma.tenantBranding.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantBrandingFindManyArgs>(args?: SelectSubset<T, TenantBrandingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TenantBranding.
+     * @param {TenantBrandingCreateArgs} args - Arguments to create a TenantBranding.
+     * @example
+     * // Create one TenantBranding
+     * const TenantBranding = await prisma.tenantBranding.create({
+     *   data: {
+     *     // ... data to create a TenantBranding
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantBrandingCreateArgs>(args: SelectSubset<T, TenantBrandingCreateArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TenantBrandings.
+     * @param {TenantBrandingCreateManyArgs} args - Arguments to create many TenantBrandings.
+     * @example
+     * // Create many TenantBrandings
+     * const tenantBranding = await prisma.tenantBranding.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantBrandingCreateManyArgs>(args?: SelectSubset<T, TenantBrandingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TenantBrandings and returns the data saved in the database.
+     * @param {TenantBrandingCreateManyAndReturnArgs} args - Arguments to create many TenantBrandings.
+     * @example
+     * // Create many TenantBrandings
+     * const tenantBranding = await prisma.tenantBranding.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TenantBrandings and only return the `id`
+     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantBrandingCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantBrandingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TenantBranding.
+     * @param {TenantBrandingDeleteArgs} args - Arguments to delete one TenantBranding.
+     * @example
+     * // Delete one TenantBranding
+     * const TenantBranding = await prisma.tenantBranding.delete({
+     *   where: {
+     *     // ... filter to delete one TenantBranding
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantBrandingDeleteArgs>(args: SelectSubset<T, TenantBrandingDeleteArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TenantBranding.
+     * @param {TenantBrandingUpdateArgs} args - Arguments to update one TenantBranding.
+     * @example
+     * // Update one TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantBrandingUpdateArgs>(args: SelectSubset<T, TenantBrandingUpdateArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TenantBrandings.
+     * @param {TenantBrandingDeleteManyArgs} args - Arguments to filter TenantBrandings to delete.
+     * @example
+     * // Delete a few TenantBrandings
+     * const { count } = await prisma.tenantBranding.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantBrandingDeleteManyArgs>(args?: SelectSubset<T, TenantBrandingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantBrandings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TenantBrandings
+     * const tenantBranding = await prisma.tenantBranding.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantBrandingUpdateManyArgs>(args: SelectSubset<T, TenantBrandingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantBrandings and returns the data updated in the database.
+     * @param {TenantBrandingUpdateManyAndReturnArgs} args - Arguments to update many TenantBrandings.
+     * @example
+     * // Update many TenantBrandings
+     * const tenantBranding = await prisma.tenantBranding.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TenantBrandings and only return the `id`
+     * const tenantBrandingWithIdOnly = await prisma.tenantBranding.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantBrandingUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantBrandingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TenantBranding.
+     * @param {TenantBrandingUpsertArgs} args - Arguments to update or create a TenantBranding.
+     * @example
+     * // Update or create a TenantBranding
+     * const tenantBranding = await prisma.tenantBranding.upsert({
+     *   create: {
+     *     // ... data to create a TenantBranding
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TenantBranding we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantBrandingUpsertArgs>(args: SelectSubset<T, TenantBrandingUpsertArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TenantBrandings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingCountArgs} args - Arguments to filter TenantBrandings to count.
+     * @example
+     * // Count the number of TenantBrandings
+     * const count = await prisma.tenantBranding.count({
+     *   where: {
+     *     // ... the filter for the TenantBrandings we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantBrandingCountArgs>(
+      args?: Subset<T, TenantBrandingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantBrandingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TenantBranding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantBrandingAggregateArgs>(args: Subset<T, TenantBrandingAggregateArgs>): Prisma.PrismaPromise<GetTenantBrandingAggregateType<T>>
+
+    /**
+     * Group by TenantBranding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantBrandingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantBrandingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantBrandingGroupByArgs['orderBy'] }
+        : { orderBy?: TenantBrandingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantBrandingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantBrandingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TenantBranding model
+   */
+  readonly fields: TenantBrandingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TenantBranding.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantBrandingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TenantBranding model
+   */
+  interface TenantBrandingFieldRefs {
+    readonly id: FieldRef<"TenantBranding", 'String'>
+    readonly tenantId: FieldRef<"TenantBranding", 'String'>
+    readonly appName: FieldRef<"TenantBranding", 'String'>
+    readonly logoUrl: FieldRef<"TenantBranding", 'String'>
+    readonly faviconUrl: FieldRef<"TenantBranding", 'String'>
+    readonly primaryColor: FieldRef<"TenantBranding", 'String'>
+    readonly secondaryColor: FieldRef<"TenantBranding", 'String'>
+    readonly supportEmail: FieldRef<"TenantBranding", 'String'>
+    readonly fromName: FieldRef<"TenantBranding", 'String'>
+    readonly emailDomain: FieldRef<"TenantBranding", 'String'>
+    readonly customCss: FieldRef<"TenantBranding", 'String'>
+    readonly createdAt: FieldRef<"TenantBranding", 'DateTime'>
+    readonly updatedAt: FieldRef<"TenantBranding", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TenantBranding findUnique
+   */
+  export type TenantBrandingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantBranding to fetch.
+     */
+    where: TenantBrandingWhereUniqueInput
+  }
+
+  /**
+   * TenantBranding findUniqueOrThrow
+   */
+  export type TenantBrandingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantBranding to fetch.
+     */
+    where: TenantBrandingWhereUniqueInput
+  }
+
+  /**
+   * TenantBranding findFirst
+   */
+  export type TenantBrandingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantBranding to fetch.
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantBrandings to fetch.
+     */
+    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantBrandings.
+     */
+    cursor?: TenantBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantBrandings.
+     */
+    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * TenantBranding findFirstOrThrow
+   */
+  export type TenantBrandingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantBranding to fetch.
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantBrandings to fetch.
+     */
+    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantBrandings.
+     */
+    cursor?: TenantBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantBrandings.
+     */
+    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * TenantBranding findMany
+   */
+  export type TenantBrandingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantBrandings to fetch.
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantBrandings to fetch.
+     */
+    orderBy?: TenantBrandingOrderByWithRelationInput | TenantBrandingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TenantBrandings.
+     */
+    cursor?: TenantBrandingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantBrandings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantBrandings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantBrandings.
+     */
+    distinct?: TenantBrandingScalarFieldEnum | TenantBrandingScalarFieldEnum[]
+  }
+
+  /**
+   * TenantBranding create
+   */
+  export type TenantBrandingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TenantBranding.
+     */
+    data: XOR<TenantBrandingCreateInput, TenantBrandingUncheckedCreateInput>
+  }
+
+  /**
+   * TenantBranding createMany
+   */
+  export type TenantBrandingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TenantBrandings.
+     */
+    data: TenantBrandingCreateManyInput | TenantBrandingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TenantBranding createManyAndReturn
+   */
+  export type TenantBrandingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * The data used to create many TenantBrandings.
+     */
+    data: TenantBrandingCreateManyInput | TenantBrandingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantBranding update
+   */
+  export type TenantBrandingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TenantBranding.
+     */
+    data: XOR<TenantBrandingUpdateInput, TenantBrandingUncheckedUpdateInput>
+    /**
+     * Choose, which TenantBranding to update.
+     */
+    where: TenantBrandingWhereUniqueInput
+  }
+
+  /**
+   * TenantBranding updateMany
+   */
+  export type TenantBrandingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TenantBrandings.
+     */
+    data: XOR<TenantBrandingUpdateManyMutationInput, TenantBrandingUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantBrandings to update
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * Limit how many TenantBrandings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantBranding updateManyAndReturn
+   */
+  export type TenantBrandingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * The data used to update TenantBrandings.
+     */
+    data: XOR<TenantBrandingUpdateManyMutationInput, TenantBrandingUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantBrandings to update
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * Limit how many TenantBrandings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantBranding upsert
+   */
+  export type TenantBrandingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TenantBranding to update in case it exists.
+     */
+    where: TenantBrandingWhereUniqueInput
+    /**
+     * In case the TenantBranding found by the `where` argument doesn't exist, create a new TenantBranding with this data.
+     */
+    create: XOR<TenantBrandingCreateInput, TenantBrandingUncheckedCreateInput>
+    /**
+     * In case the TenantBranding was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantBrandingUpdateInput, TenantBrandingUncheckedUpdateInput>
+  }
+
+  /**
+   * TenantBranding delete
+   */
+  export type TenantBrandingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+    /**
+     * Filter which TenantBranding to delete.
+     */
+    where: TenantBrandingWhereUniqueInput
+  }
+
+  /**
+   * TenantBranding deleteMany
+   */
+  export type TenantBrandingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantBrandings to delete
+     */
+    where?: TenantBrandingWhereInput
+    /**
+     * Limit how many TenantBrandings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantBranding without action
+   */
+  export type TenantBrandingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantBranding
+     */
+    select?: TenantBrandingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantBranding
+     */
+    omit?: TenantBrandingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantBrandingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Membership
+   */
+
+  export type AggregateMembership = {
+    _count: MembershipCountAggregateOutputType | null
+    _min: MembershipMinAggregateOutputType | null
+    _max: MembershipMaxAggregateOutputType | null
+  }
+
+  export type MembershipMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    userId: string | null
+    role: $Enums.TenantRole | null
+    isOwner: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MembershipMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    userId: string | null
+    role: $Enums.TenantRole | null
+    isOwner: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MembershipCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    userId: number
+    role: number
+    isOwner: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MembershipMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    userId?: true
+    role?: true
+    isOwner?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MembershipMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    userId?: true
+    role?: true
+    isOwner?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MembershipCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    userId?: true
+    role?: true
+    isOwner?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MembershipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Membership to aggregate.
+     */
+    where?: MembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memberships to fetch.
+     */
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Memberships
+    **/
+    _count?: true | MembershipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MembershipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MembershipMaxAggregateInputType
+  }
+
+  export type GetMembershipAggregateType<T extends MembershipAggregateArgs> = {
+        [P in keyof T & keyof AggregateMembership]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMembership[P]>
+      : GetScalarType<T[P], AggregateMembership[P]>
+  }
+
+
+
+
+  export type MembershipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MembershipWhereInput
+    orderBy?: MembershipOrderByWithAggregationInput | MembershipOrderByWithAggregationInput[]
+    by: MembershipScalarFieldEnum[] | MembershipScalarFieldEnum
+    having?: MembershipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MembershipCountAggregateInputType | true
+    _min?: MembershipMinAggregateInputType
+    _max?: MembershipMaxAggregateInputType
+  }
+
+  export type MembershipGroupByOutputType = {
+    id: string
+    tenantId: string
+    userId: string
+    role: $Enums.TenantRole
+    isOwner: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: MembershipCountAggregateOutputType | null
+    _min: MembershipMinAggregateOutputType | null
+    _max: MembershipMaxAggregateOutputType | null
+  }
+
+  type GetMembershipGroupByPayload<T extends MembershipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MembershipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MembershipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MembershipGroupByOutputType[P]>
+            : GetScalarType<T[P], MembershipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MembershipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    userId?: boolean
+    role?: boolean
+    isOwner?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membership"]>
+
+  export type MembershipSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    userId?: boolean
+    role?: boolean
+    isOwner?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membership"]>
+
+  export type MembershipSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    userId?: boolean
+    role?: boolean
+    isOwner?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["membership"]>
+
+  export type MembershipSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    userId?: boolean
+    role?: boolean
+    isOwner?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "role" | "isOwner" | "createdAt" | "updatedAt", ExtArgs["result"]["membership"]>
+  export type MembershipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MembershipIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MembershipIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MembershipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Membership"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      userId: string
+      role: $Enums.TenantRole
+      isOwner: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["membership"]>
+    composites: {}
+  }
+
+  type MembershipGetPayload<S extends boolean | null | undefined | MembershipDefaultArgs> = $Result.GetResult<Prisma.$MembershipPayload, S>
+
+  type MembershipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MembershipFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MembershipCountAggregateInputType | true
+    }
+
+  export interface MembershipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Membership'], meta: { name: 'Membership' } }
+    /**
+     * Find zero or one Membership that matches the filter.
+     * @param {MembershipFindUniqueArgs} args - Arguments to find a Membership
+     * @example
+     * // Get one Membership
+     * const membership = await prisma.membership.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MembershipFindUniqueArgs>(args: SelectSubset<T, MembershipFindUniqueArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Membership that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MembershipFindUniqueOrThrowArgs} args - Arguments to find a Membership
+     * @example
+     * // Get one Membership
+     * const membership = await prisma.membership.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MembershipFindUniqueOrThrowArgs>(args: SelectSubset<T, MembershipFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Membership that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipFindFirstArgs} args - Arguments to find a Membership
+     * @example
+     * // Get one Membership
+     * const membership = await prisma.membership.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MembershipFindFirstArgs>(args?: SelectSubset<T, MembershipFindFirstArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Membership that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipFindFirstOrThrowArgs} args - Arguments to find a Membership
+     * @example
+     * // Get one Membership
+     * const membership = await prisma.membership.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MembershipFindFirstOrThrowArgs>(args?: SelectSubset<T, MembershipFindFirstOrThrowArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Memberships that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Memberships
+     * const memberships = await prisma.membership.findMany()
+     * 
+     * // Get first 10 Memberships
+     * const memberships = await prisma.membership.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const membershipWithIdOnly = await prisma.membership.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MembershipFindManyArgs>(args?: SelectSubset<T, MembershipFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Membership.
+     * @param {MembershipCreateArgs} args - Arguments to create a Membership.
+     * @example
+     * // Create one Membership
+     * const Membership = await prisma.membership.create({
+     *   data: {
+     *     // ... data to create a Membership
+     *   }
+     * })
+     * 
+     */
+    create<T extends MembershipCreateArgs>(args: SelectSubset<T, MembershipCreateArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Memberships.
+     * @param {MembershipCreateManyArgs} args - Arguments to create many Memberships.
+     * @example
+     * // Create many Memberships
+     * const membership = await prisma.membership.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MembershipCreateManyArgs>(args?: SelectSubset<T, MembershipCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Memberships and returns the data saved in the database.
+     * @param {MembershipCreateManyAndReturnArgs} args - Arguments to create many Memberships.
+     * @example
+     * // Create many Memberships
+     * const membership = await prisma.membership.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Memberships and only return the `id`
+     * const membershipWithIdOnly = await prisma.membership.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MembershipCreateManyAndReturnArgs>(args?: SelectSubset<T, MembershipCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Membership.
+     * @param {MembershipDeleteArgs} args - Arguments to delete one Membership.
+     * @example
+     * // Delete one Membership
+     * const Membership = await prisma.membership.delete({
+     *   where: {
+     *     // ... filter to delete one Membership
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MembershipDeleteArgs>(args: SelectSubset<T, MembershipDeleteArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Membership.
+     * @param {MembershipUpdateArgs} args - Arguments to update one Membership.
+     * @example
+     * // Update one Membership
+     * const membership = await prisma.membership.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MembershipUpdateArgs>(args: SelectSubset<T, MembershipUpdateArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Memberships.
+     * @param {MembershipDeleteManyArgs} args - Arguments to filter Memberships to delete.
+     * @example
+     * // Delete a few Memberships
+     * const { count } = await prisma.membership.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MembershipDeleteManyArgs>(args?: SelectSubset<T, MembershipDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Memberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Memberships
+     * const membership = await prisma.membership.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MembershipUpdateManyArgs>(args: SelectSubset<T, MembershipUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Memberships and returns the data updated in the database.
+     * @param {MembershipUpdateManyAndReturnArgs} args - Arguments to update many Memberships.
+     * @example
+     * // Update many Memberships
+     * const membership = await prisma.membership.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Memberships and only return the `id`
+     * const membershipWithIdOnly = await prisma.membership.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MembershipUpdateManyAndReturnArgs>(args: SelectSubset<T, MembershipUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Membership.
+     * @param {MembershipUpsertArgs} args - Arguments to update or create a Membership.
+     * @example
+     * // Update or create a Membership
+     * const membership = await prisma.membership.upsert({
+     *   create: {
+     *     // ... data to create a Membership
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Membership we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MembershipUpsertArgs>(args: SelectSubset<T, MembershipUpsertArgs<ExtArgs>>): Prisma__MembershipClient<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Memberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipCountArgs} args - Arguments to filter Memberships to count.
+     * @example
+     * // Count the number of Memberships
+     * const count = await prisma.membership.count({
+     *   where: {
+     *     // ... the filter for the Memberships we want to count
+     *   }
+     * })
+    **/
+    count<T extends MembershipCountArgs>(
+      args?: Subset<T, MembershipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MembershipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Membership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MembershipAggregateArgs>(args: Subset<T, MembershipAggregateArgs>): Prisma.PrismaPromise<GetMembershipAggregateType<T>>
+
+    /**
+     * Group by Membership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MembershipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MembershipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MembershipGroupByArgs['orderBy'] }
+        : { orderBy?: MembershipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MembershipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMembershipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Membership model
+   */
+  readonly fields: MembershipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Membership.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MembershipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Membership model
+   */
+  interface MembershipFieldRefs {
+    readonly id: FieldRef<"Membership", 'String'>
+    readonly tenantId: FieldRef<"Membership", 'String'>
+    readonly userId: FieldRef<"Membership", 'String'>
+    readonly role: FieldRef<"Membership", 'TenantRole'>
+    readonly isOwner: FieldRef<"Membership", 'Boolean'>
+    readonly createdAt: FieldRef<"Membership", 'DateTime'>
+    readonly updatedAt: FieldRef<"Membership", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Membership findUnique
+   */
+  export type MembershipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which Membership to fetch.
+     */
+    where: MembershipWhereUniqueInput
+  }
+
+  /**
+   * Membership findUniqueOrThrow
+   */
+  export type MembershipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which Membership to fetch.
+     */
+    where: MembershipWhereUniqueInput
+  }
+
+  /**
+   * Membership findFirst
+   */
+  export type MembershipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which Membership to fetch.
+     */
+    where?: MembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memberships to fetch.
+     */
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Memberships.
+     */
+    cursor?: MembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Memberships.
+     */
+    distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * Membership findFirstOrThrow
+   */
+  export type MembershipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which Membership to fetch.
+     */
+    where?: MembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memberships to fetch.
+     */
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Memberships.
+     */
+    cursor?: MembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Memberships.
+     */
+    distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * Membership findMany
+   */
+  export type MembershipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which Memberships to fetch.
+     */
+    where?: MembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Memberships to fetch.
+     */
+    orderBy?: MembershipOrderByWithRelationInput | MembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Memberships.
+     */
+    cursor?: MembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Memberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Memberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Memberships.
+     */
+    distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * Membership create
+   */
+  export type MembershipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Membership.
+     */
+    data: XOR<MembershipCreateInput, MembershipUncheckedCreateInput>
+  }
+
+  /**
+   * Membership createMany
+   */
+  export type MembershipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Memberships.
+     */
+    data: MembershipCreateManyInput | MembershipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Membership createManyAndReturn
+   */
+  export type MembershipCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * The data used to create many Memberships.
+     */
+    data: MembershipCreateManyInput | MembershipCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Membership update
+   */
+  export type MembershipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Membership.
+     */
+    data: XOR<MembershipUpdateInput, MembershipUncheckedUpdateInput>
+    /**
+     * Choose, which Membership to update.
+     */
+    where: MembershipWhereUniqueInput
+  }
+
+  /**
+   * Membership updateMany
+   */
+  export type MembershipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Memberships.
+     */
+    data: XOR<MembershipUpdateManyMutationInput, MembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which Memberships to update
+     */
+    where?: MembershipWhereInput
+    /**
+     * Limit how many Memberships to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Membership updateManyAndReturn
+   */
+  export type MembershipUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * The data used to update Memberships.
+     */
+    data: XOR<MembershipUpdateManyMutationInput, MembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which Memberships to update
+     */
+    where?: MembershipWhereInput
+    /**
+     * Limit how many Memberships to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Membership upsert
+   */
+  export type MembershipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Membership to update in case it exists.
+     */
+    where: MembershipWhereUniqueInput
+    /**
+     * In case the Membership found by the `where` argument doesn't exist, create a new Membership with this data.
+     */
+    create: XOR<MembershipCreateInput, MembershipUncheckedCreateInput>
+    /**
+     * In case the Membership was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MembershipUpdateInput, MembershipUncheckedUpdateInput>
+  }
+
+  /**
+   * Membership delete
+   */
+  export type MembershipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+    /**
+     * Filter which Membership to delete.
+     */
+    where: MembershipWhereUniqueInput
+  }
+
+  /**
+   * Membership deleteMany
+   */
+  export type MembershipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Memberships to delete
+     */
+    where?: MembershipWhereInput
+    /**
+     * Limit how many Memberships to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Membership without action
+   */
+  export type MembershipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Membership
+     */
+    select?: MembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Membership
+     */
+    omit?: MembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MembershipInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5582,6 +10710,7 @@ export namespace Prisma {
     email: 'email',
     password: 'password',
     createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     image: 'image',
     role: 'role',
     emailVerified: 'emailVerified',
@@ -5627,6 +10756,72 @@ export namespace Prisma {
   };
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+
+  export const TenantScalarFieldEnum: {
+    id: 'id',
+    slug: 'slug',
+    name: 'name',
+    mode: 'mode',
+    billingMode: 'billingMode',
+    status: 'status',
+    timezone: 'timezone',
+    locale: 'locale',
+    planCode: 'planCode',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+  export const TenantDomainScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    host: 'host',
+    kind: 'kind',
+    isPrimary: 'isPrimary',
+    verifiedAt: 'verifiedAt',
+    sslStatus: 'sslStatus',
+    dnsTarget: 'dnsTarget',
+    redirectToHost: 'redirectToHost',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantDomainScalarFieldEnum = (typeof TenantDomainScalarFieldEnum)[keyof typeof TenantDomainScalarFieldEnum]
+
+
+  export const TenantBrandingScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    appName: 'appName',
+    logoUrl: 'logoUrl',
+    faviconUrl: 'faviconUrl',
+    primaryColor: 'primaryColor',
+    secondaryColor: 'secondaryColor',
+    supportEmail: 'supportEmail',
+    fromName: 'fromName',
+    emailDomain: 'emailDomain',
+    customCss: 'customCss',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantBrandingScalarFieldEnum = (typeof TenantBrandingScalarFieldEnum)[keyof typeof TenantBrandingScalarFieldEnum]
+
+
+  export const MembershipScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    userId: 'userId',
+    role: 'role',
+    isOwner: 'isOwner',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5715,6 +10910,83 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TenantMode'
+   */
+  export type EnumTenantModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantMode[]'
+   */
+  export type ListEnumTenantModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantMode[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantBillingMode'
+   */
+  export type EnumTenantBillingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantBillingMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantBillingMode[]'
+   */
+  export type ListEnumTenantBillingModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantBillingMode[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantStatus'
+   */
+  export type EnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantStatus[]'
+   */
+  export type ListEnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DomainKind'
+   */
+  export type EnumDomainKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DomainKind'>
+    
+
+
+  /**
+   * Reference to a field of type 'DomainKind[]'
+   */
+  export type ListEnumDomainKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DomainKind[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantRole'
+   */
+  export type EnumTenantRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantRole[]'
+   */
+  export type ListEnumTenantRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5739,6 +11011,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -5746,6 +11019,7 @@ export namespace Prisma {
     phone?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    memberships?: MembershipListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5753,6 +11027,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     emailVerified?: SortOrderInput | SortOrder
@@ -5760,6 +11035,7 @@ export namespace Prisma {
     phone?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
+    memberships?: MembershipOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5770,6 +11046,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -5777,6 +11054,7 @@ export namespace Prisma {
     phone?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    memberships?: MembershipListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5784,6 +11062,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     emailVerified?: SortOrderInput | SortOrder
@@ -5802,6 +11081,7 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -5995,11 +11275,352 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
+  export type TenantWhereInput = {
+    AND?: TenantWhereInput | TenantWhereInput[]
+    OR?: TenantWhereInput[]
+    NOT?: TenantWhereInput | TenantWhereInput[]
+    id?: StringFilter<"Tenant"> | string
+    slug?: StringFilter<"Tenant"> | string
+    name?: StringFilter<"Tenant"> | string
+    mode?: EnumTenantModeFilter<"Tenant"> | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFilter<"Tenant"> | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
+    timezone?: StringNullableFilter<"Tenant"> | string | null
+    locale?: StringNullableFilter<"Tenant"> | string | null
+    planCode?: StringNullableFilter<"Tenant"> | string | null
+    createdAt?: DateTimeFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    domains?: TenantDomainListRelationFilter
+    branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
+    memberships?: MembershipListRelationFilter
+  }
+
+  export type TenantOrderByWithRelationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    mode?: SortOrder
+    billingMode?: SortOrder
+    status?: SortOrder
+    timezone?: SortOrderInput | SortOrder
+    locale?: SortOrderInput | SortOrder
+    planCode?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    domains?: TenantDomainOrderByRelationAggregateInput
+    branding?: TenantBrandingOrderByWithRelationInput
+    memberships?: MembershipOrderByRelationAggregateInput
+  }
+
+  export type TenantWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: TenantWhereInput | TenantWhereInput[]
+    OR?: TenantWhereInput[]
+    NOT?: TenantWhereInput | TenantWhereInput[]
+    name?: StringFilter<"Tenant"> | string
+    mode?: EnumTenantModeFilter<"Tenant"> | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFilter<"Tenant"> | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
+    timezone?: StringNullableFilter<"Tenant"> | string | null
+    locale?: StringNullableFilter<"Tenant"> | string | null
+    planCode?: StringNullableFilter<"Tenant"> | string | null
+    createdAt?: DateTimeFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    domains?: TenantDomainListRelationFilter
+    branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
+    memberships?: MembershipListRelationFilter
+  }, "id" | "slug">
+
+  export type TenantOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    mode?: SortOrder
+    billingMode?: SortOrder
+    status?: SortOrder
+    timezone?: SortOrderInput | SortOrder
+    locale?: SortOrderInput | SortOrder
+    planCode?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantCountOrderByAggregateInput
+    _max?: TenantMaxOrderByAggregateInput
+    _min?: TenantMinOrderByAggregateInput
+  }
+
+  export type TenantScalarWhereWithAggregatesInput = {
+    AND?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
+    OR?: TenantScalarWhereWithAggregatesInput[]
+    NOT?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Tenant"> | string
+    slug?: StringWithAggregatesFilter<"Tenant"> | string
+    name?: StringWithAggregatesFilter<"Tenant"> | string
+    mode?: EnumTenantModeWithAggregatesFilter<"Tenant"> | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeWithAggregatesFilter<"Tenant"> | $Enums.TenantBillingMode
+    status?: EnumTenantStatusWithAggregatesFilter<"Tenant"> | $Enums.TenantStatus
+    timezone?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    locale?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    planCode?: StringNullableWithAggregatesFilter<"Tenant"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+  }
+
+  export type TenantDomainWhereInput = {
+    AND?: TenantDomainWhereInput | TenantDomainWhereInput[]
+    OR?: TenantDomainWhereInput[]
+    NOT?: TenantDomainWhereInput | TenantDomainWhereInput[]
+    id?: StringFilter<"TenantDomain"> | string
+    tenantId?: StringFilter<"TenantDomain"> | string
+    host?: StringFilter<"TenantDomain"> | string
+    kind?: EnumDomainKindFilter<"TenantDomain"> | $Enums.DomainKind
+    isPrimary?: BoolFilter<"TenantDomain"> | boolean
+    verifiedAt?: DateTimeNullableFilter<"TenantDomain"> | Date | string | null
+    sslStatus?: StringNullableFilter<"TenantDomain"> | string | null
+    dnsTarget?: StringNullableFilter<"TenantDomain"> | string | null
+    redirectToHost?: StringNullableFilter<"TenantDomain"> | string | null
+    createdAt?: DateTimeFilter<"TenantDomain"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantDomain"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type TenantDomainOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    host?: SortOrder
+    kind?: SortOrder
+    isPrimary?: SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    sslStatus?: SortOrderInput | SortOrder
+    dnsTarget?: SortOrderInput | SortOrder
+    redirectToHost?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type TenantDomainWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    host?: string
+    AND?: TenantDomainWhereInput | TenantDomainWhereInput[]
+    OR?: TenantDomainWhereInput[]
+    NOT?: TenantDomainWhereInput | TenantDomainWhereInput[]
+    tenantId?: StringFilter<"TenantDomain"> | string
+    kind?: EnumDomainKindFilter<"TenantDomain"> | $Enums.DomainKind
+    isPrimary?: BoolFilter<"TenantDomain"> | boolean
+    verifiedAt?: DateTimeNullableFilter<"TenantDomain"> | Date | string | null
+    sslStatus?: StringNullableFilter<"TenantDomain"> | string | null
+    dnsTarget?: StringNullableFilter<"TenantDomain"> | string | null
+    redirectToHost?: StringNullableFilter<"TenantDomain"> | string | null
+    createdAt?: DateTimeFilter<"TenantDomain"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantDomain"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id" | "host">
+
+  export type TenantDomainOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    host?: SortOrder
+    kind?: SortOrder
+    isPrimary?: SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    sslStatus?: SortOrderInput | SortOrder
+    dnsTarget?: SortOrderInput | SortOrder
+    redirectToHost?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantDomainCountOrderByAggregateInput
+    _max?: TenantDomainMaxOrderByAggregateInput
+    _min?: TenantDomainMinOrderByAggregateInput
+  }
+
+  export type TenantDomainScalarWhereWithAggregatesInput = {
+    AND?: TenantDomainScalarWhereWithAggregatesInput | TenantDomainScalarWhereWithAggregatesInput[]
+    OR?: TenantDomainScalarWhereWithAggregatesInput[]
+    NOT?: TenantDomainScalarWhereWithAggregatesInput | TenantDomainScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TenantDomain"> | string
+    tenantId?: StringWithAggregatesFilter<"TenantDomain"> | string
+    host?: StringWithAggregatesFilter<"TenantDomain"> | string
+    kind?: EnumDomainKindWithAggregatesFilter<"TenantDomain"> | $Enums.DomainKind
+    isPrimary?: BoolWithAggregatesFilter<"TenantDomain"> | boolean
+    verifiedAt?: DateTimeNullableWithAggregatesFilter<"TenantDomain"> | Date | string | null
+    sslStatus?: StringNullableWithAggregatesFilter<"TenantDomain"> | string | null
+    dnsTarget?: StringNullableWithAggregatesFilter<"TenantDomain"> | string | null
+    redirectToHost?: StringNullableWithAggregatesFilter<"TenantDomain"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TenantDomain"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TenantDomain"> | Date | string
+  }
+
+  export type TenantBrandingWhereInput = {
+    AND?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
+    OR?: TenantBrandingWhereInput[]
+    NOT?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
+    id?: StringFilter<"TenantBranding"> | string
+    tenantId?: StringFilter<"TenantBranding"> | string
+    appName?: StringFilter<"TenantBranding"> | string
+    logoUrl?: StringNullableFilter<"TenantBranding"> | string | null
+    faviconUrl?: StringNullableFilter<"TenantBranding"> | string | null
+    primaryColor?: StringNullableFilter<"TenantBranding"> | string | null
+    secondaryColor?: StringNullableFilter<"TenantBranding"> | string | null
+    supportEmail?: StringNullableFilter<"TenantBranding"> | string | null
+    fromName?: StringNullableFilter<"TenantBranding"> | string | null
+    emailDomain?: StringNullableFilter<"TenantBranding"> | string | null
+    customCss?: StringNullableFilter<"TenantBranding"> | string | null
+    createdAt?: DateTimeFilter<"TenantBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantBranding"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type TenantBrandingOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    appName?: SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    faviconUrl?: SortOrderInput | SortOrder
+    primaryColor?: SortOrderInput | SortOrder
+    secondaryColor?: SortOrderInput | SortOrder
+    supportEmail?: SortOrderInput | SortOrder
+    fromName?: SortOrderInput | SortOrder
+    emailDomain?: SortOrderInput | SortOrder
+    customCss?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type TenantBrandingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId?: string
+    AND?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
+    OR?: TenantBrandingWhereInput[]
+    NOT?: TenantBrandingWhereInput | TenantBrandingWhereInput[]
+    appName?: StringFilter<"TenantBranding"> | string
+    logoUrl?: StringNullableFilter<"TenantBranding"> | string | null
+    faviconUrl?: StringNullableFilter<"TenantBranding"> | string | null
+    primaryColor?: StringNullableFilter<"TenantBranding"> | string | null
+    secondaryColor?: StringNullableFilter<"TenantBranding"> | string | null
+    supportEmail?: StringNullableFilter<"TenantBranding"> | string | null
+    fromName?: StringNullableFilter<"TenantBranding"> | string | null
+    emailDomain?: StringNullableFilter<"TenantBranding"> | string | null
+    customCss?: StringNullableFilter<"TenantBranding"> | string | null
+    createdAt?: DateTimeFilter<"TenantBranding"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantBranding"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id" | "tenantId">
+
+  export type TenantBrandingOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    appName?: SortOrder
+    logoUrl?: SortOrderInput | SortOrder
+    faviconUrl?: SortOrderInput | SortOrder
+    primaryColor?: SortOrderInput | SortOrder
+    secondaryColor?: SortOrderInput | SortOrder
+    supportEmail?: SortOrderInput | SortOrder
+    fromName?: SortOrderInput | SortOrder
+    emailDomain?: SortOrderInput | SortOrder
+    customCss?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantBrandingCountOrderByAggregateInput
+    _max?: TenantBrandingMaxOrderByAggregateInput
+    _min?: TenantBrandingMinOrderByAggregateInput
+  }
+
+  export type TenantBrandingScalarWhereWithAggregatesInput = {
+    AND?: TenantBrandingScalarWhereWithAggregatesInput | TenantBrandingScalarWhereWithAggregatesInput[]
+    OR?: TenantBrandingScalarWhereWithAggregatesInput[]
+    NOT?: TenantBrandingScalarWhereWithAggregatesInput | TenantBrandingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TenantBranding"> | string
+    tenantId?: StringWithAggregatesFilter<"TenantBranding"> | string
+    appName?: StringWithAggregatesFilter<"TenantBranding"> | string
+    logoUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    faviconUrl?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    primaryColor?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    secondaryColor?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    supportEmail?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    fromName?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    emailDomain?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    customCss?: StringNullableWithAggregatesFilter<"TenantBranding"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TenantBranding"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TenantBranding"> | Date | string
+  }
+
+  export type MembershipWhereInput = {
+    AND?: MembershipWhereInput | MembershipWhereInput[]
+    OR?: MembershipWhereInput[]
+    NOT?: MembershipWhereInput | MembershipWhereInput[]
+    id?: StringFilter<"Membership"> | string
+    tenantId?: StringFilter<"Membership"> | string
+    userId?: StringFilter<"Membership"> | string
+    role?: EnumTenantRoleFilter<"Membership"> | $Enums.TenantRole
+    isOwner?: BoolFilter<"Membership"> | boolean
+    createdAt?: DateTimeFilter<"Membership"> | Date | string
+    updatedAt?: DateTimeFilter<"Membership"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MembershipOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    isOwner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MembershipWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_userId?: MembershipTenantIdUserIdCompoundUniqueInput
+    AND?: MembershipWhereInput | MembershipWhereInput[]
+    OR?: MembershipWhereInput[]
+    NOT?: MembershipWhereInput | MembershipWhereInput[]
+    tenantId?: StringFilter<"Membership"> | string
+    userId?: StringFilter<"Membership"> | string
+    role?: EnumTenantRoleFilter<"Membership"> | $Enums.TenantRole
+    isOwner?: BoolFilter<"Membership"> | boolean
+    createdAt?: DateTimeFilter<"Membership"> | Date | string
+    updatedAt?: DateTimeFilter<"Membership"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "tenantId_userId">
+
+  export type MembershipOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    isOwner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MembershipCountOrderByAggregateInput
+    _max?: MembershipMaxOrderByAggregateInput
+    _min?: MembershipMinOrderByAggregateInput
+  }
+
+  export type MembershipScalarWhereWithAggregatesInput = {
+    AND?: MembershipScalarWhereWithAggregatesInput | MembershipScalarWhereWithAggregatesInput[]
+    OR?: MembershipScalarWhereWithAggregatesInput[]
+    NOT?: MembershipScalarWhereWithAggregatesInput | MembershipScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Membership"> | string
+    tenantId?: StringWithAggregatesFilter<"Membership"> | string
+    userId?: StringWithAggregatesFilter<"Membership"> | string
+    role?: EnumTenantRoleWithAggregatesFilter<"Membership"> | $Enums.TenantRole
+    isOwner?: BoolWithAggregatesFilter<"Membership"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
@@ -6007,6 +11628,7 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    memberships?: MembershipCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6014,6 +11636,7 @@ export namespace Prisma {
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
@@ -6021,6 +11644,7 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6028,6 +11652,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6035,6 +11660,7 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6042,6 +11668,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6049,6 +11676,7 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6056,6 +11684,7 @@ export namespace Prisma {
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
@@ -6068,6 +11697,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6080,6 +11710,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6281,6 +11912,392 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TenantCreateInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateManyInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainCreateInput = {
+    id?: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutDomainsInput
+  }
+
+  export type TenantDomainUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantDomainUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutDomainsNestedInput
+  }
+
+  export type TenantDomainUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainCreateManyInput = {
+    id?: string
+    tenantId: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantDomainUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantBrandingCreateInput = {
+    id?: string
+    appName: string
+    logoUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string | null
+    secondaryColor?: string | null
+    supportEmail?: string | null
+    fromName?: string | null
+    emailDomain?: string | null
+    customCss?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandingInput
+  }
+
+  export type TenantBrandingUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    appName: string
+    logoUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string | null
+    secondaryColor?: string | null
+    supportEmail?: string | null
+    fromName?: string | null
+    emailDomain?: string | null
+    customCss?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantBrandingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandingNestedInput
+  }
+
+  export type TenantBrandingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantBrandingCreateManyInput = {
+    id?: string
+    tenantId: string
+    appName: string
+    logoUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string | null
+    secondaryColor?: string | null
+    supportEmail?: string | null
+    fromName?: string | null
+    emailDomain?: string | null
+    customCss?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantBrandingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantBrandingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipCreateInput = {
+    id?: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMembershipsInput
+    user: UserCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type MembershipUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    userId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MembershipUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMembershipsNestedInput
+    user?: UserUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type MembershipUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipCreateManyInput = {
+    id?: string
+    tenantId: string
+    userId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MembershipUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6352,6 +12369,12 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type MembershipListRelationFilter = {
+    every?: MembershipWhereInput
+    some?: MembershipWhereInput
+    none?: MembershipWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6365,11 +12388,16 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type MembershipOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     image?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
@@ -6382,6 +12410,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     image?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
@@ -6394,6 +12423,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     image?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
@@ -6609,6 +12639,291 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type EnumTenantModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantMode | EnumTenantModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantModeFilter<$PrismaModel> | $Enums.TenantMode
+  }
+
+  export type EnumTenantBillingModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantBillingMode | EnumTenantBillingModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantBillingModeFilter<$PrismaModel> | $Enums.TenantBillingMode
+  }
+
+  export type EnumTenantStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  }
+
+  export type TenantDomainListRelationFilter = {
+    every?: TenantDomainWhereInput
+    some?: TenantDomainWhereInput
+    none?: TenantDomainWhereInput
+  }
+
+  export type TenantBrandingNullableScalarRelationFilter = {
+    is?: TenantBrandingWhereInput | null
+    isNot?: TenantBrandingWhereInput | null
+  }
+
+  export type TenantDomainOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TenantCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    mode?: SortOrder
+    billingMode?: SortOrder
+    status?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    planCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    mode?: SortOrder
+    billingMode?: SortOrder
+    status?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    planCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    name?: SortOrder
+    mode?: SortOrder
+    billingMode?: SortOrder
+    status?: SortOrder
+    timezone?: SortOrder
+    locale?: SortOrder
+    planCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTenantModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantMode | EnumTenantModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantModeWithAggregatesFilter<$PrismaModel> | $Enums.TenantMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantModeFilter<$PrismaModel>
+    _max?: NestedEnumTenantModeFilter<$PrismaModel>
+  }
+
+  export type EnumTenantBillingModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantBillingMode | EnumTenantBillingModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantBillingModeWithAggregatesFilter<$PrismaModel> | $Enums.TenantBillingMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantBillingModeFilter<$PrismaModel>
+    _max?: NestedEnumTenantBillingModeFilter<$PrismaModel>
+  }
+
+  export type EnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+  }
+
+  export type EnumDomainKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.DomainKind | EnumDomainKindFieldRefInput<$PrismaModel>
+    in?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumDomainKindFilter<$PrismaModel> | $Enums.DomainKind
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type TenantScalarRelationFilter = {
+    is?: TenantWhereInput
+    isNot?: TenantWhereInput
+  }
+
+  export type TenantDomainCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    host?: SortOrder
+    kind?: SortOrder
+    isPrimary?: SortOrder
+    verifiedAt?: SortOrder
+    sslStatus?: SortOrder
+    dnsTarget?: SortOrder
+    redirectToHost?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantDomainMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    host?: SortOrder
+    kind?: SortOrder
+    isPrimary?: SortOrder
+    verifiedAt?: SortOrder
+    sslStatus?: SortOrder
+    dnsTarget?: SortOrder
+    redirectToHost?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantDomainMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    host?: SortOrder
+    kind?: SortOrder
+    isPrimary?: SortOrder
+    verifiedAt?: SortOrder
+    sslStatus?: SortOrder
+    dnsTarget?: SortOrder
+    redirectToHost?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumDomainKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DomainKind | EnumDomainKindFieldRefInput<$PrismaModel>
+    in?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumDomainKindWithAggregatesFilter<$PrismaModel> | $Enums.DomainKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDomainKindFilter<$PrismaModel>
+    _max?: NestedEnumDomainKindFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type TenantBrandingCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    appName?: SortOrder
+    logoUrl?: SortOrder
+    faviconUrl?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    supportEmail?: SortOrder
+    fromName?: SortOrder
+    emailDomain?: SortOrder
+    customCss?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantBrandingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    appName?: SortOrder
+    logoUrl?: SortOrder
+    faviconUrl?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    supportEmail?: SortOrder
+    fromName?: SortOrder
+    emailDomain?: SortOrder
+    customCss?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantBrandingMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    appName?: SortOrder
+    logoUrl?: SortOrder
+    faviconUrl?: SortOrder
+    primaryColor?: SortOrder
+    secondaryColor?: SortOrder
+    supportEmail?: SortOrder
+    fromName?: SortOrder
+    emailDomain?: SortOrder
+    customCss?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTenantRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantRole | EnumTenantRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantRoleFilter<$PrismaModel> | $Enums.TenantRole
+  }
+
+  export type MembershipTenantIdUserIdCompoundUniqueInput = {
+    tenantId: string
+    userId: string
+  }
+
+  export type MembershipCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    isOwner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MembershipMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    isOwner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MembershipMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    isOwner?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumTenantRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantRole | EnumTenantRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantRoleWithAggregatesFilter<$PrismaModel> | $Enums.TenantRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantRoleFilter<$PrismaModel>
+    _max?: NestedEnumTenantRoleFilter<$PrismaModel>
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -6623,6 +12938,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type MembershipCreateNestedManyWithoutUserInput = {
+    create?: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput> | MembershipCreateWithoutUserInput[] | MembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutUserInput | MembershipCreateOrConnectWithoutUserInput[]
+    createMany?: MembershipCreateManyUserInputEnvelope
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -6635,6 +12957,13 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type MembershipUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput> | MembershipCreateWithoutUserInput[] | MembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutUserInput | MembershipCreateOrConnectWithoutUserInput[]
+    createMany?: MembershipCreateManyUserInputEnvelope
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6685,6 +13014,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type MembershipUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput> | MembershipCreateWithoutUserInput[] | MembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutUserInput | MembershipCreateOrConnectWithoutUserInput[]
+    upsert?: MembershipUpsertWithWhereUniqueWithoutUserInput | MembershipUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MembershipCreateManyUserInputEnvelope
+    set?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    disconnect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    delete?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    update?: MembershipUpdateWithWhereUniqueWithoutUserInput | MembershipUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MembershipUpdateManyWithWhereWithoutUserInput | MembershipUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -6711,6 +13054,20 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type MembershipUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput> | MembershipCreateWithoutUserInput[] | MembershipUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutUserInput | MembershipCreateOrConnectWithoutUserInput[]
+    upsert?: MembershipUpsertWithWhereUniqueWithoutUserInput | MembershipUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MembershipCreateManyUserInputEnvelope
+    set?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    disconnect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    delete?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    update?: MembershipUpdateWithWhereUniqueWithoutUserInput | MembershipUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MembershipUpdateManyWithWhereWithoutUserInput | MembershipUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -6747,6 +13104,202 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSessionsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type TenantDomainCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantDomainCreateManyTenantInputEnvelope
+    connect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+  }
+
+  export type TenantBrandingCreateNestedOneWithoutTenantInput = {
+    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
+    connect?: TenantBrandingWhereUniqueInput
+  }
+
+  export type MembershipCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput> | MembershipCreateWithoutTenantInput[] | MembershipUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutTenantInput | MembershipCreateOrConnectWithoutTenantInput[]
+    createMany?: MembershipCreateManyTenantInputEnvelope
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
+  export type TenantDomainUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantDomainCreateManyTenantInputEnvelope
+    connect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+  }
+
+  export type TenantBrandingUncheckedCreateNestedOneWithoutTenantInput = {
+    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
+    connect?: TenantBrandingWhereUniqueInput
+  }
+
+  export type MembershipUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput> | MembershipCreateWithoutTenantInput[] | MembershipUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutTenantInput | MembershipCreateOrConnectWithoutTenantInput[]
+    createMany?: MembershipCreateManyTenantInputEnvelope
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
+  export type EnumTenantModeFieldUpdateOperationsInput = {
+    set?: $Enums.TenantMode
+  }
+
+  export type EnumTenantBillingModeFieldUpdateOperationsInput = {
+    set?: $Enums.TenantBillingMode
+  }
+
+  export type EnumTenantStatusFieldUpdateOperationsInput = {
+    set?: $Enums.TenantStatus
+  }
+
+  export type TenantDomainUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantDomainUpsertWithWhereUniqueWithoutTenantInput | TenantDomainUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantDomainCreateManyTenantInputEnvelope
+    set?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    disconnect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    delete?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    connect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    update?: TenantDomainUpdateWithWhereUniqueWithoutTenantInput | TenantDomainUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantDomainUpdateManyWithWhereWithoutTenantInput | TenantDomainUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantDomainScalarWhereInput | TenantDomainScalarWhereInput[]
+  }
+
+  export type TenantBrandingUpdateOneWithoutTenantNestedInput = {
+    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
+    upsert?: TenantBrandingUpsertWithoutTenantInput
+    disconnect?: TenantBrandingWhereInput | boolean
+    delete?: TenantBrandingWhereInput | boolean
+    connect?: TenantBrandingWhereUniqueInput
+    update?: XOR<XOR<TenantBrandingUpdateToOneWithWhereWithoutTenantInput, TenantBrandingUpdateWithoutTenantInput>, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MembershipUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput> | MembershipCreateWithoutTenantInput[] | MembershipUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutTenantInput | MembershipCreateOrConnectWithoutTenantInput[]
+    upsert?: MembershipUpsertWithWhereUniqueWithoutTenantInput | MembershipUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MembershipCreateManyTenantInputEnvelope
+    set?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    disconnect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    delete?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    update?: MembershipUpdateWithWhereUniqueWithoutTenantInput | MembershipUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MembershipUpdateManyWithWhereWithoutTenantInput | MembershipUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+  }
+
+  export type TenantDomainUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantDomainUpsertWithWhereUniqueWithoutTenantInput | TenantDomainUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantDomainCreateManyTenantInputEnvelope
+    set?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    disconnect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    delete?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    connect?: TenantDomainWhereUniqueInput | TenantDomainWhereUniqueInput[]
+    update?: TenantDomainUpdateWithWhereUniqueWithoutTenantInput | TenantDomainUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantDomainUpdateManyWithWhereWithoutTenantInput | TenantDomainUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantDomainScalarWhereInput | TenantDomainScalarWhereInput[]
+  }
+
+  export type TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput = {
+    create?: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: TenantBrandingCreateOrConnectWithoutTenantInput
+    upsert?: TenantBrandingUpsertWithoutTenantInput
+    disconnect?: TenantBrandingWhereInput | boolean
+    delete?: TenantBrandingWhereInput | boolean
+    connect?: TenantBrandingWhereUniqueInput
+    update?: XOR<XOR<TenantBrandingUpdateToOneWithWhereWithoutTenantInput, TenantBrandingUpdateWithoutTenantInput>, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MembershipUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput> | MembershipCreateWithoutTenantInput[] | MembershipUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MembershipCreateOrConnectWithoutTenantInput | MembershipCreateOrConnectWithoutTenantInput[]
+    upsert?: MembershipUpsertWithWhereUniqueWithoutTenantInput | MembershipUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MembershipCreateManyTenantInputEnvelope
+    set?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    disconnect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    delete?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+    update?: MembershipUpdateWithWhereUniqueWithoutTenantInput | MembershipUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MembershipUpdateManyWithWhereWithoutTenantInput | MembershipUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutDomainsInput = {
+    create?: XOR<TenantCreateWithoutDomainsInput, TenantUncheckedCreateWithoutDomainsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutDomainsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type EnumDomainKindFieldUpdateOperationsInput = {
+    set?: $Enums.DomainKind
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type TenantUpdateOneRequiredWithoutDomainsNestedInput = {
+    create?: XOR<TenantCreateWithoutDomainsInput, TenantUncheckedCreateWithoutDomainsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutDomainsInput
+    upsert?: TenantUpsertWithoutDomainsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutDomainsInput, TenantUpdateWithoutDomainsInput>, TenantUncheckedUpdateWithoutDomainsInput>
+  }
+
+  export type TenantCreateNestedOneWithoutBrandingInput = {
+    create?: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandingInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutBrandingNestedInput = {
+    create?: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandingInput
+    upsert?: TenantUpsertWithoutBrandingInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutBrandingInput, TenantUpdateWithoutBrandingInput>, TenantUncheckedUpdateWithoutBrandingInput>
+  }
+
+  export type TenantCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<TenantCreateWithoutMembershipsInput, TenantUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMembershipsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumTenantRoleFieldUpdateOperationsInput = {
+    set?: $Enums.TenantRole
+  }
+
+  export type TenantUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<TenantCreateWithoutMembershipsInput, TenantUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMembershipsInput
+    upsert?: TenantUpsertWithoutMembershipsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutMembershipsInput, TenantUpdateWithoutMembershipsInput>, TenantUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMembershipsInput
+    upsert?: UserUpsertWithoutMembershipsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMembershipsInput, UserUpdateWithoutMembershipsInput>, UserUncheckedUpdateWithoutMembershipsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6927,6 +13480,104 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumTenantModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantMode | EnumTenantModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantModeFilter<$PrismaModel> | $Enums.TenantMode
+  }
+
+  export type NestedEnumTenantBillingModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantBillingMode | EnumTenantBillingModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantBillingModeFilter<$PrismaModel> | $Enums.TenantBillingMode
+  }
+
+  export type NestedEnumTenantStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  }
+
+  export type NestedEnumTenantModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantMode | EnumTenantModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantMode[] | ListEnumTenantModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantModeWithAggregatesFilter<$PrismaModel> | $Enums.TenantMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantModeFilter<$PrismaModel>
+    _max?: NestedEnumTenantModeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTenantBillingModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantBillingMode | EnumTenantBillingModeFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantBillingMode[] | ListEnumTenantBillingModeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantBillingModeWithAggregatesFilter<$PrismaModel> | $Enums.TenantBillingMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantBillingModeFilter<$PrismaModel>
+    _max?: NestedEnumTenantBillingModeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDomainKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.DomainKind | EnumDomainKindFieldRefInput<$PrismaModel>
+    in?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumDomainKindFilter<$PrismaModel> | $Enums.DomainKind
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumDomainKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DomainKind | EnumDomainKindFieldRefInput<$PrismaModel>
+    in?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DomainKind[] | ListEnumDomainKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumDomainKindWithAggregatesFilter<$PrismaModel> | $Enums.DomainKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDomainKindFilter<$PrismaModel>
+    _max?: NestedEnumDomainKindFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTenantRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantRole | EnumTenantRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantRoleFilter<$PrismaModel> | $Enums.TenantRole
+  }
+
+  export type NestedEnumTenantRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantRole | EnumTenantRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantRole[] | ListEnumTenantRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantRoleWithAggregatesFilter<$PrismaModel> | $Enums.TenantRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantRoleFilter<$PrismaModel>
+    _max?: NestedEnumTenantRoleFilter<$PrismaModel>
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -6984,6 +13635,34 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MembershipCreateWithoutUserInput = {
+    id?: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type MembershipUncheckedCreateWithoutUserInput = {
+    id?: string
+    tenantId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MembershipCreateOrConnectWithoutUserInput = {
+    where: MembershipWhereUniqueInput
+    create: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput>
+  }
+
+  export type MembershipCreateManyUserInputEnvelope = {
+    data: MembershipCreateManyUserInput | MembershipCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -7047,17 +13726,48 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type MembershipUpsertWithWhereUniqueWithoutUserInput = {
+    where: MembershipWhereUniqueInput
+    update: XOR<MembershipUpdateWithoutUserInput, MembershipUncheckedUpdateWithoutUserInput>
+    create: XOR<MembershipCreateWithoutUserInput, MembershipUncheckedCreateWithoutUserInput>
+  }
+
+  export type MembershipUpdateWithWhereUniqueWithoutUserInput = {
+    where: MembershipWhereUniqueInput
+    data: XOR<MembershipUpdateWithoutUserInput, MembershipUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MembershipUpdateManyWithWhereWithoutUserInput = {
+    where: MembershipScalarWhereInput
+    data: XOR<MembershipUpdateManyMutationInput, MembershipUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MembershipScalarWhereInput = {
+    AND?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+    OR?: MembershipScalarWhereInput[]
+    NOT?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+    id?: StringFilter<"Membership"> | string
+    tenantId?: StringFilter<"Membership"> | string
+    userId?: StringFilter<"Membership"> | string
+    role?: EnumTenantRoleFilter<"Membership"> | $Enums.TenantRole
+    isOwner?: BoolFilter<"Membership"> | boolean
+    createdAt?: DateTimeFilter<"Membership"> | Date | string
+    updatedAt?: DateTimeFilter<"Membership"> | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
     name?: string | null
     phone?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
+    memberships?: MembershipCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7065,12 +13775,14 @@ export namespace Prisma {
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
     name?: string | null
     phone?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7094,12 +13806,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7107,12 +13821,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -7120,12 +13836,14 @@ export namespace Prisma {
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
     name?: string | null
     phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    memberships?: MembershipCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7133,12 +13851,14 @@ export namespace Prisma {
     email?: string | null
     password?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     image?: string | null
     role?: $Enums.Role
     emailVerified?: Date | string | null
     name?: string | null
     phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7162,12 +13882,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -7175,12 +13897,519 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantDomainCreateWithoutTenantInput = {
+    id?: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantDomainUncheckedCreateWithoutTenantInput = {
+    id?: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantDomainCreateOrConnectWithoutTenantInput = {
+    where: TenantDomainWhereUniqueInput
+    create: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantDomainCreateManyTenantInputEnvelope = {
+    data: TenantDomainCreateManyTenantInput | TenantDomainCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantBrandingCreateWithoutTenantInput = {
+    id?: string
+    appName: string
+    logoUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string | null
+    secondaryColor?: string | null
+    supportEmail?: string | null
+    fromName?: string | null
+    emailDomain?: string | null
+    customCss?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantBrandingUncheckedCreateWithoutTenantInput = {
+    id?: string
+    appName: string
+    logoUrl?: string | null
+    faviconUrl?: string | null
+    primaryColor?: string | null
+    secondaryColor?: string | null
+    supportEmail?: string | null
+    fromName?: string | null
+    emailDomain?: string | null
+    customCss?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantBrandingCreateOrConnectWithoutTenantInput = {
+    where: TenantBrandingWhereUniqueInput
+    create: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MembershipCreateWithoutTenantInput = {
+    id?: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type MembershipUncheckedCreateWithoutTenantInput = {
+    id?: string
+    userId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MembershipCreateOrConnectWithoutTenantInput = {
+    where: MembershipWhereUniqueInput
+    create: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MembershipCreateManyTenantInputEnvelope = {
+    data: MembershipCreateManyTenantInput | MembershipCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantDomainUpsertWithWhereUniqueWithoutTenantInput = {
+    where: TenantDomainWhereUniqueInput
+    update: XOR<TenantDomainUpdateWithoutTenantInput, TenantDomainUncheckedUpdateWithoutTenantInput>
+    create: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantDomainUpdateWithWhereUniqueWithoutTenantInput = {
+    where: TenantDomainWhereUniqueInput
+    data: XOR<TenantDomainUpdateWithoutTenantInput, TenantDomainUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TenantDomainUpdateManyWithWhereWithoutTenantInput = {
+    where: TenantDomainScalarWhereInput
+    data: XOR<TenantDomainUpdateManyMutationInput, TenantDomainUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TenantDomainScalarWhereInput = {
+    AND?: TenantDomainScalarWhereInput | TenantDomainScalarWhereInput[]
+    OR?: TenantDomainScalarWhereInput[]
+    NOT?: TenantDomainScalarWhereInput | TenantDomainScalarWhereInput[]
+    id?: StringFilter<"TenantDomain"> | string
+    tenantId?: StringFilter<"TenantDomain"> | string
+    host?: StringFilter<"TenantDomain"> | string
+    kind?: EnumDomainKindFilter<"TenantDomain"> | $Enums.DomainKind
+    isPrimary?: BoolFilter<"TenantDomain"> | boolean
+    verifiedAt?: DateTimeNullableFilter<"TenantDomain"> | Date | string | null
+    sslStatus?: StringNullableFilter<"TenantDomain"> | string | null
+    dnsTarget?: StringNullableFilter<"TenantDomain"> | string | null
+    redirectToHost?: StringNullableFilter<"TenantDomain"> | string | null
+    createdAt?: DateTimeFilter<"TenantDomain"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantDomain"> | Date | string
+  }
+
+  export type TenantBrandingUpsertWithoutTenantInput = {
+    update: XOR<TenantBrandingUpdateWithoutTenantInput, TenantBrandingUncheckedUpdateWithoutTenantInput>
+    create: XOR<TenantBrandingCreateWithoutTenantInput, TenantBrandingUncheckedCreateWithoutTenantInput>
+    where?: TenantBrandingWhereInput
+  }
+
+  export type TenantBrandingUpdateToOneWithWhereWithoutTenantInput = {
+    where?: TenantBrandingWhereInput
+    data: XOR<TenantBrandingUpdateWithoutTenantInput, TenantBrandingUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TenantBrandingUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantBrandingUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appName?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    faviconUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    secondaryColor?: NullableStringFieldUpdateOperationsInput | string | null
+    supportEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    fromName?: NullableStringFieldUpdateOperationsInput | string | null
+    emailDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    customCss?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUpsertWithWhereUniqueWithoutTenantInput = {
+    where: MembershipWhereUniqueInput
+    update: XOR<MembershipUpdateWithoutTenantInput, MembershipUncheckedUpdateWithoutTenantInput>
+    create: XOR<MembershipCreateWithoutTenantInput, MembershipUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MembershipUpdateWithWhereUniqueWithoutTenantInput = {
+    where: MembershipWhereUniqueInput
+    data: XOR<MembershipUpdateWithoutTenantInput, MembershipUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MembershipUpdateManyWithWhereWithoutTenantInput = {
+    where: MembershipScalarWhereInput
+    data: XOR<MembershipUpdateManyMutationInput, MembershipUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TenantCreateWithoutDomainsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutDomainsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutDomainsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutDomainsInput, TenantUncheckedCreateWithoutDomainsInput>
+  }
+
+  export type TenantUpsertWithoutDomainsInput = {
+    update: XOR<TenantUpdateWithoutDomainsInput, TenantUncheckedUpdateWithoutDomainsInput>
+    create: XOR<TenantCreateWithoutDomainsInput, TenantUncheckedCreateWithoutDomainsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutDomainsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutDomainsInput, TenantUncheckedUpdateWithoutDomainsInput>
+  }
+
+  export type TenantUpdateWithoutDomainsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutDomainsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateWithoutBrandingInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutBrandingInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutBrandingInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
+  }
+
+  export type TenantUpsertWithoutBrandingInput = {
+    update: XOR<TenantUpdateWithoutBrandingInput, TenantUncheckedUpdateWithoutBrandingInput>
+    create: XOR<TenantCreateWithoutBrandingInput, TenantUncheckedCreateWithoutBrandingInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutBrandingInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutBrandingInput, TenantUncheckedUpdateWithoutBrandingInput>
+  }
+
+  export type TenantUpdateWithoutBrandingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutBrandingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateWithoutMembershipsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutMembershipsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutMembershipsInput, TenantUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type UserCreateWithoutMembershipsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMembershipsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type TenantUpsertWithoutMembershipsInput = {
+    update: XOR<TenantUpdateWithoutMembershipsInput, TenantUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<TenantCreateWithoutMembershipsInput, TenantUncheckedCreateWithoutMembershipsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutMembershipsInput, TenantUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type TenantUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+  }
+
+  export type UserUpsertWithoutMembershipsInput = {
+    update: XOR<UserUpdateWithoutMembershipsInput, UserUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<UserCreateWithoutMembershipsInput, UserUncheckedCreateWithoutMembershipsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMembershipsInput, UserUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type UserUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -7201,6 +14430,15 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+  }
+
+  export type MembershipCreateManyUserInput = {
+    id?: string
+    tenantId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -7261,6 +14499,121 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type MembershipUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainCreateManyTenantInput = {
+    id?: string
+    host: string
+    kind?: $Enums.DomainKind
+    isPrimary?: boolean
+    verifiedAt?: Date | string | null
+    sslStatus?: string | null
+    dnsTarget?: string | null
+    redirectToHost?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MembershipCreateManyTenantInput = {
+    id?: string
+    userId: string
+    role: $Enums.TenantRole
+    isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantDomainUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantDomainUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    host?: StringFieldUpdateOperationsInput | string
+    kind?: EnumDomainKindFieldUpdateOperationsInput | $Enums.DomainKind
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sslStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    dnsTarget?: NullableStringFieldUpdateOperationsInput | string | null
+    redirectToHost?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type MembershipUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MembershipUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantRoleFieldUpdateOperationsInput | $Enums.TenantRole
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

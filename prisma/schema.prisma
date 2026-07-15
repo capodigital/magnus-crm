@@ -8,17 +8,19 @@ datasource db {
 }
 
 model User {
-  id            String              @id @default(cuid())
-  email         String?             @unique
+  id            String        @id @default(cuid())
+  email         String?       @unique
   password      String?
-  createdAt     DateTime            @default(now())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   image         String?
-  role          Role                @default(USUARIO)
+  role          Role          @default(USUARIO)
   emailVerified DateTime?
   name          String?
-  phone         String?             @db.VarChar(20)
+  phone         String?       @db.VarChar(20)
   accounts      Account[]
   sessions      Session[]
+  memberships   Membership[]
 
   @@map("users")
 }
@@ -61,4 +63,110 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum TenantMode {
+  SAAS
+  WHITE_LABEL
+}
+
+enum TenantBillingMode {
+  PLATFORM_PLUS_META
+  META_ONLY
+}
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+enum TenantRole {
+  OWNER
+  ADMIN
+  MEMBER
+  AGENT
+  VIEWER
+}
+
+enum DomainKind {
+  PLATFORM_SUBDOMAIN
+  CUSTOM_DOMAIN
+  WILDCARD_DOMAIN
+}
+
+model Tenant {
+  id           String            @id @default(cuid())
+  slug         String            @unique
+  name         String
+  mode         TenantMode        @default(SAAS)
+  billingMode  TenantBillingMode  @default(PLATFORM_PLUS_META)
+  status       TenantStatus      @default(ACTIVE)
+  timezone     String?           @default("UTC")
+  locale       String?           @default("es-419")
+  planCode     String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  domains      TenantDomain[]
+  branding     TenantBranding?
+  memberships  Membership[]
+
+  @@map("tenants")
+  @@index([status, createdAt])
+}
+
+model TenantDomain {
+  id             String      @id @default(cuid())
+  tenantId       String
+  host           String      @unique
+  kind           DomainKind   @default(CUSTOM_DOMAIN)
+  isPrimary      Boolean     @default(false)
+  verifiedAt     DateTime?
+  sslStatus      String?
+  dnsTarget      String?
+  redirectToHost String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_domains")
+  @@index([tenantId, isPrimary])
+}
+
+model TenantBranding {
+  id           String   @id @default(cuid())
+  tenantId     String   @unique
+  appName      String
+  logoUrl      String?
+  faviconUrl   String?
+  primaryColor String?
+  secondaryColor String?
+  supportEmail String?
+  fromName     String?
+  emailDomain  String?
+  customCss    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("tenant_branding")
+}
+
+model Membership {
+  id          String      @id @default(cuid())
+  tenantId    String
+  userId      String
+  role        TenantRole
+  isOwner     Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("memberships")
+  @@unique([tenantId, userId])
+  @@index([tenantId, role])
 }

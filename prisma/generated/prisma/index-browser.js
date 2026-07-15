@@ -125,6 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   password: 'password',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   image: 'image',
   role: 'role',
   emailVerified: 'emailVerified',
@@ -160,6 +161,60 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.TenantScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  mode: 'mode',
+  billingMode: 'billingMode',
+  status: 'status',
+  timezone: 'timezone',
+  locale: 'locale',
+  planCode: 'planCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TenantDomainScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  host: 'host',
+  kind: 'kind',
+  isPrimary: 'isPrimary',
+  verifiedAt: 'verifiedAt',
+  sslStatus: 'sslStatus',
+  dnsTarget: 'dnsTarget',
+  redirectToHost: 'redirectToHost',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TenantBrandingScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  appName: 'appName',
+  logoUrl: 'logoUrl',
+  faviconUrl: 'faviconUrl',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor',
+  supportEmail: 'supportEmail',
+  fromName: 'fromName',
+  emailDomain: 'emailDomain',
+  customCss: 'customCss',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MembershipScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  userId: 'userId',
+  role: 'role',
+  isOwner: 'isOwner',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -180,11 +235,45 @@ exports.Role = exports.$Enums.Role = {
   SUPER_ADMIN: 'SUPER_ADMIN'
 };
 
+exports.TenantMode = exports.$Enums.TenantMode = {
+  SAAS: 'SAAS',
+  WHITE_LABEL: 'WHITE_LABEL'
+};
+
+exports.TenantBillingMode = exports.$Enums.TenantBillingMode = {
+  PLATFORM_PLUS_META: 'PLATFORM_PLUS_META',
+  META_ONLY: 'META_ONLY'
+};
+
+exports.TenantStatus = exports.$Enums.TenantStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.DomainKind = exports.$Enums.DomainKind = {
+  PLATFORM_SUBDOMAIN: 'PLATFORM_SUBDOMAIN',
+  CUSTOM_DOMAIN: 'CUSTOM_DOMAIN',
+  WILDCARD_DOMAIN: 'WILDCARD_DOMAIN'
+};
+
+exports.TenantRole = exports.$Enums.TenantRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER',
+  AGENT: 'AGENT',
+  VIEWER: 'VIEWER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   Session: 'Session',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  Tenant: 'Tenant',
+  TenantDomain: 'TenantDomain',
+  TenantBranding: 'TenantBranding',
+  Membership: 'Membership'
 };
 
 /**
