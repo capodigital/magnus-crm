@@ -15,6 +15,9 @@
 11. Resolve tenant access by exact host first, and only fall back to slug matching for platform-managed wildcard subdomains.
 12. Add the first CRM workflow entities directly to Prisma before implementing WhatsApp ingestion routes.
 13. Bootstrap the first real workspace through a reusable CLI-backed service instead of waiting for a settings UI.
+14. Persist WhatsApp webhook data as one raw event row per message or status item, keyed by a derived tenant-scoped `eventKey`, instead of one row per HTTP delivery.
+15. Resolve WhatsApp webhook tenancy through a trusted `phone_number_id -> WhatsappPhoneNumber -> tenantId` mapping and ignore unmapped numbers until onboarding exists.
+16. Use `externalThreadKey = phone_number_id:wa_id` so each tenant can keep a stable WhatsApp conversation thread per business number and contact pair.
 
 ## Rationale
 
@@ -26,3 +29,6 @@
 - Exact-host-first resolution avoids accidentally treating arbitrary custom domains as trusted tenant slugs.
 - Adding the CRM entities early gives the webhook and inbox work a stable contract to build against.
 - A scriptable bootstrap path unblocks database provisioning, local testing, and early QA while the admin UI is still under construction.
+- Item-level raw event storage gives us better idempotency, better retries, and cleaner auditability than storing only the outer webhook POST.
+- Tenant resolution through Meta `phone_number_id` is the safest first contract because webhook hosts do not identify the tenant.
+- A stable external thread key lets inbound retries and future outbound/status reconciliation converge on the same conversation record.

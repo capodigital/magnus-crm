@@ -14,8 +14,12 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - Dashboard access is now tenant-aware: platform-host requests still work with session auth, while tenant-scoped hosts require both a resolved tenant and a matching membership.
 - The Prisma schema and generated client now include the tenant core plus the first CRM domain slice: contacts, leads, conversations, messages, pipelines, and pipeline stages.
 - The repo now includes a reusable workspace bootstrap service and a CLI script to provision the first tenant, owner membership, branding, primary domain, and default pipeline.
+- The Prisma schema now also includes the first WhatsApp integration slice: `WhatsappPhoneNumber`, `WhatsappWebhookEvent`, and conversation fields for `externalThreadKey` plus `whatsappPhoneNumberId`.
+- A new WhatsApp webhook route now verifies `hub.challenge`, validates `X-Hub-Signature-256`, stores raw message/status events idempotently, and processes inbound message events into CRM entities.
+- The backend now has dedicated modules for WhatsApp payload extraction, signature validation, raw event persistence, and CRM inbox upserts.
 - The repo now has an expanded `.env.example` that lists the initial App, Database, NextAuth, Google, and Meta placeholders we will need.
 - Google OAuth and Meta WhatsApp values are still pending from the user, as requested.
+- The WhatsApp inbound slice now typechecks and lints cleanly against the current generated Prisma client.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -25,6 +29,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - If the user has not answered a product-shaping question yet, proceed with the recommended default and record it instead of waiting.
 - White-label work is intentionally deferred until the core CRM loop is stable.
 - Keep using project-local progress notes and explicit plan updates for the long-running CRM build.
+- Keep unresolved Meta phone numbers out of tenant processing until onboarding or manual registration creates a trusted `WhatsappPhoneNumber` mapping.
 
 ## Files touched in this journal pass
 - `.codex/CODEX_STATE.md`
@@ -37,9 +42,15 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/lib/app-context.ts`
 - `src/lib/tenant.ts`
 - `src/lib/workspace-bootstrap.ts`
+- `src/lib/crm/inbox-repository.ts`
+- `src/lib/whatsapp/webhook-types.ts`
+- `src/lib/whatsapp/webhook-signature.ts`
+- `src/lib/whatsapp/webhook-event-store.ts`
+- `src/lib/whatsapp/inbound-service.ts`
+- `src/app/api/webhooks/whatsapp/route.ts`
 - `scripts/bootstrap-workspace.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Use the bootstrap layer to create the first workspace in the real database, then build the repository and route layer for WhatsApp inbound events and conversation upserts.
+Register the first tenant WhatsApp phone mapping (`META_WABA_ID`, `META_PHONE_NUMBER_ID`) and then exercise `/api/webhooks/whatsapp` with a signed Meta payload to verify raw event storage, idempotency, and CRM upserts end to end.

@@ -147,6 +147,11 @@
   - `codex-progress-journal`
 - Goal output:
   - Reliable message ingestion and reply delivery.
+- Status:
+  - A node-runtime webhook route now handles `hub.challenge`, validates `X-Hub-Signature-256`, and ignores non-WhatsApp objects safely.
+  - Raw webhook items are now persisted one row per message/status with tenant-scoped idempotency via `eventKey`.
+  - Inbound message events now upsert contact, lead, conversation, and message records through a dedicated inbox repository.
+  - Status events are stored for audit and marked ignored until the status reconciliation slice is implemented.
 
 ### Phase 6: CRM workflow
 - Objective: turn inbound WhatsApp activity into contacts, leads, and conversations.
@@ -214,7 +219,7 @@
 1. Which Google OAuth client ID and secret should we use to enable the Google provider?
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
 3. Which concrete tenant slug, tenant name, owner email, and optional owner password should we use when we run the first workspace bootstrap?
-4. Do you want the next backend slice after this bootstrap capability to be WhatsApp webhook ingestion or repository-level CRM upsert services first?
+4. Once you share the Meta identifiers, do you want the next slice to be tenant integration registration/admin or status reconciliation plus outbound replies first?
 
 ## Deferred for now
 - Any destructive or broad refactors.

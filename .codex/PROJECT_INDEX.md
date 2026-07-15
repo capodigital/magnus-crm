@@ -9,6 +9,8 @@
 - Auth is wired with NextAuth + Prisma, a `proxy.ts` guard, and a credential-plus-Google login surface.
 - Prisma now carries the first tenant core: tenants, tenant domains, tenant branding, and memberships.
 - Prisma also now carries the first CRM workflow entities: contacts, leads, conversations, messages, pipelines, and pipeline stages.
+- Prisma now also carries the first WhatsApp integration entities: `WhatsappPhoneNumber` and `WhatsappWebhookEvent`.
+- The backend now includes a production-oriented inbound WhatsApp webhook slice with signature validation, raw event persistence, and CRM upsert orchestration.
 
 ## Key files
 
@@ -26,10 +28,16 @@
 - `src/app/(blank-layout-pages)/login/page.tsx` - login route entry point.
 - `src/views/Login.tsx` - login view component.
 - `src/app/api/auth/[...nextauth]/route.ts` - NextAuth route handler.
+- `src/app/api/webhooks/whatsapp/route.ts` - Meta webhook verification and inbound event entry point.
 - `src/lib/auth.ts` - NextAuth options, callbacks, and session helper.
 - `src/lib/app-context.ts` - server-only resolver for request tenant, session, and membership.
 - `src/lib/tenant.ts` - host-based tenant context helper.
 - `src/lib/workspace-bootstrap.ts` - reusable tenant/workspace provisioning service.
+- `src/lib/crm/inbox-repository.ts` - tenant-scoped upserts for contacts, leads, conversations, and inbound messages.
+- `src/lib/whatsapp/webhook-types.ts` - minimal Meta payload types plus message/status extraction.
+- `src/lib/whatsapp/webhook-signature.ts` - `X-Hub-Signature-256` validation helper.
+- `src/lib/whatsapp/webhook-event-store.ts` - tenant phone-number resolution plus raw webhook event persistence.
+- `src/lib/whatsapp/inbound-service.ts` - orchestration layer that connects webhook events to CRM upserts.
 - `src/proxy.ts` - request guard and auth context injector.
 - `src/views/NotFound.tsx` - not-found view component.
 - `src/components/crm/SectionPage.tsx` - shared route shell for CRM sections.
@@ -46,6 +54,8 @@
 - `src/@layouts/` - layout wrappers and layout-specific components.
 - `src/@menu/` - navigation system and menu rendering.
 - `src/configs/` - theme and color configuration.
+- `src/lib/crm/` - tenant-scoped CRM repository modules.
+- `src/lib/whatsapp/` - Meta webhook parsing, validation, persistence, and orchestration.
 - `public/` - static images and assets.
 - `.codex/skills/` - project-local Codex skills installed for this repo.
 
@@ -56,6 +66,8 @@
 - `npm run lint` - run ESLint across the repo.
 - `npm run lint:fix` - apply automatic lint fixes.
 - `npm run bootstrap:workspace` - provision a tenant, owner membership, branding, primary domain, and default pipeline from env vars.
+- `npm exec -- prisma generate` - refresh the generated Prisma client after schema changes.
+- `npm exec -- tsc --noEmit --pretty false` - run a fast typecheck without building the app.
 - `npm run format` - format `src/**/*.{js,jsx,ts,tsx}` with Prettier.
 - `npm run build:icons` - regenerate the icon CSS bundle.
 
@@ -63,4 +75,4 @@
 
 - A `git status` check was not available from the current workspace view, so this index is based on the filesystem and package metadata.
 - The dashboard home now frames the workspace around leads, conversations, pipeline, billing, and settings instead of generic template content.
-- The remaining external values we still need from the user are the final Google OAuth pair and the Meta WhatsApp / Embedded Signup credentials.
+- The remaining external values we still need from the user are the final Google OAuth pair plus the Meta app secret, verify token, WABA ID, and phone number ID for the first tenant integration.
