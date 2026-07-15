@@ -53,6 +53,36 @@ export type TenantBranding = $Result.DefaultSelection<Prisma.$TenantBrandingPayl
  * 
  */
 export type Membership = $Result.DefaultSelection<Prisma.$MembershipPayload>
+/**
+ * Model Contact
+ * 
+ */
+export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
+/**
+ * Model Lead
+ * 
+ */
+export type Lead = $Result.DefaultSelection<Prisma.$LeadPayload>
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
+/**
+ * Model Message
+ * 
+ */
+export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model Pipeline
+ * 
+ */
+export type Pipeline = $Result.DefaultSelection<Prisma.$PipelinePayload>
+/**
+ * Model PipelineStage
+ * 
+ */
+export type PipelineStage = $Result.DefaultSelection<Prisma.$PipelineStagePayload>
 
 /**
  * Enums
@@ -111,6 +141,64 @@ export const DomainKind: {
 
 export type DomainKind = (typeof DomainKind)[keyof typeof DomainKind]
 
+
+export const LeadSourceChannel: {
+  WHATSAPP: 'WHATSAPP',
+  MANUAL: 'MANUAL',
+  IMPORT: 'IMPORT',
+  API: 'API'
+};
+
+export type LeadSourceChannel = (typeof LeadSourceChannel)[keyof typeof LeadSourceChannel]
+
+
+export const LeadStatus: {
+  OPEN: 'OPEN',
+  WON: 'WON',
+  LOST: 'LOST',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
+
+
+export const ChannelType: {
+  WHATSAPP: 'WHATSAPP'
+};
+
+export type ChannelType = (typeof ChannelType)[keyof typeof ChannelType]
+
+
+export const ConversationStatus: {
+  OPEN: 'OPEN',
+  PENDING: 'PENDING',
+  CLOSED: 'CLOSED',
+  SPAM: 'SPAM'
+};
+
+export type ConversationStatus = (typeof ConversationStatus)[keyof typeof ConversationStatus]
+
+
+export const MessageDirection: {
+  INBOUND: 'INBOUND',
+  OUTBOUND: 'OUTBOUND'
+};
+
+export type MessageDirection = (typeof MessageDirection)[keyof typeof MessageDirection]
+
+
+export const MessageKind: {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  DOCUMENT: 'DOCUMENT',
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO',
+  TEMPLATE: 'TEMPLATE',
+  SYSTEM: 'SYSTEM'
+};
+
+export type MessageKind = (typeof MessageKind)[keyof typeof MessageKind]
+
 }
 
 export type Role = $Enums.Role
@@ -136,6 +224,30 @@ export const TenantRole: typeof $Enums.TenantRole
 export type DomainKind = $Enums.DomainKind
 
 export const DomainKind: typeof $Enums.DomainKind
+
+export type LeadSourceChannel = $Enums.LeadSourceChannel
+
+export const LeadSourceChannel: typeof $Enums.LeadSourceChannel
+
+export type LeadStatus = $Enums.LeadStatus
+
+export const LeadStatus: typeof $Enums.LeadStatus
+
+export type ChannelType = $Enums.ChannelType
+
+export const ChannelType: typeof $Enums.ChannelType
+
+export type ConversationStatus = $Enums.ConversationStatus
+
+export const ConversationStatus: typeof $Enums.ConversationStatus
+
+export type MessageDirection = $Enums.MessageDirection
+
+export const MessageDirection: typeof $Enums.MessageDirection
+
+export type MessageKind = $Enums.MessageKind
+
+export const MessageKind: typeof $Enums.MessageKind
 
 /**
  * ##  Prisma Client ʲˢ
@@ -337,6 +449,66 @@ export class PrismaClient<
     * ```
     */
   get membership(): Prisma.MembershipDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contact`: Exposes CRUD operations for the **Contact** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contacts
+    * const contacts = await prisma.contact.findMany()
+    * ```
+    */
+  get contact(): Prisma.ContactDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.lead`: Exposes CRUD operations for the **Lead** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Leads
+    * const leads = await prisma.lead.findMany()
+    * ```
+    */
+  get lead(): Prisma.LeadDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversation`: Exposes CRUD operations for the **Conversation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Conversations
+    * const conversations = await prisma.conversation.findMany()
+    * ```
+    */
+  get conversation(): Prisma.ConversationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Messages
+    * const messages = await prisma.message.findMany()
+    * ```
+    */
+  get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pipeline`: Exposes CRUD operations for the **Pipeline** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Pipelines
+    * const pipelines = await prisma.pipeline.findMany()
+    * ```
+    */
+  get pipeline(): Prisma.PipelineDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pipelineStage`: Exposes CRUD operations for the **PipelineStage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PipelineStages
+    * const pipelineStages = await prisma.pipelineStage.findMany()
+    * ```
+    */
+  get pipelineStage(): Prisma.PipelineStageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -778,7 +950,13 @@ export namespace Prisma {
     Tenant: 'Tenant',
     TenantDomain: 'TenantDomain',
     TenantBranding: 'TenantBranding',
-    Membership: 'Membership'
+    Membership: 'Membership',
+    Contact: 'Contact',
+    Lead: 'Lead',
+    Conversation: 'Conversation',
+    Message: 'Message',
+    Pipeline: 'Pipeline',
+    PipelineStage: 'PipelineStage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -794,7 +972,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership" | "contact" | "lead" | "conversation" | "message" | "pipeline" | "pipelineStage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1390,6 +1568,450 @@ export namespace Prisma {
           }
         }
       }
+      Contact: {
+        payload: Prisma.$ContactPayload<ExtArgs>
+        fields: Prisma.ContactFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          findMany: {
+            args: Prisma.ContactFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>[]
+          }
+          create: {
+            args: Prisma.ContactCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          createMany: {
+            args: Prisma.ContactCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          update: {
+            args: Prisma.ContactUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContactUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContactUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContact>
+          }
+          groupBy: {
+            args: Prisma.ContactGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContactGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactCountArgs<ExtArgs>
+            result: $Utils.Optional<ContactCountAggregateOutputType> | number
+          }
+        }
+      }
+      Lead: {
+        payload: Prisma.$LeadPayload<ExtArgs>
+        fields: Prisma.LeadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LeadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LeadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          findFirst: {
+            args: Prisma.LeadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LeadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          findMany: {
+            args: Prisma.LeadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          create: {
+            args: Prisma.LeadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          createMany: {
+            args: Prisma.LeadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LeadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          delete: {
+            args: Prisma.LeadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          update: {
+            args: Prisma.LeadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          deleteMany: {
+            args: Prisma.LeadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LeadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LeadUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          upsert: {
+            args: Prisma.LeadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          aggregate: {
+            args: Prisma.LeadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLead>
+          }
+          groupBy: {
+            args: Prisma.LeadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LeadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LeadCountArgs<ExtArgs>
+            result: $Utils.Optional<LeadCountAggregateOutputType> | number
+          }
+        }
+      }
+      Conversation: {
+        payload: Prisma.$ConversationPayload<ExtArgs>
+        fields: Prisma.ConversationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          findMany: {
+            args: Prisma.ConversationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          create: {
+            args: Prisma.ConversationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          createMany: {
+            args: Prisma.ConversationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          update: {
+            args: Prisma.ConversationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversationPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversation>
+          }
+          groupBy: {
+            args: Prisma.ConversationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversationCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Message: {
+        payload: Prisma.$MessagePayload<ExtArgs>
+        fields: Prisma.MessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findFirst: {
+            args: Prisma.MessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findMany: {
+            args: Prisma.MessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          create: {
+            args: Prisma.MessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          createMany: {
+            args: Prisma.MessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          delete: {
+            args: Prisma.MessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          update: {
+            args: Prisma.MessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.MessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.MessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          aggregate: {
+            args: Prisma.MessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessage>
+          }
+          groupBy: {
+            args: Prisma.MessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MessageCountArgs<ExtArgs>
+            result: $Utils.Optional<MessageCountAggregateOutputType> | number
+          }
+        }
+      }
+      Pipeline: {
+        payload: Prisma.$PipelinePayload<ExtArgs>
+        fields: Prisma.PipelineFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PipelineFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PipelineFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          findFirst: {
+            args: Prisma.PipelineFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PipelineFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          findMany: {
+            args: Prisma.PipelineFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>[]
+          }
+          create: {
+            args: Prisma.PipelineCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          createMany: {
+            args: Prisma.PipelineCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PipelineCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>[]
+          }
+          delete: {
+            args: Prisma.PipelineDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          update: {
+            args: Prisma.PipelineUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          deleteMany: {
+            args: Prisma.PipelineDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PipelineUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PipelineUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>[]
+          }
+          upsert: {
+            args: Prisma.PipelineUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelinePayload>
+          }
+          aggregate: {
+            args: Prisma.PipelineAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePipeline>
+          }
+          groupBy: {
+            args: Prisma.PipelineGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PipelineGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PipelineCountArgs<ExtArgs>
+            result: $Utils.Optional<PipelineCountAggregateOutputType> | number
+          }
+        }
+      }
+      PipelineStage: {
+        payload: Prisma.$PipelineStagePayload<ExtArgs>
+        fields: Prisma.PipelineStageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PipelineStageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PipelineStageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          findFirst: {
+            args: Prisma.PipelineStageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PipelineStageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          findMany: {
+            args: Prisma.PipelineStageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>[]
+          }
+          create: {
+            args: Prisma.PipelineStageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          createMany: {
+            args: Prisma.PipelineStageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PipelineStageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>[]
+          }
+          delete: {
+            args: Prisma.PipelineStageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          update: {
+            args: Prisma.PipelineStageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          deleteMany: {
+            args: Prisma.PipelineStageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PipelineStageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PipelineStageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>[]
+          }
+          upsert: {
+            args: Prisma.PipelineStageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PipelineStagePayload>
+          }
+          aggregate: {
+            args: Prisma.PipelineStageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePipelineStage>
+          }
+          groupBy: {
+            args: Prisma.PipelineStageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PipelineStageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PipelineStageCountArgs<ExtArgs>
+            result: $Utils.Optional<PipelineStageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1506,6 +2128,12 @@ export namespace Prisma {
     tenantDomain?: TenantDomainOmit
     tenantBranding?: TenantBrandingOmit
     membership?: MembershipOmit
+    contact?: ContactOmit
+    lead?: LeadOmit
+    conversation?: ConversationOmit
+    message?: MessageOmit
+    pipeline?: PipelineOmit
+    pipelineStage?: PipelineStageOmit
   }
 
   /* Types for Logging */
@@ -1589,12 +2217,16 @@ export namespace Prisma {
     accounts: number
     sessions: number
     memberships: number
+    ownedLeads: number
+    assignedConversations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
+    ownedLeads?: boolean | UserCountOutputTypeCountOwnedLeadsArgs
+    assignedConversations?: boolean | UserCountOutputTypeCountAssignedConversationsArgs
   }
 
   // Custom InputTypes
@@ -1629,6 +2261,20 @@ export namespace Prisma {
     where?: MembershipWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOwnedLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAssignedConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
 
   /**
    * Count Type TenantCountOutputType
@@ -1637,11 +2283,23 @@ export namespace Prisma {
   export type TenantCountOutputType = {
     domains: number
     memberships: number
+    contacts: number
+    leads: number
+    conversations: number
+    messages: number
+    pipelines: number
+    pipelineStages: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     domains?: boolean | TenantCountOutputTypeCountDomainsArgs
     memberships?: boolean | TenantCountOutputTypeCountMembershipsArgs
+    contacts?: boolean | TenantCountOutputTypeCountContactsArgs
+    leads?: boolean | TenantCountOutputTypeCountLeadsArgs
+    conversations?: boolean | TenantCountOutputTypeCountConversationsArgs
+    messages?: boolean | TenantCountOutputTypeCountMessagesArgs
+    pipelines?: boolean | TenantCountOutputTypeCountPipelinesArgs
+    pipelineStages?: boolean | TenantCountOutputTypeCountPipelineStagesArgs
   }
 
   // Custom InputTypes
@@ -1667,6 +2325,221 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MembershipWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountPipelinesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PipelineWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountPipelineStagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PipelineStageWhereInput
+  }
+
+
+  /**
+   * Count Type ContactCountOutputType
+   */
+
+  export type ContactCountOutputType = {
+    leads: number
+    conversations: number
+  }
+
+  export type ContactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    leads?: boolean | ContactCountOutputTypeCountLeadsArgs
+    conversations?: boolean | ContactCountOutputTypeCountConversationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactCountOutputType
+     */
+    select?: ContactCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+
+  /**
+   * Count Type LeadCountOutputType
+   */
+
+  export type LeadCountOutputType = {
+    conversations: number
+  }
+
+  export type LeadCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | LeadCountOutputTypeCountConversationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LeadCountOutputType without action
+   */
+  export type LeadCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LeadCountOutputType
+     */
+    select?: LeadCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LeadCountOutputType without action
+   */
+  export type LeadCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+
+  /**
+   * Count Type ConversationCountOutputType
+   */
+
+  export type ConversationCountOutputType = {
+    messages: number
+  }
+
+  export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversationCountOutputType
+     */
+    select?: ConversationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type PipelineCountOutputType
+   */
+
+  export type PipelineCountOutputType = {
+    stages: number
+    leads: number
+  }
+
+  export type PipelineCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    stages?: boolean | PipelineCountOutputTypeCountStagesArgs
+    leads?: boolean | PipelineCountOutputTypeCountLeadsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PipelineCountOutputType without action
+   */
+  export type PipelineCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineCountOutputType
+     */
+    select?: PipelineCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PipelineCountOutputType without action
+   */
+  export type PipelineCountOutputTypeCountStagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PipelineStageWhereInput
+  }
+
+  /**
+   * PipelineCountOutputType without action
+   */
+  export type PipelineCountOutputTypeCountLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+  }
+
+
+  /**
+   * Count Type PipelineStageCountOutputType
+   */
+
+  export type PipelineStageCountOutputType = {
+    leads: number
+  }
+
+  export type PipelineStageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    leads?: boolean | PipelineStageCountOutputTypeCountLeadsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PipelineStageCountOutputType without action
+   */
+  export type PipelineStageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStageCountOutputType
+     */
+    select?: PipelineStageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PipelineStageCountOutputType without action
+   */
+  export type PipelineStageCountOutputTypeCountLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
   }
 
 
@@ -1881,6 +2754,8 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     memberships?: boolean | User$membershipsArgs<ExtArgs>
+    ownedLeads?: boolean | User$ownedLeadsArgs<ExtArgs>
+    assignedConversations?: boolean | User$assignedConversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1928,6 +2803,8 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     memberships?: boolean | User$membershipsArgs<ExtArgs>
+    ownedLeads?: boolean | User$ownedLeadsArgs<ExtArgs>
+    assignedConversations?: boolean | User$assignedConversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1939,6 +2816,8 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       memberships: Prisma.$MembershipPayload<ExtArgs>[]
+      ownedLeads: Prisma.$LeadPayload<ExtArgs>[]
+      assignedConversations: Prisma.$ConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2348,6 +3227,8 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     memberships<T extends User$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownedLeads<T extends User$ownedLeadsArgs<ExtArgs> = {}>(args?: Subset<T, User$ownedLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assignedConversations<T extends User$assignedConversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2849,6 +3730,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * User.ownedLeads
+   */
+  export type User$ownedLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * User.assignedConversations
+   */
+  export type User$assignedConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
   }
 
   /**
@@ -6297,6 +7226,12 @@ export namespace Prisma {
     domains?: boolean | Tenant$domainsArgs<ExtArgs>
     branding?: boolean | Tenant$brandingArgs<ExtArgs>
     memberships?: boolean | Tenant$membershipsArgs<ExtArgs>
+    contacts?: boolean | Tenant$contactsArgs<ExtArgs>
+    leads?: boolean | Tenant$leadsArgs<ExtArgs>
+    conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
+    messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
+    pipelineStages?: boolean | Tenant$pipelineStagesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -6347,6 +7282,12 @@ export namespace Prisma {
     domains?: boolean | Tenant$domainsArgs<ExtArgs>
     branding?: boolean | Tenant$brandingArgs<ExtArgs>
     memberships?: boolean | Tenant$membershipsArgs<ExtArgs>
+    contacts?: boolean | Tenant$contactsArgs<ExtArgs>
+    leads?: boolean | Tenant$leadsArgs<ExtArgs>
+    conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
+    messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
+    pipelineStages?: boolean | Tenant$pipelineStagesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6358,6 +7299,12 @@ export namespace Prisma {
       domains: Prisma.$TenantDomainPayload<ExtArgs>[]
       branding: Prisma.$TenantBrandingPayload<ExtArgs> | null
       memberships: Prisma.$MembershipPayload<ExtArgs>[]
+      contacts: Prisma.$ContactPayload<ExtArgs>[]
+      leads: Prisma.$LeadPayload<ExtArgs>[]
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      pipelines: Prisma.$PipelinePayload<ExtArgs>[]
+      pipelineStages: Prisma.$PipelineStagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6768,6 +7715,12 @@ export namespace Prisma {
     domains<T extends Tenant$domainsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$domainsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantDomainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     branding<T extends Tenant$brandingArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandingArgs<ExtArgs>>): Prisma__TenantBrandingClient<$Result.GetResult<Prisma.$TenantBrandingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     memberships<T extends Tenant$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contacts<T extends Tenant$contactsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    leads<T extends Tenant$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversations<T extends Tenant$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    messages<T extends Tenant$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pipelines<T extends Tenant$pipelinesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$pipelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pipelineStages<T extends Tenant$pipelineStagesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$pipelineStagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7265,6 +8218,150 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MembershipScalarFieldEnum | MembershipScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.contacts
+   */
+  export type Tenant$contactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    cursor?: ContactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.leads
+   */
+  export type Tenant$leadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.conversations
+   */
+  export type Tenant$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.messages
+   */
+  export type Tenant$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.pipelines
+   */
+  export type Tenant$pipelinesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    where?: PipelineWhereInput
+    orderBy?: PipelineOrderByWithRelationInput | PipelineOrderByWithRelationInput[]
+    cursor?: PipelineWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PipelineScalarFieldEnum | PipelineScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.pipelineStages
+   */
+  export type Tenant$pipelineStagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    where?: PipelineStageWhereInput
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    cursor?: PipelineStageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PipelineStageScalarFieldEnum | PipelineStageScalarFieldEnum[]
   }
 
   /**
@@ -10692,6 +11789,7560 @@ export namespace Prisma {
 
 
   /**
+   * Model Contact
+   */
+
+  export type AggregateContact = {
+    _count: ContactCountAggregateOutputType | null
+    _avg: ContactAvgAggregateOutputType | null
+    _sum: ContactSumAggregateOutputType | null
+    _min: ContactMinAggregateOutputType | null
+    _max: ContactMaxAggregateOutputType | null
+  }
+
+  export type ContactAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ContactSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ContactMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    firstName: string | null
+    lastName: string | null
+    fullName: string | null
+    email: string | null
+    phoneE164: string | null
+    whatsappWaId: string | null
+    normalizedPhone: string | null
+    source: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type ContactMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    firstName: string | null
+    lastName: string | null
+    fullName: string | null
+    email: string | null
+    phoneE164: string | null
+    whatsappWaId: string | null
+    normalizedPhone: string | null
+    source: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type ContactCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    firstName: number
+    lastName: number
+    fullName: number
+    email: number
+    phoneE164: number
+    whatsappWaId: number
+    normalizedPhone: number
+    source: number
+    tags: number
+    createdAt: number
+    updatedAt: number
+    version: number
+    _all: number
+  }
+
+
+  export type ContactAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type ContactSumAggregateInputType = {
+    version?: true
+  }
+
+  export type ContactMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    firstName?: true
+    lastName?: true
+    fullName?: true
+    email?: true
+    phoneE164?: true
+    whatsappWaId?: true
+    normalizedPhone?: true
+    source?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type ContactMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    firstName?: true
+    lastName?: true
+    fullName?: true
+    email?: true
+    phoneE164?: true
+    whatsappWaId?: true
+    normalizedPhone?: true
+    source?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type ContactCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    firstName?: true
+    lastName?: true
+    fullName?: true
+    email?: true
+    phoneE164?: true
+    whatsappWaId?: true
+    normalizedPhone?: true
+    source?: true
+    tags?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+    _all?: true
+  }
+
+  export type ContactAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contact to aggregate.
+     */
+    where?: ContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contacts to fetch.
+     */
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Contacts
+    **/
+    _count?: true | ContactCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactMaxAggregateInputType
+  }
+
+  export type GetContactAggregateType<T extends ContactAggregateArgs> = {
+        [P in keyof T & keyof AggregateContact]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContact[P]>
+      : GetScalarType<T[P], AggregateContact[P]>
+  }
+
+
+
+
+  export type ContactGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactWhereInput
+    orderBy?: ContactOrderByWithAggregationInput | ContactOrderByWithAggregationInput[]
+    by: ContactScalarFieldEnum[] | ContactScalarFieldEnum
+    having?: ContactScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactCountAggregateInputType | true
+    _avg?: ContactAvgAggregateInputType
+    _sum?: ContactSumAggregateInputType
+    _min?: ContactMinAggregateInputType
+    _max?: ContactMaxAggregateInputType
+  }
+
+  export type ContactGroupByOutputType = {
+    id: string
+    tenantId: string
+    firstName: string | null
+    lastName: string | null
+    fullName: string | null
+    email: string | null
+    phoneE164: string | null
+    whatsappWaId: string | null
+    normalizedPhone: string | null
+    source: string | null
+    tags: string[]
+    createdAt: Date
+    updatedAt: Date
+    version: number
+    _count: ContactCountAggregateOutputType | null
+    _avg: ContactAvgAggregateOutputType | null
+    _sum: ContactSumAggregateOutputType | null
+    _min: ContactMinAggregateOutputType | null
+    _max: ContactMaxAggregateOutputType | null
+  }
+
+  type GetContactGroupByPayload<T extends ContactGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    fullName?: boolean
+    email?: boolean
+    phoneE164?: boolean
+    whatsappWaId?: boolean
+    normalizedPhone?: boolean
+    source?: boolean
+    tags?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    leads?: boolean | Contact$leadsArgs<ExtArgs>
+    conversations?: boolean | Contact$conversationsArgs<ExtArgs>
+    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contact"]>
+
+  export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    fullName?: boolean
+    email?: boolean
+    phoneE164?: boolean
+    whatsappWaId?: boolean
+    normalizedPhone?: boolean
+    source?: boolean
+    tags?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contact"]>
+
+  export type ContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    fullName?: boolean
+    email?: boolean
+    phoneE164?: boolean
+    whatsappWaId?: boolean
+    normalizedPhone?: boolean
+    source?: boolean
+    tags?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contact"]>
+
+  export type ContactSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    fullName?: boolean
+    email?: boolean
+    phoneE164?: boolean
+    whatsappWaId?: boolean
+    normalizedPhone?: boolean
+    source?: boolean
+    tags?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+  }
+
+  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "firstName" | "lastName" | "fullName" | "email" | "phoneE164" | "whatsappWaId" | "normalizedPhone" | "source" | "tags" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["contact"]>
+  export type ContactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    leads?: boolean | Contact$leadsArgs<ExtArgs>
+    conversations?: boolean | Contact$conversationsArgs<ExtArgs>
+    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type ContactIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $ContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Contact"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      leads: Prisma.$LeadPayload<ExtArgs>[]
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      firstName: string | null
+      lastName: string | null
+      fullName: string | null
+      email: string | null
+      phoneE164: string | null
+      whatsappWaId: string | null
+      normalizedPhone: string | null
+      source: string | null
+      tags: string[]
+      createdAt: Date
+      updatedAt: Date
+      version: number
+    }, ExtArgs["result"]["contact"]>
+    composites: {}
+  }
+
+  type ContactGetPayload<S extends boolean | null | undefined | ContactDefaultArgs> = $Result.GetResult<Prisma.$ContactPayload, S>
+
+  type ContactCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContactFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContactCountAggregateInputType | true
+    }
+
+  export interface ContactDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contact'], meta: { name: 'Contact' } }
+    /**
+     * Find zero or one Contact that matches the filter.
+     * @param {ContactFindUniqueArgs} args - Arguments to find a Contact
+     * @example
+     * // Get one Contact
+     * const contact = await prisma.contact.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContactFindUniqueArgs>(args: SelectSubset<T, ContactFindUniqueArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contact that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContactFindUniqueOrThrowArgs} args - Arguments to find a Contact
+     * @example
+     * // Get one Contact
+     * const contact = await prisma.contact.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContactFindUniqueOrThrowArgs>(args: SelectSubset<T, ContactFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contact that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFindFirstArgs} args - Arguments to find a Contact
+     * @example
+     * // Get one Contact
+     * const contact = await prisma.contact.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContactFindFirstArgs>(args?: SelectSubset<T, ContactFindFirstArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contact that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFindFirstOrThrowArgs} args - Arguments to find a Contact
+     * @example
+     * // Get one Contact
+     * const contact = await prisma.contact.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContactFindFirstOrThrowArgs>(args?: SelectSubset<T, ContactFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contacts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contacts
+     * const contacts = await prisma.contact.findMany()
+     * 
+     * // Get first 10 Contacts
+     * const contacts = await prisma.contact.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactWithIdOnly = await prisma.contact.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContactFindManyArgs>(args?: SelectSubset<T, ContactFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contact.
+     * @param {ContactCreateArgs} args - Arguments to create a Contact.
+     * @example
+     * // Create one Contact
+     * const Contact = await prisma.contact.create({
+     *   data: {
+     *     // ... data to create a Contact
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContactCreateArgs>(args: SelectSubset<T, ContactCreateArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contacts.
+     * @param {ContactCreateManyArgs} args - Arguments to create many Contacts.
+     * @example
+     * // Create many Contacts
+     * const contact = await prisma.contact.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContactCreateManyArgs>(args?: SelectSubset<T, ContactCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Contacts and returns the data saved in the database.
+     * @param {ContactCreateManyAndReturnArgs} args - Arguments to create many Contacts.
+     * @example
+     * // Create many Contacts
+     * const contact = await prisma.contact.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Contacts and only return the `id`
+     * const contactWithIdOnly = await prisma.contact.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContactCreateManyAndReturnArgs>(args?: SelectSubset<T, ContactCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Contact.
+     * @param {ContactDeleteArgs} args - Arguments to delete one Contact.
+     * @example
+     * // Delete one Contact
+     * const Contact = await prisma.contact.delete({
+     *   where: {
+     *     // ... filter to delete one Contact
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContactDeleteArgs>(args: SelectSubset<T, ContactDeleteArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contact.
+     * @param {ContactUpdateArgs} args - Arguments to update one Contact.
+     * @example
+     * // Update one Contact
+     * const contact = await prisma.contact.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContactUpdateArgs>(args: SelectSubset<T, ContactUpdateArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contacts.
+     * @param {ContactDeleteManyArgs} args - Arguments to filter Contacts to delete.
+     * @example
+     * // Delete a few Contacts
+     * const { count } = await prisma.contact.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContactDeleteManyArgs>(args?: SelectSubset<T, ContactDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contacts
+     * const contact = await prisma.contact.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContactUpdateManyArgs>(args: SelectSubset<T, ContactUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contacts and returns the data updated in the database.
+     * @param {ContactUpdateManyAndReturnArgs} args - Arguments to update many Contacts.
+     * @example
+     * // Update many Contacts
+     * const contact = await prisma.contact.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Contacts and only return the `id`
+     * const contactWithIdOnly = await prisma.contact.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContactUpdateManyAndReturnArgs>(args: SelectSubset<T, ContactUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Contact.
+     * @param {ContactUpsertArgs} args - Arguments to update or create a Contact.
+     * @example
+     * // Update or create a Contact
+     * const contact = await prisma.contact.upsert({
+     *   create: {
+     *     // ... data to create a Contact
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contact we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContactUpsertArgs>(args: SelectSubset<T, ContactUpsertArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contacts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactCountArgs} args - Arguments to filter Contacts to count.
+     * @example
+     * // Count the number of Contacts
+     * const count = await prisma.contact.count({
+     *   where: {
+     *     // ... the filter for the Contacts we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactCountArgs>(
+      args?: Subset<T, ContactCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactAggregateArgs>(args: Subset<T, ContactAggregateArgs>): Prisma.PrismaPromise<GetContactAggregateType<T>>
+
+    /**
+     * Group by Contact.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactGroupByArgs['orderBy'] }
+        : { orderBy?: ContactGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Contact model
+   */
+  readonly fields: ContactFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Contact.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    leads<T extends Contact$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Contact$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversations<T extends Contact$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Contact$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Contact model
+   */
+  interface ContactFieldRefs {
+    readonly id: FieldRef<"Contact", 'String'>
+    readonly tenantId: FieldRef<"Contact", 'String'>
+    readonly firstName: FieldRef<"Contact", 'String'>
+    readonly lastName: FieldRef<"Contact", 'String'>
+    readonly fullName: FieldRef<"Contact", 'String'>
+    readonly email: FieldRef<"Contact", 'String'>
+    readonly phoneE164: FieldRef<"Contact", 'String'>
+    readonly whatsappWaId: FieldRef<"Contact", 'String'>
+    readonly normalizedPhone: FieldRef<"Contact", 'String'>
+    readonly source: FieldRef<"Contact", 'String'>
+    readonly tags: FieldRef<"Contact", 'String[]'>
+    readonly createdAt: FieldRef<"Contact", 'DateTime'>
+    readonly updatedAt: FieldRef<"Contact", 'DateTime'>
+    readonly version: FieldRef<"Contact", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Contact findUnique
+   */
+  export type ContactFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter, which Contact to fetch.
+     */
+    where: ContactWhereUniqueInput
+  }
+
+  /**
+   * Contact findUniqueOrThrow
+   */
+  export type ContactFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter, which Contact to fetch.
+     */
+    where: ContactWhereUniqueInput
+  }
+
+  /**
+   * Contact findFirst
+   */
+  export type ContactFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter, which Contact to fetch.
+     */
+    where?: ContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contacts to fetch.
+     */
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contacts.
+     */
+    cursor?: ContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contacts.
+     */
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * Contact findFirstOrThrow
+   */
+  export type ContactFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter, which Contact to fetch.
+     */
+    where?: ContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contacts to fetch.
+     */
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contacts.
+     */
+    cursor?: ContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contacts.
+     */
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * Contact findMany
+   */
+  export type ContactFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter, which Contacts to fetch.
+     */
+    where?: ContactWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contacts to fetch.
+     */
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Contacts.
+     */
+    cursor?: ContactWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contacts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contacts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contacts.
+     */
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * Contact create
+   */
+  export type ContactCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Contact.
+     */
+    data: XOR<ContactCreateInput, ContactUncheckedCreateInput>
+  }
+
+  /**
+   * Contact createMany
+   */
+  export type ContactCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Contacts.
+     */
+    data: ContactCreateManyInput | ContactCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contact createManyAndReturn
+   */
+  export type ContactCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * The data used to create many Contacts.
+     */
+    data: ContactCreateManyInput | ContactCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Contact update
+   */
+  export type ContactUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Contact.
+     */
+    data: XOR<ContactUpdateInput, ContactUncheckedUpdateInput>
+    /**
+     * Choose, which Contact to update.
+     */
+    where: ContactWhereUniqueInput
+  }
+
+  /**
+   * Contact updateMany
+   */
+  export type ContactUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Contacts.
+     */
+    data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyInput>
+    /**
+     * Filter which Contacts to update
+     */
+    where?: ContactWhereInput
+    /**
+     * Limit how many Contacts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contact updateManyAndReturn
+   */
+  export type ContactUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * The data used to update Contacts.
+     */
+    data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyInput>
+    /**
+     * Filter which Contacts to update
+     */
+    where?: ContactWhereInput
+    /**
+     * Limit how many Contacts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Contact upsert
+   */
+  export type ContactUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Contact to update in case it exists.
+     */
+    where: ContactWhereUniqueInput
+    /**
+     * In case the Contact found by the `where` argument doesn't exist, create a new Contact with this data.
+     */
+    create: XOR<ContactCreateInput, ContactUncheckedCreateInput>
+    /**
+     * In case the Contact was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactUpdateInput, ContactUncheckedUpdateInput>
+  }
+
+  /**
+   * Contact delete
+   */
+  export type ContactDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    /**
+     * Filter which Contact to delete.
+     */
+    where: ContactWhereUniqueInput
+  }
+
+  /**
+   * Contact deleteMany
+   */
+  export type ContactDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contacts to delete
+     */
+    where?: ContactWhereInput
+    /**
+     * Limit how many Contacts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contact.leads
+   */
+  export type Contact$leadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Contact.conversations
+   */
+  export type Contact$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Contact without action
+   */
+  export type ContactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Lead
+   */
+
+  export type AggregateLead = {
+    _count: LeadCountAggregateOutputType | null
+    _avg: LeadAvgAggregateOutputType | null
+    _sum: LeadSumAggregateOutputType | null
+    _min: LeadMinAggregateOutputType | null
+    _max: LeadMaxAggregateOutputType | null
+  }
+
+  export type LeadAvgAggregateOutputType = {
+    score: number | null
+    version: number | null
+  }
+
+  export type LeadSumAggregateOutputType = {
+    score: number | null
+    version: number | null
+  }
+
+  export type LeadMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    contactId: string | null
+    pipelineId: string | null
+    stageId: string | null
+    ownerUserId: string | null
+    title: string | null
+    sourceChannel: $Enums.LeadSourceChannel | null
+    status: $Enums.LeadStatus | null
+    score: number | null
+    firstInboundAt: Date | null
+    lastInboundAt: Date | null
+    lastOutboundAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type LeadMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    contactId: string | null
+    pipelineId: string | null
+    stageId: string | null
+    ownerUserId: string | null
+    title: string | null
+    sourceChannel: $Enums.LeadSourceChannel | null
+    status: $Enums.LeadStatus | null
+    score: number | null
+    firstInboundAt: Date | null
+    lastInboundAt: Date | null
+    lastOutboundAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type LeadCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    contactId: number
+    pipelineId: number
+    stageId: number
+    ownerUserId: number
+    title: number
+    sourceChannel: number
+    status: number
+    score: number
+    firstInboundAt: number
+    lastInboundAt: number
+    lastOutboundAt: number
+    createdAt: number
+    updatedAt: number
+    version: number
+    _all: number
+  }
+
+
+  export type LeadAvgAggregateInputType = {
+    score?: true
+    version?: true
+  }
+
+  export type LeadSumAggregateInputType = {
+    score?: true
+    version?: true
+  }
+
+  export type LeadMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    pipelineId?: true
+    stageId?: true
+    ownerUserId?: true
+    title?: true
+    sourceChannel?: true
+    status?: true
+    score?: true
+    firstInboundAt?: true
+    lastInboundAt?: true
+    lastOutboundAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type LeadMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    pipelineId?: true
+    stageId?: true
+    ownerUserId?: true
+    title?: true
+    sourceChannel?: true
+    status?: true
+    score?: true
+    firstInboundAt?: true
+    lastInboundAt?: true
+    lastOutboundAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type LeadCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    pipelineId?: true
+    stageId?: true
+    ownerUserId?: true
+    title?: true
+    sourceChannel?: true
+    status?: true
+    score?: true
+    firstInboundAt?: true
+    lastInboundAt?: true
+    lastOutboundAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+    _all?: true
+  }
+
+  export type LeadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lead to aggregate.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Leads
+    **/
+    _count?: true | LeadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LeadAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LeadSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LeadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LeadMaxAggregateInputType
+  }
+
+  export type GetLeadAggregateType<T extends LeadAggregateArgs> = {
+        [P in keyof T & keyof AggregateLead]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLead[P]>
+      : GetScalarType<T[P], AggregateLead[P]>
+  }
+
+
+
+
+  export type LeadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithAggregationInput | LeadOrderByWithAggregationInput[]
+    by: LeadScalarFieldEnum[] | LeadScalarFieldEnum
+    having?: LeadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LeadCountAggregateInputType | true
+    _avg?: LeadAvgAggregateInputType
+    _sum?: LeadSumAggregateInputType
+    _min?: LeadMinAggregateInputType
+    _max?: LeadMaxAggregateInputType
+  }
+
+  export type LeadGroupByOutputType = {
+    id: string
+    tenantId: string
+    contactId: string
+    pipelineId: string | null
+    stageId: string | null
+    ownerUserId: string | null
+    title: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status: $Enums.LeadStatus
+    score: number | null
+    firstInboundAt: Date | null
+    lastInboundAt: Date | null
+    lastOutboundAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    version: number
+    _count: LeadCountAggregateOutputType | null
+    _avg: LeadAvgAggregateOutputType | null
+    _sum: LeadSumAggregateOutputType | null
+    _min: LeadMinAggregateOutputType | null
+    _max: LeadMaxAggregateOutputType | null
+  }
+
+  type GetLeadGroupByPayload<T extends LeadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LeadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LeadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LeadGroupByOutputType[P]>
+            : GetScalarType<T[P], LeadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LeadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    pipelineId?: boolean
+    stageId?: boolean
+    ownerUserId?: boolean
+    title?: boolean
+    sourceChannel?: boolean
+    status?: boolean
+    score?: boolean
+    firstInboundAt?: boolean
+    lastInboundAt?: boolean
+    lastOutboundAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+    conversations?: boolean | Lead$conversationsArgs<ExtArgs>
+    _count?: boolean | LeadCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    pipelineId?: boolean
+    stageId?: boolean
+    ownerUserId?: boolean
+    title?: boolean
+    sourceChannel?: boolean
+    status?: boolean
+    score?: boolean
+    firstInboundAt?: boolean
+    lastInboundAt?: boolean
+    lastOutboundAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    pipelineId?: boolean
+    stageId?: boolean
+    ownerUserId?: boolean
+    title?: boolean
+    sourceChannel?: boolean
+    status?: boolean
+    score?: boolean
+    firstInboundAt?: boolean
+    lastInboundAt?: boolean
+    lastOutboundAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    pipelineId?: boolean
+    stageId?: boolean
+    ownerUserId?: boolean
+    title?: boolean
+    sourceChannel?: boolean
+    status?: boolean
+    score?: boolean
+    firstInboundAt?: boolean
+    lastInboundAt?: boolean
+    lastOutboundAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+  }
+
+  export type LeadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "pipelineId" | "stageId" | "ownerUserId" | "title" | "sourceChannel" | "status" | "score" | "firstInboundAt" | "lastInboundAt" | "lastOutboundAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["lead"]>
+  export type LeadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+    conversations?: boolean | Lead$conversationsArgs<ExtArgs>
+    _count?: boolean | LeadCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LeadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+  }
+  export type LeadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    pipeline?: boolean | Lead$pipelineArgs<ExtArgs>
+    stage?: boolean | Lead$stageArgs<ExtArgs>
+    ownerUser?: boolean | Lead$ownerUserArgs<ExtArgs>
+  }
+
+  export type $LeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Lead"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      contact: Prisma.$ContactPayload<ExtArgs>
+      pipeline: Prisma.$PipelinePayload<ExtArgs> | null
+      stage: Prisma.$PipelineStagePayload<ExtArgs> | null
+      ownerUser: Prisma.$UserPayload<ExtArgs> | null
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      contactId: string
+      pipelineId: string | null
+      stageId: string | null
+      ownerUserId: string | null
+      title: string | null
+      sourceChannel: $Enums.LeadSourceChannel
+      status: $Enums.LeadStatus
+      score: number | null
+      firstInboundAt: Date | null
+      lastInboundAt: Date | null
+      lastOutboundAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+      version: number
+    }, ExtArgs["result"]["lead"]>
+    composites: {}
+  }
+
+  type LeadGetPayload<S extends boolean | null | undefined | LeadDefaultArgs> = $Result.GetResult<Prisma.$LeadPayload, S>
+
+  type LeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LeadFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LeadCountAggregateInputType | true
+    }
+
+  export interface LeadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Lead'], meta: { name: 'Lead' } }
+    /**
+     * Find zero or one Lead that matches the filter.
+     * @param {LeadFindUniqueArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LeadFindUniqueArgs>(args: SelectSubset<T, LeadFindUniqueArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Lead that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LeadFindUniqueOrThrowArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LeadFindUniqueOrThrowArgs>(args: SelectSubset<T, LeadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lead that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindFirstArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LeadFindFirstArgs>(args?: SelectSubset<T, LeadFindFirstArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lead that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindFirstOrThrowArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LeadFindFirstOrThrowArgs>(args?: SelectSubset<T, LeadFindFirstOrThrowArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Leads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Leads
+     * const leads = await prisma.lead.findMany()
+     * 
+     * // Get first 10 Leads
+     * const leads = await prisma.lead.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const leadWithIdOnly = await prisma.lead.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LeadFindManyArgs>(args?: SelectSubset<T, LeadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Lead.
+     * @param {LeadCreateArgs} args - Arguments to create a Lead.
+     * @example
+     * // Create one Lead
+     * const Lead = await prisma.lead.create({
+     *   data: {
+     *     // ... data to create a Lead
+     *   }
+     * })
+     * 
+     */
+    create<T extends LeadCreateArgs>(args: SelectSubset<T, LeadCreateArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Leads.
+     * @param {LeadCreateManyArgs} args - Arguments to create many Leads.
+     * @example
+     * // Create many Leads
+     * const lead = await prisma.lead.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LeadCreateManyArgs>(args?: SelectSubset<T, LeadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Leads and returns the data saved in the database.
+     * @param {LeadCreateManyAndReturnArgs} args - Arguments to create many Leads.
+     * @example
+     * // Create many Leads
+     * const lead = await prisma.lead.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Leads and only return the `id`
+     * const leadWithIdOnly = await prisma.lead.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LeadCreateManyAndReturnArgs>(args?: SelectSubset<T, LeadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Lead.
+     * @param {LeadDeleteArgs} args - Arguments to delete one Lead.
+     * @example
+     * // Delete one Lead
+     * const Lead = await prisma.lead.delete({
+     *   where: {
+     *     // ... filter to delete one Lead
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LeadDeleteArgs>(args: SelectSubset<T, LeadDeleteArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Lead.
+     * @param {LeadUpdateArgs} args - Arguments to update one Lead.
+     * @example
+     * // Update one Lead
+     * const lead = await prisma.lead.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LeadUpdateArgs>(args: SelectSubset<T, LeadUpdateArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Leads.
+     * @param {LeadDeleteManyArgs} args - Arguments to filter Leads to delete.
+     * @example
+     * // Delete a few Leads
+     * const { count } = await prisma.lead.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LeadDeleteManyArgs>(args?: SelectSubset<T, LeadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Leads
+     * const lead = await prisma.lead.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LeadUpdateManyArgs>(args: SelectSubset<T, LeadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leads and returns the data updated in the database.
+     * @param {LeadUpdateManyAndReturnArgs} args - Arguments to update many Leads.
+     * @example
+     * // Update many Leads
+     * const lead = await prisma.lead.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Leads and only return the `id`
+     * const leadWithIdOnly = await prisma.lead.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LeadUpdateManyAndReturnArgs>(args: SelectSubset<T, LeadUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Lead.
+     * @param {LeadUpsertArgs} args - Arguments to update or create a Lead.
+     * @example
+     * // Update or create a Lead
+     * const lead = await prisma.lead.upsert({
+     *   create: {
+     *     // ... data to create a Lead
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Lead we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LeadUpsertArgs>(args: SelectSubset<T, LeadUpsertArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Leads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadCountArgs} args - Arguments to filter Leads to count.
+     * @example
+     * // Count the number of Leads
+     * const count = await prisma.lead.count({
+     *   where: {
+     *     // ... the filter for the Leads we want to count
+     *   }
+     * })
+    **/
+    count<T extends LeadCountArgs>(
+      args?: Subset<T, LeadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LeadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Lead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LeadAggregateArgs>(args: Subset<T, LeadAggregateArgs>): Prisma.PrismaPromise<GetLeadAggregateType<T>>
+
+    /**
+     * Group by Lead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LeadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LeadGroupByArgs['orderBy'] }
+        : { orderBy?: LeadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LeadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLeadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Lead model
+   */
+  readonly fields: LeadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Lead.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LeadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contact<T extends ContactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContactDefaultArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pipeline<T extends Lead$pipelineArgs<ExtArgs> = {}>(args?: Subset<T, Lead$pipelineArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    stage<T extends Lead$stageArgs<ExtArgs> = {}>(args?: Subset<T, Lead$stageArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    ownerUser<T extends Lead$ownerUserArgs<ExtArgs> = {}>(args?: Subset<T, Lead$ownerUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    conversations<T extends Lead$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Lead$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Lead model
+   */
+  interface LeadFieldRefs {
+    readonly id: FieldRef<"Lead", 'String'>
+    readonly tenantId: FieldRef<"Lead", 'String'>
+    readonly contactId: FieldRef<"Lead", 'String'>
+    readonly pipelineId: FieldRef<"Lead", 'String'>
+    readonly stageId: FieldRef<"Lead", 'String'>
+    readonly ownerUserId: FieldRef<"Lead", 'String'>
+    readonly title: FieldRef<"Lead", 'String'>
+    readonly sourceChannel: FieldRef<"Lead", 'LeadSourceChannel'>
+    readonly status: FieldRef<"Lead", 'LeadStatus'>
+    readonly score: FieldRef<"Lead", 'Int'>
+    readonly firstInboundAt: FieldRef<"Lead", 'DateTime'>
+    readonly lastInboundAt: FieldRef<"Lead", 'DateTime'>
+    readonly lastOutboundAt: FieldRef<"Lead", 'DateTime'>
+    readonly createdAt: FieldRef<"Lead", 'DateTime'>
+    readonly updatedAt: FieldRef<"Lead", 'DateTime'>
+    readonly version: FieldRef<"Lead", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Lead findUnique
+   */
+  export type LeadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead findUniqueOrThrow
+   */
+  export type LeadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead findFirst
+   */
+  export type LeadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leads.
+     */
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead findFirstOrThrow
+   */
+  export type LeadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leads.
+     */
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead findMany
+   */
+  export type LeadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Leads to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leads.
+     */
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead create
+   */
+  export type LeadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Lead.
+     */
+    data: XOR<LeadCreateInput, LeadUncheckedCreateInput>
+  }
+
+  /**
+   * Lead createMany
+   */
+  export type LeadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Leads.
+     */
+    data: LeadCreateManyInput | LeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Lead createManyAndReturn
+   */
+  export type LeadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * The data used to create many Leads.
+     */
+    data: LeadCreateManyInput | LeadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lead update
+   */
+  export type LeadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Lead.
+     */
+    data: XOR<LeadUpdateInput, LeadUncheckedUpdateInput>
+    /**
+     * Choose, which Lead to update.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead updateMany
+   */
+  export type LeadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Leads.
+     */
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyInput>
+    /**
+     * Filter which Leads to update
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lead updateManyAndReturn
+   */
+  export type LeadUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * The data used to update Leads.
+     */
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyInput>
+    /**
+     * Filter which Leads to update
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lead upsert
+   */
+  export type LeadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Lead to update in case it exists.
+     */
+    where: LeadWhereUniqueInput
+    /**
+     * In case the Lead found by the `where` argument doesn't exist, create a new Lead with this data.
+     */
+    create: XOR<LeadCreateInput, LeadUncheckedCreateInput>
+    /**
+     * In case the Lead was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LeadUpdateInput, LeadUncheckedUpdateInput>
+  }
+
+  /**
+   * Lead delete
+   */
+  export type LeadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter which Lead to delete.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead deleteMany
+   */
+  export type LeadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Leads to delete
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lead.pipeline
+   */
+  export type Lead$pipelineArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    where?: PipelineWhereInput
+  }
+
+  /**
+   * Lead.stage
+   */
+  export type Lead$stageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    where?: PipelineStageWhereInput
+  }
+
+  /**
+   * Lead.ownerUser
+   */
+  export type Lead$ownerUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Lead.conversations
+   */
+  export type Lead$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Lead without action
+   */
+  export type LeadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Conversation
+   */
+
+  export type AggregateConversation = {
+    _count: ConversationCountAggregateOutputType | null
+    _avg: ConversationAvgAggregateOutputType | null
+    _sum: ConversationSumAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
+  }
+
+  export type ConversationAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ConversationSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type ConversationMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    contactId: string | null
+    leadId: string | null
+    channel: $Enums.ChannelType | null
+    status: $Enums.ConversationStatus | null
+    assigneeUserId: string | null
+    lastMessageAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type ConversationMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    contactId: string | null
+    leadId: string | null
+    channel: $Enums.ChannelType | null
+    status: $Enums.ConversationStatus | null
+    assigneeUserId: string | null
+    lastMessageAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    version: number | null
+  }
+
+  export type ConversationCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    contactId: number
+    leadId: number
+    channel: number
+    status: number
+    assigneeUserId: number
+    lastMessageAt: number
+    createdAt: number
+    updatedAt: number
+    version: number
+    _all: number
+  }
+
+
+  export type ConversationAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type ConversationSumAggregateInputType = {
+    version?: true
+  }
+
+  export type ConversationMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    leadId?: true
+    channel?: true
+    status?: true
+    assigneeUserId?: true
+    lastMessageAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type ConversationMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    leadId?: true
+    channel?: true
+    status?: true
+    assigneeUserId?: true
+    lastMessageAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+  }
+
+  export type ConversationCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    contactId?: true
+    leadId?: true
+    channel?: true
+    status?: true
+    assigneeUserId?: true
+    lastMessageAt?: true
+    createdAt?: true
+    updatedAt?: true
+    version?: true
+    _all?: true
+  }
+
+  export type ConversationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Conversation to aggregate.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Conversations
+    **/
+    _count?: true | ConversationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConversationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConversationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversationMaxAggregateInputType
+  }
+
+  export type GetConversationAggregateType<T extends ConversationAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversation[P]>
+      : GetScalarType<T[P], AggregateConversation[P]>
+  }
+
+
+
+
+  export type ConversationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithAggregationInput | ConversationOrderByWithAggregationInput[]
+    by: ConversationScalarFieldEnum[] | ConversationScalarFieldEnum
+    having?: ConversationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversationCountAggregateInputType | true
+    _avg?: ConversationAvgAggregateInputType
+    _sum?: ConversationSumAggregateInputType
+    _min?: ConversationMinAggregateInputType
+    _max?: ConversationMaxAggregateInputType
+  }
+
+  export type ConversationGroupByOutputType = {
+    id: string
+    tenantId: string
+    contactId: string
+    leadId: string | null
+    channel: $Enums.ChannelType
+    status: $Enums.ConversationStatus
+    assigneeUserId: string | null
+    lastMessageAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    version: number
+    _count: ConversationCountAggregateOutputType | null
+    _avg: ConversationAvgAggregateOutputType | null
+    _sum: ConversationSumAggregateOutputType | null
+    _min: ConversationMinAggregateOutputType | null
+    _max: ConversationMaxAggregateOutputType | null
+  }
+
+  type GetConversationGroupByPayload<T extends ConversationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversationGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    leadId?: boolean
+    channel?: boolean
+    status?: boolean
+    assigneeUserId?: boolean
+    lastMessageAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    leadId?: boolean
+    channel?: boolean
+    status?: boolean
+    assigneeUserId?: boolean
+    lastMessageAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    leadId?: boolean
+    channel?: boolean
+    status?: boolean
+    assigneeUserId?: boolean
+    lastMessageAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+  }, ExtArgs["result"]["conversation"]>
+
+  export type ConversationSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    contactId?: boolean
+    leadId?: boolean
+    channel?: boolean
+    status?: boolean
+    assigneeUserId?: boolean
+    lastMessageAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    version?: boolean
+  }
+
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "leadId" | "channel" | "status" | "assigneeUserId" | "lastMessageAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["conversation"]>
+  export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    messages?: boolean | Conversation$messagesArgs<ExtArgs>
+    _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+  }
+  export type ConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    contact?: boolean | ContactDefaultArgs<ExtArgs>
+    lead?: boolean | Conversation$leadArgs<ExtArgs>
+    assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+  }
+
+  export type $ConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Conversation"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      contact: Prisma.$ContactPayload<ExtArgs>
+      lead: Prisma.$LeadPayload<ExtArgs> | null
+      assigneeUser: Prisma.$UserPayload<ExtArgs> | null
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      contactId: string
+      leadId: string | null
+      channel: $Enums.ChannelType
+      status: $Enums.ConversationStatus
+      assigneeUserId: string | null
+      lastMessageAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+      version: number
+    }, ExtArgs["result"]["conversation"]>
+    composites: {}
+  }
+
+  type ConversationGetPayload<S extends boolean | null | undefined | ConversationDefaultArgs> = $Result.GetResult<Prisma.$ConversationPayload, S>
+
+  type ConversationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversationCountAggregateInputType | true
+    }
+
+  export interface ConversationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Conversation'], meta: { name: 'Conversation' } }
+    /**
+     * Find zero or one Conversation that matches the filter.
+     * @param {ConversationFindUniqueArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversationFindUniqueArgs>(args: SelectSubset<T, ConversationFindUniqueArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Conversation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversationFindUniqueOrThrowArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversationFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Conversation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindFirstArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversationFindFirstArgs>(args?: SelectSubset<T, ConversationFindFirstArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Conversation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindFirstOrThrowArgs} args - Arguments to find a Conversation
+     * @example
+     * // Get one Conversation
+     * const conversation = await prisma.conversation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversationFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Conversations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Conversations
+     * const conversations = await prisma.conversation.findMany()
+     * 
+     * // Get first 10 Conversations
+     * const conversations = await prisma.conversation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversationWithIdOnly = await prisma.conversation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversationFindManyArgs>(args?: SelectSubset<T, ConversationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Conversation.
+     * @param {ConversationCreateArgs} args - Arguments to create a Conversation.
+     * @example
+     * // Create one Conversation
+     * const Conversation = await prisma.conversation.create({
+     *   data: {
+     *     // ... data to create a Conversation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversationCreateArgs>(args: SelectSubset<T, ConversationCreateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Conversations.
+     * @param {ConversationCreateManyArgs} args - Arguments to create many Conversations.
+     * @example
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversationCreateManyArgs>(args?: SelectSubset<T, ConversationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Conversations and returns the data saved in the database.
+     * @param {ConversationCreateManyAndReturnArgs} args - Arguments to create many Conversations.
+     * @example
+     * // Create many Conversations
+     * const conversation = await prisma.conversation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversationCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Conversation.
+     * @param {ConversationDeleteArgs} args - Arguments to delete one Conversation.
+     * @example
+     * // Delete one Conversation
+     * const Conversation = await prisma.conversation.delete({
+     *   where: {
+     *     // ... filter to delete one Conversation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversationDeleteArgs>(args: SelectSubset<T, ConversationDeleteArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Conversation.
+     * @param {ConversationUpdateArgs} args - Arguments to update one Conversation.
+     * @example
+     * // Update one Conversation
+     * const conversation = await prisma.conversation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversationUpdateArgs>(args: SelectSubset<T, ConversationUpdateArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Conversations.
+     * @param {ConversationDeleteManyArgs} args - Arguments to filter Conversations to delete.
+     * @example
+     * // Delete a few Conversations
+     * const { count } = await prisma.conversation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversationDeleteManyArgs>(args?: SelectSubset<T, ConversationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversationUpdateManyArgs>(args: SelectSubset<T, ConversationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Conversations and returns the data updated in the database.
+     * @param {ConversationUpdateManyAndReturnArgs} args - Arguments to update many Conversations.
+     * @example
+     * // Update many Conversations
+     * const conversation = await prisma.conversation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Conversations and only return the `id`
+     * const conversationWithIdOnly = await prisma.conversation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversationUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Conversation.
+     * @param {ConversationUpsertArgs} args - Arguments to update or create a Conversation.
+     * @example
+     * // Update or create a Conversation
+     * const conversation = await prisma.conversation.upsert({
+     *   create: {
+     *     // ... data to create a Conversation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Conversation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversationUpsertArgs>(args: SelectSubset<T, ConversationUpsertArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationCountArgs} args - Arguments to filter Conversations to count.
+     * @example
+     * // Count the number of Conversations
+     * const count = await prisma.conversation.count({
+     *   where: {
+     *     // ... the filter for the Conversations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversationCountArgs>(
+      args?: Subset<T, ConversationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversationAggregateArgs>(args: Subset<T, ConversationAggregateArgs>): Prisma.PrismaPromise<GetConversationAggregateType<T>>
+
+    /**
+     * Group by Conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversationGroupByArgs['orderBy'] }
+        : { orderBy?: ConversationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Conversation model
+   */
+  readonly fields: ConversationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Conversation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contact<T extends ContactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContactDefaultArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    lead<T extends Conversation$leadArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$leadArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    assigneeUser<T extends Conversation$assigneeUserArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$assigneeUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Conversation model
+   */
+  interface ConversationFieldRefs {
+    readonly id: FieldRef<"Conversation", 'String'>
+    readonly tenantId: FieldRef<"Conversation", 'String'>
+    readonly contactId: FieldRef<"Conversation", 'String'>
+    readonly leadId: FieldRef<"Conversation", 'String'>
+    readonly channel: FieldRef<"Conversation", 'ChannelType'>
+    readonly status: FieldRef<"Conversation", 'ConversationStatus'>
+    readonly assigneeUserId: FieldRef<"Conversation", 'String'>
+    readonly lastMessageAt: FieldRef<"Conversation", 'DateTime'>
+    readonly createdAt: FieldRef<"Conversation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
+    readonly version: FieldRef<"Conversation", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Conversation findUnique
+   */
+  export type ConversationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findUniqueOrThrow
+   */
+  export type ConversationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation findFirst
+   */
+  export type ConversationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findFirstOrThrow
+   */
+  export type ConversationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversation to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation findMany
+   */
+  export type ConversationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter, which Conversations to fetch.
+     */
+    where?: ConversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Conversations to fetch.
+     */
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Conversations.
+     */
+    cursor?: ConversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Conversations.
+     */
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation create
+   */
+  export type ConversationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Conversation.
+     */
+    data: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+  }
+
+  /**
+   * Conversation createMany
+   */
+  export type ConversationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Conversation createManyAndReturn
+   */
+  export type ConversationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Conversations.
+     */
+    data: ConversationCreateManyInput | ConversationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation update
+   */
+  export type ConversationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Conversation.
+     */
+    data: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+    /**
+     * Choose, which Conversation to update.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation updateMany
+   */
+  export type ConversationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Conversation updateManyAndReturn
+   */
+  export type ConversationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * The data used to update Conversations.
+     */
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyInput>
+    /**
+     * Filter which Conversations to update
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Conversation upsert
+   */
+  export type ConversationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Conversation to update in case it exists.
+     */
+    where: ConversationWhereUniqueInput
+    /**
+     * In case the Conversation found by the `where` argument doesn't exist, create a new Conversation with this data.
+     */
+    create: XOR<ConversationCreateInput, ConversationUncheckedCreateInput>
+    /**
+     * In case the Conversation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversationUpdateInput, ConversationUncheckedUpdateInput>
+  }
+
+  /**
+   * Conversation delete
+   */
+  export type ConversationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    /**
+     * Filter which Conversation to delete.
+     */
+    where: ConversationWhereUniqueInput
+  }
+
+  /**
+   * Conversation deleteMany
+   */
+  export type ConversationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Conversations to delete
+     */
+    where?: ConversationWhereInput
+    /**
+     * Limit how many Conversations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Conversation.lead
+   */
+  export type Conversation$leadArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+  }
+
+  /**
+   * Conversation.assigneeUser
+   */
+  export type Conversation$assigneeUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Conversation.messages
+   */
+  export type Conversation$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Conversation without action
+   */
+  export type ConversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Message
+   */
+
+  export type AggregateMessage = {
+    _count: MessageCountAggregateOutputType | null
+    _avg: MessageAvgAggregateOutputType | null
+    _sum: MessageSumAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  export type MessageAvgAggregateOutputType = {
+    estimatedMetaCost: Decimal | null
+  }
+
+  export type MessageSumAggregateOutputType = {
+    estimatedMetaCost: Decimal | null
+  }
+
+  export type MessageMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    conversationId: string | null
+    direction: $Enums.MessageDirection | null
+    kind: $Enums.MessageKind | null
+    bodyText: string | null
+    mediaUrl: string | null
+    mediaMimeType: string | null
+    metaMessageId: string | null
+    externalStatus: string | null
+    pricingCategory: string | null
+    pricingType: string | null
+    currency: string | null
+    estimatedMetaCost: Decimal | null
+    recipientCountry: string | null
+    deliveredAt: Date | null
+    readAt: Date | null
+    failedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MessageMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    conversationId: string | null
+    direction: $Enums.MessageDirection | null
+    kind: $Enums.MessageKind | null
+    bodyText: string | null
+    mediaUrl: string | null
+    mediaMimeType: string | null
+    metaMessageId: string | null
+    externalStatus: string | null
+    pricingCategory: string | null
+    pricingType: string | null
+    currency: string | null
+    estimatedMetaCost: Decimal | null
+    recipientCountry: string | null
+    deliveredAt: Date | null
+    readAt: Date | null
+    failedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MessageCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    conversationId: number
+    direction: number
+    kind: number
+    bodyText: number
+    mediaUrl: number
+    mediaMimeType: number
+    metaMessageId: number
+    externalStatus: number
+    pricingCategory: number
+    pricingType: number
+    currency: number
+    estimatedMetaCost: number
+    recipientCountry: number
+    deliveredAt: number
+    readAt: number
+    failedAt: number
+    rawPayload: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MessageAvgAggregateInputType = {
+    estimatedMetaCost?: true
+  }
+
+  export type MessageSumAggregateInputType = {
+    estimatedMetaCost?: true
+  }
+
+  export type MessageMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    conversationId?: true
+    direction?: true
+    kind?: true
+    bodyText?: true
+    mediaUrl?: true
+    mediaMimeType?: true
+    metaMessageId?: true
+    externalStatus?: true
+    pricingCategory?: true
+    pricingType?: true
+    currency?: true
+    estimatedMetaCost?: true
+    recipientCountry?: true
+    deliveredAt?: true
+    readAt?: true
+    failedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MessageMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    conversationId?: true
+    direction?: true
+    kind?: true
+    bodyText?: true
+    mediaUrl?: true
+    mediaMimeType?: true
+    metaMessageId?: true
+    externalStatus?: true
+    pricingCategory?: true
+    pricingType?: true
+    currency?: true
+    estimatedMetaCost?: true
+    recipientCountry?: true
+    deliveredAt?: true
+    readAt?: true
+    failedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MessageCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    conversationId?: true
+    direction?: true
+    kind?: true
+    bodyText?: true
+    mediaUrl?: true
+    mediaMimeType?: true
+    metaMessageId?: true
+    externalStatus?: true
+    pricingCategory?: true
+    pricingType?: true
+    currency?: true
+    estimatedMetaCost?: true
+    recipientCountry?: true
+    deliveredAt?: true
+    readAt?: true
+    failedAt?: true
+    rawPayload?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Message to aggregate.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Messages
+    **/
+    _count?: true | MessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MessageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MessageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage[P]>
+      : GetScalarType<T[P], AggregateMessage[P]>
+  }
+
+
+
+
+  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
+    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
+    having?: MessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageCountAggregateInputType | true
+    _avg?: MessageAvgAggregateInputType
+    _sum?: MessageSumAggregateInputType
+    _min?: MessageMinAggregateInputType
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type MessageGroupByOutputType = {
+    id: string
+    tenantId: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText: string | null
+    mediaUrl: string | null
+    mediaMimeType: string | null
+    metaMessageId: string | null
+    externalStatus: string | null
+    pricingCategory: string | null
+    pricingType: string | null
+    currency: string | null
+    estimatedMetaCost: Decimal | null
+    recipientCountry: string | null
+    deliveredAt: Date | null
+    readAt: Date | null
+    failedAt: Date | null
+    rawPayload: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MessageCountAggregateOutputType | null
+    _avg: MessageAvgAggregateOutputType | null
+    _sum: MessageSumAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    conversationId?: boolean
+    direction?: boolean
+    kind?: boolean
+    bodyText?: boolean
+    mediaUrl?: boolean
+    mediaMimeType?: boolean
+    metaMessageId?: boolean
+    externalStatus?: boolean
+    pricingCategory?: boolean
+    pricingType?: boolean
+    currency?: boolean
+    estimatedMetaCost?: boolean
+    recipientCountry?: boolean
+    deliveredAt?: boolean
+    readAt?: boolean
+    failedAt?: boolean
+    rawPayload?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    conversationId?: boolean
+    direction?: boolean
+    kind?: boolean
+    bodyText?: boolean
+    mediaUrl?: boolean
+    mediaMimeType?: boolean
+    metaMessageId?: boolean
+    externalStatus?: boolean
+    pricingCategory?: boolean
+    pricingType?: boolean
+    currency?: boolean
+    estimatedMetaCost?: boolean
+    recipientCountry?: boolean
+    deliveredAt?: boolean
+    readAt?: boolean
+    failedAt?: boolean
+    rawPayload?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    conversationId?: boolean
+    direction?: boolean
+    kind?: boolean
+    bodyText?: boolean
+    mediaUrl?: boolean
+    mediaMimeType?: boolean
+    metaMessageId?: boolean
+    externalStatus?: boolean
+    pricingCategory?: boolean
+    pricingType?: boolean
+    currency?: boolean
+    estimatedMetaCost?: boolean
+    recipientCountry?: boolean
+    deliveredAt?: boolean
+    readAt?: boolean
+    failedAt?: boolean
+    rawPayload?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    conversationId?: boolean
+    direction?: boolean
+    kind?: boolean
+    bodyText?: boolean
+    mediaUrl?: boolean
+    mediaMimeType?: boolean
+    metaMessageId?: boolean
+    externalStatus?: boolean
+    pricingCategory?: boolean
+    pricingType?: boolean
+    currency?: boolean
+    estimatedMetaCost?: boolean
+    recipientCountry?: boolean
+    deliveredAt?: boolean
+    readAt?: boolean
+    failedAt?: boolean
+    rawPayload?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "conversationId" | "direction" | "kind" | "bodyText" | "mediaUrl" | "mediaMimeType" | "metaMessageId" | "externalStatus" | "pricingCategory" | "pricingType" | "currency" | "estimatedMetaCost" | "recipientCountry" | "deliveredAt" | "readAt" | "failedAt" | "rawPayload" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
+  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+  }
+
+  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Message"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      conversationId: string
+      direction: $Enums.MessageDirection
+      kind: $Enums.MessageKind
+      bodyText: string | null
+      mediaUrl: string | null
+      mediaMimeType: string | null
+      metaMessageId: string | null
+      externalStatus: string | null
+      pricingCategory: string | null
+      pricingType: string | null
+      currency: string | null
+      estimatedMetaCost: Prisma.Decimal | null
+      recipientCountry: string | null
+      deliveredAt: Date | null
+      readAt: Date | null
+      failedAt: Date | null
+      rawPayload: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["message"]>
+    composites: {}
+  }
+
+  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+
+  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageCountAggregateInputType | true
+    }
+
+  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+    /**
+     * Find zero or one Message that matches the filter.
+     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.message.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.message.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Message.
+     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * @example
+     * // Create one Message
+     * const Message = await prisma.message.create({
+     *   data: {
+     *     // ... data to create a Message
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Messages.
+     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Message.
+     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * @example
+     * // Delete one Message
+     * const Message = await prisma.message.delete({
+     *   where: {
+     *     // ... filter to delete one Message
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Message.
+     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * @example
+     * // Update one Message
+     * const message = await prisma.message.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.message.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Message.
+     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * @example
+     * // Update or create a Message
+     * const message = await prisma.message.upsert({
+     *   create: {
+     *     // ... data to create a Message
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.message.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageCountArgs>(
+      args?: Subset<T, MessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+
+    /**
+     * Group by Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageGroupByArgs['orderBy'] }
+        : { orderBy?: MessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Message model
+   */
+  readonly fields: MessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Message.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Message model
+   */
+  interface MessageFieldRefs {
+    readonly id: FieldRef<"Message", 'String'>
+    readonly tenantId: FieldRef<"Message", 'String'>
+    readonly conversationId: FieldRef<"Message", 'String'>
+    readonly direction: FieldRef<"Message", 'MessageDirection'>
+    readonly kind: FieldRef<"Message", 'MessageKind'>
+    readonly bodyText: FieldRef<"Message", 'String'>
+    readonly mediaUrl: FieldRef<"Message", 'String'>
+    readonly mediaMimeType: FieldRef<"Message", 'String'>
+    readonly metaMessageId: FieldRef<"Message", 'String'>
+    readonly externalStatus: FieldRef<"Message", 'String'>
+    readonly pricingCategory: FieldRef<"Message", 'String'>
+    readonly pricingType: FieldRef<"Message", 'String'>
+    readonly currency: FieldRef<"Message", 'String'>
+    readonly estimatedMetaCost: FieldRef<"Message", 'Decimal'>
+    readonly recipientCountry: FieldRef<"Message", 'String'>
+    readonly deliveredAt: FieldRef<"Message", 'DateTime'>
+    readonly readAt: FieldRef<"Message", 'DateTime'>
+    readonly failedAt: FieldRef<"Message", 'DateTime'>
+    readonly rawPayload: FieldRef<"Message", 'Json'>
+    readonly createdAt: FieldRef<"Message", 'DateTime'>
+    readonly updatedAt: FieldRef<"Message", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Message findUnique
+   */
+  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findUniqueOrThrow
+   */
+  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findFirst
+   */
+  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findFirstOrThrow
+   */
+  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findMany
+   */
+  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Messages to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message create
+   */
+  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Message.
+     */
+    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+  }
+
+  /**
+   * Message createMany
+   */
+  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Message createManyAndReturn
+   */
+  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message update
+   */
+  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Message.
+     */
+    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+    /**
+     * Choose, which Message to update.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message updateMany
+   */
+  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message updateManyAndReturn
+   */
+  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message upsert
+   */
+  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Message to update in case it exists.
+     */
+    where: MessageWhereUniqueInput
+    /**
+     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
+     */
+    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    /**
+     * In case the Message was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+  }
+
+  /**
+   * Message delete
+   */
+  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter which Message to delete.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message deleteMany
+   */
+  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Messages to delete
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message without action
+   */
+  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Pipeline
+   */
+
+  export type AggregatePipeline = {
+    _count: PipelineCountAggregateOutputType | null
+    _min: PipelineMinAggregateOutputType | null
+    _max: PipelineMaxAggregateOutputType | null
+  }
+
+  export type PipelineMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    description: string | null
+    isDefault: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PipelineMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    description: string | null
+    isDefault: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PipelineCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    name: number
+    description: number
+    isDefault: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PipelineMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    description?: true
+    isDefault?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PipelineMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    description?: true
+    isDefault?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PipelineCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    description?: true
+    isDefault?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PipelineAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pipeline to aggregate.
+     */
+    where?: PipelineWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pipelines to fetch.
+     */
+    orderBy?: PipelineOrderByWithRelationInput | PipelineOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PipelineWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pipelines from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pipelines.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Pipelines
+    **/
+    _count?: true | PipelineCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PipelineMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PipelineMaxAggregateInputType
+  }
+
+  export type GetPipelineAggregateType<T extends PipelineAggregateArgs> = {
+        [P in keyof T & keyof AggregatePipeline]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePipeline[P]>
+      : GetScalarType<T[P], AggregatePipeline[P]>
+  }
+
+
+
+
+  export type PipelineGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PipelineWhereInput
+    orderBy?: PipelineOrderByWithAggregationInput | PipelineOrderByWithAggregationInput[]
+    by: PipelineScalarFieldEnum[] | PipelineScalarFieldEnum
+    having?: PipelineScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PipelineCountAggregateInputType | true
+    _min?: PipelineMinAggregateInputType
+    _max?: PipelineMaxAggregateInputType
+  }
+
+  export type PipelineGroupByOutputType = {
+    id: string
+    tenantId: string
+    name: string
+    description: string | null
+    isDefault: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: PipelineCountAggregateOutputType | null
+    _min: PipelineMinAggregateOutputType | null
+    _max: PipelineMaxAggregateOutputType | null
+  }
+
+  type GetPipelineGroupByPayload<T extends PipelineGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PipelineGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PipelineGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PipelineGroupByOutputType[P]>
+            : GetScalarType<T[P], PipelineGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PipelineSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    description?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    stages?: boolean | Pipeline$stagesArgs<ExtArgs>
+    leads?: boolean | Pipeline$leadsArgs<ExtArgs>
+    _count?: boolean | PipelineCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipeline"]>
+
+  export type PipelineSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    description?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipeline"]>
+
+  export type PipelineSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    description?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipeline"]>
+
+  export type PipelineSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    description?: boolean
+    isDefault?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PipelineOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "description" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["pipeline"]>
+  export type PipelineInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    stages?: boolean | Pipeline$stagesArgs<ExtArgs>
+    leads?: boolean | Pipeline$leadsArgs<ExtArgs>
+    _count?: boolean | PipelineCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PipelineIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type PipelineIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $PipelinePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Pipeline"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      stages: Prisma.$PipelineStagePayload<ExtArgs>[]
+      leads: Prisma.$LeadPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      name: string
+      description: string | null
+      isDefault: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pipeline"]>
+    composites: {}
+  }
+
+  type PipelineGetPayload<S extends boolean | null | undefined | PipelineDefaultArgs> = $Result.GetResult<Prisma.$PipelinePayload, S>
+
+  type PipelineCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PipelineFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PipelineCountAggregateInputType | true
+    }
+
+  export interface PipelineDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Pipeline'], meta: { name: 'Pipeline' } }
+    /**
+     * Find zero or one Pipeline that matches the filter.
+     * @param {PipelineFindUniqueArgs} args - Arguments to find a Pipeline
+     * @example
+     * // Get one Pipeline
+     * const pipeline = await prisma.pipeline.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PipelineFindUniqueArgs>(args: SelectSubset<T, PipelineFindUniqueArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Pipeline that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PipelineFindUniqueOrThrowArgs} args - Arguments to find a Pipeline
+     * @example
+     * // Get one Pipeline
+     * const pipeline = await prisma.pipeline.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PipelineFindUniqueOrThrowArgs>(args: SelectSubset<T, PipelineFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pipeline that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineFindFirstArgs} args - Arguments to find a Pipeline
+     * @example
+     * // Get one Pipeline
+     * const pipeline = await prisma.pipeline.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PipelineFindFirstArgs>(args?: SelectSubset<T, PipelineFindFirstArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pipeline that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineFindFirstOrThrowArgs} args - Arguments to find a Pipeline
+     * @example
+     * // Get one Pipeline
+     * const pipeline = await prisma.pipeline.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PipelineFindFirstOrThrowArgs>(args?: SelectSubset<T, PipelineFindFirstOrThrowArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Pipelines that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Pipelines
+     * const pipelines = await prisma.pipeline.findMany()
+     * 
+     * // Get first 10 Pipelines
+     * const pipelines = await prisma.pipeline.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pipelineWithIdOnly = await prisma.pipeline.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PipelineFindManyArgs>(args?: SelectSubset<T, PipelineFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Pipeline.
+     * @param {PipelineCreateArgs} args - Arguments to create a Pipeline.
+     * @example
+     * // Create one Pipeline
+     * const Pipeline = await prisma.pipeline.create({
+     *   data: {
+     *     // ... data to create a Pipeline
+     *   }
+     * })
+     * 
+     */
+    create<T extends PipelineCreateArgs>(args: SelectSubset<T, PipelineCreateArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Pipelines.
+     * @param {PipelineCreateManyArgs} args - Arguments to create many Pipelines.
+     * @example
+     * // Create many Pipelines
+     * const pipeline = await prisma.pipeline.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PipelineCreateManyArgs>(args?: SelectSubset<T, PipelineCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Pipelines and returns the data saved in the database.
+     * @param {PipelineCreateManyAndReturnArgs} args - Arguments to create many Pipelines.
+     * @example
+     * // Create many Pipelines
+     * const pipeline = await prisma.pipeline.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Pipelines and only return the `id`
+     * const pipelineWithIdOnly = await prisma.pipeline.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PipelineCreateManyAndReturnArgs>(args?: SelectSubset<T, PipelineCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Pipeline.
+     * @param {PipelineDeleteArgs} args - Arguments to delete one Pipeline.
+     * @example
+     * // Delete one Pipeline
+     * const Pipeline = await prisma.pipeline.delete({
+     *   where: {
+     *     // ... filter to delete one Pipeline
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PipelineDeleteArgs>(args: SelectSubset<T, PipelineDeleteArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Pipeline.
+     * @param {PipelineUpdateArgs} args - Arguments to update one Pipeline.
+     * @example
+     * // Update one Pipeline
+     * const pipeline = await prisma.pipeline.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PipelineUpdateArgs>(args: SelectSubset<T, PipelineUpdateArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Pipelines.
+     * @param {PipelineDeleteManyArgs} args - Arguments to filter Pipelines to delete.
+     * @example
+     * // Delete a few Pipelines
+     * const { count } = await prisma.pipeline.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PipelineDeleteManyArgs>(args?: SelectSubset<T, PipelineDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pipelines.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Pipelines
+     * const pipeline = await prisma.pipeline.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PipelineUpdateManyArgs>(args: SelectSubset<T, PipelineUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pipelines and returns the data updated in the database.
+     * @param {PipelineUpdateManyAndReturnArgs} args - Arguments to update many Pipelines.
+     * @example
+     * // Update many Pipelines
+     * const pipeline = await prisma.pipeline.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Pipelines and only return the `id`
+     * const pipelineWithIdOnly = await prisma.pipeline.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PipelineUpdateManyAndReturnArgs>(args: SelectSubset<T, PipelineUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Pipeline.
+     * @param {PipelineUpsertArgs} args - Arguments to update or create a Pipeline.
+     * @example
+     * // Update or create a Pipeline
+     * const pipeline = await prisma.pipeline.upsert({
+     *   create: {
+     *     // ... data to create a Pipeline
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Pipeline we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PipelineUpsertArgs>(args: SelectSubset<T, PipelineUpsertArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Pipelines.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineCountArgs} args - Arguments to filter Pipelines to count.
+     * @example
+     * // Count the number of Pipelines
+     * const count = await prisma.pipeline.count({
+     *   where: {
+     *     // ... the filter for the Pipelines we want to count
+     *   }
+     * })
+    **/
+    count<T extends PipelineCountArgs>(
+      args?: Subset<T, PipelineCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PipelineCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Pipeline.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PipelineAggregateArgs>(args: Subset<T, PipelineAggregateArgs>): Prisma.PrismaPromise<GetPipelineAggregateType<T>>
+
+    /**
+     * Group by Pipeline.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PipelineGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PipelineGroupByArgs['orderBy'] }
+        : { orderBy?: PipelineGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PipelineGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPipelineGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Pipeline model
+   */
+  readonly fields: PipelineFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Pipeline.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PipelineClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    stages<T extends Pipeline$stagesArgs<ExtArgs> = {}>(args?: Subset<T, Pipeline$stagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    leads<T extends Pipeline$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Pipeline$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Pipeline model
+   */
+  interface PipelineFieldRefs {
+    readonly id: FieldRef<"Pipeline", 'String'>
+    readonly tenantId: FieldRef<"Pipeline", 'String'>
+    readonly name: FieldRef<"Pipeline", 'String'>
+    readonly description: FieldRef<"Pipeline", 'String'>
+    readonly isDefault: FieldRef<"Pipeline", 'Boolean'>
+    readonly createdAt: FieldRef<"Pipeline", 'DateTime'>
+    readonly updatedAt: FieldRef<"Pipeline", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Pipeline findUnique
+   */
+  export type PipelineFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter, which Pipeline to fetch.
+     */
+    where: PipelineWhereUniqueInput
+  }
+
+  /**
+   * Pipeline findUniqueOrThrow
+   */
+  export type PipelineFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter, which Pipeline to fetch.
+     */
+    where: PipelineWhereUniqueInput
+  }
+
+  /**
+   * Pipeline findFirst
+   */
+  export type PipelineFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter, which Pipeline to fetch.
+     */
+    where?: PipelineWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pipelines to fetch.
+     */
+    orderBy?: PipelineOrderByWithRelationInput | PipelineOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pipelines.
+     */
+    cursor?: PipelineWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pipelines from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pipelines.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pipelines.
+     */
+    distinct?: PipelineScalarFieldEnum | PipelineScalarFieldEnum[]
+  }
+
+  /**
+   * Pipeline findFirstOrThrow
+   */
+  export type PipelineFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter, which Pipeline to fetch.
+     */
+    where?: PipelineWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pipelines to fetch.
+     */
+    orderBy?: PipelineOrderByWithRelationInput | PipelineOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pipelines.
+     */
+    cursor?: PipelineWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pipelines from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pipelines.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pipelines.
+     */
+    distinct?: PipelineScalarFieldEnum | PipelineScalarFieldEnum[]
+  }
+
+  /**
+   * Pipeline findMany
+   */
+  export type PipelineFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter, which Pipelines to fetch.
+     */
+    where?: PipelineWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pipelines to fetch.
+     */
+    orderBy?: PipelineOrderByWithRelationInput | PipelineOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Pipelines.
+     */
+    cursor?: PipelineWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pipelines from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pipelines.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pipelines.
+     */
+    distinct?: PipelineScalarFieldEnum | PipelineScalarFieldEnum[]
+  }
+
+  /**
+   * Pipeline create
+   */
+  export type PipelineCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Pipeline.
+     */
+    data: XOR<PipelineCreateInput, PipelineUncheckedCreateInput>
+  }
+
+  /**
+   * Pipeline createMany
+   */
+  export type PipelineCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Pipelines.
+     */
+    data: PipelineCreateManyInput | PipelineCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Pipeline createManyAndReturn
+   */
+  export type PipelineCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * The data used to create many Pipelines.
+     */
+    data: PipelineCreateManyInput | PipelineCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pipeline update
+   */
+  export type PipelineUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Pipeline.
+     */
+    data: XOR<PipelineUpdateInput, PipelineUncheckedUpdateInput>
+    /**
+     * Choose, which Pipeline to update.
+     */
+    where: PipelineWhereUniqueInput
+  }
+
+  /**
+   * Pipeline updateMany
+   */
+  export type PipelineUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Pipelines.
+     */
+    data: XOR<PipelineUpdateManyMutationInput, PipelineUncheckedUpdateManyInput>
+    /**
+     * Filter which Pipelines to update
+     */
+    where?: PipelineWhereInput
+    /**
+     * Limit how many Pipelines to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pipeline updateManyAndReturn
+   */
+  export type PipelineUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * The data used to update Pipelines.
+     */
+    data: XOR<PipelineUpdateManyMutationInput, PipelineUncheckedUpdateManyInput>
+    /**
+     * Filter which Pipelines to update
+     */
+    where?: PipelineWhereInput
+    /**
+     * Limit how many Pipelines to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pipeline upsert
+   */
+  export type PipelineUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Pipeline to update in case it exists.
+     */
+    where: PipelineWhereUniqueInput
+    /**
+     * In case the Pipeline found by the `where` argument doesn't exist, create a new Pipeline with this data.
+     */
+    create: XOR<PipelineCreateInput, PipelineUncheckedCreateInput>
+    /**
+     * In case the Pipeline was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PipelineUpdateInput, PipelineUncheckedUpdateInput>
+  }
+
+  /**
+   * Pipeline delete
+   */
+  export type PipelineDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+    /**
+     * Filter which Pipeline to delete.
+     */
+    where: PipelineWhereUniqueInput
+  }
+
+  /**
+   * Pipeline deleteMany
+   */
+  export type PipelineDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pipelines to delete
+     */
+    where?: PipelineWhereInput
+    /**
+     * Limit how many Pipelines to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pipeline.stages
+   */
+  export type Pipeline$stagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    where?: PipelineStageWhereInput
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    cursor?: PipelineStageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PipelineStageScalarFieldEnum | PipelineStageScalarFieldEnum[]
+  }
+
+  /**
+   * Pipeline.leads
+   */
+  export type Pipeline$leadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Pipeline without action
+   */
+  export type PipelineDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pipeline
+     */
+    select?: PipelineSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pipeline
+     */
+    omit?: PipelineOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PipelineStage
+   */
+
+  export type AggregatePipelineStage = {
+    _count: PipelineStageCountAggregateOutputType | null
+    _avg: PipelineStageAvgAggregateOutputType | null
+    _sum: PipelineStageSumAggregateOutputType | null
+    _min: PipelineStageMinAggregateOutputType | null
+    _max: PipelineStageMaxAggregateOutputType | null
+  }
+
+  export type PipelineStageAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type PipelineStageSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type PipelineStageMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    pipelineId: string | null
+    name: string | null
+    slug: string | null
+    color: string | null
+    position: number | null
+    isFinal: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PipelineStageMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    pipelineId: string | null
+    name: string | null
+    slug: string | null
+    color: string | null
+    position: number | null
+    isFinal: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PipelineStageCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    pipelineId: number
+    name: number
+    slug: number
+    color: number
+    position: number
+    isFinal: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PipelineStageAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type PipelineStageSumAggregateInputType = {
+    position?: true
+  }
+
+  export type PipelineStageMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    pipelineId?: true
+    name?: true
+    slug?: true
+    color?: true
+    position?: true
+    isFinal?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PipelineStageMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    pipelineId?: true
+    name?: true
+    slug?: true
+    color?: true
+    position?: true
+    isFinal?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PipelineStageCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    pipelineId?: true
+    name?: true
+    slug?: true
+    color?: true
+    position?: true
+    isFinal?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PipelineStageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PipelineStage to aggregate.
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PipelineStages to fetch.
+     */
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PipelineStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PipelineStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PipelineStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PipelineStages
+    **/
+    _count?: true | PipelineStageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PipelineStageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PipelineStageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PipelineStageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PipelineStageMaxAggregateInputType
+  }
+
+  export type GetPipelineStageAggregateType<T extends PipelineStageAggregateArgs> = {
+        [P in keyof T & keyof AggregatePipelineStage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePipelineStage[P]>
+      : GetScalarType<T[P], AggregatePipelineStage[P]>
+  }
+
+
+
+
+  export type PipelineStageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PipelineStageWhereInput
+    orderBy?: PipelineStageOrderByWithAggregationInput | PipelineStageOrderByWithAggregationInput[]
+    by: PipelineStageScalarFieldEnum[] | PipelineStageScalarFieldEnum
+    having?: PipelineStageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PipelineStageCountAggregateInputType | true
+    _avg?: PipelineStageAvgAggregateInputType
+    _sum?: PipelineStageSumAggregateInputType
+    _min?: PipelineStageMinAggregateInputType
+    _max?: PipelineStageMaxAggregateInputType
+  }
+
+  export type PipelineStageGroupByOutputType = {
+    id: string
+    tenantId: string
+    pipelineId: string
+    name: string
+    slug: string
+    color: string | null
+    position: number
+    isFinal: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: PipelineStageCountAggregateOutputType | null
+    _avg: PipelineStageAvgAggregateOutputType | null
+    _sum: PipelineStageSumAggregateOutputType | null
+    _min: PipelineStageMinAggregateOutputType | null
+    _max: PipelineStageMaxAggregateOutputType | null
+  }
+
+  type GetPipelineStageGroupByPayload<T extends PipelineStageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PipelineStageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PipelineStageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PipelineStageGroupByOutputType[P]>
+            : GetScalarType<T[P], PipelineStageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PipelineStageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    pipelineId?: boolean
+    name?: boolean
+    slug?: boolean
+    color?: boolean
+    position?: boolean
+    isFinal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+    leads?: boolean | PipelineStage$leadsArgs<ExtArgs>
+    _count?: boolean | PipelineStageCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipelineStage"]>
+
+  export type PipelineStageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    pipelineId?: boolean
+    name?: boolean
+    slug?: boolean
+    color?: boolean
+    position?: boolean
+    isFinal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipelineStage"]>
+
+  export type PipelineStageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    pipelineId?: boolean
+    name?: boolean
+    slug?: boolean
+    color?: boolean
+    position?: boolean
+    isFinal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pipelineStage"]>
+
+  export type PipelineStageSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    pipelineId?: boolean
+    name?: boolean
+    slug?: boolean
+    color?: boolean
+    position?: boolean
+    isFinal?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PipelineStageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "pipelineId" | "name" | "slug" | "color" | "position" | "isFinal" | "createdAt" | "updatedAt", ExtArgs["result"]["pipelineStage"]>
+  export type PipelineStageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+    leads?: boolean | PipelineStage$leadsArgs<ExtArgs>
+    _count?: boolean | PipelineStageCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PipelineStageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+  }
+  export type PipelineStageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    pipeline?: boolean | PipelineDefaultArgs<ExtArgs>
+  }
+
+  export type $PipelineStagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PipelineStage"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      pipeline: Prisma.$PipelinePayload<ExtArgs>
+      leads: Prisma.$LeadPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      pipelineId: string
+      name: string
+      slug: string
+      color: string | null
+      position: number
+      isFinal: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pipelineStage"]>
+    composites: {}
+  }
+
+  type PipelineStageGetPayload<S extends boolean | null | undefined | PipelineStageDefaultArgs> = $Result.GetResult<Prisma.$PipelineStagePayload, S>
+
+  type PipelineStageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PipelineStageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PipelineStageCountAggregateInputType | true
+    }
+
+  export interface PipelineStageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PipelineStage'], meta: { name: 'PipelineStage' } }
+    /**
+     * Find zero or one PipelineStage that matches the filter.
+     * @param {PipelineStageFindUniqueArgs} args - Arguments to find a PipelineStage
+     * @example
+     * // Get one PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PipelineStageFindUniqueArgs>(args: SelectSubset<T, PipelineStageFindUniqueArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PipelineStage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PipelineStageFindUniqueOrThrowArgs} args - Arguments to find a PipelineStage
+     * @example
+     * // Get one PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PipelineStageFindUniqueOrThrowArgs>(args: SelectSubset<T, PipelineStageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PipelineStage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageFindFirstArgs} args - Arguments to find a PipelineStage
+     * @example
+     * // Get one PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PipelineStageFindFirstArgs>(args?: SelectSubset<T, PipelineStageFindFirstArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PipelineStage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageFindFirstOrThrowArgs} args - Arguments to find a PipelineStage
+     * @example
+     * // Get one PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PipelineStageFindFirstOrThrowArgs>(args?: SelectSubset<T, PipelineStageFindFirstOrThrowArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PipelineStages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PipelineStages
+     * const pipelineStages = await prisma.pipelineStage.findMany()
+     * 
+     * // Get first 10 PipelineStages
+     * const pipelineStages = await prisma.pipelineStage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pipelineStageWithIdOnly = await prisma.pipelineStage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PipelineStageFindManyArgs>(args?: SelectSubset<T, PipelineStageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PipelineStage.
+     * @param {PipelineStageCreateArgs} args - Arguments to create a PipelineStage.
+     * @example
+     * // Create one PipelineStage
+     * const PipelineStage = await prisma.pipelineStage.create({
+     *   data: {
+     *     // ... data to create a PipelineStage
+     *   }
+     * })
+     * 
+     */
+    create<T extends PipelineStageCreateArgs>(args: SelectSubset<T, PipelineStageCreateArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PipelineStages.
+     * @param {PipelineStageCreateManyArgs} args - Arguments to create many PipelineStages.
+     * @example
+     * // Create many PipelineStages
+     * const pipelineStage = await prisma.pipelineStage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PipelineStageCreateManyArgs>(args?: SelectSubset<T, PipelineStageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PipelineStages and returns the data saved in the database.
+     * @param {PipelineStageCreateManyAndReturnArgs} args - Arguments to create many PipelineStages.
+     * @example
+     * // Create many PipelineStages
+     * const pipelineStage = await prisma.pipelineStage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PipelineStages and only return the `id`
+     * const pipelineStageWithIdOnly = await prisma.pipelineStage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PipelineStageCreateManyAndReturnArgs>(args?: SelectSubset<T, PipelineStageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PipelineStage.
+     * @param {PipelineStageDeleteArgs} args - Arguments to delete one PipelineStage.
+     * @example
+     * // Delete one PipelineStage
+     * const PipelineStage = await prisma.pipelineStage.delete({
+     *   where: {
+     *     // ... filter to delete one PipelineStage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PipelineStageDeleteArgs>(args: SelectSubset<T, PipelineStageDeleteArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PipelineStage.
+     * @param {PipelineStageUpdateArgs} args - Arguments to update one PipelineStage.
+     * @example
+     * // Update one PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PipelineStageUpdateArgs>(args: SelectSubset<T, PipelineStageUpdateArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PipelineStages.
+     * @param {PipelineStageDeleteManyArgs} args - Arguments to filter PipelineStages to delete.
+     * @example
+     * // Delete a few PipelineStages
+     * const { count } = await prisma.pipelineStage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PipelineStageDeleteManyArgs>(args?: SelectSubset<T, PipelineStageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PipelineStages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PipelineStages
+     * const pipelineStage = await prisma.pipelineStage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PipelineStageUpdateManyArgs>(args: SelectSubset<T, PipelineStageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PipelineStages and returns the data updated in the database.
+     * @param {PipelineStageUpdateManyAndReturnArgs} args - Arguments to update many PipelineStages.
+     * @example
+     * // Update many PipelineStages
+     * const pipelineStage = await prisma.pipelineStage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PipelineStages and only return the `id`
+     * const pipelineStageWithIdOnly = await prisma.pipelineStage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PipelineStageUpdateManyAndReturnArgs>(args: SelectSubset<T, PipelineStageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PipelineStage.
+     * @param {PipelineStageUpsertArgs} args - Arguments to update or create a PipelineStage.
+     * @example
+     * // Update or create a PipelineStage
+     * const pipelineStage = await prisma.pipelineStage.upsert({
+     *   create: {
+     *     // ... data to create a PipelineStage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PipelineStage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PipelineStageUpsertArgs>(args: SelectSubset<T, PipelineStageUpsertArgs<ExtArgs>>): Prisma__PipelineStageClient<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PipelineStages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageCountArgs} args - Arguments to filter PipelineStages to count.
+     * @example
+     * // Count the number of PipelineStages
+     * const count = await prisma.pipelineStage.count({
+     *   where: {
+     *     // ... the filter for the PipelineStages we want to count
+     *   }
+     * })
+    **/
+    count<T extends PipelineStageCountArgs>(
+      args?: Subset<T, PipelineStageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PipelineStageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PipelineStage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PipelineStageAggregateArgs>(args: Subset<T, PipelineStageAggregateArgs>): Prisma.PrismaPromise<GetPipelineStageAggregateType<T>>
+
+    /**
+     * Group by PipelineStage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PipelineStageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PipelineStageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PipelineStageGroupByArgs['orderBy'] }
+        : { orderBy?: PipelineStageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PipelineStageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPipelineStageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PipelineStage model
+   */
+  readonly fields: PipelineStageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PipelineStage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PipelineStageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pipeline<T extends PipelineDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PipelineDefaultArgs<ExtArgs>>): Prisma__PipelineClient<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    leads<T extends PipelineStage$leadsArgs<ExtArgs> = {}>(args?: Subset<T, PipelineStage$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PipelineStage model
+   */
+  interface PipelineStageFieldRefs {
+    readonly id: FieldRef<"PipelineStage", 'String'>
+    readonly tenantId: FieldRef<"PipelineStage", 'String'>
+    readonly pipelineId: FieldRef<"PipelineStage", 'String'>
+    readonly name: FieldRef<"PipelineStage", 'String'>
+    readonly slug: FieldRef<"PipelineStage", 'String'>
+    readonly color: FieldRef<"PipelineStage", 'String'>
+    readonly position: FieldRef<"PipelineStage", 'Int'>
+    readonly isFinal: FieldRef<"PipelineStage", 'Boolean'>
+    readonly createdAt: FieldRef<"PipelineStage", 'DateTime'>
+    readonly updatedAt: FieldRef<"PipelineStage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PipelineStage findUnique
+   */
+  export type PipelineStageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter, which PipelineStage to fetch.
+     */
+    where: PipelineStageWhereUniqueInput
+  }
+
+  /**
+   * PipelineStage findUniqueOrThrow
+   */
+  export type PipelineStageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter, which PipelineStage to fetch.
+     */
+    where: PipelineStageWhereUniqueInput
+  }
+
+  /**
+   * PipelineStage findFirst
+   */
+  export type PipelineStageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter, which PipelineStage to fetch.
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PipelineStages to fetch.
+     */
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PipelineStages.
+     */
+    cursor?: PipelineStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PipelineStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PipelineStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PipelineStages.
+     */
+    distinct?: PipelineStageScalarFieldEnum | PipelineStageScalarFieldEnum[]
+  }
+
+  /**
+   * PipelineStage findFirstOrThrow
+   */
+  export type PipelineStageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter, which PipelineStage to fetch.
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PipelineStages to fetch.
+     */
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PipelineStages.
+     */
+    cursor?: PipelineStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PipelineStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PipelineStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PipelineStages.
+     */
+    distinct?: PipelineStageScalarFieldEnum | PipelineStageScalarFieldEnum[]
+  }
+
+  /**
+   * PipelineStage findMany
+   */
+  export type PipelineStageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter, which PipelineStages to fetch.
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PipelineStages to fetch.
+     */
+    orderBy?: PipelineStageOrderByWithRelationInput | PipelineStageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PipelineStages.
+     */
+    cursor?: PipelineStageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PipelineStages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PipelineStages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PipelineStages.
+     */
+    distinct?: PipelineStageScalarFieldEnum | PipelineStageScalarFieldEnum[]
+  }
+
+  /**
+   * PipelineStage create
+   */
+  export type PipelineStageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PipelineStage.
+     */
+    data: XOR<PipelineStageCreateInput, PipelineStageUncheckedCreateInput>
+  }
+
+  /**
+   * PipelineStage createMany
+   */
+  export type PipelineStageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PipelineStages.
+     */
+    data: PipelineStageCreateManyInput | PipelineStageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PipelineStage createManyAndReturn
+   */
+  export type PipelineStageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * The data used to create many PipelineStages.
+     */
+    data: PipelineStageCreateManyInput | PipelineStageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PipelineStage update
+   */
+  export type PipelineStageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PipelineStage.
+     */
+    data: XOR<PipelineStageUpdateInput, PipelineStageUncheckedUpdateInput>
+    /**
+     * Choose, which PipelineStage to update.
+     */
+    where: PipelineStageWhereUniqueInput
+  }
+
+  /**
+   * PipelineStage updateMany
+   */
+  export type PipelineStageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PipelineStages.
+     */
+    data: XOR<PipelineStageUpdateManyMutationInput, PipelineStageUncheckedUpdateManyInput>
+    /**
+     * Filter which PipelineStages to update
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * Limit how many PipelineStages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PipelineStage updateManyAndReturn
+   */
+  export type PipelineStageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * The data used to update PipelineStages.
+     */
+    data: XOR<PipelineStageUpdateManyMutationInput, PipelineStageUncheckedUpdateManyInput>
+    /**
+     * Filter which PipelineStages to update
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * Limit how many PipelineStages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PipelineStage upsert
+   */
+  export type PipelineStageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PipelineStage to update in case it exists.
+     */
+    where: PipelineStageWhereUniqueInput
+    /**
+     * In case the PipelineStage found by the `where` argument doesn't exist, create a new PipelineStage with this data.
+     */
+    create: XOR<PipelineStageCreateInput, PipelineStageUncheckedCreateInput>
+    /**
+     * In case the PipelineStage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PipelineStageUpdateInput, PipelineStageUncheckedUpdateInput>
+  }
+
+  /**
+   * PipelineStage delete
+   */
+  export type PipelineStageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+    /**
+     * Filter which PipelineStage to delete.
+     */
+    where: PipelineStageWhereUniqueInput
+  }
+
+  /**
+   * PipelineStage deleteMany
+   */
+  export type PipelineStageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PipelineStages to delete
+     */
+    where?: PipelineStageWhereInput
+    /**
+     * Limit how many PipelineStages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PipelineStage.leads
+   */
+  export type PipelineStage$leadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * PipelineStage without action
+   */
+  export type PipelineStageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PipelineStage
+     */
+    select?: PipelineStageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PipelineStage
+     */
+    omit?: PipelineStageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PipelineStageInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10824,12 +19475,135 @@ export namespace Prisma {
   export type MembershipScalarFieldEnum = (typeof MembershipScalarFieldEnum)[keyof typeof MembershipScalarFieldEnum]
 
 
+  export const ContactScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    fullName: 'fullName',
+    email: 'email',
+    phoneE164: 'phoneE164',
+    whatsappWaId: 'whatsappWaId',
+    normalizedPhone: 'normalizedPhone',
+    source: 'source',
+    tags: 'tags',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    version: 'version'
+  };
+
+  export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+  export const LeadScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    contactId: 'contactId',
+    pipelineId: 'pipelineId',
+    stageId: 'stageId',
+    ownerUserId: 'ownerUserId',
+    title: 'title',
+    sourceChannel: 'sourceChannel',
+    status: 'status',
+    score: 'score',
+    firstInboundAt: 'firstInboundAt',
+    lastInboundAt: 'lastInboundAt',
+    lastOutboundAt: 'lastOutboundAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    version: 'version'
+  };
+
+  export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+  export const ConversationScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    contactId: 'contactId',
+    leadId: 'leadId',
+    channel: 'channel',
+    status: 'status',
+    assigneeUserId: 'assigneeUserId',
+    lastMessageAt: 'lastMessageAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    version: 'version'
+  };
+
+  export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+  export const MessageScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    conversationId: 'conversationId',
+    direction: 'direction',
+    kind: 'kind',
+    bodyText: 'bodyText',
+    mediaUrl: 'mediaUrl',
+    mediaMimeType: 'mediaMimeType',
+    metaMessageId: 'metaMessageId',
+    externalStatus: 'externalStatus',
+    pricingCategory: 'pricingCategory',
+    pricingType: 'pricingType',
+    currency: 'currency',
+    estimatedMetaCost: 'estimatedMetaCost',
+    recipientCountry: 'recipientCountry',
+    deliveredAt: 'deliveredAt',
+    readAt: 'readAt',
+    failedAt: 'failedAt',
+    rawPayload: 'rawPayload',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const PipelineScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    name: 'name',
+    description: 'description',
+    isDefault: 'isDefault',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PipelineScalarFieldEnum = (typeof PipelineScalarFieldEnum)[keyof typeof PipelineScalarFieldEnum]
+
+
+  export const PipelineStageScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    pipelineId: 'pipelineId',
+    name: 'name',
+    slug: 'slug',
+    color: 'color',
+    position: 'position',
+    isFinal: 'isFinal',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PipelineStageScalarFieldEnum = (typeof PipelineStageScalarFieldEnum)[keyof typeof PipelineStageScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -10846,6 +19620,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -10987,6 +19770,118 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'LeadSourceChannel'
+   */
+  export type EnumLeadSourceChannelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadSourceChannel'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeadSourceChannel[]'
+   */
+  export type ListEnumLeadSourceChannelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadSourceChannel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeadStatus'
+   */
+  export type EnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeadStatus[]'
+   */
+  export type ListEnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ChannelType'
+   */
+  export type EnumChannelTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChannelType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ChannelType[]'
+   */
+  export type ListEnumChannelTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChannelType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConversationStatus'
+   */
+  export type EnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConversationStatus[]'
+   */
+  export type ListEnumConversationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageDirection'
+   */
+  export type EnumMessageDirectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageDirection'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageDirection[]'
+   */
+  export type ListEnumMessageDirectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageDirection[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageKind'
+   */
+  export type EnumMessageKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageKind'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageKind[]'
+   */
+  export type ListEnumMessageKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageKind[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -11020,6 +19915,8 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     memberships?: MembershipListRelationFilter
+    ownedLeads?: LeadListRelationFilter
+    assignedConversations?: ConversationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11036,6 +19933,8 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     memberships?: MembershipOrderByRelationAggregateInput
+    ownedLeads?: LeadOrderByRelationAggregateInput
+    assignedConversations?: ConversationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11055,6 +19954,8 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     memberships?: MembershipListRelationFilter
+    ownedLeads?: LeadListRelationFilter
+    assignedConversations?: ConversationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11293,6 +20194,12 @@ export namespace Prisma {
     domains?: TenantDomainListRelationFilter
     branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
     memberships?: MembershipListRelationFilter
+    contacts?: ContactListRelationFilter
+    leads?: LeadListRelationFilter
+    conversations?: ConversationListRelationFilter
+    messages?: MessageListRelationFilter
+    pipelines?: PipelineListRelationFilter
+    pipelineStages?: PipelineStageListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -11310,6 +20217,12 @@ export namespace Prisma {
     domains?: TenantDomainOrderByRelationAggregateInput
     branding?: TenantBrandingOrderByWithRelationInput
     memberships?: MembershipOrderByRelationAggregateInput
+    contacts?: ContactOrderByRelationAggregateInput
+    leads?: LeadOrderByRelationAggregateInput
+    conversations?: ConversationOrderByRelationAggregateInput
+    messages?: MessageOrderByRelationAggregateInput
+    pipelines?: PipelineOrderByRelationAggregateInput
+    pipelineStages?: PipelineStageOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -11330,6 +20243,12 @@ export namespace Prisma {
     domains?: TenantDomainListRelationFilter
     branding?: XOR<TenantBrandingNullableScalarRelationFilter, TenantBrandingWhereInput> | null
     memberships?: MembershipListRelationFilter
+    contacts?: ContactListRelationFilter
+    leads?: LeadListRelationFilter
+    conversations?: ConversationListRelationFilter
+    messages?: MessageListRelationFilter
+    pipelines?: PipelineListRelationFilter
+    pipelineStages?: PipelineStageListRelationFilter
   }, "id" | "slug">
 
   export type TenantOrderByWithAggregationInput = {
@@ -11615,6 +20534,646 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
   }
 
+  export type ContactWhereInput = {
+    AND?: ContactWhereInput | ContactWhereInput[]
+    OR?: ContactWhereInput[]
+    NOT?: ContactWhereInput | ContactWhereInput[]
+    id?: StringFilter<"Contact"> | string
+    tenantId?: StringFilter<"Contact"> | string
+    firstName?: StringNullableFilter<"Contact"> | string | null
+    lastName?: StringNullableFilter<"Contact"> | string | null
+    fullName?: StringNullableFilter<"Contact"> | string | null
+    email?: StringNullableFilter<"Contact"> | string | null
+    phoneE164?: StringNullableFilter<"Contact"> | string | null
+    whatsappWaId?: StringNullableFilter<"Contact"> | string | null
+    normalizedPhone?: StringNullableFilter<"Contact"> | string | null
+    source?: StringNullableFilter<"Contact"> | string | null
+    tags?: StringNullableListFilter<"Contact">
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeFilter<"Contact"> | Date | string
+    version?: IntFilter<"Contact"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    leads?: LeadListRelationFilter
+    conversations?: ConversationListRelationFilter
+  }
+
+  export type ContactOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    fullName?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phoneE164?: SortOrderInput | SortOrder
+    whatsappWaId?: SortOrderInput | SortOrder
+    normalizedPhone?: SortOrderInput | SortOrder
+    source?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    leads?: LeadOrderByRelationAggregateInput
+    conversations?: ConversationOrderByRelationAggregateInput
+  }
+
+  export type ContactWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_whatsappWaId?: ContactTenantIdWhatsappWaIdCompoundUniqueInput
+    tenantId_normalizedPhone?: ContactTenantIdNormalizedPhoneCompoundUniqueInput
+    tenantId_email?: ContactTenantIdEmailCompoundUniqueInput
+    AND?: ContactWhereInput | ContactWhereInput[]
+    OR?: ContactWhereInput[]
+    NOT?: ContactWhereInput | ContactWhereInput[]
+    tenantId?: StringFilter<"Contact"> | string
+    firstName?: StringNullableFilter<"Contact"> | string | null
+    lastName?: StringNullableFilter<"Contact"> | string | null
+    fullName?: StringNullableFilter<"Contact"> | string | null
+    email?: StringNullableFilter<"Contact"> | string | null
+    phoneE164?: StringNullableFilter<"Contact"> | string | null
+    whatsappWaId?: StringNullableFilter<"Contact"> | string | null
+    normalizedPhone?: StringNullableFilter<"Contact"> | string | null
+    source?: StringNullableFilter<"Contact"> | string | null
+    tags?: StringNullableListFilter<"Contact">
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeFilter<"Contact"> | Date | string
+    version?: IntFilter<"Contact"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    leads?: LeadListRelationFilter
+    conversations?: ConversationListRelationFilter
+  }, "id" | "tenantId_whatsappWaId" | "tenantId_normalizedPhone" | "tenantId_email">
+
+  export type ContactOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    fullName?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    phoneE164?: SortOrderInput | SortOrder
+    whatsappWaId?: SortOrderInput | SortOrder
+    normalizedPhone?: SortOrderInput | SortOrder
+    source?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    _count?: ContactCountOrderByAggregateInput
+    _avg?: ContactAvgOrderByAggregateInput
+    _max?: ContactMaxOrderByAggregateInput
+    _min?: ContactMinOrderByAggregateInput
+    _sum?: ContactSumOrderByAggregateInput
+  }
+
+  export type ContactScalarWhereWithAggregatesInput = {
+    AND?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
+    OR?: ContactScalarWhereWithAggregatesInput[]
+    NOT?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Contact"> | string
+    tenantId?: StringWithAggregatesFilter<"Contact"> | string
+    firstName?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    fullName?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    phoneE164?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    whatsappWaId?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    normalizedPhone?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    source?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    tags?: StringNullableListFilter<"Contact">
+    createdAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
+    version?: IntWithAggregatesFilter<"Contact"> | number
+  }
+
+  export type LeadWhereInput = {
+    AND?: LeadWhereInput | LeadWhereInput[]
+    OR?: LeadWhereInput[]
+    NOT?: LeadWhereInput | LeadWhereInput[]
+    id?: StringFilter<"Lead"> | string
+    tenantId?: StringFilter<"Lead"> | string
+    contactId?: StringFilter<"Lead"> | string
+    pipelineId?: StringNullableFilter<"Lead"> | string | null
+    stageId?: StringNullableFilter<"Lead"> | string | null
+    ownerUserId?: StringNullableFilter<"Lead"> | string | null
+    title?: StringNullableFilter<"Lead"> | string | null
+    sourceChannel?: EnumLeadSourceChannelFilter<"Lead"> | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+    score?: IntNullableFilter<"Lead"> | number | null
+    firstInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastOutboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+    updatedAt?: DateTimeFilter<"Lead"> | Date | string
+    version?: IntFilter<"Lead"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
+    pipeline?: XOR<PipelineNullableScalarRelationFilter, PipelineWhereInput> | null
+    stage?: XOR<PipelineStageNullableScalarRelationFilter, PipelineStageWhereInput> | null
+    ownerUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    conversations?: ConversationListRelationFilter
+  }
+
+  export type LeadOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    pipelineId?: SortOrderInput | SortOrder
+    stageId?: SortOrderInput | SortOrder
+    ownerUserId?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    sourceChannel?: SortOrder
+    status?: SortOrder
+    score?: SortOrderInput | SortOrder
+    firstInboundAt?: SortOrderInput | SortOrder
+    lastInboundAt?: SortOrderInput | SortOrder
+    lastOutboundAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+    pipeline?: PipelineOrderByWithRelationInput
+    stage?: PipelineStageOrderByWithRelationInput
+    ownerUser?: UserOrderByWithRelationInput
+    conversations?: ConversationOrderByRelationAggregateInput
+  }
+
+  export type LeadWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LeadWhereInput | LeadWhereInput[]
+    OR?: LeadWhereInput[]
+    NOT?: LeadWhereInput | LeadWhereInput[]
+    tenantId?: StringFilter<"Lead"> | string
+    contactId?: StringFilter<"Lead"> | string
+    pipelineId?: StringNullableFilter<"Lead"> | string | null
+    stageId?: StringNullableFilter<"Lead"> | string | null
+    ownerUserId?: StringNullableFilter<"Lead"> | string | null
+    title?: StringNullableFilter<"Lead"> | string | null
+    sourceChannel?: EnumLeadSourceChannelFilter<"Lead"> | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+    score?: IntNullableFilter<"Lead"> | number | null
+    firstInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastOutboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+    updatedAt?: DateTimeFilter<"Lead"> | Date | string
+    version?: IntFilter<"Lead"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
+    pipeline?: XOR<PipelineNullableScalarRelationFilter, PipelineWhereInput> | null
+    stage?: XOR<PipelineStageNullableScalarRelationFilter, PipelineStageWhereInput> | null
+    ownerUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    conversations?: ConversationListRelationFilter
+  }, "id">
+
+  export type LeadOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    pipelineId?: SortOrderInput | SortOrder
+    stageId?: SortOrderInput | SortOrder
+    ownerUserId?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
+    sourceChannel?: SortOrder
+    status?: SortOrder
+    score?: SortOrderInput | SortOrder
+    firstInboundAt?: SortOrderInput | SortOrder
+    lastInboundAt?: SortOrderInput | SortOrder
+    lastOutboundAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    _count?: LeadCountOrderByAggregateInput
+    _avg?: LeadAvgOrderByAggregateInput
+    _max?: LeadMaxOrderByAggregateInput
+    _min?: LeadMinOrderByAggregateInput
+    _sum?: LeadSumOrderByAggregateInput
+  }
+
+  export type LeadScalarWhereWithAggregatesInput = {
+    AND?: LeadScalarWhereWithAggregatesInput | LeadScalarWhereWithAggregatesInput[]
+    OR?: LeadScalarWhereWithAggregatesInput[]
+    NOT?: LeadScalarWhereWithAggregatesInput | LeadScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Lead"> | string
+    tenantId?: StringWithAggregatesFilter<"Lead"> | string
+    contactId?: StringWithAggregatesFilter<"Lead"> | string
+    pipelineId?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    stageId?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    ownerUserId?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    sourceChannel?: EnumLeadSourceChannelWithAggregatesFilter<"Lead"> | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
+    score?: IntNullableWithAggregatesFilter<"Lead"> | number | null
+    firstInboundAt?: DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+    lastInboundAt?: DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+    lastOutboundAt?: DateTimeNullableWithAggregatesFilter<"Lead"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Lead"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Lead"> | Date | string
+    version?: IntWithAggregatesFilter<"Lead"> | number
+  }
+
+  export type ConversationWhereInput = {
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    tenantId?: StringFilter<"Conversation"> | string
+    contactId?: StringFilter<"Conversation"> | string
+    leadId?: StringNullableFilter<"Conversation"> | string | null
+    channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    version?: IntFilter<"Conversation"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
+    lead?: XOR<LeadNullableScalarRelationFilter, LeadWhereInput> | null
+    assigneeUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    messages?: MessageListRelationFilter
+  }
+
+  export type ConversationOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    leadId?: SortOrderInput | SortOrder
+    channel?: SortOrder
+    status?: SortOrder
+    assigneeUserId?: SortOrderInput | SortOrder
+    lastMessageAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+    lead?: LeadOrderByWithRelationInput
+    assigneeUser?: UserOrderByWithRelationInput
+    messages?: MessageOrderByRelationAggregateInput
+  }
+
+  export type ConversationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConversationWhereInput | ConversationWhereInput[]
+    OR?: ConversationWhereInput[]
+    NOT?: ConversationWhereInput | ConversationWhereInput[]
+    tenantId?: StringFilter<"Conversation"> | string
+    contactId?: StringFilter<"Conversation"> | string
+    leadId?: StringNullableFilter<"Conversation"> | string | null
+    channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    version?: IntFilter<"Conversation"> | number
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
+    lead?: XOR<LeadNullableScalarRelationFilter, LeadWhereInput> | null
+    assigneeUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    messages?: MessageListRelationFilter
+  }, "id">
+
+  export type ConversationOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    leadId?: SortOrderInput | SortOrder
+    channel?: SortOrder
+    status?: SortOrder
+    assigneeUserId?: SortOrderInput | SortOrder
+    lastMessageAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+    _count?: ConversationCountOrderByAggregateInput
+    _avg?: ConversationAvgOrderByAggregateInput
+    _max?: ConversationMaxOrderByAggregateInput
+    _min?: ConversationMinOrderByAggregateInput
+    _sum?: ConversationSumOrderByAggregateInput
+  }
+
+  export type ConversationScalarWhereWithAggregatesInput = {
+    AND?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    OR?: ConversationScalarWhereWithAggregatesInput[]
+    NOT?: ConversationScalarWhereWithAggregatesInput | ConversationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Conversation"> | string
+    tenantId?: StringWithAggregatesFilter<"Conversation"> | string
+    contactId?: StringWithAggregatesFilter<"Conversation"> | string
+    leadId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    channel?: EnumChannelTypeWithAggregatesFilter<"Conversation"> | $Enums.ChannelType
+    status?: EnumConversationStatusWithAggregatesFilter<"Conversation"> | $Enums.ConversationStatus
+    assigneeUserId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    lastMessageAt?: DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
+    version?: IntWithAggregatesFilter<"Conversation"> | number
+  }
+
+  export type MessageWhereInput = {
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    id?: StringFilter<"Message"> | string
+    tenantId?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    direction?: EnumMessageDirectionFilter<"Message"> | $Enums.MessageDirection
+    kind?: EnumMessageKindFilter<"Message"> | $Enums.MessageKind
+    bodyText?: StringNullableFilter<"Message"> | string | null
+    mediaUrl?: StringNullableFilter<"Message"> | string | null
+    mediaMimeType?: StringNullableFilter<"Message"> | string | null
+    metaMessageId?: StringNullableFilter<"Message"> | string | null
+    externalStatus?: StringNullableFilter<"Message"> | string | null
+    pricingCategory?: StringNullableFilter<"Message"> | string | null
+    pricingType?: StringNullableFilter<"Message"> | string | null
+    currency?: StringNullableFilter<"Message"> | string | null
+    estimatedMetaCost?: DecimalNullableFilter<"Message"> | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: StringNullableFilter<"Message"> | string | null
+    deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    rawPayload?: JsonNullableFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    updatedAt?: DateTimeFilter<"Message"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }
+
+  export type MessageOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    conversationId?: SortOrder
+    direction?: SortOrder
+    kind?: SortOrder
+    bodyText?: SortOrderInput | SortOrder
+    mediaUrl?: SortOrderInput | SortOrder
+    mediaMimeType?: SortOrderInput | SortOrder
+    metaMessageId?: SortOrderInput | SortOrder
+    externalStatus?: SortOrderInput | SortOrder
+    pricingCategory?: SortOrderInput | SortOrder
+    pricingType?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    estimatedMetaCost?: SortOrderInput | SortOrder
+    recipientCountry?: SortOrderInput | SortOrder
+    deliveredAt?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    failedAt?: SortOrderInput | SortOrder
+    rawPayload?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    conversation?: ConversationOrderByWithRelationInput
+  }
+
+  export type MessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_metaMessageId?: MessageTenantIdMetaMessageIdCompoundUniqueInput
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    tenantId?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    direction?: EnumMessageDirectionFilter<"Message"> | $Enums.MessageDirection
+    kind?: EnumMessageKindFilter<"Message"> | $Enums.MessageKind
+    bodyText?: StringNullableFilter<"Message"> | string | null
+    mediaUrl?: StringNullableFilter<"Message"> | string | null
+    mediaMimeType?: StringNullableFilter<"Message"> | string | null
+    metaMessageId?: StringNullableFilter<"Message"> | string | null
+    externalStatus?: StringNullableFilter<"Message"> | string | null
+    pricingCategory?: StringNullableFilter<"Message"> | string | null
+    pricingType?: StringNullableFilter<"Message"> | string | null
+    currency?: StringNullableFilter<"Message"> | string | null
+    estimatedMetaCost?: DecimalNullableFilter<"Message"> | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: StringNullableFilter<"Message"> | string | null
+    deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    rawPayload?: JsonNullableFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    updatedAt?: DateTimeFilter<"Message"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+  }, "id" | "tenantId_metaMessageId">
+
+  export type MessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    conversationId?: SortOrder
+    direction?: SortOrder
+    kind?: SortOrder
+    bodyText?: SortOrderInput | SortOrder
+    mediaUrl?: SortOrderInput | SortOrder
+    mediaMimeType?: SortOrderInput | SortOrder
+    metaMessageId?: SortOrderInput | SortOrder
+    externalStatus?: SortOrderInput | SortOrder
+    pricingCategory?: SortOrderInput | SortOrder
+    pricingType?: SortOrderInput | SortOrder
+    currency?: SortOrderInput | SortOrder
+    estimatedMetaCost?: SortOrderInput | SortOrder
+    recipientCountry?: SortOrderInput | SortOrder
+    deliveredAt?: SortOrderInput | SortOrder
+    readAt?: SortOrderInput | SortOrder
+    failedAt?: SortOrderInput | SortOrder
+    rawPayload?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MessageCountOrderByAggregateInput
+    _avg?: MessageAvgOrderByAggregateInput
+    _max?: MessageMaxOrderByAggregateInput
+    _min?: MessageMinOrderByAggregateInput
+    _sum?: MessageSumOrderByAggregateInput
+  }
+
+  export type MessageScalarWhereWithAggregatesInput = {
+    AND?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    OR?: MessageScalarWhereWithAggregatesInput[]
+    NOT?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Message"> | string
+    tenantId?: StringWithAggregatesFilter<"Message"> | string
+    conversationId?: StringWithAggregatesFilter<"Message"> | string
+    direction?: EnumMessageDirectionWithAggregatesFilter<"Message"> | $Enums.MessageDirection
+    kind?: EnumMessageKindWithAggregatesFilter<"Message"> | $Enums.MessageKind
+    bodyText?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    mediaUrl?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    mediaMimeType?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    metaMessageId?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    externalStatus?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    pricingCategory?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    pricingType?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    currency?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    estimatedMetaCost?: DecimalNullableWithAggregatesFilter<"Message"> | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    deliveredAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
+    readAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
+    failedAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
+    rawPayload?: JsonNullableWithAggregatesFilter<"Message">
+    createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+  }
+
+  export type PipelineWhereInput = {
+    AND?: PipelineWhereInput | PipelineWhereInput[]
+    OR?: PipelineWhereInput[]
+    NOT?: PipelineWhereInput | PipelineWhereInput[]
+    id?: StringFilter<"Pipeline"> | string
+    tenantId?: StringFilter<"Pipeline"> | string
+    name?: StringFilter<"Pipeline"> | string
+    description?: StringNullableFilter<"Pipeline"> | string | null
+    isDefault?: BoolFilter<"Pipeline"> | boolean
+    createdAt?: DateTimeFilter<"Pipeline"> | Date | string
+    updatedAt?: DateTimeFilter<"Pipeline"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    stages?: PipelineStageListRelationFilter
+    leads?: LeadListRelationFilter
+  }
+
+  export type PipelineOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    stages?: PipelineStageOrderByRelationAggregateInput
+    leads?: LeadOrderByRelationAggregateInput
+  }
+
+  export type PipelineWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_name?: PipelineTenantIdNameCompoundUniqueInput
+    AND?: PipelineWhereInput | PipelineWhereInput[]
+    OR?: PipelineWhereInput[]
+    NOT?: PipelineWhereInput | PipelineWhereInput[]
+    tenantId?: StringFilter<"Pipeline"> | string
+    name?: StringFilter<"Pipeline"> | string
+    description?: StringNullableFilter<"Pipeline"> | string | null
+    isDefault?: BoolFilter<"Pipeline"> | boolean
+    createdAt?: DateTimeFilter<"Pipeline"> | Date | string
+    updatedAt?: DateTimeFilter<"Pipeline"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    stages?: PipelineStageListRelationFilter
+    leads?: LeadListRelationFilter
+  }, "id" | "tenantId_name">
+
+  export type PipelineOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PipelineCountOrderByAggregateInput
+    _max?: PipelineMaxOrderByAggregateInput
+    _min?: PipelineMinOrderByAggregateInput
+  }
+
+  export type PipelineScalarWhereWithAggregatesInput = {
+    AND?: PipelineScalarWhereWithAggregatesInput | PipelineScalarWhereWithAggregatesInput[]
+    OR?: PipelineScalarWhereWithAggregatesInput[]
+    NOT?: PipelineScalarWhereWithAggregatesInput | PipelineScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Pipeline"> | string
+    tenantId?: StringWithAggregatesFilter<"Pipeline"> | string
+    name?: StringWithAggregatesFilter<"Pipeline"> | string
+    description?: StringNullableWithAggregatesFilter<"Pipeline"> | string | null
+    isDefault?: BoolWithAggregatesFilter<"Pipeline"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Pipeline"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Pipeline"> | Date | string
+  }
+
+  export type PipelineStageWhereInput = {
+    AND?: PipelineStageWhereInput | PipelineStageWhereInput[]
+    OR?: PipelineStageWhereInput[]
+    NOT?: PipelineStageWhereInput | PipelineStageWhereInput[]
+    id?: StringFilter<"PipelineStage"> | string
+    tenantId?: StringFilter<"PipelineStage"> | string
+    pipelineId?: StringFilter<"PipelineStage"> | string
+    name?: StringFilter<"PipelineStage"> | string
+    slug?: StringFilter<"PipelineStage"> | string
+    color?: StringNullableFilter<"PipelineStage"> | string | null
+    position?: IntFilter<"PipelineStage"> | number
+    isFinal?: BoolFilter<"PipelineStage"> | boolean
+    createdAt?: DateTimeFilter<"PipelineStage"> | Date | string
+    updatedAt?: DateTimeFilter<"PipelineStage"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    pipeline?: XOR<PipelineScalarRelationFilter, PipelineWhereInput>
+    leads?: LeadListRelationFilter
+  }
+
+  export type PipelineStageOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    pipelineId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    color?: SortOrderInput | SortOrder
+    position?: SortOrder
+    isFinal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    pipeline?: PipelineOrderByWithRelationInput
+    leads?: LeadOrderByRelationAggregateInput
+  }
+
+  export type PipelineStageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    pipelineId_slug?: PipelineStagePipelineIdSlugCompoundUniqueInput
+    pipelineId_position?: PipelineStagePipelineIdPositionCompoundUniqueInput
+    AND?: PipelineStageWhereInput | PipelineStageWhereInput[]
+    OR?: PipelineStageWhereInput[]
+    NOT?: PipelineStageWhereInput | PipelineStageWhereInput[]
+    tenantId?: StringFilter<"PipelineStage"> | string
+    pipelineId?: StringFilter<"PipelineStage"> | string
+    name?: StringFilter<"PipelineStage"> | string
+    slug?: StringFilter<"PipelineStage"> | string
+    color?: StringNullableFilter<"PipelineStage"> | string | null
+    position?: IntFilter<"PipelineStage"> | number
+    isFinal?: BoolFilter<"PipelineStage"> | boolean
+    createdAt?: DateTimeFilter<"PipelineStage"> | Date | string
+    updatedAt?: DateTimeFilter<"PipelineStage"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    pipeline?: XOR<PipelineScalarRelationFilter, PipelineWhereInput>
+    leads?: LeadListRelationFilter
+  }, "id" | "pipelineId_slug" | "pipelineId_position">
+
+  export type PipelineStageOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    pipelineId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    color?: SortOrderInput | SortOrder
+    position?: SortOrder
+    isFinal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PipelineStageCountOrderByAggregateInput
+    _avg?: PipelineStageAvgOrderByAggregateInput
+    _max?: PipelineStageMaxOrderByAggregateInput
+    _min?: PipelineStageMinOrderByAggregateInput
+    _sum?: PipelineStageSumOrderByAggregateInput
+  }
+
+  export type PipelineStageScalarWhereWithAggregatesInput = {
+    AND?: PipelineStageScalarWhereWithAggregatesInput | PipelineStageScalarWhereWithAggregatesInput[]
+    OR?: PipelineStageScalarWhereWithAggregatesInput[]
+    NOT?: PipelineStageScalarWhereWithAggregatesInput | PipelineStageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PipelineStage"> | string
+    tenantId?: StringWithAggregatesFilter<"PipelineStage"> | string
+    pipelineId?: StringWithAggregatesFilter<"PipelineStage"> | string
+    name?: StringWithAggregatesFilter<"PipelineStage"> | string
+    slug?: StringWithAggregatesFilter<"PipelineStage"> | string
+    color?: StringNullableWithAggregatesFilter<"PipelineStage"> | string | null
+    position?: IntWithAggregatesFilter<"PipelineStage"> | number
+    isFinal?: BoolWithAggregatesFilter<"PipelineStage"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"PipelineStage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PipelineStage"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email?: string | null
@@ -11629,6 +21188,8 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     memberships?: MembershipCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11645,6 +21206,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadUncheckedCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserUpdateInput = {
@@ -11661,6 +21224,8 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     memberships?: MembershipUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11677,6 +21242,8 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11927,6 +21494,12 @@ export namespace Prisma {
     domains?: TenantDomainCreateNestedManyWithoutTenantInput
     branding?: TenantBrandingCreateNestedOneWithoutTenantInput
     memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -11944,6 +21517,12 @@ export namespace Prisma {
     domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
     branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -11961,6 +21540,12 @@ export namespace Prisma {
     domains?: TenantDomainUpdateManyWithoutTenantNestedInput
     branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
     memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -11978,6 +21563,12 @@ export namespace Prisma {
     domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
     branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -12298,6 +21889,698 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContactCreateInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutContactsInput
+    leads?: LeadCreateNestedManyWithoutContactInput
+    conversations?: ConversationCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    leads?: LeadUncheckedCreateNestedManyWithoutContactInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutContactsNestedInput
+    leads?: LeadUpdateManyWithoutContactNestedInput
+    conversations?: ConversationUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    leads?: LeadUncheckedUpdateManyWithoutContactNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactCreateManyInput = {
+    id?: string
+    tenantId: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ContactUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ContactUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LeadCreateInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadCreateManyInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type LeadUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LeadUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationCreateInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationCreateManyInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MessageCreateInput = {
+    id?: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMessagesInput
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMessagesNestedInput
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateManyInput = {
+    id?: string
+    tenantId: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelinesInput
+    stages?: PipelineStageCreateNestedManyWithoutPipelineInput
+    leads?: LeadCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stages?: PipelineStageUncheckedCreateNestedManyWithoutPipelineInput
+    leads?: LeadUncheckedCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelinesNestedInput
+    stages?: PipelineStageUpdateManyWithoutPipelineNestedInput
+    leads?: LeadUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stages?: PipelineStageUncheckedUpdateManyWithoutPipelineNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineCreateManyInput = {
+    id?: string
+    tenantId: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PipelineUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineStageCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelineStagesInput
+    pipeline: PipelineCreateNestedOneWithoutStagesInput
+    leads?: LeadCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    pipelineId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    leads?: LeadUncheckedCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelineStagesNestedInput
+    pipeline?: PipelineUpdateOneRequiredWithoutStagesNestedInput
+    leads?: LeadUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    leads?: LeadUncheckedUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageCreateManyInput = {
+    id?: string
+    tenantId: string
+    pipelineId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PipelineStageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineStageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12375,6 +22658,18 @@ export namespace Prisma {
     none?: MembershipWhereInput
   }
 
+  export type LeadListRelationFilter = {
+    every?: LeadWhereInput
+    some?: LeadWhereInput
+    none?: LeadWhereInput
+  }
+
+  export type ConversationListRelationFilter = {
+    every?: ConversationWhereInput
+    some?: ConversationWhereInput
+    none?: ConversationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -12389,6 +22684,14 @@ export namespace Prisma {
   }
 
   export type MembershipOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LeadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12671,7 +22974,47 @@ export namespace Prisma {
     isNot?: TenantBrandingWhereInput | null
   }
 
+  export type ContactListRelationFilter = {
+    every?: ContactWhereInput
+    some?: ContactWhereInput
+    none?: ContactWhereInput
+  }
+
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type PipelineListRelationFilter = {
+    every?: PipelineWhereInput
+    some?: PipelineWhereInput
+    none?: PipelineWhereInput
+  }
+
+  export type PipelineStageListRelationFilter = {
+    every?: PipelineStageWhereInput
+    some?: PipelineStageWhereInput
+    none?: PipelineStageWhereInput
+  }
+
   export type TenantDomainOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContactOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PipelineOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PipelineStageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12924,6 +23267,618 @@ export namespace Prisma {
     _max?: NestedEnumTenantRoleFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type ContactTenantIdWhatsappWaIdCompoundUniqueInput = {
+    tenantId: string
+    whatsappWaId: string
+  }
+
+  export type ContactTenantIdNormalizedPhoneCompoundUniqueInput = {
+    tenantId: string
+    normalizedPhone: string
+  }
+
+  export type ContactTenantIdEmailCompoundUniqueInput = {
+    tenantId: string
+    email: string
+  }
+
+  export type ContactCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phoneE164?: SortOrder
+    whatsappWaId?: SortOrder
+    normalizedPhone?: SortOrder
+    source?: SortOrder
+    tags?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ContactAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type ContactMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phoneE164?: SortOrder
+    whatsappWaId?: SortOrder
+    normalizedPhone?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ContactMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phoneE164?: SortOrder
+    whatsappWaId?: SortOrder
+    normalizedPhone?: SortOrder
+    source?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ContactSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumLeadSourceChannelFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadSourceChannel | EnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadSourceChannelFilter<$PrismaModel> | $Enums.LeadSourceChannel
+  }
+
+  export type EnumLeadStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadStatus | EnumLeadStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadStatusFilter<$PrismaModel> | $Enums.LeadStatus
+  }
+
+  export type ContactScalarRelationFilter = {
+    is?: ContactWhereInput
+    isNot?: ContactWhereInput
+  }
+
+  export type PipelineNullableScalarRelationFilter = {
+    is?: PipelineWhereInput | null
+    isNot?: PipelineWhereInput | null
+  }
+
+  export type PipelineStageNullableScalarRelationFilter = {
+    is?: PipelineStageWhereInput | null
+    isNot?: PipelineStageWhereInput | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type LeadCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    pipelineId?: SortOrder
+    stageId?: SortOrder
+    ownerUserId?: SortOrder
+    title?: SortOrder
+    sourceChannel?: SortOrder
+    status?: SortOrder
+    score?: SortOrder
+    firstInboundAt?: SortOrder
+    lastInboundAt?: SortOrder
+    lastOutboundAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type LeadAvgOrderByAggregateInput = {
+    score?: SortOrder
+    version?: SortOrder
+  }
+
+  export type LeadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    pipelineId?: SortOrder
+    stageId?: SortOrder
+    ownerUserId?: SortOrder
+    title?: SortOrder
+    sourceChannel?: SortOrder
+    status?: SortOrder
+    score?: SortOrder
+    firstInboundAt?: SortOrder
+    lastInboundAt?: SortOrder
+    lastOutboundAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type LeadMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    pipelineId?: SortOrder
+    stageId?: SortOrder
+    ownerUserId?: SortOrder
+    title?: SortOrder
+    sourceChannel?: SortOrder
+    status?: SortOrder
+    score?: SortOrder
+    firstInboundAt?: SortOrder
+    lastInboundAt?: SortOrder
+    lastOutboundAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type LeadSumOrderByAggregateInput = {
+    score?: SortOrder
+    version?: SortOrder
+  }
+
+  export type EnumLeadSourceChannelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadSourceChannel | EnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadSourceChannelWithAggregatesFilter<$PrismaModel> | $Enums.LeadSourceChannel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeadSourceChannelFilter<$PrismaModel>
+    _max?: NestedEnumLeadSourceChannelFilter<$PrismaModel>
+  }
+
+  export type EnumLeadStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadStatus | EnumLeadStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadStatusWithAggregatesFilter<$PrismaModel> | $Enums.LeadStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeadStatusFilter<$PrismaModel>
+    _max?: NestedEnumLeadStatusFilter<$PrismaModel>
+  }
+
+  export type EnumChannelTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChannelType | EnumChannelTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChannelTypeFilter<$PrismaModel> | $Enums.ChannelType
+  }
+
+  export type EnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
+  }
+
+  export type LeadNullableScalarRelationFilter = {
+    is?: LeadWhereInput | null
+    isNot?: LeadWhereInput | null
+  }
+
+  export type ConversationCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    leadId?: SortOrder
+    channel?: SortOrder
+    status?: SortOrder
+    assigneeUserId?: SortOrder
+    lastMessageAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ConversationAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type ConversationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    leadId?: SortOrder
+    channel?: SortOrder
+    status?: SortOrder
+    assigneeUserId?: SortOrder
+    lastMessageAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ConversationMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    contactId?: SortOrder
+    leadId?: SortOrder
+    channel?: SortOrder
+    status?: SortOrder
+    assigneeUserId?: SortOrder
+    lastMessageAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ConversationSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type EnumChannelTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChannelType | EnumChannelTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChannelTypeWithAggregatesFilter<$PrismaModel> | $Enums.ChannelType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumChannelTypeFilter<$PrismaModel>
+    _max?: NestedEnumChannelTypeFilter<$PrismaModel>
+  }
+
+  export type EnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMessageDirectionFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageDirection | EnumMessageDirectionFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageDirectionFilter<$PrismaModel> | $Enums.MessageDirection
+  }
+
+  export type EnumMessageKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageKind | EnumMessageKindFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageKindFilter<$PrismaModel> | $Enums.MessageKind
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ConversationScalarRelationFilter = {
+    is?: ConversationWhereInput
+    isNot?: ConversationWhereInput
+  }
+
+  export type MessageTenantIdMetaMessageIdCompoundUniqueInput = {
+    tenantId: string
+    metaMessageId: string
+  }
+
+  export type MessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    conversationId?: SortOrder
+    direction?: SortOrder
+    kind?: SortOrder
+    bodyText?: SortOrder
+    mediaUrl?: SortOrder
+    mediaMimeType?: SortOrder
+    metaMessageId?: SortOrder
+    externalStatus?: SortOrder
+    pricingCategory?: SortOrder
+    pricingType?: SortOrder
+    currency?: SortOrder
+    estimatedMetaCost?: SortOrder
+    recipientCountry?: SortOrder
+    deliveredAt?: SortOrder
+    readAt?: SortOrder
+    failedAt?: SortOrder
+    rawPayload?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MessageAvgOrderByAggregateInput = {
+    estimatedMetaCost?: SortOrder
+  }
+
+  export type MessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    conversationId?: SortOrder
+    direction?: SortOrder
+    kind?: SortOrder
+    bodyText?: SortOrder
+    mediaUrl?: SortOrder
+    mediaMimeType?: SortOrder
+    metaMessageId?: SortOrder
+    externalStatus?: SortOrder
+    pricingCategory?: SortOrder
+    pricingType?: SortOrder
+    currency?: SortOrder
+    estimatedMetaCost?: SortOrder
+    recipientCountry?: SortOrder
+    deliveredAt?: SortOrder
+    readAt?: SortOrder
+    failedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    conversationId?: SortOrder
+    direction?: SortOrder
+    kind?: SortOrder
+    bodyText?: SortOrder
+    mediaUrl?: SortOrder
+    mediaMimeType?: SortOrder
+    metaMessageId?: SortOrder
+    externalStatus?: SortOrder
+    pricingCategory?: SortOrder
+    pricingType?: SortOrder
+    currency?: SortOrder
+    estimatedMetaCost?: SortOrder
+    recipientCountry?: SortOrder
+    deliveredAt?: SortOrder
+    readAt?: SortOrder
+    failedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MessageSumOrderByAggregateInput = {
+    estimatedMetaCost?: SortOrder
+  }
+
+  export type EnumMessageDirectionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageDirection | EnumMessageDirectionFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageDirectionWithAggregatesFilter<$PrismaModel> | $Enums.MessageDirection
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageDirectionFilter<$PrismaModel>
+    _max?: NestedEnumMessageDirectionFilter<$PrismaModel>
+  }
+
+  export type EnumMessageKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageKind | EnumMessageKindFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageKindWithAggregatesFilter<$PrismaModel> | $Enums.MessageKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageKindFilter<$PrismaModel>
+    _max?: NestedEnumMessageKindFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type PipelineTenantIdNameCompoundUniqueInput = {
+    tenantId: string
+    name: string
+  }
+
+  export type PipelineCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    isDefault?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineScalarRelationFilter = {
+    is?: PipelineWhereInput
+    isNot?: PipelineWhereInput
+  }
+
+  export type PipelineStagePipelineIdSlugCompoundUniqueInput = {
+    pipelineId: string
+    slug: string
+  }
+
+  export type PipelineStagePipelineIdPositionCompoundUniqueInput = {
+    pipelineId: string
+    position: number
+  }
+
+  export type PipelineStageCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    pipelineId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    color?: SortOrder
+    position?: SortOrder
+    isFinal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineStageAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type PipelineStageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    pipelineId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    color?: SortOrder
+    position?: SortOrder
+    isFinal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineStageMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    pipelineId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    color?: SortOrder
+    position?: SortOrder
+    isFinal?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PipelineStageSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12945,6 +23900,20 @@ export namespace Prisma {
     connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
   }
 
+  export type LeadCreateNestedManyWithoutOwnerUserInput = {
+    create?: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput> | LeadCreateWithoutOwnerUserInput[] | LeadUncheckedCreateWithoutOwnerUserInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutOwnerUserInput | LeadCreateOrConnectWithoutOwnerUserInput[]
+    createMany?: LeadCreateManyOwnerUserInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationCreateNestedManyWithoutAssigneeUserInput = {
+    create?: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput> | ConversationCreateWithoutAssigneeUserInput[] | ConversationUncheckedCreateWithoutAssigneeUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutAssigneeUserInput | ConversationCreateOrConnectWithoutAssigneeUserInput[]
+    createMany?: ConversationCreateManyAssigneeUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -12964,6 +23933,20 @@ export namespace Prisma {
     connectOrCreate?: MembershipCreateOrConnectWithoutUserInput | MembershipCreateOrConnectWithoutUserInput[]
     createMany?: MembershipCreateManyUserInputEnvelope
     connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutOwnerUserInput = {
+    create?: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput> | LeadCreateWithoutOwnerUserInput[] | LeadUncheckedCreateWithoutOwnerUserInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutOwnerUserInput | LeadCreateOrConnectWithoutOwnerUserInput[]
+    createMany?: LeadCreateManyOwnerUserInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput = {
+    create?: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput> | ConversationCreateWithoutAssigneeUserInput[] | ConversationUncheckedCreateWithoutAssigneeUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutAssigneeUserInput | ConversationCreateOrConnectWithoutAssigneeUserInput[]
+    createMany?: ConversationCreateManyAssigneeUserInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13028,6 +24011,34 @@ export namespace Prisma {
     deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
   }
 
+  export type LeadUpdateManyWithoutOwnerUserNestedInput = {
+    create?: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput> | LeadCreateWithoutOwnerUserInput[] | LeadUncheckedCreateWithoutOwnerUserInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutOwnerUserInput | LeadCreateOrConnectWithoutOwnerUserInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutOwnerUserInput | LeadUpsertWithWhereUniqueWithoutOwnerUserInput[]
+    createMany?: LeadCreateManyOwnerUserInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutOwnerUserInput | LeadUpdateWithWhereUniqueWithoutOwnerUserInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutOwnerUserInput | LeadUpdateManyWithWhereWithoutOwnerUserInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUpdateManyWithoutAssigneeUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput> | ConversationCreateWithoutAssigneeUserInput[] | ConversationUncheckedCreateWithoutAssigneeUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutAssigneeUserInput | ConversationCreateOrConnectWithoutAssigneeUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutAssigneeUserInput | ConversationUpsertWithWhereUniqueWithoutAssigneeUserInput[]
+    createMany?: ConversationCreateManyAssigneeUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutAssigneeUserInput | ConversationUpdateWithWhereUniqueWithoutAssigneeUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutAssigneeUserInput | ConversationUpdateManyWithWhereWithoutAssigneeUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -13068,6 +24079,34 @@ export namespace Prisma {
     update?: MembershipUpdateWithWhereUniqueWithoutUserInput | MembershipUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: MembershipUpdateManyWithWhereWithoutUserInput | MembershipUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutOwnerUserNestedInput = {
+    create?: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput> | LeadCreateWithoutOwnerUserInput[] | LeadUncheckedCreateWithoutOwnerUserInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutOwnerUserInput | LeadCreateOrConnectWithoutOwnerUserInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutOwnerUserInput | LeadUpsertWithWhereUniqueWithoutOwnerUserInput[]
+    createMany?: LeadCreateManyOwnerUserInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutOwnerUserInput | LeadUpdateWithWhereUniqueWithoutOwnerUserInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutOwnerUserInput | LeadUpdateManyWithWhereWithoutOwnerUserInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput = {
+    create?: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput> | ConversationCreateWithoutAssigneeUserInput[] | ConversationUncheckedCreateWithoutAssigneeUserInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutAssigneeUserInput | ConversationCreateOrConnectWithoutAssigneeUserInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutAssigneeUserInput | ConversationUpsertWithWhereUniqueWithoutAssigneeUserInput[]
+    createMany?: ConversationCreateManyAssigneeUserInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutAssigneeUserInput | ConversationUpdateWithWhereUniqueWithoutAssigneeUserInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutAssigneeUserInput | ConversationUpdateManyWithWhereWithoutAssigneeUserInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -13126,6 +24165,48 @@ export namespace Prisma {
     connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
   }
 
+  export type ContactCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput> | ContactCreateWithoutTenantInput[] | ContactUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutTenantInput | ContactCreateOrConnectWithoutTenantInput[]
+    createMany?: ContactCreateManyTenantInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+  }
+
+  export type LeadCreateNestedManyWithoutTenantInput = {
+    create?: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput> | LeadCreateWithoutTenantInput[] | LeadUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutTenantInput | LeadCreateOrConnectWithoutTenantInput[]
+    createMany?: LeadCreateManyTenantInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput> | ConversationCreateWithoutTenantInput[] | ConversationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutTenantInput | ConversationCreateOrConnectWithoutTenantInput[]
+    createMany?: ConversationCreateManyTenantInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput> | MessageCreateWithoutTenantInput[] | MessageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
+    createMany?: MessageCreateManyTenantInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type PipelineCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
+    createMany?: PipelineCreateManyTenantInputEnvelope
+    connect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+  }
+
+  export type PipelineStageCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput> | PipelineStageCreateWithoutTenantInput[] | PipelineStageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutTenantInput | PipelineStageCreateOrConnectWithoutTenantInput[]
+    createMany?: PipelineStageCreateManyTenantInputEnvelope
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+  }
+
   export type TenantDomainUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
@@ -13144,6 +24225,48 @@ export namespace Prisma {
     connectOrCreate?: MembershipCreateOrConnectWithoutTenantInput | MembershipCreateOrConnectWithoutTenantInput[]
     createMany?: MembershipCreateManyTenantInputEnvelope
     connect?: MembershipWhereUniqueInput | MembershipWhereUniqueInput[]
+  }
+
+  export type ContactUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput> | ContactCreateWithoutTenantInput[] | ContactUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutTenantInput | ContactCreateOrConnectWithoutTenantInput[]
+    createMany?: ContactCreateManyTenantInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput> | LeadCreateWithoutTenantInput[] | LeadUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutTenantInput | LeadCreateOrConnectWithoutTenantInput[]
+    createMany?: LeadCreateManyTenantInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput> | ConversationCreateWithoutTenantInput[] | ConversationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutTenantInput | ConversationCreateOrConnectWithoutTenantInput[]
+    createMany?: ConversationCreateManyTenantInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput> | MessageCreateWithoutTenantInput[] | MessageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
+    createMany?: MessageCreateManyTenantInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type PipelineUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
+    createMany?: PipelineCreateManyTenantInputEnvelope
+    connect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+  }
+
+  export type PipelineStageUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput> | PipelineStageCreateWithoutTenantInput[] | PipelineStageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutTenantInput | PipelineStageCreateOrConnectWithoutTenantInput[]
+    createMany?: PipelineStageCreateManyTenantInputEnvelope
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
   }
 
   export type EnumTenantModeFieldUpdateOperationsInput = {
@@ -13196,6 +24319,90 @@ export namespace Prisma {
     deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
   }
 
+  export type ContactUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput> | ContactCreateWithoutTenantInput[] | ContactUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutTenantInput | ContactCreateOrConnectWithoutTenantInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutTenantInput | ContactUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ContactCreateManyTenantInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutTenantInput | ContactUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutTenantInput | ContactUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+  }
+
+  export type LeadUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput> | LeadCreateWithoutTenantInput[] | LeadUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutTenantInput | LeadCreateOrConnectWithoutTenantInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutTenantInput | LeadUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: LeadCreateManyTenantInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutTenantInput | LeadUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutTenantInput | LeadUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput> | ConversationCreateWithoutTenantInput[] | ConversationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutTenantInput | ConversationCreateOrConnectWithoutTenantInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutTenantInput | ConversationUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ConversationCreateManyTenantInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutTenantInput | ConversationUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutTenantInput | ConversationUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput> | MessageCreateWithoutTenantInput[] | MessageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutTenantInput | MessageUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MessageCreateManyTenantInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutTenantInput | MessageUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutTenantInput | MessageUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type PipelineUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
+    upsert?: PipelineUpsertWithWhereUniqueWithoutTenantInput | PipelineUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PipelineCreateManyTenantInputEnvelope
+    set?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    disconnect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    delete?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    connect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    update?: PipelineUpdateWithWhereUniqueWithoutTenantInput | PipelineUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PipelineUpdateManyWithWhereWithoutTenantInput | PipelineUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PipelineScalarWhereInput | PipelineScalarWhereInput[]
+  }
+
+  export type PipelineStageUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput> | PipelineStageCreateWithoutTenantInput[] | PipelineStageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutTenantInput | PipelineStageCreateOrConnectWithoutTenantInput[]
+    upsert?: PipelineStageUpsertWithWhereUniqueWithoutTenantInput | PipelineStageUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PipelineStageCreateManyTenantInputEnvelope
+    set?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    disconnect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    delete?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    update?: PipelineStageUpdateWithWhereUniqueWithoutTenantInput | PipelineStageUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PipelineStageUpdateManyWithWhereWithoutTenantInput | PipelineStageUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
+  }
+
   export type TenantDomainUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<TenantDomainCreateWithoutTenantInput, TenantDomainUncheckedCreateWithoutTenantInput> | TenantDomainCreateWithoutTenantInput[] | TenantDomainUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: TenantDomainCreateOrConnectWithoutTenantInput | TenantDomainCreateOrConnectWithoutTenantInput[]
@@ -13232,6 +24439,90 @@ export namespace Prisma {
     update?: MembershipUpdateWithWhereUniqueWithoutTenantInput | MembershipUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: MembershipUpdateManyWithWhereWithoutTenantInput | MembershipUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: MembershipScalarWhereInput | MembershipScalarWhereInput[]
+  }
+
+  export type ContactUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput> | ContactCreateWithoutTenantInput[] | ContactUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutTenantInput | ContactCreateOrConnectWithoutTenantInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutTenantInput | ContactUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ContactCreateManyTenantInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutTenantInput | ContactUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutTenantInput | ContactUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput> | LeadCreateWithoutTenantInput[] | LeadUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutTenantInput | LeadCreateOrConnectWithoutTenantInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutTenantInput | LeadUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: LeadCreateManyTenantInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutTenantInput | LeadUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutTenantInput | LeadUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput> | ConversationCreateWithoutTenantInput[] | ConversationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutTenantInput | ConversationCreateOrConnectWithoutTenantInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutTenantInput | ConversationUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ConversationCreateManyTenantInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutTenantInput | ConversationUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutTenantInput | ConversationUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput> | MessageCreateWithoutTenantInput[] | MessageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutTenantInput | MessageUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MessageCreateManyTenantInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutTenantInput | MessageUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutTenantInput | MessageUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type PipelineUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
+    upsert?: PipelineUpsertWithWhereUniqueWithoutTenantInput | PipelineUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PipelineCreateManyTenantInputEnvelope
+    set?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    disconnect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    delete?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    connect?: PipelineWhereUniqueInput | PipelineWhereUniqueInput[]
+    update?: PipelineUpdateWithWhereUniqueWithoutTenantInput | PipelineUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PipelineUpdateManyWithWhereWithoutTenantInput | PipelineUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PipelineScalarWhereInput | PipelineScalarWhereInput[]
+  }
+
+  export type PipelineStageUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput> | PipelineStageCreateWithoutTenantInput[] | PipelineStageUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutTenantInput | PipelineStageCreateOrConnectWithoutTenantInput[]
+    upsert?: PipelineStageUpsertWithWhereUniqueWithoutTenantInput | PipelineStageUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PipelineStageCreateManyTenantInputEnvelope
+    set?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    disconnect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    delete?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    update?: PipelineStageUpdateWithWhereUniqueWithoutTenantInput | PipelineStageUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PipelineStageUpdateManyWithWhereWithoutTenantInput | PipelineStageUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutDomainsInput = {
@@ -13300,6 +24591,569 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutMembershipsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMembershipsInput, UserUpdateWithoutMembershipsInput>, UserUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type ContactCreatetagsInput = {
+    set: string[]
+  }
+
+  export type TenantCreateNestedOneWithoutContactsInput = {
+    create?: XOR<TenantCreateWithoutContactsInput, TenantUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutContactsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type LeadCreateNestedManyWithoutContactInput = {
+    create?: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput> | LeadCreateWithoutContactInput[] | LeadUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutContactInput | LeadCreateOrConnectWithoutContactInput[]
+    createMany?: LeadCreateManyContactInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationCreateNestedManyWithoutContactInput = {
+    create?: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput> | ConversationCreateWithoutContactInput[] | ConversationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutContactInput | ConversationCreateOrConnectWithoutContactInput[]
+    createMany?: ConversationCreateManyContactInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput> | LeadCreateWithoutContactInput[] | LeadUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutContactInput | LeadCreateOrConnectWithoutContactInput[]
+    createMany?: LeadCreateManyContactInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput> | ConversationCreateWithoutContactInput[] | ConversationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutContactInput | ConversationCreateOrConnectWithoutContactInput[]
+    createMany?: ConversationCreateManyContactInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type ContactUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TenantUpdateOneRequiredWithoutContactsNestedInput = {
+    create?: XOR<TenantCreateWithoutContactsInput, TenantUncheckedCreateWithoutContactsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutContactsInput
+    upsert?: TenantUpsertWithoutContactsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutContactsInput, TenantUpdateWithoutContactsInput>, TenantUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type LeadUpdateManyWithoutContactNestedInput = {
+    create?: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput> | LeadCreateWithoutContactInput[] | LeadUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutContactInput | LeadCreateOrConnectWithoutContactInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutContactInput | LeadUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: LeadCreateManyContactInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutContactInput | LeadUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutContactInput | LeadUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUpdateManyWithoutContactNestedInput = {
+    create?: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput> | ConversationCreateWithoutContactInput[] | ConversationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutContactInput | ConversationCreateOrConnectWithoutContactInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutContactInput | ConversationUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: ConversationCreateManyContactInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutContactInput | ConversationUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutContactInput | ConversationUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput> | LeadCreateWithoutContactInput[] | LeadUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutContactInput | LeadCreateOrConnectWithoutContactInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutContactInput | LeadUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: LeadCreateManyContactInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutContactInput | LeadUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutContactInput | LeadUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput> | ConversationCreateWithoutContactInput[] | ConversationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutContactInput | ConversationCreateOrConnectWithoutContactInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutContactInput | ConversationUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: ConversationCreateManyContactInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutContactInput | ConversationUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutContactInput | ConversationUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutLeadsInput = {
+    create?: XOR<TenantCreateWithoutLeadsInput, TenantUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutLeadsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutLeadsInput = {
+    create?: XOR<ContactCreateWithoutLeadsInput, ContactUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutLeadsInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type PipelineCreateNestedOneWithoutLeadsInput = {
+    create?: XOR<PipelineCreateWithoutLeadsInput, PipelineUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: PipelineCreateOrConnectWithoutLeadsInput
+    connect?: PipelineWhereUniqueInput
+  }
+
+  export type PipelineStageCreateNestedOneWithoutLeadsInput = {
+    create?: XOR<PipelineStageCreateWithoutLeadsInput, PipelineStageUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutLeadsInput
+    connect?: PipelineStageWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOwnedLeadsInput = {
+    create?: XOR<UserCreateWithoutOwnedLeadsInput, UserUncheckedCreateWithoutOwnedLeadsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedLeadsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedManyWithoutLeadInput = {
+    create?: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput> | ConversationCreateWithoutLeadInput[] | ConversationUncheckedCreateWithoutLeadInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutLeadInput | ConversationCreateOrConnectWithoutLeadInput[]
+    createMany?: ConversationCreateManyLeadInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutLeadInput = {
+    create?: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput> | ConversationCreateWithoutLeadInput[] | ConversationUncheckedCreateWithoutLeadInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutLeadInput | ConversationCreateOrConnectWithoutLeadInput[]
+    createMany?: ConversationCreateManyLeadInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type EnumLeadSourceChannelFieldUpdateOperationsInput = {
+    set?: $Enums.LeadSourceChannel
+  }
+
+  export type EnumLeadStatusFieldUpdateOperationsInput = {
+    set?: $Enums.LeadStatus
+  }
+
+  export type TenantUpdateOneRequiredWithoutLeadsNestedInput = {
+    create?: XOR<TenantCreateWithoutLeadsInput, TenantUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutLeadsInput
+    upsert?: TenantUpsertWithoutLeadsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutLeadsInput, TenantUpdateWithoutLeadsInput>, TenantUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type ContactUpdateOneRequiredWithoutLeadsNestedInput = {
+    create?: XOR<ContactCreateWithoutLeadsInput, ContactUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutLeadsInput
+    upsert?: ContactUpsertWithoutLeadsInput
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutLeadsInput, ContactUpdateWithoutLeadsInput>, ContactUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type PipelineUpdateOneWithoutLeadsNestedInput = {
+    create?: XOR<PipelineCreateWithoutLeadsInput, PipelineUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: PipelineCreateOrConnectWithoutLeadsInput
+    upsert?: PipelineUpsertWithoutLeadsInput
+    disconnect?: PipelineWhereInput | boolean
+    delete?: PipelineWhereInput | boolean
+    connect?: PipelineWhereUniqueInput
+    update?: XOR<XOR<PipelineUpdateToOneWithWhereWithoutLeadsInput, PipelineUpdateWithoutLeadsInput>, PipelineUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type PipelineStageUpdateOneWithoutLeadsNestedInput = {
+    create?: XOR<PipelineStageCreateWithoutLeadsInput, PipelineStageUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutLeadsInput
+    upsert?: PipelineStageUpsertWithoutLeadsInput
+    disconnect?: PipelineStageWhereInput | boolean
+    delete?: PipelineStageWhereInput | boolean
+    connect?: PipelineStageWhereUniqueInput
+    update?: XOR<XOR<PipelineStageUpdateToOneWithWhereWithoutLeadsInput, PipelineStageUpdateWithoutLeadsInput>, PipelineStageUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type UserUpdateOneWithoutOwnedLeadsNestedInput = {
+    create?: XOR<UserCreateWithoutOwnedLeadsInput, UserUncheckedCreateWithoutOwnedLeadsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedLeadsInput
+    upsert?: UserUpsertWithoutOwnedLeadsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOwnedLeadsInput, UserUpdateWithoutOwnedLeadsInput>, UserUncheckedUpdateWithoutOwnedLeadsInput>
+  }
+
+  export type ConversationUpdateManyWithoutLeadNestedInput = {
+    create?: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput> | ConversationCreateWithoutLeadInput[] | ConversationUncheckedCreateWithoutLeadInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutLeadInput | ConversationCreateOrConnectWithoutLeadInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutLeadInput | ConversationUpsertWithWhereUniqueWithoutLeadInput[]
+    createMany?: ConversationCreateManyLeadInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutLeadInput | ConversationUpdateWithWhereUniqueWithoutLeadInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutLeadInput | ConversationUpdateManyWithWhereWithoutLeadInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutLeadNestedInput = {
+    create?: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput> | ConversationCreateWithoutLeadInput[] | ConversationUncheckedCreateWithoutLeadInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutLeadInput | ConversationCreateOrConnectWithoutLeadInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutLeadInput | ConversationUpsertWithWhereUniqueWithoutLeadInput[]
+    createMany?: ConversationCreateManyLeadInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutLeadInput | ConversationUpdateWithWhereUniqueWithoutLeadInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutLeadInput | ConversationUpdateManyWithWhereWithoutLeadInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<TenantCreateWithoutConversationsInput, TenantUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutConversationsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<ContactCreateWithoutConversationsInput, ContactUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutConversationsInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type LeadCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<LeadCreateWithoutConversationsInput, LeadUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: LeadCreateOrConnectWithoutConversationsInput
+    connect?: LeadWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutAssignedConversationsInput = {
+    create?: XOR<UserCreateWithoutAssignedConversationsInput, UserUncheckedCreateWithoutAssignedConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedConversationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type MessageCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type EnumChannelTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ChannelType
+  }
+
+  export type EnumConversationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ConversationStatus
+  }
+
+  export type TenantUpdateOneRequiredWithoutConversationsNestedInput = {
+    create?: XOR<TenantCreateWithoutConversationsInput, TenantUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutConversationsInput
+    upsert?: TenantUpsertWithoutConversationsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutConversationsInput, TenantUpdateWithoutConversationsInput>, TenantUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type ContactUpdateOneRequiredWithoutConversationsNestedInput = {
+    create?: XOR<ContactCreateWithoutConversationsInput, ContactUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutConversationsInput
+    upsert?: ContactUpsertWithoutConversationsInput
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutConversationsInput, ContactUpdateWithoutConversationsInput>, ContactUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type LeadUpdateOneWithoutConversationsNestedInput = {
+    create?: XOR<LeadCreateWithoutConversationsInput, LeadUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: LeadCreateOrConnectWithoutConversationsInput
+    upsert?: LeadUpsertWithoutConversationsInput
+    disconnect?: LeadWhereInput | boolean
+    delete?: LeadWhereInput | boolean
+    connect?: LeadWhereUniqueInput
+    update?: XOR<XOR<LeadUpdateToOneWithWhereWithoutConversationsInput, LeadUpdateWithoutConversationsInput>, LeadUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type UserUpdateOneWithoutAssignedConversationsNestedInput = {
+    create?: XOR<UserCreateWithoutAssignedConversationsInput, UserUncheckedCreateWithoutAssignedConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssignedConversationsInput
+    upsert?: UserUpsertWithoutAssignedConversationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedConversationsInput, UserUpdateWithoutAssignedConversationsInput>, UserUncheckedUpdateWithoutAssignedConversationsInput>
+  }
+
+  export type MessageUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutConversationInput | MessageUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: MessageCreateManyConversationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<TenantCreateWithoutMessagesInput, TenantUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMessagesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type EnumMessageDirectionFieldUpdateOperationsInput = {
+    set?: $Enums.MessageDirection
+  }
+
+  export type EnumMessageKindFieldUpdateOperationsInput = {
+    set?: $Enums.MessageKind
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type TenantUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<TenantCreateWithoutMessagesInput, TenantUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMessagesInput
+    upsert?: TenantUpsertWithoutMessagesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutMessagesInput, TenantUpdateWithoutMessagesInput>, TenantUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ConversationUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutMessagesInput
+    upsert?: ConversationUpsertWithoutMessagesInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type TenantCreateNestedOneWithoutPipelinesInput = {
+    create?: XOR<TenantCreateWithoutPipelinesInput, TenantUncheckedCreateWithoutPipelinesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPipelinesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type PipelineStageCreateNestedManyWithoutPipelineInput = {
+    create?: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput> | PipelineStageCreateWithoutPipelineInput[] | PipelineStageUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutPipelineInput | PipelineStageCreateOrConnectWithoutPipelineInput[]
+    createMany?: PipelineStageCreateManyPipelineInputEnvelope
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+  }
+
+  export type LeadCreateNestedManyWithoutPipelineInput = {
+    create?: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput> | LeadCreateWithoutPipelineInput[] | LeadUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutPipelineInput | LeadCreateOrConnectWithoutPipelineInput[]
+    createMany?: LeadCreateManyPipelineInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type PipelineStageUncheckedCreateNestedManyWithoutPipelineInput = {
+    create?: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput> | PipelineStageCreateWithoutPipelineInput[] | PipelineStageUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutPipelineInput | PipelineStageCreateOrConnectWithoutPipelineInput[]
+    createMany?: PipelineStageCreateManyPipelineInputEnvelope
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutPipelineInput = {
+    create?: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput> | LeadCreateWithoutPipelineInput[] | LeadUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutPipelineInput | LeadCreateOrConnectWithoutPipelineInput[]
+    createMany?: LeadCreateManyPipelineInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutPipelinesNestedInput = {
+    create?: XOR<TenantCreateWithoutPipelinesInput, TenantUncheckedCreateWithoutPipelinesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPipelinesInput
+    upsert?: TenantUpsertWithoutPipelinesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutPipelinesInput, TenantUpdateWithoutPipelinesInput>, TenantUncheckedUpdateWithoutPipelinesInput>
+  }
+
+  export type PipelineStageUpdateManyWithoutPipelineNestedInput = {
+    create?: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput> | PipelineStageCreateWithoutPipelineInput[] | PipelineStageUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutPipelineInput | PipelineStageCreateOrConnectWithoutPipelineInput[]
+    upsert?: PipelineStageUpsertWithWhereUniqueWithoutPipelineInput | PipelineStageUpsertWithWhereUniqueWithoutPipelineInput[]
+    createMany?: PipelineStageCreateManyPipelineInputEnvelope
+    set?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    disconnect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    delete?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    update?: PipelineStageUpdateWithWhereUniqueWithoutPipelineInput | PipelineStageUpdateWithWhereUniqueWithoutPipelineInput[]
+    updateMany?: PipelineStageUpdateManyWithWhereWithoutPipelineInput | PipelineStageUpdateManyWithWhereWithoutPipelineInput[]
+    deleteMany?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
+  }
+
+  export type LeadUpdateManyWithoutPipelineNestedInput = {
+    create?: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput> | LeadCreateWithoutPipelineInput[] | LeadUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutPipelineInput | LeadCreateOrConnectWithoutPipelineInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutPipelineInput | LeadUpsertWithWhereUniqueWithoutPipelineInput[]
+    createMany?: LeadCreateManyPipelineInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutPipelineInput | LeadUpdateWithWhereUniqueWithoutPipelineInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutPipelineInput | LeadUpdateManyWithWhereWithoutPipelineInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type PipelineStageUncheckedUpdateManyWithoutPipelineNestedInput = {
+    create?: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput> | PipelineStageCreateWithoutPipelineInput[] | PipelineStageUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: PipelineStageCreateOrConnectWithoutPipelineInput | PipelineStageCreateOrConnectWithoutPipelineInput[]
+    upsert?: PipelineStageUpsertWithWhereUniqueWithoutPipelineInput | PipelineStageUpsertWithWhereUniqueWithoutPipelineInput[]
+    createMany?: PipelineStageCreateManyPipelineInputEnvelope
+    set?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    disconnect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    delete?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    connect?: PipelineStageWhereUniqueInput | PipelineStageWhereUniqueInput[]
+    update?: PipelineStageUpdateWithWhereUniqueWithoutPipelineInput | PipelineStageUpdateWithWhereUniqueWithoutPipelineInput[]
+    updateMany?: PipelineStageUpdateManyWithWhereWithoutPipelineInput | PipelineStageUpdateManyWithWhereWithoutPipelineInput[]
+    deleteMany?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutPipelineNestedInput = {
+    create?: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput> | LeadCreateWithoutPipelineInput[] | LeadUncheckedCreateWithoutPipelineInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutPipelineInput | LeadCreateOrConnectWithoutPipelineInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutPipelineInput | LeadUpsertWithWhereUniqueWithoutPipelineInput[]
+    createMany?: LeadCreateManyPipelineInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutPipelineInput | LeadUpdateWithWhereUniqueWithoutPipelineInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutPipelineInput | LeadUpdateManyWithWhereWithoutPipelineInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutPipelineStagesInput = {
+    create?: XOR<TenantCreateWithoutPipelineStagesInput, TenantUncheckedCreateWithoutPipelineStagesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPipelineStagesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type PipelineCreateNestedOneWithoutStagesInput = {
+    create?: XOR<PipelineCreateWithoutStagesInput, PipelineUncheckedCreateWithoutStagesInput>
+    connectOrCreate?: PipelineCreateOrConnectWithoutStagesInput
+    connect?: PipelineWhereUniqueInput
+  }
+
+  export type LeadCreateNestedManyWithoutStageInput = {
+    create?: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput> | LeadCreateWithoutStageInput[] | LeadUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutStageInput | LeadCreateOrConnectWithoutStageInput[]
+    createMany?: LeadCreateManyStageInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutStageInput = {
+    create?: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput> | LeadCreateWithoutStageInput[] | LeadUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutStageInput | LeadCreateOrConnectWithoutStageInput[]
+    createMany?: LeadCreateManyStageInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutPipelineStagesNestedInput = {
+    create?: XOR<TenantCreateWithoutPipelineStagesInput, TenantUncheckedCreateWithoutPipelineStagesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPipelineStagesInput
+    upsert?: TenantUpsertWithoutPipelineStagesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutPipelineStagesInput, TenantUpdateWithoutPipelineStagesInput>, TenantUncheckedUpdateWithoutPipelineStagesInput>
+  }
+
+  export type PipelineUpdateOneRequiredWithoutStagesNestedInput = {
+    create?: XOR<PipelineCreateWithoutStagesInput, PipelineUncheckedCreateWithoutStagesInput>
+    connectOrCreate?: PipelineCreateOrConnectWithoutStagesInput
+    upsert?: PipelineUpsertWithoutStagesInput
+    connect?: PipelineWhereUniqueInput
+    update?: XOR<XOR<PipelineUpdateToOneWithWhereWithoutStagesInput, PipelineUpdateWithoutStagesInput>, PipelineUncheckedUpdateWithoutStagesInput>
+  }
+
+  export type LeadUpdateManyWithoutStageNestedInput = {
+    create?: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput> | LeadCreateWithoutStageInput[] | LeadUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutStageInput | LeadCreateOrConnectWithoutStageInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutStageInput | LeadUpsertWithWhereUniqueWithoutStageInput[]
+    createMany?: LeadCreateManyStageInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutStageInput | LeadUpdateWithWhereUniqueWithoutStageInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutStageInput | LeadUpdateManyWithWhereWithoutStageInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutStageNestedInput = {
+    create?: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput> | LeadCreateWithoutStageInput[] | LeadUncheckedCreateWithoutStageInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutStageInput | LeadCreateOrConnectWithoutStageInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutStageInput | LeadUpsertWithWhereUniqueWithoutStageInput[]
+    createMany?: LeadCreateManyStageInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutStageInput | LeadUpdateWithWhereUniqueWithoutStageInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutStageInput | LeadUpdateManyWithWhereWithoutStageInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13578,6 +25432,185 @@ export namespace Prisma {
     _max?: NestedEnumTenantRoleFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumLeadSourceChannelFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadSourceChannel | EnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadSourceChannelFilter<$PrismaModel> | $Enums.LeadSourceChannel
+  }
+
+  export type NestedEnumLeadStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadStatus | EnumLeadStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadStatusFilter<$PrismaModel> | $Enums.LeadStatus
+  }
+
+  export type NestedEnumLeadSourceChannelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadSourceChannel | EnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadSourceChannel[] | ListEnumLeadSourceChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadSourceChannelWithAggregatesFilter<$PrismaModel> | $Enums.LeadSourceChannel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeadSourceChannelFilter<$PrismaModel>
+    _max?: NestedEnumLeadSourceChannelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLeadStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeadStatus | EnumLeadStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeadStatus[] | ListEnumLeadStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeadStatusWithAggregatesFilter<$PrismaModel> | $Enums.LeadStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeadStatusFilter<$PrismaModel>
+    _max?: NestedEnumLeadStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumChannelTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChannelType | EnumChannelTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChannelTypeFilter<$PrismaModel> | $Enums.ChannelType
+  }
+
+  export type NestedEnumConversationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusFilter<$PrismaModel> | $Enums.ConversationStatus
+  }
+
+  export type NestedEnumChannelTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChannelType | EnumChannelTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChannelType[] | ListEnumChannelTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChannelTypeWithAggregatesFilter<$PrismaModel> | $Enums.ChannelType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumChannelTypeFilter<$PrismaModel>
+    _max?: NestedEnumChannelTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConversationStatus | EnumConversationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConversationStatus[] | ListEnumConversationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConversationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConversationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConversationStatusFilter<$PrismaModel>
+    _max?: NestedEnumConversationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMessageDirectionFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageDirection | EnumMessageDirectionFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageDirectionFilter<$PrismaModel> | $Enums.MessageDirection
+  }
+
+  export type NestedEnumMessageKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageKind | EnumMessageKindFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageKindFilter<$PrismaModel> | $Enums.MessageKind
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type NestedEnumMessageDirectionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageDirection | EnumMessageDirectionFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageDirection[] | ListEnumMessageDirectionFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageDirectionWithAggregatesFilter<$PrismaModel> | $Enums.MessageDirection
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageDirectionFilter<$PrismaModel>
+    _max?: NestedEnumMessageDirectionFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMessageKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageKind | EnumMessageKindFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageKind[] | ListEnumMessageKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageKindWithAggregatesFilter<$PrismaModel> | $Enums.MessageKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageKindFilter<$PrismaModel>
+    _max?: NestedEnumMessageKindFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -13663,6 +25696,92 @@ export namespace Prisma {
 
   export type MembershipCreateManyUserInputEnvelope = {
     data: MembershipCreateManyUserInput | MembershipCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeadCreateWithoutOwnerUserInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateWithoutOwnerUserInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadCreateOrConnectWithoutOwnerUserInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput>
+  }
+
+  export type LeadCreateManyOwnerUserInputEnvelope = {
+    data: LeadCreateManyOwnerUserInput | LeadCreateManyOwnerUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutAssigneeUserInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutAssigneeUserInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutAssigneeUserInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput>
+  }
+
+  export type ConversationCreateManyAssigneeUserInputEnvelope = {
+    data: ConversationCreateManyAssigneeUserInput | ConversationCreateManyAssigneeUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13755,6 +25874,77 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Membership"> | Date | string
   }
 
+  export type LeadUpsertWithWhereUniqueWithoutOwnerUserInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutOwnerUserInput, LeadUncheckedUpdateWithoutOwnerUserInput>
+    create: XOR<LeadCreateWithoutOwnerUserInput, LeadUncheckedCreateWithoutOwnerUserInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutOwnerUserInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutOwnerUserInput, LeadUncheckedUpdateWithoutOwnerUserInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutOwnerUserInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutOwnerUserInput>
+  }
+
+  export type LeadScalarWhereInput = {
+    AND?: LeadScalarWhereInput | LeadScalarWhereInput[]
+    OR?: LeadScalarWhereInput[]
+    NOT?: LeadScalarWhereInput | LeadScalarWhereInput[]
+    id?: StringFilter<"Lead"> | string
+    tenantId?: StringFilter<"Lead"> | string
+    contactId?: StringFilter<"Lead"> | string
+    pipelineId?: StringNullableFilter<"Lead"> | string | null
+    stageId?: StringNullableFilter<"Lead"> | string | null
+    ownerUserId?: StringNullableFilter<"Lead"> | string | null
+    title?: StringNullableFilter<"Lead"> | string | null
+    sourceChannel?: EnumLeadSourceChannelFilter<"Lead"> | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+    score?: IntNullableFilter<"Lead"> | number | null
+    firstInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    lastOutboundAt?: DateTimeNullableFilter<"Lead"> | Date | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+    updatedAt?: DateTimeFilter<"Lead"> | Date | string
+    version?: IntFilter<"Lead"> | number
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutAssigneeUserInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutAssigneeUserInput, ConversationUncheckedUpdateWithoutAssigneeUserInput>
+    create: XOR<ConversationCreateWithoutAssigneeUserInput, ConversationUncheckedCreateWithoutAssigneeUserInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutAssigneeUserInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutAssigneeUserInput, ConversationUncheckedUpdateWithoutAssigneeUserInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutAssigneeUserInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutAssigneeUserInput>
+  }
+
+  export type ConversationScalarWhereInput = {
+    AND?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    OR?: ConversationScalarWhereInput[]
+    NOT?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    tenantId?: StringFilter<"Conversation"> | string
+    contactId?: StringFilter<"Conversation"> | string
+    leadId?: StringNullableFilter<"Conversation"> | string | null
+    channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
+    status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
+    assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    version?: IntFilter<"Conversation"> | number
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     email?: string | null
@@ -13768,6 +25958,8 @@ export namespace Prisma {
     phone?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     memberships?: MembershipCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -13783,6 +25975,8 @@ export namespace Prisma {
     phone?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadUncheckedCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -13814,6 +26008,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     memberships?: MembershipUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -13829,6 +26025,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -13844,6 +26042,8 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     memberships?: MembershipCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -13859,6 +26059,8 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadUncheckedCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -13890,6 +26092,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     memberships?: MembershipUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -13905,6 +26109,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type TenantDomainCreateWithoutTenantInput = {
@@ -14006,6 +26212,262 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContactCreateWithoutTenantInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    leads?: LeadCreateNestedManyWithoutContactInput
+    conversations?: ConversationCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutTenantInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    leads?: LeadUncheckedCreateNestedManyWithoutContactInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutTenantInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ContactCreateManyTenantInputEnvelope = {
+    data: ContactCreateManyTenantInput | ContactCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeadCreateWithoutTenantInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateWithoutTenantInput = {
+    id?: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadCreateOrConnectWithoutTenantInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput>
+  }
+
+  export type LeadCreateManyTenantInputEnvelope = {
+    data: LeadCreateManyTenantInput | LeadCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutTenantInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutTenantInput = {
+    id?: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutTenantInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ConversationCreateManyTenantInputEnvelope = {
+    data: ConversationCreateManyTenantInput | ConversationCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MessageCreateWithoutTenantInput = {
+    id?: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutTenantInput = {
+    id?: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutTenantInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MessageCreateManyTenantInputEnvelope = {
+    data: MessageCreateManyTenantInput | MessageCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PipelineCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stages?: PipelineStageCreateNestedManyWithoutPipelineInput
+    leads?: LeadCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stages?: PipelineStageUncheckedCreateNestedManyWithoutPipelineInput
+    leads?: LeadUncheckedCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineCreateOrConnectWithoutTenantInput = {
+    where: PipelineWhereUniqueInput
+    create: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PipelineCreateManyTenantInputEnvelope = {
+    data: PipelineCreateManyTenantInput | PipelineCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PipelineStageCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pipeline: PipelineCreateNestedOneWithoutStagesInput
+    leads?: LeadCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageUncheckedCreateWithoutTenantInput = {
+    id?: string
+    pipelineId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    leads?: LeadUncheckedCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageCreateOrConnectWithoutTenantInput = {
+    where: PipelineStageWhereUniqueInput
+    create: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PipelineStageCreateManyTenantInputEnvelope = {
+    data: PipelineStageCreateManyTenantInput | PipelineStageCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantDomainUpsertWithWhereUniqueWithoutTenantInput = {
     where: TenantDomainWhereUniqueInput
     update: XOR<TenantDomainUpdateWithoutTenantInput, TenantDomainUncheckedUpdateWithoutTenantInput>
@@ -14096,6 +26558,178 @@ export namespace Prisma {
     data: XOR<MembershipUpdateManyMutationInput, MembershipUncheckedUpdateManyWithoutTenantInput>
   }
 
+  export type ContactUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ContactWhereUniqueInput
+    update: XOR<ContactUpdateWithoutTenantInput, ContactUncheckedUpdateWithoutTenantInput>
+    create: XOR<ContactCreateWithoutTenantInput, ContactUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ContactUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ContactWhereUniqueInput
+    data: XOR<ContactUpdateWithoutTenantInput, ContactUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ContactUpdateManyWithWhereWithoutTenantInput = {
+    where: ContactScalarWhereInput
+    data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ContactScalarWhereInput = {
+    AND?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    OR?: ContactScalarWhereInput[]
+    NOT?: ContactScalarWhereInput | ContactScalarWhereInput[]
+    id?: StringFilter<"Contact"> | string
+    tenantId?: StringFilter<"Contact"> | string
+    firstName?: StringNullableFilter<"Contact"> | string | null
+    lastName?: StringNullableFilter<"Contact"> | string | null
+    fullName?: StringNullableFilter<"Contact"> | string | null
+    email?: StringNullableFilter<"Contact"> | string | null
+    phoneE164?: StringNullableFilter<"Contact"> | string | null
+    whatsappWaId?: StringNullableFilter<"Contact"> | string | null
+    normalizedPhone?: StringNullableFilter<"Contact"> | string | null
+    source?: StringNullableFilter<"Contact"> | string | null
+    tags?: StringNullableListFilter<"Contact">
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeFilter<"Contact"> | Date | string
+    version?: IntFilter<"Contact"> | number
+  }
+
+  export type LeadUpsertWithWhereUniqueWithoutTenantInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutTenantInput, LeadUncheckedUpdateWithoutTenantInput>
+    create: XOR<LeadCreateWithoutTenantInput, LeadUncheckedCreateWithoutTenantInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutTenantInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutTenantInput, LeadUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutTenantInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutTenantInput, ConversationUncheckedUpdateWithoutTenantInput>
+    create: XOR<ConversationCreateWithoutTenantInput, ConversationUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutTenantInput, ConversationUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutTenantInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutTenantInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutTenantInput, MessageUncheckedUpdateWithoutTenantInput>
+    create: XOR<MessageCreateWithoutTenantInput, MessageUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutTenantInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutTenantInput, MessageUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutTenantInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type MessageScalarWhereInput = {
+    AND?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    OR?: MessageScalarWhereInput[]
+    NOT?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    id?: StringFilter<"Message"> | string
+    tenantId?: StringFilter<"Message"> | string
+    conversationId?: StringFilter<"Message"> | string
+    direction?: EnumMessageDirectionFilter<"Message"> | $Enums.MessageDirection
+    kind?: EnumMessageKindFilter<"Message"> | $Enums.MessageKind
+    bodyText?: StringNullableFilter<"Message"> | string | null
+    mediaUrl?: StringNullableFilter<"Message"> | string | null
+    mediaMimeType?: StringNullableFilter<"Message"> | string | null
+    metaMessageId?: StringNullableFilter<"Message"> | string | null
+    externalStatus?: StringNullableFilter<"Message"> | string | null
+    pricingCategory?: StringNullableFilter<"Message"> | string | null
+    pricingType?: StringNullableFilter<"Message"> | string | null
+    currency?: StringNullableFilter<"Message"> | string | null
+    estimatedMetaCost?: DecimalNullableFilter<"Message"> | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: StringNullableFilter<"Message"> | string | null
+    deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    rawPayload?: JsonNullableFilter<"Message">
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    updatedAt?: DateTimeFilter<"Message"> | Date | string
+  }
+
+  export type PipelineUpsertWithWhereUniqueWithoutTenantInput = {
+    where: PipelineWhereUniqueInput
+    update: XOR<PipelineUpdateWithoutTenantInput, PipelineUncheckedUpdateWithoutTenantInput>
+    create: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PipelineUpdateWithWhereUniqueWithoutTenantInput = {
+    where: PipelineWhereUniqueInput
+    data: XOR<PipelineUpdateWithoutTenantInput, PipelineUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type PipelineUpdateManyWithWhereWithoutTenantInput = {
+    where: PipelineScalarWhereInput
+    data: XOR<PipelineUpdateManyMutationInput, PipelineUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type PipelineScalarWhereInput = {
+    AND?: PipelineScalarWhereInput | PipelineScalarWhereInput[]
+    OR?: PipelineScalarWhereInput[]
+    NOT?: PipelineScalarWhereInput | PipelineScalarWhereInput[]
+    id?: StringFilter<"Pipeline"> | string
+    tenantId?: StringFilter<"Pipeline"> | string
+    name?: StringFilter<"Pipeline"> | string
+    description?: StringNullableFilter<"Pipeline"> | string | null
+    isDefault?: BoolFilter<"Pipeline"> | boolean
+    createdAt?: DateTimeFilter<"Pipeline"> | Date | string
+    updatedAt?: DateTimeFilter<"Pipeline"> | Date | string
+  }
+
+  export type PipelineStageUpsertWithWhereUniqueWithoutTenantInput = {
+    where: PipelineStageWhereUniqueInput
+    update: XOR<PipelineStageUpdateWithoutTenantInput, PipelineStageUncheckedUpdateWithoutTenantInput>
+    create: XOR<PipelineStageCreateWithoutTenantInput, PipelineStageUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PipelineStageUpdateWithWhereUniqueWithoutTenantInput = {
+    where: PipelineStageWhereUniqueInput
+    data: XOR<PipelineStageUpdateWithoutTenantInput, PipelineStageUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type PipelineStageUpdateManyWithWhereWithoutTenantInput = {
+    where: PipelineStageScalarWhereInput
+    data: XOR<PipelineStageUpdateManyMutationInput, PipelineStageUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type PipelineStageScalarWhereInput = {
+    AND?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
+    OR?: PipelineStageScalarWhereInput[]
+    NOT?: PipelineStageScalarWhereInput | PipelineStageScalarWhereInput[]
+    id?: StringFilter<"PipelineStage"> | string
+    tenantId?: StringFilter<"PipelineStage"> | string
+    pipelineId?: StringFilter<"PipelineStage"> | string
+    name?: StringFilter<"PipelineStage"> | string
+    slug?: StringFilter<"PipelineStage"> | string
+    color?: StringNullableFilter<"PipelineStage"> | string | null
+    position?: IntFilter<"PipelineStage"> | number
+    isFinal?: BoolFilter<"PipelineStage"> | boolean
+    createdAt?: DateTimeFilter<"PipelineStage"> | Date | string
+    updatedAt?: DateTimeFilter<"PipelineStage"> | Date | string
+  }
+
   export type TenantCreateWithoutDomainsInput = {
     id?: string
     slug: string
@@ -14110,6 +26744,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     branding?: TenantBrandingCreateNestedOneWithoutTenantInput
     memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutDomainsInput = {
@@ -14126,6 +26766,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutDomainsInput = {
@@ -14158,6 +26804,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
     memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutDomainsInput = {
@@ -14174,6 +26826,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutBrandingInput = {
@@ -14190,6 +26848,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     domains?: TenantDomainCreateNestedManyWithoutTenantInput
     memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutBrandingInput = {
@@ -14206,6 +26870,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
     memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutBrandingInput = {
@@ -14238,6 +26908,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     domains?: TenantDomainUpdateManyWithoutTenantNestedInput
     memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutBrandingInput = {
@@ -14254,6 +26930,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
     memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutMembershipsInput = {
@@ -14270,6 +26952,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     domains?: TenantDomainCreateNestedManyWithoutTenantInput
     branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutMembershipsInput = {
@@ -14286,6 +26974,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
     branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutMembershipsInput = {
@@ -14306,6 +27000,8 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -14321,6 +27017,8 @@ export namespace Prisma {
     phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadUncheckedCreateNestedManyWithoutOwnerUserInput
+    assignedConversations?: ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput
   }
 
   export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -14353,6 +27051,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     domains?: TenantDomainUpdateManyWithoutTenantNestedInput
     branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutMembershipsInput = {
@@ -14369,6 +27073,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
     branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserUpsertWithoutMembershipsInput = {
@@ -14395,6 +27105,8 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUpdateManyWithoutAssigneeUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -14410,6 +27122,1752 @@ export namespace Prisma {
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
+    assignedConversations?: ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput
+  }
+
+  export type TenantCreateWithoutContactsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutContactsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutContactsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutContactsInput, TenantUncheckedCreateWithoutContactsInput>
+  }
+
+  export type LeadCreateWithoutContactInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateWithoutContactInput = {
+    id?: string
+    tenantId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadCreateOrConnectWithoutContactInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput>
+  }
+
+  export type LeadCreateManyContactInputEnvelope = {
+    data: LeadCreateManyContactInput | LeadCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutContactInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutContactInput = {
+    id?: string
+    tenantId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutContactInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput>
+  }
+
+  export type ConversationCreateManyContactInputEnvelope = {
+    data: ConversationCreateManyContactInput | ConversationCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutContactsInput = {
+    update: XOR<TenantUpdateWithoutContactsInput, TenantUncheckedUpdateWithoutContactsInput>
+    create: XOR<TenantCreateWithoutContactsInput, TenantUncheckedCreateWithoutContactsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutContactsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutContactsInput, TenantUncheckedUpdateWithoutContactsInput>
+  }
+
+  export type TenantUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutContactsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type LeadUpsertWithWhereUniqueWithoutContactInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutContactInput, LeadUncheckedUpdateWithoutContactInput>
+    create: XOR<LeadCreateWithoutContactInput, LeadUncheckedCreateWithoutContactInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutContactInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutContactInput, LeadUncheckedUpdateWithoutContactInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutContactInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutContactInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutContactInput, ConversationUncheckedUpdateWithoutContactInput>
+    create: XOR<ConversationCreateWithoutContactInput, ConversationUncheckedCreateWithoutContactInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutContactInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutContactInput, ConversationUncheckedUpdateWithoutContactInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutContactInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type TenantCreateWithoutLeadsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutLeadsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutLeadsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutLeadsInput, TenantUncheckedCreateWithoutLeadsInput>
+  }
+
+  export type ContactCreateWithoutLeadsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutContactsInput
+    conversations?: ConversationCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutLeadsInput = {
+    id?: string
+    tenantId: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutLeadsInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutLeadsInput, ContactUncheckedCreateWithoutLeadsInput>
+  }
+
+  export type PipelineCreateWithoutLeadsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelinesInput
+    stages?: PipelineStageCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineUncheckedCreateWithoutLeadsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    stages?: PipelineStageUncheckedCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineCreateOrConnectWithoutLeadsInput = {
+    where: PipelineWhereUniqueInput
+    create: XOR<PipelineCreateWithoutLeadsInput, PipelineUncheckedCreateWithoutLeadsInput>
+  }
+
+  export type PipelineStageCreateWithoutLeadsInput = {
+    id?: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelineStagesInput
+    pipeline: PipelineCreateNestedOneWithoutStagesInput
+  }
+
+  export type PipelineStageUncheckedCreateWithoutLeadsInput = {
+    id?: string
+    tenantId: string
+    pipelineId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PipelineStageCreateOrConnectWithoutLeadsInput = {
+    where: PipelineStageWhereUniqueInput
+    create: XOR<PipelineStageCreateWithoutLeadsInput, PipelineStageUncheckedCreateWithoutLeadsInput>
+  }
+
+  export type UserCreateWithoutOwnedLeadsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    memberships?: MembershipCreateNestedManyWithoutUserInput
+    assignedConversations?: ConversationCreateNestedManyWithoutAssigneeUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOwnedLeadsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
+    assignedConversations?: ConversationUncheckedCreateNestedManyWithoutAssigneeUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOwnedLeadsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOwnedLeadsInput, UserUncheckedCreateWithoutOwnedLeadsInput>
+  }
+
+  export type ConversationCreateWithoutLeadInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutLeadInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutLeadInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput>
+  }
+
+  export type ConversationCreateManyLeadInputEnvelope = {
+    data: ConversationCreateManyLeadInput | ConversationCreateManyLeadInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutLeadsInput = {
+    update: XOR<TenantUpdateWithoutLeadsInput, TenantUncheckedUpdateWithoutLeadsInput>
+    create: XOR<TenantCreateWithoutLeadsInput, TenantUncheckedCreateWithoutLeadsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutLeadsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutLeadsInput, TenantUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type TenantUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ContactUpsertWithoutLeadsInput = {
+    update: XOR<ContactUpdateWithoutLeadsInput, ContactUncheckedUpdateWithoutLeadsInput>
+    create: XOR<ContactCreateWithoutLeadsInput, ContactUncheckedCreateWithoutLeadsInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutLeadsInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutLeadsInput, ContactUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type ContactUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutContactsNestedInput
+    conversations?: ConversationUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type PipelineUpsertWithoutLeadsInput = {
+    update: XOR<PipelineUpdateWithoutLeadsInput, PipelineUncheckedUpdateWithoutLeadsInput>
+    create: XOR<PipelineCreateWithoutLeadsInput, PipelineUncheckedCreateWithoutLeadsInput>
+    where?: PipelineWhereInput
+  }
+
+  export type PipelineUpdateToOneWithWhereWithoutLeadsInput = {
+    where?: PipelineWhereInput
+    data: XOR<PipelineUpdateWithoutLeadsInput, PipelineUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type PipelineUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelinesNestedInput
+    stages?: PipelineStageUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineUncheckedUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stages?: PipelineStageUncheckedUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineStageUpsertWithoutLeadsInput = {
+    update: XOR<PipelineStageUpdateWithoutLeadsInput, PipelineStageUncheckedUpdateWithoutLeadsInput>
+    create: XOR<PipelineStageCreateWithoutLeadsInput, PipelineStageUncheckedCreateWithoutLeadsInput>
+    where?: PipelineStageWhereInput
+  }
+
+  export type PipelineStageUpdateToOneWithWhereWithoutLeadsInput = {
+    where?: PipelineStageWhereInput
+    data: XOR<PipelineStageUpdateWithoutLeadsInput, PipelineStageUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type PipelineStageUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelineStagesNestedInput
+    pipeline?: PipelineUpdateOneRequiredWithoutStagesNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutOwnedLeadsInput = {
+    update: XOR<UserUpdateWithoutOwnedLeadsInput, UserUncheckedUpdateWithoutOwnedLeadsInput>
+    create: XOR<UserCreateWithoutOwnedLeadsInput, UserUncheckedCreateWithoutOwnedLeadsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOwnedLeadsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOwnedLeadsInput, UserUncheckedUpdateWithoutOwnedLeadsInput>
+  }
+
+  export type UserUpdateWithoutOwnedLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUpdateManyWithoutUserNestedInput
+    assignedConversations?: ConversationUpdateManyWithoutAssigneeUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+    assignedConversations?: ConversationUncheckedUpdateManyWithoutAssigneeUserNestedInput
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutLeadInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutLeadInput, ConversationUncheckedUpdateWithoutLeadInput>
+    create: XOR<ConversationCreateWithoutLeadInput, ConversationUncheckedCreateWithoutLeadInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutLeadInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutLeadInput, ConversationUncheckedUpdateWithoutLeadInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutLeadInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutLeadInput>
+  }
+
+  export type TenantCreateWithoutConversationsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutConversationsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutConversationsInput, TenantUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type ContactCreateWithoutConversationsInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutContactsInput
+    leads?: LeadCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    tenantId: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    leads?: LeadUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutConversationsInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutConversationsInput, ContactUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type LeadCreateWithoutConversationsInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+  }
+
+  export type LeadUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type LeadCreateOrConnectWithoutConversationsInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutConversationsInput, LeadUncheckedCreateWithoutConversationsInput>
+  }
+
+  export type UserCreateWithoutAssignedConversationsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    memberships?: MembershipCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadCreateNestedManyWithoutOwnerUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAssignedConversationsInput = {
+    id?: string
+    email?: string | null
+    password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    image?: string | null
+    role?: $Enums.Role
+    emailVerified?: Date | string | null
+    name?: string | null
+    phone?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutUserInput
+    ownedLeads?: LeadUncheckedCreateNestedManyWithoutOwnerUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAssignedConversationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAssignedConversationsInput, UserUncheckedCreateWithoutAssignedConversationsInput>
+  }
+
+  export type MessageCreateWithoutConversationInput = {
+    id?: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutConversationInput = {
+    id?: string
+    tenantId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageCreateManyConversationInputEnvelope = {
+    data: MessageCreateManyConversationInput | MessageCreateManyConversationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutConversationsInput = {
+    update: XOR<TenantUpdateWithoutConversationsInput, TenantUncheckedUpdateWithoutConversationsInput>
+    create: XOR<TenantCreateWithoutConversationsInput, TenantUncheckedCreateWithoutConversationsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutConversationsInput, TenantUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type TenantUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ContactUpsertWithoutConversationsInput = {
+    update: XOR<ContactUpdateWithoutConversationsInput, ContactUncheckedUpdateWithoutConversationsInput>
+    create: XOR<ContactCreateWithoutConversationsInput, ContactUncheckedCreateWithoutConversationsInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutConversationsInput, ContactUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type ContactUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutContactsNestedInput
+    leads?: LeadUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    leads?: LeadUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type LeadUpsertWithoutConversationsInput = {
+    update: XOR<LeadUpdateWithoutConversationsInput, LeadUncheckedUpdateWithoutConversationsInput>
+    create: XOR<LeadCreateWithoutConversationsInput, LeadUncheckedCreateWithoutConversationsInput>
+    where?: LeadWhereInput
+  }
+
+  export type LeadUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: LeadWhereInput
+    data: XOR<LeadUpdateWithoutConversationsInput, LeadUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type LeadUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserUpsertWithoutAssignedConversationsInput = {
+    update: XOR<UserUpdateWithoutAssignedConversationsInput, UserUncheckedUpdateWithoutAssignedConversationsInput>
+    create: XOR<UserCreateWithoutAssignedConversationsInput, UserUncheckedCreateWithoutAssignedConversationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAssignedConversationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAssignedConversationsInput, UserUncheckedUpdateWithoutAssignedConversationsInput>
+  }
+
+  export type UserUpdateWithoutAssignedConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUpdateManyWithoutOwnerUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAssignedConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutUserNestedInput
+    ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+    create: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutConversationInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutConversationInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutConversationInput>
+  }
+
+  export type TenantCreateWithoutMessagesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutMessagesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutMessagesInput, TenantUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type ConversationCreateWithoutMessagesInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+  }
+
+  export type ConversationUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationCreateOrConnectWithoutMessagesInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type TenantUpsertWithoutMessagesInput = {
+    update: XOR<TenantUpdateWithoutMessagesInput, TenantUncheckedUpdateWithoutMessagesInput>
+    create: XOR<TenantCreateWithoutMessagesInput, TenantUncheckedCreateWithoutMessagesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutMessagesInput, TenantUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type TenantUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ConversationUpsertWithoutMessagesInput = {
+    update: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+    create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutMessagesInput, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ConversationUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TenantCreateWithoutPipelinesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutPipelinesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutPipelinesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutPipelinesInput, TenantUncheckedCreateWithoutPipelinesInput>
+  }
+
+  export type PipelineStageCreateWithoutPipelineInput = {
+    id?: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelineStagesInput
+    leads?: LeadCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageUncheckedCreateWithoutPipelineInput = {
+    id?: string
+    tenantId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    leads?: LeadUncheckedCreateNestedManyWithoutStageInput
+  }
+
+  export type PipelineStageCreateOrConnectWithoutPipelineInput = {
+    where: PipelineStageWhereUniqueInput
+    create: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput>
+  }
+
+  export type PipelineStageCreateManyPipelineInputEnvelope = {
+    data: PipelineStageCreateManyPipelineInput | PipelineStageCreateManyPipelineInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeadCreateWithoutPipelineInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    stage?: PipelineStageCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateWithoutPipelineInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadCreateOrConnectWithoutPipelineInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput>
+  }
+
+  export type LeadCreateManyPipelineInputEnvelope = {
+    data: LeadCreateManyPipelineInput | LeadCreateManyPipelineInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutPipelinesInput = {
+    update: XOR<TenantUpdateWithoutPipelinesInput, TenantUncheckedUpdateWithoutPipelinesInput>
+    create: XOR<TenantCreateWithoutPipelinesInput, TenantUncheckedCreateWithoutPipelinesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutPipelinesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutPipelinesInput, TenantUncheckedUpdateWithoutPipelinesInput>
+  }
+
+  export type TenantUpdateWithoutPipelinesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutPipelinesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type PipelineStageUpsertWithWhereUniqueWithoutPipelineInput = {
+    where: PipelineStageWhereUniqueInput
+    update: XOR<PipelineStageUpdateWithoutPipelineInput, PipelineStageUncheckedUpdateWithoutPipelineInput>
+    create: XOR<PipelineStageCreateWithoutPipelineInput, PipelineStageUncheckedCreateWithoutPipelineInput>
+  }
+
+  export type PipelineStageUpdateWithWhereUniqueWithoutPipelineInput = {
+    where: PipelineStageWhereUniqueInput
+    data: XOR<PipelineStageUpdateWithoutPipelineInput, PipelineStageUncheckedUpdateWithoutPipelineInput>
+  }
+
+  export type PipelineStageUpdateManyWithWhereWithoutPipelineInput = {
+    where: PipelineStageScalarWhereInput
+    data: XOR<PipelineStageUpdateManyMutationInput, PipelineStageUncheckedUpdateManyWithoutPipelineInput>
+  }
+
+  export type LeadUpsertWithWhereUniqueWithoutPipelineInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutPipelineInput, LeadUncheckedUpdateWithoutPipelineInput>
+    create: XOR<LeadCreateWithoutPipelineInput, LeadUncheckedCreateWithoutPipelineInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutPipelineInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutPipelineInput, LeadUncheckedUpdateWithoutPipelineInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutPipelineInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutPipelineInput>
+  }
+
+  export type TenantCreateWithoutPipelineStagesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutPipelineStagesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutPipelineStagesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutPipelineStagesInput, TenantUncheckedCreateWithoutPipelineStagesInput>
+  }
+
+  export type PipelineCreateWithoutStagesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPipelinesInput
+    leads?: LeadCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineUncheckedCreateWithoutStagesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    leads?: LeadUncheckedCreateNestedManyWithoutPipelineInput
+  }
+
+  export type PipelineCreateOrConnectWithoutStagesInput = {
+    where: PipelineWhereUniqueInput
+    create: XOR<PipelineCreateWithoutStagesInput, PipelineUncheckedCreateWithoutStagesInput>
+  }
+
+  export type LeadCreateWithoutStageInput = {
+    id?: string
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutLeadsInput
+    contact: ContactCreateNestedOneWithoutLeadsInput
+    pipeline?: PipelineCreateNestedOneWithoutLeadsInput
+    ownerUser?: UserCreateNestedOneWithoutOwnedLeadsInput
+    conversations?: ConversationCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadUncheckedCreateWithoutStageInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    conversations?: ConversationUncheckedCreateNestedManyWithoutLeadInput
+  }
+
+  export type LeadCreateOrConnectWithoutStageInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput>
+  }
+
+  export type LeadCreateManyStageInputEnvelope = {
+    data: LeadCreateManyStageInput | LeadCreateManyStageInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutPipelineStagesInput = {
+    update: XOR<TenantUpdateWithoutPipelineStagesInput, TenantUncheckedUpdateWithoutPipelineStagesInput>
+    create: XOR<TenantCreateWithoutPipelineStagesInput, TenantUncheckedCreateWithoutPipelineStagesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutPipelineStagesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutPipelineStagesInput, TenantUncheckedUpdateWithoutPipelineStagesInput>
+  }
+
+  export type TenantUpdateWithoutPipelineStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutPipelineStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type PipelineUpsertWithoutStagesInput = {
+    update: XOR<PipelineUpdateWithoutStagesInput, PipelineUncheckedUpdateWithoutStagesInput>
+    create: XOR<PipelineCreateWithoutStagesInput, PipelineUncheckedCreateWithoutStagesInput>
+    where?: PipelineWhereInput
+  }
+
+  export type PipelineUpdateToOneWithWhereWithoutStagesInput = {
+    where?: PipelineWhereInput
+    data: XOR<PipelineUpdateWithoutStagesInput, PipelineUncheckedUpdateWithoutStagesInput>
+  }
+
+  export type PipelineUpdateWithoutStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelinesNestedInput
+    leads?: LeadUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineUncheckedUpdateWithoutStagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    leads?: LeadUncheckedUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type LeadUpsertWithWhereUniqueWithoutStageInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutStageInput, LeadUncheckedUpdateWithoutStageInput>
+    create: XOR<LeadCreateWithoutStageInput, LeadUncheckedCreateWithoutStageInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutStageInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutStageInput, LeadUncheckedUpdateWithoutStageInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutStageInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutStageInput>
   }
 
   export type AccountCreateManyUserInput = {
@@ -14439,6 +28897,37 @@ export namespace Prisma {
     isOwner?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type LeadCreateManyOwnerUserInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationCreateManyAssigneeUserInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -14528,6 +29017,103 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LeadUpdateWithoutOwnerUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutOwnerUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateManyWithoutOwnerUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationUpdateWithoutAssigneeUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutAssigneeUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutAssigneeUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
   export type TenantDomainCreateManyTenantInput = {
     id?: string
     host: string
@@ -14546,6 +29132,97 @@ export namespace Prisma {
     userId: string
     role: $Enums.TenantRole
     isOwner?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContactCreateManyTenantInput = {
+    id?: string
+    firstName?: string | null
+    lastName?: string | null
+    fullName?: string | null
+    email?: string | null
+    phoneE164?: string | null
+    whatsappWaId?: string | null
+    normalizedPhone?: string | null
+    source?: string | null
+    tags?: ContactCreatetagsInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type LeadCreateManyTenantInput = {
+    id?: string
+    contactId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationCreateManyTenantInput = {
+    id?: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type MessageCreateManyTenantInput = {
+    id?: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PipelineCreateManyTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    isDefault?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PipelineStageCreateManyTenantInput = {
+    id?: string
+    pipelineId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14614,6 +29291,765 @@ export namespace Prisma {
     isOwner?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    leads?: LeadUpdateManyWithoutContactNestedInput
+    conversations?: ConversationUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    leads?: LeadUncheckedUpdateManyWithoutContactNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneE164?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    normalizedPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: ContactUpdatetagsInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LeadUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MessageUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stages?: PipelineStageUpdateManyWithoutPipelineNestedInput
+    leads?: LeadUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stages?: PipelineStageUncheckedUpdateManyWithoutPipelineNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutPipelineNestedInput
+  }
+
+  export type PipelineUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineStageUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pipeline?: PipelineUpdateOneRequiredWithoutStagesNestedInput
+    leads?: LeadUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pipelineId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    leads?: LeadUncheckedUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pipelineId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadCreateManyContactInput = {
+    id?: string
+    tenantId: string
+    pipelineId?: string | null
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationCreateManyContactInput = {
+    id?: string
+    tenantId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type LeadUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConversationCreateManyLeadInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type ConversationUpdateWithoutLeadInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutLeadInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutLeadInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MessageCreateManyConversationInput = {
+    id?: string
+    tenantId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PipelineStageCreateManyPipelineInput = {
+    id?: string
+    tenantId: string
+    name: string
+    slug: string
+    color?: string | null
+    position: number
+    isFinal?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeadCreateManyPipelineInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    stageId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type PipelineStageUpdateWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPipelineStagesNestedInput
+    leads?: LeadUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    leads?: LeadUncheckedUpdateManyWithoutStageNestedInput
+  }
+
+  export type PipelineStageUncheckedUpdateManyWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isFinal?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadUpdateWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    stage?: PipelineStageUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateManyWithoutPipelineInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    stageId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LeadCreateManyStageInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    pipelineId?: string | null
+    ownerUserId?: string | null
+    title?: string | null
+    sourceChannel: $Enums.LeadSourceChannel
+    status?: $Enums.LeadStatus
+    score?: number | null
+    firstInboundAt?: Date | string | null
+    lastInboundAt?: Date | string | null
+    lastOutboundAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type LeadUpdateWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutLeadsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutLeadsNestedInput
+    pipeline?: PipelineUpdateOneWithoutLeadsNestedInput
+    ownerUser?: UserUpdateOneWithoutOwnedLeadsNestedInput
+    conversations?: ConversationUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    conversations?: ConversationUncheckedUpdateManyWithoutLeadNestedInput
+  }
+
+  export type LeadUncheckedUpdateManyWithoutStageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    pipelineId?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    sourceChannel?: EnumLeadSourceChannelFieldUpdateOperationsInput | $Enums.LeadSourceChannel
+    status?: EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+    score?: NullableIntFieldUpdateOperationsInput | number | null
+    firstInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastOutboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
   }
 
 

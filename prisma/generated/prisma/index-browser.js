@@ -215,9 +215,111 @@ exports.Prisma.MembershipScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  fullName: 'fullName',
+  email: 'email',
+  phoneE164: 'phoneE164',
+  whatsappWaId: 'whatsappWaId',
+  normalizedPhone: 'normalizedPhone',
+  source: 'source',
+  tags: 'tags',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  version: 'version'
+};
+
+exports.Prisma.LeadScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  pipelineId: 'pipelineId',
+  stageId: 'stageId',
+  ownerUserId: 'ownerUserId',
+  title: 'title',
+  sourceChannel: 'sourceChannel',
+  status: 'status',
+  score: 'score',
+  firstInboundAt: 'firstInboundAt',
+  lastInboundAt: 'lastInboundAt',
+  lastOutboundAt: 'lastOutboundAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  version: 'version'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  channel: 'channel',
+  status: 'status',
+  assigneeUserId: 'assigneeUserId',
+  lastMessageAt: 'lastMessageAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  version: 'version'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  conversationId: 'conversationId',
+  direction: 'direction',
+  kind: 'kind',
+  bodyText: 'bodyText',
+  mediaUrl: 'mediaUrl',
+  mediaMimeType: 'mediaMimeType',
+  metaMessageId: 'metaMessageId',
+  externalStatus: 'externalStatus',
+  pricingCategory: 'pricingCategory',
+  pricingType: 'pricingType',
+  currency: 'currency',
+  estimatedMetaCost: 'estimatedMetaCost',
+  recipientCountry: 'recipientCountry',
+  deliveredAt: 'deliveredAt',
+  readAt: 'readAt',
+  failedAt: 'failedAt',
+  rawPayload: 'rawPayload',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PipelineScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PipelineStageScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  pipelineId: 'pipelineId',
+  name: 'name',
+  slug: 'slug',
+  color: 'color',
+  position: 'position',
+  isFinal: 'isFinal',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -228,6 +330,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
@@ -265,6 +373,46 @@ exports.TenantRole = exports.$Enums.TenantRole = {
   VIEWER: 'VIEWER'
 };
 
+exports.LeadSourceChannel = exports.$Enums.LeadSourceChannel = {
+  WHATSAPP: 'WHATSAPP',
+  MANUAL: 'MANUAL',
+  IMPORT: 'IMPORT',
+  API: 'API'
+};
+
+exports.LeadStatus = exports.$Enums.LeadStatus = {
+  OPEN: 'OPEN',
+  WON: 'WON',
+  LOST: 'LOST',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.ChannelType = exports.$Enums.ChannelType = {
+  WHATSAPP: 'WHATSAPP'
+};
+
+exports.ConversationStatus = exports.$Enums.ConversationStatus = {
+  OPEN: 'OPEN',
+  PENDING: 'PENDING',
+  CLOSED: 'CLOSED',
+  SPAM: 'SPAM'
+};
+
+exports.MessageDirection = exports.$Enums.MessageDirection = {
+  INBOUND: 'INBOUND',
+  OUTBOUND: 'OUTBOUND'
+};
+
+exports.MessageKind = exports.$Enums.MessageKind = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  DOCUMENT: 'DOCUMENT',
+  AUDIO: 'AUDIO',
+  VIDEO: 'VIDEO',
+  TEMPLATE: 'TEMPLATE',
+  SYSTEM: 'SYSTEM'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
@@ -273,7 +421,13 @@ exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   TenantDomain: 'TenantDomain',
   TenantBranding: 'TenantBranding',
-  Membership: 'Membership'
+  Membership: 'Membership',
+  Contact: 'Contact',
+  Lead: 'Lead',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  Pipeline: 'Pipeline',
+  PipelineStage: 'PipelineStage'
 };
 
 /**

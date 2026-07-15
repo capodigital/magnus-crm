@@ -21,6 +21,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   memberships   Membership[]
+  ownedLeads    Lead[]        @relation("LeadOwner")
+  assignedConversations Conversation[] @relation("ConversationAssignee")
 
   @@map("users")
 }
@@ -95,6 +97,46 @@ enum DomainKind {
   WILDCARD_DOMAIN
 }
 
+enum LeadSourceChannel {
+  WHATSAPP
+  MANUAL
+  IMPORT
+  API
+}
+
+enum LeadStatus {
+  OPEN
+  WON
+  LOST
+  ARCHIVED
+}
+
+enum ChannelType {
+  WHATSAPP
+}
+
+enum ConversationStatus {
+  OPEN
+  PENDING
+  CLOSED
+  SPAM
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageKind {
+  TEXT
+  IMAGE
+  DOCUMENT
+  AUDIO
+  VIDEO
+  TEMPLATE
+  SYSTEM
+}
+
 model Tenant {
   id           String            @id @default(cuid())
   slug         String            @unique
@@ -110,6 +152,12 @@ model Tenant {
   domains      TenantDomain[]
   branding     TenantBranding?
   memberships  Membership[]
+  contacts     Contact[]
+  leads        Lead[]
+  conversations Conversation[]
+  messages     Message[]
+  pipelines    Pipeline[]
+  pipelineStages PipelineStage[]
 
   @@map("tenants")
   @@index([status, createdAt])
@@ -169,4 +217,152 @@ model Membership {
   @@map("memberships")
   @@unique([tenantId, userId])
   @@index([tenantId, role])
+}
+
+model Contact {
+  id              String         @id @default(cuid())
+  tenantId        String
+  firstName       String?
+  lastName        String?
+  fullName        String?
+  email           String?
+  phoneE164       String?
+  whatsappWaId    String?
+  normalizedPhone String?
+  source          String?
+  tags            String[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  version         Int            @default(1)
+  tenant          Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leads           Lead[]
+  conversations   Conversation[]
+
+  @@map("contacts")
+  @@index([tenantId, updatedAt])
+  @@unique([tenantId, whatsappWaId])
+  @@unique([tenantId, normalizedPhone])
+  @@unique([tenantId, email])
+}
+
+model Lead {
+  id               String            @id @default(cuid())
+  tenantId         String
+  contactId        String
+  pipelineId       String?
+  stageId          String?
+  ownerUserId      String?
+  title            String?
+  sourceChannel    LeadSourceChannel
+  status           LeadStatus        @default(OPEN)
+  score            Int?
+  firstInboundAt   DateTime?
+  lastInboundAt    DateTime?
+  lastOutboundAt   DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  version          Int               @default(1)
+  tenant           Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact          Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  pipeline         Pipeline?         @relation(fields: [pipelineId], references: [id])
+  stage            PipelineStage?    @relation(fields: [stageId], references: [id])
+  ownerUser        User?             @relation("LeadOwner", fields: [ownerUserId], references: [id])
+  conversations    Conversation[]
+
+  @@map("leads")
+  @@index([tenantId, status, updatedAt])
+  @@index([tenantId, ownerUserId, updatedAt])
+  @@index([tenantId, pipelineId, stageId])
+}
+
+model Conversation {
+  id                 String              @id @default(cuid())
+  tenantId           String
+  contactId          String
+  leadId             String?
+  channel            ChannelType
+  status             ConversationStatus  @default(OPEN)
+  assigneeUserId     String?
+  lastMessageAt      DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  version            Int                 @default(1)
+  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact            Contact             @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  lead               Lead?               @relation(fields: [leadId], references: [id])
+  assigneeUser       User?               @relation("ConversationAssignee", fields: [assigneeUserId], references: [id])
+  messages           Message[]
+
+  @@map("conversations")
+  @@index([tenantId, channel, status, lastMessageAt])
+  @@index([tenantId, assigneeUserId, lastMessageAt])
+}
+
+model Message {
+  id                String            @id @default(cuid())
+  tenantId          String
+  conversationId    String
+  direction         MessageDirection
+  kind              MessageKind
+  bodyText          String?
+  mediaUrl          String?
+  mediaMimeType     String?
+  metaMessageId     String?
+  externalStatus    String?
+  pricingCategory   String?
+  pricingType       String?
+  currency          String?
+  estimatedMetaCost Decimal?          @db.Decimal(12, 6)
+  recipientCountry  String?
+  deliveredAt       DateTime?
+  readAt            DateTime?
+  failedAt          DateTime?
+  rawPayload        Json?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  tenant            Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversation      Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+  @@unique([tenantId, metaMessageId])
+  @@index([tenantId, conversationId, createdAt])
+  @@index([tenantId, deliveredAt])
+}
+
+model Pipeline {
+  id          String          @id @default(cuid())
+  tenantId    String
+  name        String
+  description String?
+  isDefault   Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  tenant      Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  stages      PipelineStage[]
+  leads       Lead[]
+
+  @@map("pipelines")
+  @@unique([tenantId, name])
+  @@index([tenantId, isDefault])
+}
+
+model PipelineStage {
+  id          String     @id @default(cuid())
+  tenantId    String
+  pipelineId  String
+  name        String
+  slug        String
+  color       String?
+  position    Int
+  isFinal     Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  tenant      Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  pipeline    Pipeline   @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  leads       Lead[]
+
+  @@map("pipeline_stages")
+  @@unique([pipelineId, slug])
+  @@unique([pipelineId, position])
+  @@index([tenantId, pipelineId])
 }

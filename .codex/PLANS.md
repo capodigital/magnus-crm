@@ -78,6 +78,9 @@
   - `backend-clean-architecture`
 - Goal output:
   - A shell that can already render as SaaS or white-label without changing the core.
+- Status:
+  - Request host parsing now distinguishes platform host, platform subdomain, and custom domain safely.
+  - A server-only app context helper resolves tenant + membership for authenticated dashboard requests.
 
 ### Phase 4: Auth and RBAC
 - Objective: protect the surfaces and model roles correctly.
@@ -93,7 +96,26 @@
 - Goal output:
   - A secure boundary around private CRM data.
 - Status:
-  - Login, session helpers, proxy guards, and NextAuth type augmentation are in place. Tenant membership enforcement is the next layer.
+  - Login, session helpers, proxy guards, and NextAuth type augmentation are in place.
+  - Tenant membership enforcement now runs in the dashboard layout for tenant-scoped hosts.
+
+### Phase 4.5: CRM data foundation
+- Objective: create the first tenant-scoped CRM entities the WhatsApp and inbox flows will depend on.
+- Deliverables:
+  - Contact model.
+  - Lead model.
+  - Conversation model.
+  - Message model.
+  - Pipeline and stage models.
+  - Generated Prisma client aligned with those entities.
+- Skills:
+  - `backend-clean-architecture`
+  - `codex-progress-journal`
+  - `deep-code-review`
+- Goal output:
+  - A domain model that can support inbound lead capture, inbox replies, and pipeline state changes.
+- Status:
+  - The initial CRM data slice now exists in Prisma and the generated client has been refreshed.
 
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.
@@ -175,8 +197,8 @@
 
 1. Which Google OAuth client ID and secret should we use to enable the Google provider?
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
-3. Do you want the first tenant-aware query helper to resolve by host only, or also by slug for platform-admin tooling?
-4. Should the first CRM backend slice after auth be WhatsApp webhook ingestion or tenant-aware RBAC checks?
+3. Should we bootstrap the first tenant and default pipeline through a seed script, an admin route, or a manual SQL/Prisma Studio pass?
+4. Do you want the next backend slice after this data foundation to be WhatsApp webhook ingestion or tenant/workspace bootstrap tooling?
 
 ## Deferred for now
 - Any destructive or broad refactors.

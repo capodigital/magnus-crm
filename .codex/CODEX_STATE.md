@@ -10,7 +10,9 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The root route and dashboard layout now redirect unauthenticated users to `/login`, and the login page handles credentials plus optional Google sign-in.
 - The current shell uses a shared provider stack, a vertical or horizontal layout wrapper, and theme settings driven partly by cookies.
 - The auth layer now uses NextAuth with Prisma, a `proxy.ts` guard, session helpers, and local NextAuth type augmentation.
-- The Prisma schema and generated client now include the first multi-tenant core: tenants, tenant domains, tenant branding, and memberships.
+- A server-only app context helper now resolves request host, session, tenant, and membership in one place.
+- Dashboard access is now tenant-aware: platform-host requests still work with session auth, while tenant-scoped hosts require both a resolved tenant and a matching membership.
+- The Prisma schema and generated client now include the tenant core plus the first CRM domain slice: contacts, leads, conversations, messages, pipelines, and pipeline stages.
 - The repo now has an expanded `.env.example` that lists the initial App, Database, NextAuth, Google, and Meta placeholders we will need.
 - Google OAuth and Meta WhatsApp values are still pending from the user, as requested.
 
@@ -28,11 +30,11 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `.codex/PLANS.md`
 - `.codex/DECISIONS.md`
 - `.codex/PROJECT_INDEX.md`
-- `src/app/(blank-layout-pages)/login/page.tsx`
 - `src/app/(dashboard)/layout.tsx`
+- `src/lib/app-context.ts`
 - `src/lib/tenant.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Start the CRM data/model layer that sits on top of the new tenancy core, then wire the first tenant-aware query helpers once the remaining Google and Meta secrets arrive.
+Add the first repository and bootstrap layer on top of the CRM models so we can create an initial tenant workspace, seed a default pipeline, and prepare for WhatsApp event ingestion.
