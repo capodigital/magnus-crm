@@ -4,10 +4,20 @@ import type { NextAuthOptions } from 'next-auth'
 import { getServerSession } from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
+import type { JWT } from 'next-auth/jwt'
 
 import prisma from '@/lib/prisma'
 
 const hasGoogleCredentials = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)
+
+type AuthUser = {
+  id: string
+  email?: string | null
+  name?: string | null
+  image?: string | null
+  role?: string
+  phone?: string | null
+}
 
 const providers: NextAuthOptions['providers'] = [
   CredentialsProvider({
@@ -16,7 +26,7 @@ const providers: NextAuthOptions['providers'] = [
       email: { label: 'Email', type: 'email' },
       password: { label: 'Password', type: 'password' }
     },
-    async authorize(credentials) {
+    async authorize(credentials: { email?: string; password?: string } | undefined): Promise<AuthUser | null> {
       const email = credentials?.email?.trim().toLowerCase()
       const password = credentials?.password
 
@@ -63,7 +73,7 @@ export const authOptions: NextAuthOptions = {
   },
   providers,
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT; user?: AuthUser }) {
       if (user) {
         token.id = user.id
         token.role = user.role ?? token.role ?? 'USUARIO'
@@ -99,7 +109,7 @@ export const authOptions: NextAuthOptions = {
 
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: JWT }) {
       if (!session.user) return session
 
       session.user.id = token.id
