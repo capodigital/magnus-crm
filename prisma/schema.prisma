@@ -137,6 +137,19 @@ enum MessageKind {
   SYSTEM
 }
 
+enum WhatsappWebhookEventType {
+  MESSAGE
+  STATUS
+  UNKNOWN
+}
+
+enum WhatsappWebhookProcessingStatus {
+  PENDING
+  PROCESSED
+  IGNORED
+  FAILED
+}
+
 model Tenant {
   id           String            @id @default(cuid())
   slug         String            @unique
@@ -156,6 +169,8 @@ model Tenant {
   leads        Lead[]
   conversations Conversation[]
   messages     Message[]
+  whatsappPhoneNumbers WhatsappPhoneNumber[]
+  whatsappWebhookEvents WhatsappWebhookEvent[]
   pipelines    Pipeline[]
   pipelineStages PipelineStage[]
 
@@ -283,6 +298,8 @@ model Conversation {
   channel            ChannelType
   status             ConversationStatus  @default(OPEN)
   assigneeUserId     String?
+  externalThreadKey  String?
+  whatsappPhoneNumberId String?
   lastMessageAt      DateTime?
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
@@ -291,11 +308,14 @@ model Conversation {
   contact            Contact             @relation(fields: [contactId], references: [id], onDelete: Cascade)
   lead               Lead?               @relation(fields: [leadId], references: [id])
   assigneeUser       User?               @relation("ConversationAssignee", fields: [assigneeUserId], references: [id])
+  whatsappPhoneNumber WhatsappPhoneNumber? @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: SetNull)
   messages           Message[]
 
   @@map("conversations")
+  @@unique([tenantId, channel, externalThreadKey])
   @@index([tenantId, channel, status, lastMessageAt])
   @@index([tenantId, assigneeUserId, lastMessageAt])
+  @@index([tenantId, whatsappPhoneNumberId, lastMessageAt])
 }
 
 model Message {
@@ -327,6 +347,55 @@ model Message {
   @@unique([tenantId, metaMessageId])
   @@index([tenantId, conversationId, createdAt])
   @@index([tenantId, deliveredAt])
+}
+
+model WhatsappPhoneNumber {
+  id                     String                 @id @default(cuid())
+  tenantId               String
+  wabaId                 String
+  phoneNumberId          String                 @unique
+  displayPhoneNumber     String?
+  verifiedName           String?
+  qualityRating          String?
+  codeVerificationStatus String?
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  tenant                 Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversations          Conversation[]
+  webhookEvents          WhatsappWebhookEvent[]
+
+  @@map("whatsapp_phone_numbers")
+  @@index([tenantId, wabaId])
+  @@index([tenantId, displayPhoneNumber])
+}
+
+model WhatsappWebhookEvent {
+  id                    String                           @id @default(cuid())
+  tenantId              String
+  whatsappPhoneNumberId String
+  eventType             WhatsappWebhookEventType
+  processingStatus      WhatsappWebhookProcessingStatus @default(PENDING)
+  objectType            String
+  entryId               String?
+  changeField           String
+  eventKey              String
+  externalMessageId     String?
+  externalStatus        String?
+  contactWaId           String?
+  eventTimestamp        DateTime?
+  rawPayload            Json
+  processedAt           DateTime?
+  errorMessage          String?
+  createdAt             DateTime                         @default(now())
+  updatedAt             DateTime                         @updatedAt
+  tenant                Tenant                           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  whatsappPhoneNumber   WhatsappPhoneNumber              @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: Cascade)
+
+  @@map("whatsapp_webhook_events")
+  @@unique([tenantId, eventKey])
+  @@index([tenantId, processingStatus, createdAt])
+  @@index([tenantId, externalMessageId])
+  @@index([whatsappPhoneNumberId, createdAt])
 }
 
 model Pipeline {
