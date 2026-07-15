@@ -77,13 +77,13 @@ declare module '@auth/prisma-adapter' {
 declare module '@prisma/adapter-pg' {
   export interface SqlDriverAdapterFactory {
     adapterName: string
-    provider: 'postgresql'
+    provider: 'postgres'
     connect(): Promise<any>
   }
 
   export class PrismaPg implements SqlDriverAdapterFactory {
     adapterName: string
-    provider: 'postgresql'
+    provider: 'postgres'
     constructor(config: { connectionString: string })
     connect(): Promise<any>
   }
