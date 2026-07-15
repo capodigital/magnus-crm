@@ -12,6 +12,8 @@
 8. Defer white-label implementation until the core CRM workflow is stable.
 9. Model tenancy in Prisma with `Tenant`, `TenantDomain`, `TenantBranding`, and `Membership` instead of baking tenant data into the auth user row.
 10. Keep Google OAuth and Meta WhatsApp credentials out of the repo until the user provides the final values.
+11. Resolve tenant access by exact host first, and only fall back to slug matching for platform-managed wildcard subdomains.
+12. Add the first CRM workflow entities directly to Prisma before implementing WhatsApp ingestion routes.
 
 ## Rationale
 
@@ -20,3 +22,5 @@
 - The template already provides shared layout, theme, and navigation primitives that can be reused while the CRM is being introduced.
 - The shell work should stay on the current template base instead of forcing a cleanup rewrite first.
 - A dedicated tenant model keeps auth, membership, and branding concerns separated and makes white-label/domain control easier later.
+- Exact-host-first resolution avoids accidentally treating arbitrary custom domains as trusted tenant slugs.
+- Adding the CRM entities early gives the webhook and inbox work a stable contract to build against.

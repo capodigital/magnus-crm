@@ -8,6 +8,7 @@
 - The shell now contains a CRM-oriented home page and route placeholders for inbox, leads, pipeline, billing, and settings.
 - Auth is wired with NextAuth + Prisma, a `proxy.ts` guard, and a credential-plus-Google login surface.
 - Prisma now carries the first tenant core: tenants, tenant domains, tenant branding, and memberships.
+- Prisma also now carries the first CRM workflow entities: contacts, leads, conversations, messages, pipelines, and pipeline stages.
 
 ## Key files
 
@@ -26,11 +27,13 @@
 - `src/views/Login.tsx` - login view component.
 - `src/app/api/auth/[...nextauth]/route.ts` - NextAuth route handler.
 - `src/lib/auth.ts` - NextAuth options, callbacks, and session helper.
+- `src/lib/app-context.ts` - server-only resolver for request tenant, session, and membership.
 - `src/lib/tenant.ts` - host-based tenant context helper.
 - `src/proxy.ts` - request guard and auth context injector.
 - `src/views/NotFound.tsx` - not-found view component.
 - `src/components/crm/SectionPage.tsx` - shared route shell for CRM sections.
 - `prisma/schema.prisma` - tenant-aware data model and NextAuth tables.
+- `prisma/schema.prisma` - tenant-aware data model, auth tables, and CRM workflow entities.
 - `prisma/generated/prisma/` - generated Prisma client for the current schema.
 
 ## Important directories
