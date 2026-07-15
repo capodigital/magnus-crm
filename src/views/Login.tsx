@@ -1,21 +1,25 @@
 'use client'
 
 // React Imports
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 
 // Next Imports
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
 // MUI Imports
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Divider from '@mui/material/Divider'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Checkbox from '@mui/material/Checkbox'
-import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { styled, useTheme } from '@mui/material/styles'
 
 // Third-party Imports
 import classnames from 'classnames'
@@ -59,9 +63,19 @@ const MaskImg = styled('img')({
   zIndex: -1
 })
 
-const LoginV2 = ({ mode }: { mode: SystemMode }) => {
+type LoginProps = {
+  mode: SystemMode
+  callbackUrl: string
+  hasGoogleProvider: boolean
+}
+
+const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   // Vars
   const darkImg = '/images/pages/auth-mask-dark.png'
@@ -86,7 +100,38 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
     borderedDarkIllustration
   )
 
+  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
+
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    const response = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: safeCallbackUrl
+    })
+
+    setIsSubmitting(false)
+
+    if (!response || response.error) {
+      setErrorMessage('No pudimos iniciar sesión. Revisa tus credenciales e intenta de nuevo.')
+      return
+    }
+
+    router.replace(response.url ?? safeCallbackUrl)
+    router.refresh()
+  }
+
+  const handleGoogleSignIn = async () => {
+    await signIn('google', {
+      callbackUrl: safeCallbackUrl
+    })
+  }
 
   return (
     <div className='flex bs-full justify-center'>
@@ -108,30 +153,36 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
         )}
       </div>
       <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
+        <Link href='/' className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
           <Logo />
         </Link>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
           <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</Typography>
-            <Typography>Please sign-in to your account and start the adventure</Typography>
+            <Typography variant='h4'>{`Bienvenido a ${themeConfig.templateName}`}</Typography>
+            <Typography color='text.secondary'>
+              Accede con tu correo y contraseña. Google aparecerá cuando el cliente esté configurado.
+            </Typography>
           </div>
-          <form
-            noValidate
-            autoComplete='off'
-            onSubmit={e => {
-              e.preventDefault()
-              router.push('/')
-            }}
-            className='flex flex-col gap-5'
-          >
-            <CustomTextField autoFocus fullWidth label='Email or Username' placeholder='Enter your email or username' />
+          <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
+            <CustomTextField
+              autoFocus
+              fullWidth
+              label='Email'
+              placeholder='tu@empresa.com'
+              type='email'
+              autoComplete='email'
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+            />
             <CustomTextField
               fullWidth
               label='Password'
-              placeholder='············'
+              placeholder='••••••••••••'
               id='outlined-adornment-password'
               type={isPasswordShown ? 'text' : 'password'}
+              autoComplete='current-password'
+              value={password}
+              onChange={event => setPassword(event.target.value)}
               slotProps={{
                 input: {
                   endAdornment: (
@@ -144,36 +195,38 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
                 }
               }}
             />
+            {errorMessage ? <Alert severity='error'>{errorMessage}</Alert> : null}
             <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
               <FormControlLabel control={<Checkbox />} label='Remember me' />
-              <Typography className='text-end' color='primary.main' component={Link}>
-                Forgot password?
+              <Typography component='span' variant='body2' color='text.secondary'>
+                Invite-based workspace access
               </Typography>
             </div>
-            <Button fullWidth variant='contained' type='submit'>
-              Login
+            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Signing in...' : 'Sign in'}
             </Button>
-            <div className='flex justify-center items-center flex-wrap gap-2'>
-              <Typography>New on our platform?</Typography>
-              <Typography component={Link} color='primary.main'>
-                Create an account
-              </Typography>
-            </div>
-            <Divider className='gap-2 text-textPrimary'>or</Divider>
-            <div className='flex justify-center items-center gap-1.5'>
-              <IconButton className='text-facebook' size='small'>
-                <i className='tabler-brand-facebook-filled' />
-              </IconButton>
-              <IconButton className='text-twitter' size='small'>
-                <i className='tabler-brand-twitter-filled' />
-              </IconButton>
-              <IconButton className='text-textPrimary' size='small'>
-                <i className='tabler-brand-github-filled' />
-              </IconButton>
-              <IconButton className='text-error' size='small'>
-                <i className='tabler-brand-google-filled' />
-              </IconButton>
-            </div>
+            {hasGoogleProvider ? (
+              <>
+                <Divider className='gap-2 text-textPrimary'>or</Divider>
+                <Button
+                  fullWidth
+                  variant='outlined'
+                  type='button'
+                  onClick={handleGoogleSignIn}
+                  startIcon={<i className='tabler-brand-google-filled' />}
+                >
+                  Continue with Google
+                </Button>
+              </>
+            ) : (
+              <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
+                <Stack spacing={0.5}>
+                  <Typography variant='body2' color='text.secondary'>
+                    Google sign-in will appear once the client credentials are configured.
+                  </Typography>
+                </Stack>
+              </Box>
+            )}
           </form>
         </div>
       </div>
