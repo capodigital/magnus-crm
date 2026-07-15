@@ -259,6 +259,8 @@ exports.Prisma.ConversationScalarFieldEnum = {
   channel: 'channel',
   status: 'status',
   assigneeUserId: 'assigneeUserId',
+  externalThreadKey: 'externalThreadKey',
+  whatsappPhoneNumberId: 'whatsappPhoneNumberId',
   lastMessageAt: 'lastMessageAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -285,6 +287,40 @@ exports.Prisma.MessageScalarFieldEnum = {
   readAt: 'readAt',
   failedAt: 'failedAt',
   rawPayload: 'rawPayload',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WhatsappPhoneNumberScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  wabaId: 'wabaId',
+  phoneNumberId: 'phoneNumberId',
+  displayPhoneNumber: 'displayPhoneNumber',
+  verifiedName: 'verifiedName',
+  qualityRating: 'qualityRating',
+  codeVerificationStatus: 'codeVerificationStatus',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WhatsappWebhookEventScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  whatsappPhoneNumberId: 'whatsappPhoneNumberId',
+  eventType: 'eventType',
+  processingStatus: 'processingStatus',
+  objectType: 'objectType',
+  entryId: 'entryId',
+  changeField: 'changeField',
+  eventKey: 'eventKey',
+  externalMessageId: 'externalMessageId',
+  externalStatus: 'externalStatus',
+  contactWaId: 'contactWaId',
+  eventTimestamp: 'eventTimestamp',
+  rawPayload: 'rawPayload',
+  processedAt: 'processedAt',
+  errorMessage: 'errorMessage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -319,6 +355,10 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
@@ -413,6 +453,19 @@ exports.MessageKind = exports.$Enums.MessageKind = {
   SYSTEM: 'SYSTEM'
 };
 
+exports.WhatsappWebhookEventType = exports.$Enums.WhatsappWebhookEventType = {
+  MESSAGE: 'MESSAGE',
+  STATUS: 'STATUS',
+  UNKNOWN: 'UNKNOWN'
+};
+
+exports.WhatsappWebhookProcessingStatus = exports.$Enums.WhatsappWebhookProcessingStatus = {
+  PENDING: 'PENDING',
+  PROCESSED: 'PROCESSED',
+  IGNORED: 'IGNORED',
+  FAILED: 'FAILED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
@@ -426,6 +479,8 @@ exports.Prisma.ModelName = {
   Lead: 'Lead',
   Conversation: 'Conversation',
   Message: 'Message',
+  WhatsappPhoneNumber: 'WhatsappPhoneNumber',
+  WhatsappWebhookEvent: 'WhatsappWebhookEvent',
   Pipeline: 'Pipeline',
   PipelineStage: 'PipelineStage'
 };

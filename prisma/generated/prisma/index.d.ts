@@ -74,6 +74,16 @@ export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
 /**
+ * Model WhatsappPhoneNumber
+ * 
+ */
+export type WhatsappPhoneNumber = $Result.DefaultSelection<Prisma.$WhatsappPhoneNumberPayload>
+/**
+ * Model WhatsappWebhookEvent
+ * 
+ */
+export type WhatsappWebhookEvent = $Result.DefaultSelection<Prisma.$WhatsappWebhookEventPayload>
+/**
  * Model Pipeline
  * 
  */
@@ -199,6 +209,25 @@ export const MessageKind: {
 
 export type MessageKind = (typeof MessageKind)[keyof typeof MessageKind]
 
+
+export const WhatsappWebhookEventType: {
+  MESSAGE: 'MESSAGE',
+  STATUS: 'STATUS',
+  UNKNOWN: 'UNKNOWN'
+};
+
+export type WhatsappWebhookEventType = (typeof WhatsappWebhookEventType)[keyof typeof WhatsappWebhookEventType]
+
+
+export const WhatsappWebhookProcessingStatus: {
+  PENDING: 'PENDING',
+  PROCESSED: 'PROCESSED',
+  IGNORED: 'IGNORED',
+  FAILED: 'FAILED'
+};
+
+export type WhatsappWebhookProcessingStatus = (typeof WhatsappWebhookProcessingStatus)[keyof typeof WhatsappWebhookProcessingStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -248,6 +277,14 @@ export const MessageDirection: typeof $Enums.MessageDirection
 export type MessageKind = $Enums.MessageKind
 
 export const MessageKind: typeof $Enums.MessageKind
+
+export type WhatsappWebhookEventType = $Enums.WhatsappWebhookEventType
+
+export const WhatsappWebhookEventType: typeof $Enums.WhatsappWebhookEventType
+
+export type WhatsappWebhookProcessingStatus = $Enums.WhatsappWebhookProcessingStatus
+
+export const WhatsappWebhookProcessingStatus: typeof $Enums.WhatsappWebhookProcessingStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -489,6 +526,26 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.whatsappPhoneNumber`: Exposes CRUD operations for the **WhatsappPhoneNumber** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WhatsappPhoneNumbers
+    * const whatsappPhoneNumbers = await prisma.whatsappPhoneNumber.findMany()
+    * ```
+    */
+  get whatsappPhoneNumber(): Prisma.WhatsappPhoneNumberDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.whatsappWebhookEvent`: Exposes CRUD operations for the **WhatsappWebhookEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WhatsappWebhookEvents
+    * const whatsappWebhookEvents = await prisma.whatsappWebhookEvent.findMany()
+    * ```
+    */
+  get whatsappWebhookEvent(): Prisma.WhatsappWebhookEventDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pipeline`: Exposes CRUD operations for the **Pipeline** model.
@@ -955,6 +1012,8 @@ export namespace Prisma {
     Lead: 'Lead',
     Conversation: 'Conversation',
     Message: 'Message',
+    WhatsappPhoneNumber: 'WhatsappPhoneNumber',
+    WhatsappWebhookEvent: 'WhatsappWebhookEvent',
     Pipeline: 'Pipeline',
     PipelineStage: 'PipelineStage'
   };
@@ -972,7 +1031,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership" | "contact" | "lead" | "conversation" | "message" | "pipeline" | "pipelineStage"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership" | "contact" | "lead" | "conversation" | "message" | "whatsappPhoneNumber" | "whatsappWebhookEvent" | "pipeline" | "pipelineStage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1864,6 +1923,154 @@ export namespace Prisma {
           }
         }
       }
+      WhatsappPhoneNumber: {
+        payload: Prisma.$WhatsappPhoneNumberPayload<ExtArgs>
+        fields: Prisma.WhatsappPhoneNumberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WhatsappPhoneNumberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WhatsappPhoneNumberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          findFirst: {
+            args: Prisma.WhatsappPhoneNumberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WhatsappPhoneNumberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          findMany: {
+            args: Prisma.WhatsappPhoneNumberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>[]
+          }
+          create: {
+            args: Prisma.WhatsappPhoneNumberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          createMany: {
+            args: Prisma.WhatsappPhoneNumberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WhatsappPhoneNumberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>[]
+          }
+          delete: {
+            args: Prisma.WhatsappPhoneNumberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          update: {
+            args: Prisma.WhatsappPhoneNumberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          deleteMany: {
+            args: Prisma.WhatsappPhoneNumberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WhatsappPhoneNumberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WhatsappPhoneNumberUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>[]
+          }
+          upsert: {
+            args: Prisma.WhatsappPhoneNumberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappPhoneNumberPayload>
+          }
+          aggregate: {
+            args: Prisma.WhatsappPhoneNumberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWhatsappPhoneNumber>
+          }
+          groupBy: {
+            args: Prisma.WhatsappPhoneNumberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappPhoneNumberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WhatsappPhoneNumberCountArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappPhoneNumberCountAggregateOutputType> | number
+          }
+        }
+      }
+      WhatsappWebhookEvent: {
+        payload: Prisma.$WhatsappWebhookEventPayload<ExtArgs>
+        fields: Prisma.WhatsappWebhookEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WhatsappWebhookEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WhatsappWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          findFirst: {
+            args: Prisma.WhatsappWebhookEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WhatsappWebhookEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          findMany: {
+            args: Prisma.WhatsappWebhookEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>[]
+          }
+          create: {
+            args: Prisma.WhatsappWebhookEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          createMany: {
+            args: Prisma.WhatsappWebhookEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WhatsappWebhookEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>[]
+          }
+          delete: {
+            args: Prisma.WhatsappWebhookEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          update: {
+            args: Prisma.WhatsappWebhookEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.WhatsappWebhookEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WhatsappWebhookEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WhatsappWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.WhatsappWebhookEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappWebhookEventPayload>
+          }
+          aggregate: {
+            args: Prisma.WhatsappWebhookEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWhatsappWebhookEvent>
+          }
+          groupBy: {
+            args: Prisma.WhatsappWebhookEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappWebhookEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WhatsappWebhookEventCountArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappWebhookEventCountAggregateOutputType> | number
+          }
+        }
+      }
       Pipeline: {
         payload: Prisma.$PipelinePayload<ExtArgs>
         fields: Prisma.PipelineFieldRefs
@@ -2132,6 +2339,8 @@ export namespace Prisma {
     lead?: LeadOmit
     conversation?: ConversationOmit
     message?: MessageOmit
+    whatsappPhoneNumber?: WhatsappPhoneNumberOmit
+    whatsappWebhookEvent?: WhatsappWebhookEventOmit
     pipeline?: PipelineOmit
     pipelineStage?: PipelineStageOmit
   }
@@ -2287,6 +2496,8 @@ export namespace Prisma {
     leads: number
     conversations: number
     messages: number
+    whatsappPhoneNumbers: number
+    whatsappWebhookEvents: number
     pipelines: number
     pipelineStages: number
   }
@@ -2298,6 +2509,8 @@ export namespace Prisma {
     leads?: boolean | TenantCountOutputTypeCountLeadsArgs
     conversations?: boolean | TenantCountOutputTypeCountConversationsArgs
     messages?: boolean | TenantCountOutputTypeCountMessagesArgs
+    whatsappPhoneNumbers?: boolean | TenantCountOutputTypeCountWhatsappPhoneNumbersArgs
+    whatsappWebhookEvents?: boolean | TenantCountOutputTypeCountWhatsappWebhookEventsArgs
     pipelines?: boolean | TenantCountOutputTypeCountPipelinesArgs
     pipelineStages?: boolean | TenantCountOutputTypeCountPipelineStagesArgs
   }
@@ -2353,6 +2566,20 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountWhatsappPhoneNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappPhoneNumberWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountWhatsappWebhookEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappWebhookEventWhereInput
   }
 
   /**
@@ -2469,6 +2696,46 @@ export namespace Prisma {
    */
   export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type WhatsappPhoneNumberCountOutputType
+   */
+
+  export type WhatsappPhoneNumberCountOutputType = {
+    conversations: number
+    webhookEvents: number
+  }
+
+  export type WhatsappPhoneNumberCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conversations?: boolean | WhatsappPhoneNumberCountOutputTypeCountConversationsArgs
+    webhookEvents?: boolean | WhatsappPhoneNumberCountOutputTypeCountWebhookEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WhatsappPhoneNumberCountOutputType without action
+   */
+  export type WhatsappPhoneNumberCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumberCountOutputType
+     */
+    select?: WhatsappPhoneNumberCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappPhoneNumberCountOutputType without action
+   */
+  export type WhatsappPhoneNumberCountOutputTypeCountConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
+  }
+
+  /**
+   * WhatsappPhoneNumberCountOutputType without action
+   */
+  export type WhatsappPhoneNumberCountOutputTypeCountWebhookEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappWebhookEventWhereInput
   }
 
 
@@ -7230,6 +7497,8 @@ export namespace Prisma {
     leads?: boolean | Tenant$leadsArgs<ExtArgs>
     conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
     messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    whatsappPhoneNumbers?: boolean | Tenant$whatsappPhoneNumbersArgs<ExtArgs>
+    whatsappWebhookEvents?: boolean | Tenant$whatsappWebhookEventsArgs<ExtArgs>
     pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
     pipelineStages?: boolean | Tenant$pipelineStagesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
@@ -7286,6 +7555,8 @@ export namespace Prisma {
     leads?: boolean | Tenant$leadsArgs<ExtArgs>
     conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
     messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    whatsappPhoneNumbers?: boolean | Tenant$whatsappPhoneNumbersArgs<ExtArgs>
+    whatsappWebhookEvents?: boolean | Tenant$whatsappWebhookEventsArgs<ExtArgs>
     pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
     pipelineStages?: boolean | Tenant$pipelineStagesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
@@ -7303,6 +7574,8 @@ export namespace Prisma {
       leads: Prisma.$LeadPayload<ExtArgs>[]
       conversations: Prisma.$ConversationPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
+      whatsappPhoneNumbers: Prisma.$WhatsappPhoneNumberPayload<ExtArgs>[]
+      whatsappWebhookEvents: Prisma.$WhatsappWebhookEventPayload<ExtArgs>[]
       pipelines: Prisma.$PipelinePayload<ExtArgs>[]
       pipelineStages: Prisma.$PipelineStagePayload<ExtArgs>[]
     }
@@ -7719,6 +7992,8 @@ export namespace Prisma {
     leads<T extends Tenant$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversations<T extends Tenant$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends Tenant$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    whatsappPhoneNumbers<T extends Tenant$whatsappPhoneNumbersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$whatsappPhoneNumbersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    whatsappWebhookEvents<T extends Tenant$whatsappWebhookEventsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$whatsappWebhookEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pipelines<T extends Tenant$pipelinesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$pipelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pipelineStages<T extends Tenant$pipelineStagesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$pipelineStagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelineStagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -8314,6 +8589,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.whatsappPhoneNumbers
+   */
+  export type Tenant$whatsappPhoneNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    where?: WhatsappPhoneNumberWhereInput
+    orderBy?: WhatsappPhoneNumberOrderByWithRelationInput | WhatsappPhoneNumberOrderByWithRelationInput[]
+    cursor?: WhatsappPhoneNumberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WhatsappPhoneNumberScalarFieldEnum | WhatsappPhoneNumberScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.whatsappWebhookEvents
+   */
+  export type Tenant$whatsappWebhookEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    where?: WhatsappWebhookEventWhereInput
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WhatsappWebhookEventScalarFieldEnum | WhatsappWebhookEventScalarFieldEnum[]
   }
 
   /**
@@ -14447,6 +14770,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType | null
     status: $Enums.ConversationStatus | null
     assigneeUserId: string | null
+    externalThreadKey: string | null
+    whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14461,6 +14786,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType | null
     status: $Enums.ConversationStatus | null
     assigneeUserId: string | null
+    externalThreadKey: string | null
+    whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14475,6 +14802,8 @@ export namespace Prisma {
     channel: number
     status: number
     assigneeUserId: number
+    externalThreadKey: number
+    whatsappPhoneNumberId: number
     lastMessageAt: number
     createdAt: number
     updatedAt: number
@@ -14499,6 +14828,8 @@ export namespace Prisma {
     channel?: true
     status?: true
     assigneeUserId?: true
+    externalThreadKey?: true
+    whatsappPhoneNumberId?: true
     lastMessageAt?: true
     createdAt?: true
     updatedAt?: true
@@ -14513,6 +14844,8 @@ export namespace Prisma {
     channel?: true
     status?: true
     assigneeUserId?: true
+    externalThreadKey?: true
+    whatsappPhoneNumberId?: true
     lastMessageAt?: true
     createdAt?: true
     updatedAt?: true
@@ -14527,6 +14860,8 @@ export namespace Prisma {
     channel?: true
     status?: true
     assigneeUserId?: true
+    externalThreadKey?: true
+    whatsappPhoneNumberId?: true
     lastMessageAt?: true
     createdAt?: true
     updatedAt?: true
@@ -14628,6 +14963,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status: $Enums.ConversationStatus
     assigneeUserId: string | null
+    externalThreadKey: string | null
+    whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -14661,6 +14998,8 @@ export namespace Prisma {
     channel?: boolean
     status?: boolean
     assigneeUserId?: boolean
+    externalThreadKey?: boolean
+    whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14669,6 +15008,7 @@ export namespace Prisma {
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
@@ -14681,6 +15021,8 @@ export namespace Prisma {
     channel?: boolean
     status?: boolean
     assigneeUserId?: boolean
+    externalThreadKey?: boolean
+    whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14689,6 +15031,7 @@ export namespace Prisma {
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
 
   export type ConversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14699,6 +15042,8 @@ export namespace Prisma {
     channel?: boolean
     status?: boolean
     assigneeUserId?: boolean
+    externalThreadKey?: boolean
+    whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14707,6 +15052,7 @@ export namespace Prisma {
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
 
   export type ConversationSelectScalar = {
@@ -14717,18 +15063,21 @@ export namespace Prisma {
     channel?: boolean
     status?: boolean
     assigneeUserId?: boolean
+    externalThreadKey?: boolean
+    whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     version?: boolean
   }
 
-  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "leadId" | "channel" | "status" | "assigneeUserId" | "lastMessageAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["conversation"]>
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "leadId" | "channel" | "status" | "assigneeUserId" | "externalThreadKey" | "whatsappPhoneNumberId" | "lastMessageAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["conversation"]>
   export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -14737,12 +15086,14 @@ export namespace Prisma {
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
   }
   export type ConversationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     contact?: boolean | ContactDefaultArgs<ExtArgs>
     lead?: boolean | Conversation$leadArgs<ExtArgs>
     assigneeUser?: boolean | Conversation$assigneeUserArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | Conversation$whatsappPhoneNumberArgs<ExtArgs>
   }
 
   export type $ConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14752,6 +15103,7 @@ export namespace Prisma {
       contact: Prisma.$ContactPayload<ExtArgs>
       lead: Prisma.$LeadPayload<ExtArgs> | null
       assigneeUser: Prisma.$UserPayload<ExtArgs> | null
+      whatsappPhoneNumber: Prisma.$WhatsappPhoneNumberPayload<ExtArgs> | null
       messages: Prisma.$MessagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -14762,6 +15114,8 @@ export namespace Prisma {
       channel: $Enums.ChannelType
       status: $Enums.ConversationStatus
       assigneeUserId: string | null
+      externalThreadKey: string | null
+      whatsappPhoneNumberId: string | null
       lastMessageAt: Date | null
       createdAt: Date
       updatedAt: Date
@@ -15164,6 +15518,7 @@ export namespace Prisma {
     contact<T extends ContactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContactDefaultArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     lead<T extends Conversation$leadArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$leadArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     assigneeUser<T extends Conversation$assigneeUserArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$assigneeUserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    whatsappPhoneNumber<T extends Conversation$whatsappPhoneNumberArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$whatsappPhoneNumberArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -15201,6 +15556,8 @@ export namespace Prisma {
     readonly channel: FieldRef<"Conversation", 'ChannelType'>
     readonly status: FieldRef<"Conversation", 'ConversationStatus'>
     readonly assigneeUserId: FieldRef<"Conversation", 'String'>
+    readonly externalThreadKey: FieldRef<"Conversation", 'String'>
+    readonly whatsappPhoneNumberId: FieldRef<"Conversation", 'String'>
     readonly lastMessageAt: FieldRef<"Conversation", 'DateTime'>
     readonly createdAt: FieldRef<"Conversation", 'DateTime'>
     readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
@@ -15641,6 +15998,25 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
+  }
+
+  /**
+   * Conversation.whatsappPhoneNumber
+   */
+  export type Conversation$whatsappPhoneNumberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    where?: WhatsappPhoneNumberWhereInput
   }
 
   /**
@@ -16992,6 +17368,2428 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WhatsappPhoneNumber
+   */
+
+  export type AggregateWhatsappPhoneNumber = {
+    _count: WhatsappPhoneNumberCountAggregateOutputType | null
+    _min: WhatsappPhoneNumberMinAggregateOutputType | null
+    _max: WhatsappPhoneNumberMaxAggregateOutputType | null
+  }
+
+  export type WhatsappPhoneNumberMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    wabaId: string | null
+    phoneNumberId: string | null
+    displayPhoneNumber: string | null
+    verifiedName: string | null
+    qualityRating: string | null
+    codeVerificationStatus: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappPhoneNumberMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    wabaId: string | null
+    phoneNumberId: string | null
+    displayPhoneNumber: string | null
+    verifiedName: string | null
+    qualityRating: string | null
+    codeVerificationStatus: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappPhoneNumberCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    wabaId: number
+    phoneNumberId: number
+    displayPhoneNumber: number
+    verifiedName: number
+    qualityRating: number
+    codeVerificationStatus: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WhatsappPhoneNumberMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    wabaId?: true
+    phoneNumberId?: true
+    displayPhoneNumber?: true
+    verifiedName?: true
+    qualityRating?: true
+    codeVerificationStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappPhoneNumberMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    wabaId?: true
+    phoneNumberId?: true
+    displayPhoneNumber?: true
+    verifiedName?: true
+    qualityRating?: true
+    codeVerificationStatus?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappPhoneNumberCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    wabaId?: true
+    phoneNumberId?: true
+    displayPhoneNumber?: true
+    verifiedName?: true
+    qualityRating?: true
+    codeVerificationStatus?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WhatsappPhoneNumberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappPhoneNumber to aggregate.
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappPhoneNumbers to fetch.
+     */
+    orderBy?: WhatsappPhoneNumberOrderByWithRelationInput | WhatsappPhoneNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WhatsappPhoneNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappPhoneNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappPhoneNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WhatsappPhoneNumbers
+    **/
+    _count?: true | WhatsappPhoneNumberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WhatsappPhoneNumberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WhatsappPhoneNumberMaxAggregateInputType
+  }
+
+  export type GetWhatsappPhoneNumberAggregateType<T extends WhatsappPhoneNumberAggregateArgs> = {
+        [P in keyof T & keyof AggregateWhatsappPhoneNumber]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWhatsappPhoneNumber[P]>
+      : GetScalarType<T[P], AggregateWhatsappPhoneNumber[P]>
+  }
+
+
+
+
+  export type WhatsappPhoneNumberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappPhoneNumberWhereInput
+    orderBy?: WhatsappPhoneNumberOrderByWithAggregationInput | WhatsappPhoneNumberOrderByWithAggregationInput[]
+    by: WhatsappPhoneNumberScalarFieldEnum[] | WhatsappPhoneNumberScalarFieldEnum
+    having?: WhatsappPhoneNumberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WhatsappPhoneNumberCountAggregateInputType | true
+    _min?: WhatsappPhoneNumberMinAggregateInputType
+    _max?: WhatsappPhoneNumberMaxAggregateInputType
+  }
+
+  export type WhatsappPhoneNumberGroupByOutputType = {
+    id: string
+    tenantId: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber: string | null
+    verifiedName: string | null
+    qualityRating: string | null
+    codeVerificationStatus: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WhatsappPhoneNumberCountAggregateOutputType | null
+    _min: WhatsappPhoneNumberMinAggregateOutputType | null
+    _max: WhatsappPhoneNumberMaxAggregateOutputType | null
+  }
+
+  type GetWhatsappPhoneNumberGroupByPayload<T extends WhatsappPhoneNumberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WhatsappPhoneNumberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WhatsappPhoneNumberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WhatsappPhoneNumberGroupByOutputType[P]>
+            : GetScalarType<T[P], WhatsappPhoneNumberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WhatsappPhoneNumberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    wabaId?: boolean
+    phoneNumberId?: boolean
+    displayPhoneNumber?: boolean
+    verifiedName?: boolean
+    qualityRating?: boolean
+    codeVerificationStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversations?: boolean | WhatsappPhoneNumber$conversationsArgs<ExtArgs>
+    webhookEvents?: boolean | WhatsappPhoneNumber$webhookEventsArgs<ExtArgs>
+    _count?: boolean | WhatsappPhoneNumberCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappPhoneNumber"]>
+
+  export type WhatsappPhoneNumberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    wabaId?: boolean
+    phoneNumberId?: boolean
+    displayPhoneNumber?: boolean
+    verifiedName?: boolean
+    qualityRating?: boolean
+    codeVerificationStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappPhoneNumber"]>
+
+  export type WhatsappPhoneNumberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    wabaId?: boolean
+    phoneNumberId?: boolean
+    displayPhoneNumber?: boolean
+    verifiedName?: boolean
+    qualityRating?: boolean
+    codeVerificationStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappPhoneNumber"]>
+
+  export type WhatsappPhoneNumberSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    wabaId?: boolean
+    phoneNumberId?: boolean
+    displayPhoneNumber?: boolean
+    verifiedName?: boolean
+    qualityRating?: boolean
+    codeVerificationStatus?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WhatsappPhoneNumberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "wabaId" | "phoneNumberId" | "displayPhoneNumber" | "verifiedName" | "qualityRating" | "codeVerificationStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["whatsappPhoneNumber"]>
+  export type WhatsappPhoneNumberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    conversations?: boolean | WhatsappPhoneNumber$conversationsArgs<ExtArgs>
+    webhookEvents?: boolean | WhatsappPhoneNumber$webhookEventsArgs<ExtArgs>
+    _count?: boolean | WhatsappPhoneNumberCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WhatsappPhoneNumberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type WhatsappPhoneNumberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $WhatsappPhoneNumberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WhatsappPhoneNumber"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      conversations: Prisma.$ConversationPayload<ExtArgs>[]
+      webhookEvents: Prisma.$WhatsappWebhookEventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      wabaId: string
+      phoneNumberId: string
+      displayPhoneNumber: string | null
+      verifiedName: string | null
+      qualityRating: string | null
+      codeVerificationStatus: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["whatsappPhoneNumber"]>
+    composites: {}
+  }
+
+  type WhatsappPhoneNumberGetPayload<S extends boolean | null | undefined | WhatsappPhoneNumberDefaultArgs> = $Result.GetResult<Prisma.$WhatsappPhoneNumberPayload, S>
+
+  type WhatsappPhoneNumberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WhatsappPhoneNumberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WhatsappPhoneNumberCountAggregateInputType | true
+    }
+
+  export interface WhatsappPhoneNumberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WhatsappPhoneNumber'], meta: { name: 'WhatsappPhoneNumber' } }
+    /**
+     * Find zero or one WhatsappPhoneNumber that matches the filter.
+     * @param {WhatsappPhoneNumberFindUniqueArgs} args - Arguments to find a WhatsappPhoneNumber
+     * @example
+     * // Get one WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WhatsappPhoneNumberFindUniqueArgs>(args: SelectSubset<T, WhatsappPhoneNumberFindUniqueArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WhatsappPhoneNumber that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WhatsappPhoneNumberFindUniqueOrThrowArgs} args - Arguments to find a WhatsappPhoneNumber
+     * @example
+     * // Get one WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WhatsappPhoneNumberFindUniqueOrThrowArgs>(args: SelectSubset<T, WhatsappPhoneNumberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappPhoneNumber that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberFindFirstArgs} args - Arguments to find a WhatsappPhoneNumber
+     * @example
+     * // Get one WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WhatsappPhoneNumberFindFirstArgs>(args?: SelectSubset<T, WhatsappPhoneNumberFindFirstArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappPhoneNumber that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberFindFirstOrThrowArgs} args - Arguments to find a WhatsappPhoneNumber
+     * @example
+     * // Get one WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WhatsappPhoneNumberFindFirstOrThrowArgs>(args?: SelectSubset<T, WhatsappPhoneNumberFindFirstOrThrowArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WhatsappPhoneNumbers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WhatsappPhoneNumbers
+     * const whatsappPhoneNumbers = await prisma.whatsappPhoneNumber.findMany()
+     * 
+     * // Get first 10 WhatsappPhoneNumbers
+     * const whatsappPhoneNumbers = await prisma.whatsappPhoneNumber.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const whatsappPhoneNumberWithIdOnly = await prisma.whatsappPhoneNumber.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WhatsappPhoneNumberFindManyArgs>(args?: SelectSubset<T, WhatsappPhoneNumberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WhatsappPhoneNumber.
+     * @param {WhatsappPhoneNumberCreateArgs} args - Arguments to create a WhatsappPhoneNumber.
+     * @example
+     * // Create one WhatsappPhoneNumber
+     * const WhatsappPhoneNumber = await prisma.whatsappPhoneNumber.create({
+     *   data: {
+     *     // ... data to create a WhatsappPhoneNumber
+     *   }
+     * })
+     * 
+     */
+    create<T extends WhatsappPhoneNumberCreateArgs>(args: SelectSubset<T, WhatsappPhoneNumberCreateArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WhatsappPhoneNumbers.
+     * @param {WhatsappPhoneNumberCreateManyArgs} args - Arguments to create many WhatsappPhoneNumbers.
+     * @example
+     * // Create many WhatsappPhoneNumbers
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WhatsappPhoneNumberCreateManyArgs>(args?: SelectSubset<T, WhatsappPhoneNumberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WhatsappPhoneNumbers and returns the data saved in the database.
+     * @param {WhatsappPhoneNumberCreateManyAndReturnArgs} args - Arguments to create many WhatsappPhoneNumbers.
+     * @example
+     * // Create many WhatsappPhoneNumbers
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WhatsappPhoneNumbers and only return the `id`
+     * const whatsappPhoneNumberWithIdOnly = await prisma.whatsappPhoneNumber.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WhatsappPhoneNumberCreateManyAndReturnArgs>(args?: SelectSubset<T, WhatsappPhoneNumberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WhatsappPhoneNumber.
+     * @param {WhatsappPhoneNumberDeleteArgs} args - Arguments to delete one WhatsappPhoneNumber.
+     * @example
+     * // Delete one WhatsappPhoneNumber
+     * const WhatsappPhoneNumber = await prisma.whatsappPhoneNumber.delete({
+     *   where: {
+     *     // ... filter to delete one WhatsappPhoneNumber
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WhatsappPhoneNumberDeleteArgs>(args: SelectSubset<T, WhatsappPhoneNumberDeleteArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WhatsappPhoneNumber.
+     * @param {WhatsappPhoneNumberUpdateArgs} args - Arguments to update one WhatsappPhoneNumber.
+     * @example
+     * // Update one WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WhatsappPhoneNumberUpdateArgs>(args: SelectSubset<T, WhatsappPhoneNumberUpdateArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WhatsappPhoneNumbers.
+     * @param {WhatsappPhoneNumberDeleteManyArgs} args - Arguments to filter WhatsappPhoneNumbers to delete.
+     * @example
+     * // Delete a few WhatsappPhoneNumbers
+     * const { count } = await prisma.whatsappPhoneNumber.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WhatsappPhoneNumberDeleteManyArgs>(args?: SelectSubset<T, WhatsappPhoneNumberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappPhoneNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WhatsappPhoneNumbers
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WhatsappPhoneNumberUpdateManyArgs>(args: SelectSubset<T, WhatsappPhoneNumberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappPhoneNumbers and returns the data updated in the database.
+     * @param {WhatsappPhoneNumberUpdateManyAndReturnArgs} args - Arguments to update many WhatsappPhoneNumbers.
+     * @example
+     * // Update many WhatsappPhoneNumbers
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WhatsappPhoneNumbers and only return the `id`
+     * const whatsappPhoneNumberWithIdOnly = await prisma.whatsappPhoneNumber.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WhatsappPhoneNumberUpdateManyAndReturnArgs>(args: SelectSubset<T, WhatsappPhoneNumberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WhatsappPhoneNumber.
+     * @param {WhatsappPhoneNumberUpsertArgs} args - Arguments to update or create a WhatsappPhoneNumber.
+     * @example
+     * // Update or create a WhatsappPhoneNumber
+     * const whatsappPhoneNumber = await prisma.whatsappPhoneNumber.upsert({
+     *   create: {
+     *     // ... data to create a WhatsappPhoneNumber
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WhatsappPhoneNumber we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WhatsappPhoneNumberUpsertArgs>(args: SelectSubset<T, WhatsappPhoneNumberUpsertArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WhatsappPhoneNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberCountArgs} args - Arguments to filter WhatsappPhoneNumbers to count.
+     * @example
+     * // Count the number of WhatsappPhoneNumbers
+     * const count = await prisma.whatsappPhoneNumber.count({
+     *   where: {
+     *     // ... the filter for the WhatsappPhoneNumbers we want to count
+     *   }
+     * })
+    **/
+    count<T extends WhatsappPhoneNumberCountArgs>(
+      args?: Subset<T, WhatsappPhoneNumberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WhatsappPhoneNumberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WhatsappPhoneNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WhatsappPhoneNumberAggregateArgs>(args: Subset<T, WhatsappPhoneNumberAggregateArgs>): Prisma.PrismaPromise<GetWhatsappPhoneNumberAggregateType<T>>
+
+    /**
+     * Group by WhatsappPhoneNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappPhoneNumberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WhatsappPhoneNumberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WhatsappPhoneNumberGroupByArgs['orderBy'] }
+        : { orderBy?: WhatsappPhoneNumberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WhatsappPhoneNumberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWhatsappPhoneNumberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WhatsappPhoneNumber model
+   */
+  readonly fields: WhatsappPhoneNumberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WhatsappPhoneNumber.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WhatsappPhoneNumberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conversations<T extends WhatsappPhoneNumber$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, WhatsappPhoneNumber$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    webhookEvents<T extends WhatsappPhoneNumber$webhookEventsArgs<ExtArgs> = {}>(args?: Subset<T, WhatsappPhoneNumber$webhookEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WhatsappPhoneNumber model
+   */
+  interface WhatsappPhoneNumberFieldRefs {
+    readonly id: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly tenantId: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly wabaId: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly phoneNumberId: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly displayPhoneNumber: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly verifiedName: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly qualityRating: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly codeVerificationStatus: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly createdAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
+    readonly updatedAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WhatsappPhoneNumber findUnique
+   */
+  export type WhatsappPhoneNumberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappPhoneNumber to fetch.
+     */
+    where: WhatsappPhoneNumberWhereUniqueInput
+  }
+
+  /**
+   * WhatsappPhoneNumber findUniqueOrThrow
+   */
+  export type WhatsappPhoneNumberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappPhoneNumber to fetch.
+     */
+    where: WhatsappPhoneNumberWhereUniqueInput
+  }
+
+  /**
+   * WhatsappPhoneNumber findFirst
+   */
+  export type WhatsappPhoneNumberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappPhoneNumber to fetch.
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappPhoneNumbers to fetch.
+     */
+    orderBy?: WhatsappPhoneNumberOrderByWithRelationInput | WhatsappPhoneNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappPhoneNumbers.
+     */
+    cursor?: WhatsappPhoneNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappPhoneNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappPhoneNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappPhoneNumbers.
+     */
+    distinct?: WhatsappPhoneNumberScalarFieldEnum | WhatsappPhoneNumberScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappPhoneNumber findFirstOrThrow
+   */
+  export type WhatsappPhoneNumberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappPhoneNumber to fetch.
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappPhoneNumbers to fetch.
+     */
+    orderBy?: WhatsappPhoneNumberOrderByWithRelationInput | WhatsappPhoneNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappPhoneNumbers.
+     */
+    cursor?: WhatsappPhoneNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappPhoneNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappPhoneNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappPhoneNumbers.
+     */
+    distinct?: WhatsappPhoneNumberScalarFieldEnum | WhatsappPhoneNumberScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappPhoneNumber findMany
+   */
+  export type WhatsappPhoneNumberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappPhoneNumbers to fetch.
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappPhoneNumbers to fetch.
+     */
+    orderBy?: WhatsappPhoneNumberOrderByWithRelationInput | WhatsappPhoneNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WhatsappPhoneNumbers.
+     */
+    cursor?: WhatsappPhoneNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappPhoneNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappPhoneNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappPhoneNumbers.
+     */
+    distinct?: WhatsappPhoneNumberScalarFieldEnum | WhatsappPhoneNumberScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappPhoneNumber create
+   */
+  export type WhatsappPhoneNumberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WhatsappPhoneNumber.
+     */
+    data: XOR<WhatsappPhoneNumberCreateInput, WhatsappPhoneNumberUncheckedCreateInput>
+  }
+
+  /**
+   * WhatsappPhoneNumber createMany
+   */
+  export type WhatsappPhoneNumberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WhatsappPhoneNumbers.
+     */
+    data: WhatsappPhoneNumberCreateManyInput | WhatsappPhoneNumberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsappPhoneNumber createManyAndReturn
+   */
+  export type WhatsappPhoneNumberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * The data used to create many WhatsappPhoneNumbers.
+     */
+    data: WhatsappPhoneNumberCreateManyInput | WhatsappPhoneNumberCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappPhoneNumber update
+   */
+  export type WhatsappPhoneNumberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WhatsappPhoneNumber.
+     */
+    data: XOR<WhatsappPhoneNumberUpdateInput, WhatsappPhoneNumberUncheckedUpdateInput>
+    /**
+     * Choose, which WhatsappPhoneNumber to update.
+     */
+    where: WhatsappPhoneNumberWhereUniqueInput
+  }
+
+  /**
+   * WhatsappPhoneNumber updateMany
+   */
+  export type WhatsappPhoneNumberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WhatsappPhoneNumbers.
+     */
+    data: XOR<WhatsappPhoneNumberUpdateManyMutationInput, WhatsappPhoneNumberUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappPhoneNumbers to update
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * Limit how many WhatsappPhoneNumbers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappPhoneNumber updateManyAndReturn
+   */
+  export type WhatsappPhoneNumberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * The data used to update WhatsappPhoneNumbers.
+     */
+    data: XOR<WhatsappPhoneNumberUpdateManyMutationInput, WhatsappPhoneNumberUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappPhoneNumbers to update
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * Limit how many WhatsappPhoneNumbers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappPhoneNumber upsert
+   */
+  export type WhatsappPhoneNumberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WhatsappPhoneNumber to update in case it exists.
+     */
+    where: WhatsappPhoneNumberWhereUniqueInput
+    /**
+     * In case the WhatsappPhoneNumber found by the `where` argument doesn't exist, create a new WhatsappPhoneNumber with this data.
+     */
+    create: XOR<WhatsappPhoneNumberCreateInput, WhatsappPhoneNumberUncheckedCreateInput>
+    /**
+     * In case the WhatsappPhoneNumber was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WhatsappPhoneNumberUpdateInput, WhatsappPhoneNumberUncheckedUpdateInput>
+  }
+
+  /**
+   * WhatsappPhoneNumber delete
+   */
+  export type WhatsappPhoneNumberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+    /**
+     * Filter which WhatsappPhoneNumber to delete.
+     */
+    where: WhatsappPhoneNumberWhereUniqueInput
+  }
+
+  /**
+   * WhatsappPhoneNumber deleteMany
+   */
+  export type WhatsappPhoneNumberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappPhoneNumbers to delete
+     */
+    where?: WhatsappPhoneNumberWhereInput
+    /**
+     * Limit how many WhatsappPhoneNumbers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappPhoneNumber.conversations
+   */
+  export type WhatsappPhoneNumber$conversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappPhoneNumber.webhookEvents
+   */
+  export type WhatsappPhoneNumber$webhookEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    where?: WhatsappWebhookEventWhereInput
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WhatsappWebhookEventScalarFieldEnum | WhatsappWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappPhoneNumber without action
+   */
+  export type WhatsappPhoneNumberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappPhoneNumber
+     */
+    select?: WhatsappPhoneNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappPhoneNumber
+     */
+    omit?: WhatsappPhoneNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappPhoneNumberInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WhatsappWebhookEvent
+   */
+
+  export type AggregateWhatsappWebhookEvent = {
+    _count: WhatsappWebhookEventCountAggregateOutputType | null
+    _min: WhatsappWebhookEventMinAggregateOutputType | null
+    _max: WhatsappWebhookEventMaxAggregateOutputType | null
+  }
+
+  export type WhatsappWebhookEventMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    whatsappPhoneNumberId: string | null
+    eventType: $Enums.WhatsappWebhookEventType | null
+    processingStatus: $Enums.WhatsappWebhookProcessingStatus | null
+    objectType: string | null
+    entryId: string | null
+    changeField: string | null
+    eventKey: string | null
+    externalMessageId: string | null
+    externalStatus: string | null
+    contactWaId: string | null
+    eventTimestamp: Date | null
+    processedAt: Date | null
+    errorMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappWebhookEventMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    whatsappPhoneNumberId: string | null
+    eventType: $Enums.WhatsappWebhookEventType | null
+    processingStatus: $Enums.WhatsappWebhookProcessingStatus | null
+    objectType: string | null
+    entryId: string | null
+    changeField: string | null
+    eventKey: string | null
+    externalMessageId: string | null
+    externalStatus: string | null
+    contactWaId: string | null
+    eventTimestamp: Date | null
+    processedAt: Date | null
+    errorMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappWebhookEventCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    whatsappPhoneNumberId: number
+    eventType: number
+    processingStatus: number
+    objectType: number
+    entryId: number
+    changeField: number
+    eventKey: number
+    externalMessageId: number
+    externalStatus: number
+    contactWaId: number
+    eventTimestamp: number
+    rawPayload: number
+    processedAt: number
+    errorMessage: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WhatsappWebhookEventMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    whatsappPhoneNumberId?: true
+    eventType?: true
+    processingStatus?: true
+    objectType?: true
+    entryId?: true
+    changeField?: true
+    eventKey?: true
+    externalMessageId?: true
+    externalStatus?: true
+    contactWaId?: true
+    eventTimestamp?: true
+    processedAt?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappWebhookEventMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    whatsappPhoneNumberId?: true
+    eventType?: true
+    processingStatus?: true
+    objectType?: true
+    entryId?: true
+    changeField?: true
+    eventKey?: true
+    externalMessageId?: true
+    externalStatus?: true
+    contactWaId?: true
+    eventTimestamp?: true
+    processedAt?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappWebhookEventCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    whatsappPhoneNumberId?: true
+    eventType?: true
+    processingStatus?: true
+    objectType?: true
+    entryId?: true
+    changeField?: true
+    eventKey?: true
+    externalMessageId?: true
+    externalStatus?: true
+    contactWaId?: true
+    eventTimestamp?: true
+    rawPayload?: true
+    processedAt?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WhatsappWebhookEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappWebhookEvent to aggregate.
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappWebhookEvents to fetch.
+     */
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WhatsappWebhookEvents
+    **/
+    _count?: true | WhatsappWebhookEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WhatsappWebhookEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WhatsappWebhookEventMaxAggregateInputType
+  }
+
+  export type GetWhatsappWebhookEventAggregateType<T extends WhatsappWebhookEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateWhatsappWebhookEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWhatsappWebhookEvent[P]>
+      : GetScalarType<T[P], AggregateWhatsappWebhookEvent[P]>
+  }
+
+
+
+
+  export type WhatsappWebhookEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappWebhookEventWhereInput
+    orderBy?: WhatsappWebhookEventOrderByWithAggregationInput | WhatsappWebhookEventOrderByWithAggregationInput[]
+    by: WhatsappWebhookEventScalarFieldEnum[] | WhatsappWebhookEventScalarFieldEnum
+    having?: WhatsappWebhookEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WhatsappWebhookEventCountAggregateInputType | true
+    _min?: WhatsappWebhookEventMinAggregateInputType
+    _max?: WhatsappWebhookEventMaxAggregateInputType
+  }
+
+  export type WhatsappWebhookEventGroupByOutputType = {
+    id: string
+    tenantId: string
+    whatsappPhoneNumberId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId: string | null
+    externalStatus: string | null
+    contactWaId: string | null
+    eventTimestamp: Date | null
+    rawPayload: JsonValue
+    processedAt: Date | null
+    errorMessage: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WhatsappWebhookEventCountAggregateOutputType | null
+    _min: WhatsappWebhookEventMinAggregateOutputType | null
+    _max: WhatsappWebhookEventMaxAggregateOutputType | null
+  }
+
+  type GetWhatsappWebhookEventGroupByPayload<T extends WhatsappWebhookEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WhatsappWebhookEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WhatsappWebhookEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WhatsappWebhookEventGroupByOutputType[P]>
+            : GetScalarType<T[P], WhatsappWebhookEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WhatsappWebhookEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    whatsappPhoneNumberId?: boolean
+    eventType?: boolean
+    processingStatus?: boolean
+    objectType?: boolean
+    entryId?: boolean
+    changeField?: boolean
+    eventKey?: boolean
+    externalMessageId?: boolean
+    externalStatus?: boolean
+    contactWaId?: boolean
+    eventTimestamp?: boolean
+    rawPayload?: boolean
+    processedAt?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappWebhookEvent"]>
+
+  export type WhatsappWebhookEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    whatsappPhoneNumberId?: boolean
+    eventType?: boolean
+    processingStatus?: boolean
+    objectType?: boolean
+    entryId?: boolean
+    changeField?: boolean
+    eventKey?: boolean
+    externalMessageId?: boolean
+    externalStatus?: boolean
+    contactWaId?: boolean
+    eventTimestamp?: boolean
+    rawPayload?: boolean
+    processedAt?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappWebhookEvent"]>
+
+  export type WhatsappWebhookEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    whatsappPhoneNumberId?: boolean
+    eventType?: boolean
+    processingStatus?: boolean
+    objectType?: boolean
+    entryId?: boolean
+    changeField?: boolean
+    eventKey?: boolean
+    externalMessageId?: boolean
+    externalStatus?: boolean
+    contactWaId?: boolean
+    eventTimestamp?: boolean
+    rawPayload?: boolean
+    processedAt?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappWebhookEvent"]>
+
+  export type WhatsappWebhookEventSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    whatsappPhoneNumberId?: boolean
+    eventType?: boolean
+    processingStatus?: boolean
+    objectType?: boolean
+    entryId?: boolean
+    changeField?: boolean
+    eventKey?: boolean
+    externalMessageId?: boolean
+    externalStatus?: boolean
+    contactWaId?: boolean
+    eventTimestamp?: boolean
+    rawPayload?: boolean
+    processedAt?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WhatsappWebhookEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "whatsappPhoneNumberId" | "eventType" | "processingStatus" | "objectType" | "entryId" | "changeField" | "eventKey" | "externalMessageId" | "externalStatus" | "contactWaId" | "eventTimestamp" | "rawPayload" | "processedAt" | "errorMessage" | "createdAt" | "updatedAt", ExtArgs["result"]["whatsappWebhookEvent"]>
+  export type WhatsappWebhookEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }
+  export type WhatsappWebhookEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }
+  export type WhatsappWebhookEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    whatsappPhoneNumber?: boolean | WhatsappPhoneNumberDefaultArgs<ExtArgs>
+  }
+
+  export type $WhatsappWebhookEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WhatsappWebhookEvent"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      whatsappPhoneNumber: Prisma.$WhatsappPhoneNumberPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      whatsappPhoneNumberId: string
+      eventType: $Enums.WhatsappWebhookEventType
+      processingStatus: $Enums.WhatsappWebhookProcessingStatus
+      objectType: string
+      entryId: string | null
+      changeField: string
+      eventKey: string
+      externalMessageId: string | null
+      externalStatus: string | null
+      contactWaId: string | null
+      eventTimestamp: Date | null
+      rawPayload: Prisma.JsonValue
+      processedAt: Date | null
+      errorMessage: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["whatsappWebhookEvent"]>
+    composites: {}
+  }
+
+  type WhatsappWebhookEventGetPayload<S extends boolean | null | undefined | WhatsappWebhookEventDefaultArgs> = $Result.GetResult<Prisma.$WhatsappWebhookEventPayload, S>
+
+  type WhatsappWebhookEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WhatsappWebhookEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WhatsappWebhookEventCountAggregateInputType | true
+    }
+
+  export interface WhatsappWebhookEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WhatsappWebhookEvent'], meta: { name: 'WhatsappWebhookEvent' } }
+    /**
+     * Find zero or one WhatsappWebhookEvent that matches the filter.
+     * @param {WhatsappWebhookEventFindUniqueArgs} args - Arguments to find a WhatsappWebhookEvent
+     * @example
+     * // Get one WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WhatsappWebhookEventFindUniqueArgs>(args: SelectSubset<T, WhatsappWebhookEventFindUniqueArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WhatsappWebhookEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WhatsappWebhookEventFindUniqueOrThrowArgs} args - Arguments to find a WhatsappWebhookEvent
+     * @example
+     * // Get one WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WhatsappWebhookEventFindUniqueOrThrowArgs>(args: SelectSubset<T, WhatsappWebhookEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappWebhookEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventFindFirstArgs} args - Arguments to find a WhatsappWebhookEvent
+     * @example
+     * // Get one WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WhatsappWebhookEventFindFirstArgs>(args?: SelectSubset<T, WhatsappWebhookEventFindFirstArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappWebhookEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventFindFirstOrThrowArgs} args - Arguments to find a WhatsappWebhookEvent
+     * @example
+     * // Get one WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WhatsappWebhookEventFindFirstOrThrowArgs>(args?: SelectSubset<T, WhatsappWebhookEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WhatsappWebhookEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WhatsappWebhookEvents
+     * const whatsappWebhookEvents = await prisma.whatsappWebhookEvent.findMany()
+     * 
+     * // Get first 10 WhatsappWebhookEvents
+     * const whatsappWebhookEvents = await prisma.whatsappWebhookEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const whatsappWebhookEventWithIdOnly = await prisma.whatsappWebhookEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WhatsappWebhookEventFindManyArgs>(args?: SelectSubset<T, WhatsappWebhookEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WhatsappWebhookEvent.
+     * @param {WhatsappWebhookEventCreateArgs} args - Arguments to create a WhatsappWebhookEvent.
+     * @example
+     * // Create one WhatsappWebhookEvent
+     * const WhatsappWebhookEvent = await prisma.whatsappWebhookEvent.create({
+     *   data: {
+     *     // ... data to create a WhatsappWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends WhatsappWebhookEventCreateArgs>(args: SelectSubset<T, WhatsappWebhookEventCreateArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WhatsappWebhookEvents.
+     * @param {WhatsappWebhookEventCreateManyArgs} args - Arguments to create many WhatsappWebhookEvents.
+     * @example
+     * // Create many WhatsappWebhookEvents
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WhatsappWebhookEventCreateManyArgs>(args?: SelectSubset<T, WhatsappWebhookEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WhatsappWebhookEvents and returns the data saved in the database.
+     * @param {WhatsappWebhookEventCreateManyAndReturnArgs} args - Arguments to create many WhatsappWebhookEvents.
+     * @example
+     * // Create many WhatsappWebhookEvents
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WhatsappWebhookEvents and only return the `id`
+     * const whatsappWebhookEventWithIdOnly = await prisma.whatsappWebhookEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WhatsappWebhookEventCreateManyAndReturnArgs>(args?: SelectSubset<T, WhatsappWebhookEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WhatsappWebhookEvent.
+     * @param {WhatsappWebhookEventDeleteArgs} args - Arguments to delete one WhatsappWebhookEvent.
+     * @example
+     * // Delete one WhatsappWebhookEvent
+     * const WhatsappWebhookEvent = await prisma.whatsappWebhookEvent.delete({
+     *   where: {
+     *     // ... filter to delete one WhatsappWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WhatsappWebhookEventDeleteArgs>(args: SelectSubset<T, WhatsappWebhookEventDeleteArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WhatsappWebhookEvent.
+     * @param {WhatsappWebhookEventUpdateArgs} args - Arguments to update one WhatsappWebhookEvent.
+     * @example
+     * // Update one WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WhatsappWebhookEventUpdateArgs>(args: SelectSubset<T, WhatsappWebhookEventUpdateArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WhatsappWebhookEvents.
+     * @param {WhatsappWebhookEventDeleteManyArgs} args - Arguments to filter WhatsappWebhookEvents to delete.
+     * @example
+     * // Delete a few WhatsappWebhookEvents
+     * const { count } = await prisma.whatsappWebhookEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WhatsappWebhookEventDeleteManyArgs>(args?: SelectSubset<T, WhatsappWebhookEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WhatsappWebhookEvents
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WhatsappWebhookEventUpdateManyArgs>(args: SelectSubset<T, WhatsappWebhookEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappWebhookEvents and returns the data updated in the database.
+     * @param {WhatsappWebhookEventUpdateManyAndReturnArgs} args - Arguments to update many WhatsappWebhookEvents.
+     * @example
+     * // Update many WhatsappWebhookEvents
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WhatsappWebhookEvents and only return the `id`
+     * const whatsappWebhookEventWithIdOnly = await prisma.whatsappWebhookEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WhatsappWebhookEventUpdateManyAndReturnArgs>(args: SelectSubset<T, WhatsappWebhookEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WhatsappWebhookEvent.
+     * @param {WhatsappWebhookEventUpsertArgs} args - Arguments to update or create a WhatsappWebhookEvent.
+     * @example
+     * // Update or create a WhatsappWebhookEvent
+     * const whatsappWebhookEvent = await prisma.whatsappWebhookEvent.upsert({
+     *   create: {
+     *     // ... data to create a WhatsappWebhookEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WhatsappWebhookEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WhatsappWebhookEventUpsertArgs>(args: SelectSubset<T, WhatsappWebhookEventUpsertArgs<ExtArgs>>): Prisma__WhatsappWebhookEventClient<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WhatsappWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventCountArgs} args - Arguments to filter WhatsappWebhookEvents to count.
+     * @example
+     * // Count the number of WhatsappWebhookEvents
+     * const count = await prisma.whatsappWebhookEvent.count({
+     *   where: {
+     *     // ... the filter for the WhatsappWebhookEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends WhatsappWebhookEventCountArgs>(
+      args?: Subset<T, WhatsappWebhookEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WhatsappWebhookEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WhatsappWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WhatsappWebhookEventAggregateArgs>(args: Subset<T, WhatsappWebhookEventAggregateArgs>): Prisma.PrismaPromise<GetWhatsappWebhookEventAggregateType<T>>
+
+    /**
+     * Group by WhatsappWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappWebhookEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WhatsappWebhookEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WhatsappWebhookEventGroupByArgs['orderBy'] }
+        : { orderBy?: WhatsappWebhookEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WhatsappWebhookEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWhatsappWebhookEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WhatsappWebhookEvent model
+   */
+  readonly fields: WhatsappWebhookEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WhatsappWebhookEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WhatsappWebhookEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    whatsappPhoneNumber<T extends WhatsappPhoneNumberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WhatsappPhoneNumberDefaultArgs<ExtArgs>>): Prisma__WhatsappPhoneNumberClient<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WhatsappWebhookEvent model
+   */
+  interface WhatsappWebhookEventFieldRefs {
+    readonly id: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly tenantId: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly whatsappPhoneNumberId: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly eventType: FieldRef<"WhatsappWebhookEvent", 'WhatsappWebhookEventType'>
+    readonly processingStatus: FieldRef<"WhatsappWebhookEvent", 'WhatsappWebhookProcessingStatus'>
+    readonly objectType: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly entryId: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly changeField: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly eventKey: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly externalMessageId: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly externalStatus: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly contactWaId: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly eventTimestamp: FieldRef<"WhatsappWebhookEvent", 'DateTime'>
+    readonly rawPayload: FieldRef<"WhatsappWebhookEvent", 'Json'>
+    readonly processedAt: FieldRef<"WhatsappWebhookEvent", 'DateTime'>
+    readonly errorMessage: FieldRef<"WhatsappWebhookEvent", 'String'>
+    readonly createdAt: FieldRef<"WhatsappWebhookEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"WhatsappWebhookEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WhatsappWebhookEvent findUnique
+   */
+  export type WhatsappWebhookEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappWebhookEvent to fetch.
+     */
+    where: WhatsappWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * WhatsappWebhookEvent findUniqueOrThrow
+   */
+  export type WhatsappWebhookEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappWebhookEvent to fetch.
+     */
+    where: WhatsappWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * WhatsappWebhookEvent findFirst
+   */
+  export type WhatsappWebhookEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappWebhookEvent to fetch.
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappWebhookEvents to fetch.
+     */
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappWebhookEvents.
+     */
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappWebhookEvents.
+     */
+    distinct?: WhatsappWebhookEventScalarFieldEnum | WhatsappWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappWebhookEvent findFirstOrThrow
+   */
+  export type WhatsappWebhookEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappWebhookEvent to fetch.
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappWebhookEvents to fetch.
+     */
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappWebhookEvents.
+     */
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappWebhookEvents.
+     */
+    distinct?: WhatsappWebhookEventScalarFieldEnum | WhatsappWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappWebhookEvent findMany
+   */
+  export type WhatsappWebhookEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappWebhookEvents to fetch.
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappWebhookEvents to fetch.
+     */
+    orderBy?: WhatsappWebhookEventOrderByWithRelationInput | WhatsappWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WhatsappWebhookEvents.
+     */
+    cursor?: WhatsappWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappWebhookEvents.
+     */
+    distinct?: WhatsappWebhookEventScalarFieldEnum | WhatsappWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappWebhookEvent create
+   */
+  export type WhatsappWebhookEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WhatsappWebhookEvent.
+     */
+    data: XOR<WhatsappWebhookEventCreateInput, WhatsappWebhookEventUncheckedCreateInput>
+  }
+
+  /**
+   * WhatsappWebhookEvent createMany
+   */
+  export type WhatsappWebhookEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WhatsappWebhookEvents.
+     */
+    data: WhatsappWebhookEventCreateManyInput | WhatsappWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsappWebhookEvent createManyAndReturn
+   */
+  export type WhatsappWebhookEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many WhatsappWebhookEvents.
+     */
+    data: WhatsappWebhookEventCreateManyInput | WhatsappWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappWebhookEvent update
+   */
+  export type WhatsappWebhookEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WhatsappWebhookEvent.
+     */
+    data: XOR<WhatsappWebhookEventUpdateInput, WhatsappWebhookEventUncheckedUpdateInput>
+    /**
+     * Choose, which WhatsappWebhookEvent to update.
+     */
+    where: WhatsappWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * WhatsappWebhookEvent updateMany
+   */
+  export type WhatsappWebhookEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WhatsappWebhookEvents.
+     */
+    data: XOR<WhatsappWebhookEventUpdateManyMutationInput, WhatsappWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappWebhookEvents to update
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * Limit how many WhatsappWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappWebhookEvent updateManyAndReturn
+   */
+  export type WhatsappWebhookEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to update WhatsappWebhookEvents.
+     */
+    data: XOR<WhatsappWebhookEventUpdateManyMutationInput, WhatsappWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappWebhookEvents to update
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * Limit how many WhatsappWebhookEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappWebhookEvent upsert
+   */
+  export type WhatsappWebhookEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WhatsappWebhookEvent to update in case it exists.
+     */
+    where: WhatsappWebhookEventWhereUniqueInput
+    /**
+     * In case the WhatsappWebhookEvent found by the `where` argument doesn't exist, create a new WhatsappWebhookEvent with this data.
+     */
+    create: XOR<WhatsappWebhookEventCreateInput, WhatsappWebhookEventUncheckedCreateInput>
+    /**
+     * In case the WhatsappWebhookEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WhatsappWebhookEventUpdateInput, WhatsappWebhookEventUncheckedUpdateInput>
+  }
+
+  /**
+   * WhatsappWebhookEvent delete
+   */
+  export type WhatsappWebhookEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
+    /**
+     * Filter which WhatsappWebhookEvent to delete.
+     */
+    where: WhatsappWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * WhatsappWebhookEvent deleteMany
+   */
+  export type WhatsappWebhookEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappWebhookEvents to delete
+     */
+    where?: WhatsappWebhookEventWhereInput
+    /**
+     * Limit how many WhatsappWebhookEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappWebhookEvent without action
+   */
+  export type WhatsappWebhookEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappWebhookEvent
+     */
+    select?: WhatsappWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappWebhookEvent
+     */
+    omit?: WhatsappWebhookEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappWebhookEventInclude<ExtArgs> | null
   }
 
 
@@ -19525,6 +22323,8 @@ export namespace Prisma {
     channel: 'channel',
     status: 'status',
     assigneeUserId: 'assigneeUserId',
+    externalThreadKey: 'externalThreadKey',
+    whatsappPhoneNumberId: 'whatsappPhoneNumberId',
     lastMessageAt: 'lastMessageAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -19559,6 +22359,46 @@ export namespace Prisma {
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const WhatsappPhoneNumberScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    wabaId: 'wabaId',
+    phoneNumberId: 'phoneNumberId',
+    displayPhoneNumber: 'displayPhoneNumber',
+    verifiedName: 'verifiedName',
+    qualityRating: 'qualityRating',
+    codeVerificationStatus: 'codeVerificationStatus',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WhatsappPhoneNumberScalarFieldEnum = (typeof WhatsappPhoneNumberScalarFieldEnum)[keyof typeof WhatsappPhoneNumberScalarFieldEnum]
+
+
+  export const WhatsappWebhookEventScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    whatsappPhoneNumberId: 'whatsappPhoneNumberId',
+    eventType: 'eventType',
+    processingStatus: 'processingStatus',
+    objectType: 'objectType',
+    entryId: 'entryId',
+    changeField: 'changeField',
+    eventKey: 'eventKey',
+    externalMessageId: 'externalMessageId',
+    externalStatus: 'externalStatus',
+    contactWaId: 'contactWaId',
+    eventTimestamp: 'eventTimestamp',
+    rawPayload: 'rawPayload',
+    processedAt: 'processedAt',
+    errorMessage: 'errorMessage',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WhatsappWebhookEventScalarFieldEnum = (typeof WhatsappWebhookEventScalarFieldEnum)[keyof typeof WhatsappWebhookEventScalarFieldEnum]
 
 
   export const PipelineScalarFieldEnum: {
@@ -19604,6 +22444,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -19878,6 +22725,34 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappWebhookEventType'
+   */
+  export type EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappWebhookEventType'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappWebhookEventType[]'
+   */
+  export type ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappWebhookEventType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappWebhookProcessingStatus'
+   */
+  export type EnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappWebhookProcessingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappWebhookProcessingStatus[]'
+   */
+  export type ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappWebhookProcessingStatus[]'>
     
 
 
@@ -20198,6 +23073,8 @@ export namespace Prisma {
     leads?: LeadListRelationFilter
     conversations?: ConversationListRelationFilter
     messages?: MessageListRelationFilter
+    whatsappPhoneNumbers?: WhatsappPhoneNumberListRelationFilter
+    whatsappWebhookEvents?: WhatsappWebhookEventListRelationFilter
     pipelines?: PipelineListRelationFilter
     pipelineStages?: PipelineStageListRelationFilter
   }
@@ -20221,6 +23098,8 @@ export namespace Prisma {
     leads?: LeadOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberOrderByRelationAggregateInput
+    whatsappWebhookEvents?: WhatsappWebhookEventOrderByRelationAggregateInput
     pipelines?: PipelineOrderByRelationAggregateInput
     pipelineStages?: PipelineStageOrderByRelationAggregateInput
   }
@@ -20247,6 +23126,8 @@ export namespace Prisma {
     leads?: LeadListRelationFilter
     conversations?: ConversationListRelationFilter
     messages?: MessageListRelationFilter
+    whatsappPhoneNumbers?: WhatsappPhoneNumberListRelationFilter
+    whatsappWebhookEvents?: WhatsappWebhookEventListRelationFilter
     pipelines?: PipelineListRelationFilter
     pipelineStages?: PipelineStageListRelationFilter
   }, "id" | "slug">
@@ -20783,6 +23664,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
     status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
     assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
+    whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
@@ -20791,6 +23674,7 @@ export namespace Prisma {
     contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
     lead?: XOR<LeadNullableScalarRelationFilter, LeadWhereInput> | null
     assigneeUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    whatsappPhoneNumber?: XOR<WhatsappPhoneNumberNullableScalarRelationFilter, WhatsappPhoneNumberWhereInput> | null
     messages?: MessageListRelationFilter
   }
 
@@ -20802,6 +23686,8 @@ export namespace Prisma {
     channel?: SortOrder
     status?: SortOrder
     assigneeUserId?: SortOrderInput | SortOrder
+    externalThreadKey?: SortOrderInput | SortOrder
+    whatsappPhoneNumberId?: SortOrderInput | SortOrder
     lastMessageAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -20810,11 +23696,13 @@ export namespace Prisma {
     contact?: ContactOrderByWithRelationInput
     lead?: LeadOrderByWithRelationInput
     assigneeUser?: UserOrderByWithRelationInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
   }
 
   export type ConversationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    tenantId_channel_externalThreadKey?: ConversationTenantIdChannelExternalThreadKeyCompoundUniqueInput
     AND?: ConversationWhereInput | ConversationWhereInput[]
     OR?: ConversationWhereInput[]
     NOT?: ConversationWhereInput | ConversationWhereInput[]
@@ -20824,6 +23712,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
     status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
     assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
+    whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
@@ -20832,8 +23722,9 @@ export namespace Prisma {
     contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
     lead?: XOR<LeadNullableScalarRelationFilter, LeadWhereInput> | null
     assigneeUser?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    whatsappPhoneNumber?: XOR<WhatsappPhoneNumberNullableScalarRelationFilter, WhatsappPhoneNumberWhereInput> | null
     messages?: MessageListRelationFilter
-  }, "id">
+  }, "id" | "tenantId_channel_externalThreadKey">
 
   export type ConversationOrderByWithAggregationInput = {
     id?: SortOrder
@@ -20843,6 +23734,8 @@ export namespace Prisma {
     channel?: SortOrder
     status?: SortOrder
     assigneeUserId?: SortOrderInput | SortOrder
+    externalThreadKey?: SortOrderInput | SortOrder
+    whatsappPhoneNumberId?: SortOrderInput | SortOrder
     lastMessageAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -20865,6 +23758,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeWithAggregatesFilter<"Conversation"> | $Enums.ChannelType
     status?: EnumConversationStatusWithAggregatesFilter<"Conversation"> | $Enums.ConversationStatus
     assigneeUserId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    externalThreadKey?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
+    whatsappPhoneNumberId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
@@ -21010,6 +23905,216 @@ export namespace Prisma {
     rawPayload?: JsonNullableWithAggregatesFilter<"Message">
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+  }
+
+  export type WhatsappPhoneNumberWhereInput = {
+    AND?: WhatsappPhoneNumberWhereInput | WhatsappPhoneNumberWhereInput[]
+    OR?: WhatsappPhoneNumberWhereInput[]
+    NOT?: WhatsappPhoneNumberWhereInput | WhatsappPhoneNumberWhereInput[]
+    id?: StringFilter<"WhatsappPhoneNumber"> | string
+    tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
+    wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
+    phoneNumberId?: StringFilter<"WhatsappPhoneNumber"> | string
+    displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    conversations?: ConversationListRelationFilter
+    webhookEvents?: WhatsappWebhookEventListRelationFilter
+  }
+
+  export type WhatsappPhoneNumberOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    wabaId?: SortOrder
+    phoneNumberId?: SortOrder
+    displayPhoneNumber?: SortOrderInput | SortOrder
+    verifiedName?: SortOrderInput | SortOrder
+    qualityRating?: SortOrderInput | SortOrder
+    codeVerificationStatus?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    conversations?: ConversationOrderByRelationAggregateInput
+    webhookEvents?: WhatsappWebhookEventOrderByRelationAggregateInput
+  }
+
+  export type WhatsappPhoneNumberWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    phoneNumberId?: string
+    AND?: WhatsappPhoneNumberWhereInput | WhatsappPhoneNumberWhereInput[]
+    OR?: WhatsappPhoneNumberWhereInput[]
+    NOT?: WhatsappPhoneNumberWhereInput | WhatsappPhoneNumberWhereInput[]
+    tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
+    wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
+    displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    conversations?: ConversationListRelationFilter
+    webhookEvents?: WhatsappWebhookEventListRelationFilter
+  }, "id" | "phoneNumberId">
+
+  export type WhatsappPhoneNumberOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    wabaId?: SortOrder
+    phoneNumberId?: SortOrder
+    displayPhoneNumber?: SortOrderInput | SortOrder
+    verifiedName?: SortOrderInput | SortOrder
+    qualityRating?: SortOrderInput | SortOrder
+    codeVerificationStatus?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WhatsappPhoneNumberCountOrderByAggregateInput
+    _max?: WhatsappPhoneNumberMaxOrderByAggregateInput
+    _min?: WhatsappPhoneNumberMinOrderByAggregateInput
+  }
+
+  export type WhatsappPhoneNumberScalarWhereWithAggregatesInput = {
+    AND?: WhatsappPhoneNumberScalarWhereWithAggregatesInput | WhatsappPhoneNumberScalarWhereWithAggregatesInput[]
+    OR?: WhatsappPhoneNumberScalarWhereWithAggregatesInput[]
+    NOT?: WhatsappPhoneNumberScalarWhereWithAggregatesInput | WhatsappPhoneNumberScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
+    tenantId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
+    wabaId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
+    phoneNumberId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
+    displayPhoneNumber?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    verifiedName?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    qualityRating?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    codeVerificationStatus?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string
+  }
+
+  export type WhatsappWebhookEventWhereInput = {
+    AND?: WhatsappWebhookEventWhereInput | WhatsappWebhookEventWhereInput[]
+    OR?: WhatsappWebhookEventWhereInput[]
+    NOT?: WhatsappWebhookEventWhereInput | WhatsappWebhookEventWhereInput[]
+    id?: StringFilter<"WhatsappWebhookEvent"> | string
+    tenantId?: StringFilter<"WhatsappWebhookEvent"> | string
+    whatsappPhoneNumberId?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventType?: EnumWhatsappWebhookEventTypeFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFilter<"WhatsappWebhookEvent"> | string
+    entryId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    changeField?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventKey?: StringFilter<"WhatsappWebhookEvent"> | string
+    externalMessageId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    externalStatus?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    contactWaId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    eventTimestamp?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    rawPayload?: JsonFilter<"WhatsappWebhookEvent">
+    processedAt?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    errorMessage?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    whatsappPhoneNumber?: XOR<WhatsappPhoneNumberScalarRelationFilter, WhatsappPhoneNumberWhereInput>
+  }
+
+  export type WhatsappWebhookEventOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
+    eventType?: SortOrder
+    processingStatus?: SortOrder
+    objectType?: SortOrder
+    entryId?: SortOrderInput | SortOrder
+    changeField?: SortOrder
+    eventKey?: SortOrder
+    externalMessageId?: SortOrderInput | SortOrder
+    externalStatus?: SortOrderInput | SortOrder
+    contactWaId?: SortOrderInput | SortOrder
+    eventTimestamp?: SortOrderInput | SortOrder
+    rawPayload?: SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberOrderByWithRelationInput
+  }
+
+  export type WhatsappWebhookEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_eventKey?: WhatsappWebhookEventTenantIdEventKeyCompoundUniqueInput
+    AND?: WhatsappWebhookEventWhereInput | WhatsappWebhookEventWhereInput[]
+    OR?: WhatsappWebhookEventWhereInput[]
+    NOT?: WhatsappWebhookEventWhereInput | WhatsappWebhookEventWhereInput[]
+    tenantId?: StringFilter<"WhatsappWebhookEvent"> | string
+    whatsappPhoneNumberId?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventType?: EnumWhatsappWebhookEventTypeFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFilter<"WhatsappWebhookEvent"> | string
+    entryId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    changeField?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventKey?: StringFilter<"WhatsappWebhookEvent"> | string
+    externalMessageId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    externalStatus?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    contactWaId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    eventTimestamp?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    rawPayload?: JsonFilter<"WhatsappWebhookEvent">
+    processedAt?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    errorMessage?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    whatsappPhoneNumber?: XOR<WhatsappPhoneNumberScalarRelationFilter, WhatsappPhoneNumberWhereInput>
+  }, "id" | "tenantId_eventKey">
+
+  export type WhatsappWebhookEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
+    eventType?: SortOrder
+    processingStatus?: SortOrder
+    objectType?: SortOrder
+    entryId?: SortOrderInput | SortOrder
+    changeField?: SortOrder
+    eventKey?: SortOrder
+    externalMessageId?: SortOrderInput | SortOrder
+    externalStatus?: SortOrderInput | SortOrder
+    contactWaId?: SortOrderInput | SortOrder
+    eventTimestamp?: SortOrderInput | SortOrder
+    rawPayload?: SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WhatsappWebhookEventCountOrderByAggregateInput
+    _max?: WhatsappWebhookEventMaxOrderByAggregateInput
+    _min?: WhatsappWebhookEventMinOrderByAggregateInput
+  }
+
+  export type WhatsappWebhookEventScalarWhereWithAggregatesInput = {
+    AND?: WhatsappWebhookEventScalarWhereWithAggregatesInput | WhatsappWebhookEventScalarWhereWithAggregatesInput[]
+    OR?: WhatsappWebhookEventScalarWhereWithAggregatesInput[]
+    NOT?: WhatsappWebhookEventScalarWhereWithAggregatesInput | WhatsappWebhookEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    tenantId?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    whatsappPhoneNumberId?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    eventType?: EnumWhatsappWebhookEventTypeWithAggregatesFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusWithAggregatesFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    entryId?: StringNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | string | null
+    changeField?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    eventKey?: StringWithAggregatesFilter<"WhatsappWebhookEvent"> | string
+    externalMessageId?: StringNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | string | null
+    externalStatus?: StringNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | string | null
+    contactWaId?: StringNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | string | null
+    eventTimestamp?: DateTimeNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | Date | string | null
+    rawPayload?: JsonWithAggregatesFilter<"WhatsappWebhookEvent">
+    processedAt?: DateTimeNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | Date | string | null
+    errorMessage?: StringNullableWithAggregatesFilter<"WhatsappWebhookEvent"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"WhatsappWebhookEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WhatsappWebhookEvent"> | Date | string
   }
 
   export type PipelineWhereInput = {
@@ -21498,6 +24603,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -21521,6 +24628,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -21544,6 +24653,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -21567,6 +24678,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -22151,6 +25264,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22159,6 +25273,7 @@ export namespace Prisma {
     contact: ContactCreateNestedOneWithoutConversationsInput
     lead?: LeadCreateNestedOneWithoutConversationsInput
     assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -22170,6 +25285,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22181,6 +25298,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22189,6 +25307,7 @@ export namespace Prisma {
     contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
     lead?: LeadUpdateOneWithoutConversationsNestedInput
     assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -22200,6 +25319,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22215,6 +25336,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22225,6 +25348,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22239,6 +25363,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22407,6 +25533,249 @@ export namespace Prisma {
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappPhoneNumberCreateInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
+    conversations?: ConversationCreateNestedManyWithoutWhatsappPhoneNumberInput
+    webhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+    webhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
+    conversations?: ConversationUpdateManyWithoutWhatsappPhoneNumberNestedInput
+    webhookEvents?: WhatsappWebhookEventUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
+    webhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberCreateManyInput = {
+    id?: string
+    tenantId: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappPhoneNumberUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventCreateInput = {
+    id?: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappWebhookEventsInput
+    whatsappPhoneNumber: WhatsappPhoneNumberCreateNestedOneWithoutWebhookEventsInput
+  }
+
+  export type WhatsappWebhookEventUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    whatsappPhoneNumberId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappWebhookEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappWebhookEventsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneRequiredWithoutWebhookEventsNestedInput
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    whatsappPhoneNumberId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventCreateManyInput = {
+    id?: string
+    tenantId: string
+    whatsappPhoneNumberId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappWebhookEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    whatsappPhoneNumberId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22986,6 +26355,18 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
+  export type WhatsappPhoneNumberListRelationFilter = {
+    every?: WhatsappPhoneNumberWhereInput
+    some?: WhatsappPhoneNumberWhereInput
+    none?: WhatsappPhoneNumberWhereInput
+  }
+
+  export type WhatsappWebhookEventListRelationFilter = {
+    every?: WhatsappWebhookEventWhereInput
+    some?: WhatsappWebhookEventWhereInput
+    none?: WhatsappWebhookEventWhereInput
+  }
+
   export type PipelineListRelationFilter = {
     every?: PipelineWhereInput
     some?: PipelineWhereInput
@@ -23007,6 +26388,14 @@ export namespace Prisma {
   }
 
   export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WhatsappPhoneNumberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WhatsappWebhookEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -23514,6 +26903,17 @@ export namespace Prisma {
     isNot?: LeadWhereInput | null
   }
 
+  export type WhatsappPhoneNumberNullableScalarRelationFilter = {
+    is?: WhatsappPhoneNumberWhereInput | null
+    isNot?: WhatsappPhoneNumberWhereInput | null
+  }
+
+  export type ConversationTenantIdChannelExternalThreadKeyCompoundUniqueInput = {
+    tenantId: string
+    channel: $Enums.ChannelType
+    externalThreadKey: string
+  }
+
   export type ConversationCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
@@ -23522,6 +26922,8 @@ export namespace Prisma {
     channel?: SortOrder
     status?: SortOrder
     assigneeUserId?: SortOrder
+    externalThreadKey?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23540,6 +26942,8 @@ export namespace Prisma {
     channel?: SortOrder
     status?: SortOrder
     assigneeUserId?: SortOrder
+    externalThreadKey?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23554,6 +26958,8 @@ export namespace Prisma {
     channel?: SortOrder
     status?: SortOrder
     assigneeUserId?: SortOrder
+    externalThreadKey?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23780,6 +27186,199 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type WhatsappPhoneNumberCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    wabaId?: SortOrder
+    phoneNumberId?: SortOrder
+    displayPhoneNumber?: SortOrder
+    verifiedName?: SortOrder
+    qualityRating?: SortOrder
+    codeVerificationStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappPhoneNumberMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    wabaId?: SortOrder
+    phoneNumberId?: SortOrder
+    displayPhoneNumber?: SortOrder
+    verifiedName?: SortOrder
+    qualityRating?: SortOrder
+    codeVerificationStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappPhoneNumberMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    wabaId?: SortOrder
+    phoneNumberId?: SortOrder
+    displayPhoneNumber?: SortOrder
+    verifiedName?: SortOrder
+    qualityRating?: SortOrder
+    codeVerificationStatus?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumWhatsappWebhookEventTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookEventType | EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel> | $Enums.WhatsappWebhookEventType
+  }
+
+  export type EnumWhatsappWebhookProcessingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookProcessingStatus | EnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel> | $Enums.WhatsappWebhookProcessingStatus
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type WhatsappPhoneNumberScalarRelationFilter = {
+    is?: WhatsappPhoneNumberWhereInput
+    isNot?: WhatsappPhoneNumberWhereInput
+  }
+
+  export type WhatsappWebhookEventTenantIdEventKeyCompoundUniqueInput = {
+    tenantId: string
+    eventKey: string
+  }
+
+  export type WhatsappWebhookEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
+    eventType?: SortOrder
+    processingStatus?: SortOrder
+    objectType?: SortOrder
+    entryId?: SortOrder
+    changeField?: SortOrder
+    eventKey?: SortOrder
+    externalMessageId?: SortOrder
+    externalStatus?: SortOrder
+    contactWaId?: SortOrder
+    eventTimestamp?: SortOrder
+    rawPayload?: SortOrder
+    processedAt?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappWebhookEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
+    eventType?: SortOrder
+    processingStatus?: SortOrder
+    objectType?: SortOrder
+    entryId?: SortOrder
+    changeField?: SortOrder
+    eventKey?: SortOrder
+    externalMessageId?: SortOrder
+    externalStatus?: SortOrder
+    contactWaId?: SortOrder
+    eventTimestamp?: SortOrder
+    processedAt?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappWebhookEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    whatsappPhoneNumberId?: SortOrder
+    eventType?: SortOrder
+    processingStatus?: SortOrder
+    objectType?: SortOrder
+    entryId?: SortOrder
+    changeField?: SortOrder
+    eventKey?: SortOrder
+    externalMessageId?: SortOrder
+    externalStatus?: SortOrder
+    contactWaId?: SortOrder
+    eventTimestamp?: SortOrder
+    processedAt?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumWhatsappWebhookEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookEventType | EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappWebhookEventType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel>
+  }
+
+  export type EnumWhatsappWebhookProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookProcessingStatus | EnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappWebhookProcessingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type PipelineTenantIdNameCompoundUniqueInput = {
@@ -24193,6 +27792,20 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type WhatsappPhoneNumberCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput> | WhatsappPhoneNumberCreateWithoutTenantInput[] | WhatsappPhoneNumberUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutTenantInput | WhatsappPhoneNumberCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappPhoneNumberCreateManyTenantInputEnvelope
+    connect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+  }
+
+  export type WhatsappWebhookEventCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput> | WhatsappWebhookEventCreateWithoutTenantInput[] | WhatsappWebhookEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutTenantInput | WhatsappWebhookEventCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappWebhookEventCreateManyTenantInputEnvelope
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+  }
+
   export type PipelineCreateNestedManyWithoutTenantInput = {
     create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
@@ -24253,6 +27866,20 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
     createMany?: MessageCreateManyTenantInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput> | WhatsappPhoneNumberCreateWithoutTenantInput[] | WhatsappPhoneNumberUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutTenantInput | WhatsappPhoneNumberCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappPhoneNumberCreateManyTenantInputEnvelope
+    connect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+  }
+
+  export type WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput> | WhatsappWebhookEventCreateWithoutTenantInput[] | WhatsappWebhookEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutTenantInput | WhatsappWebhookEventCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappWebhookEventCreateManyTenantInputEnvelope
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
   }
 
   export type PipelineUncheckedCreateNestedManyWithoutTenantInput = {
@@ -24375,6 +28002,34 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput> | WhatsappPhoneNumberCreateWithoutTenantInput[] | WhatsappPhoneNumberUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutTenantInput | WhatsappPhoneNumberCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput | WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappPhoneNumberCreateManyTenantInputEnvelope
+    set?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    disconnect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    delete?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    connect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    update?: WhatsappPhoneNumberUpdateWithWhereUniqueWithoutTenantInput | WhatsappPhoneNumberUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappPhoneNumberUpdateManyWithWhereWithoutTenantInput | WhatsappPhoneNumberUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappPhoneNumberScalarWhereInput | WhatsappPhoneNumberScalarWhereInput[]
+  }
+
+  export type WhatsappWebhookEventUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput> | WhatsappWebhookEventCreateWithoutTenantInput[] | WhatsappWebhookEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutTenantInput | WhatsappWebhookEventCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappWebhookEventUpsertWithWhereUniqueWithoutTenantInput | WhatsappWebhookEventUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappWebhookEventCreateManyTenantInputEnvelope
+    set?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    disconnect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    delete?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    update?: WhatsappWebhookEventUpdateWithWhereUniqueWithoutTenantInput | WhatsappWebhookEventUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappWebhookEventUpdateManyWithWhereWithoutTenantInput | WhatsappWebhookEventUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
+  }
+
   export type PipelineUpdateManyWithoutTenantNestedInput = {
     create?: XOR<PipelineCreateWithoutTenantInput, PipelineUncheckedCreateWithoutTenantInput> | PipelineCreateWithoutTenantInput[] | PipelineUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: PipelineCreateOrConnectWithoutTenantInput | PipelineCreateOrConnectWithoutTenantInput[]
@@ -24495,6 +28150,34 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutTenantInput | MessageUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutTenantInput | MessageUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput> | WhatsappPhoneNumberCreateWithoutTenantInput[] | WhatsappPhoneNumberUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutTenantInput | WhatsappPhoneNumberCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput | WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappPhoneNumberCreateManyTenantInputEnvelope
+    set?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    disconnect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    delete?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    connect?: WhatsappPhoneNumberWhereUniqueInput | WhatsappPhoneNumberWhereUniqueInput[]
+    update?: WhatsappPhoneNumberUpdateWithWhereUniqueWithoutTenantInput | WhatsappPhoneNumberUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappPhoneNumberUpdateManyWithWhereWithoutTenantInput | WhatsappPhoneNumberUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappPhoneNumberScalarWhereInput | WhatsappPhoneNumberScalarWhereInput[]
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput> | WhatsappWebhookEventCreateWithoutTenantInput[] | WhatsappWebhookEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutTenantInput | WhatsappWebhookEventCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappWebhookEventUpsertWithWhereUniqueWithoutTenantInput | WhatsappWebhookEventUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappWebhookEventCreateManyTenantInputEnvelope
+    set?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    disconnect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    delete?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    update?: WhatsappWebhookEventUpdateWithWhereUniqueWithoutTenantInput | WhatsappWebhookEventUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappWebhookEventUpdateManyWithWhereWithoutTenantInput | WhatsappWebhookEventUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
   }
 
   export type PipelineUncheckedUpdateManyWithoutTenantNestedInput = {
@@ -24858,6 +28541,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutConversationsInput, WhatsappPhoneNumberUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutConversationsInput
+    connect?: WhatsappPhoneNumberWhereUniqueInput
+  }
+
   export type MessageCreateNestedManyWithoutConversationInput = {
     create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
@@ -24914,6 +28603,16 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedConversationsInput, UserUpdateWithoutAssignedConversationsInput>, UserUncheckedUpdateWithoutAssignedConversationsInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutConversationsInput, WhatsappPhoneNumberUncheckedCreateWithoutConversationsInput>
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutConversationsInput
+    upsert?: WhatsappPhoneNumberUpsertWithoutConversationsInput
+    disconnect?: WhatsappPhoneNumberWhereInput | boolean
+    delete?: WhatsappPhoneNumberWhereInput | boolean
+    connect?: WhatsappPhoneNumberWhereUniqueInput
+    update?: XOR<XOR<WhatsappPhoneNumberUpdateToOneWithWhereWithoutConversationsInput, WhatsappPhoneNumberUpdateWithoutConversationsInput>, WhatsappPhoneNumberUncheckedUpdateWithoutConversationsInput>
   }
 
   export type MessageUpdateManyWithoutConversationNestedInput = {
@@ -24986,6 +28685,140 @@ export namespace Prisma {
     upsert?: ConversationUpsertWithoutMessagesInput
     connect?: ConversationWhereUniqueInput
     update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput = {
+    create?: XOR<TenantCreateWithoutWhatsappPhoneNumbersInput, TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappPhoneNumbersInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedManyWithoutWhatsappPhoneNumberInput = {
+    create?: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput> | ConversationCreateWithoutWhatsappPhoneNumberInput[] | ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput | ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    createMany?: ConversationCreateManyWhatsappPhoneNumberInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type WhatsappWebhookEventCreateNestedManyWithoutWhatsappPhoneNumberInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput> | WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput[] | WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    createMany?: WhatsappWebhookEventCreateManyWhatsappPhoneNumberInputEnvelope
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput = {
+    create?: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput> | ConversationCreateWithoutWhatsappPhoneNumberInput[] | ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput | ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    createMany?: ConversationCreateManyWhatsappPhoneNumberInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
+  export type WhatsappWebhookEventUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput> | WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput[] | WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    createMany?: WhatsappWebhookEventCreateManyWhatsappPhoneNumberInputEnvelope
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput = {
+    create?: XOR<TenantCreateWithoutWhatsappPhoneNumbersInput, TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappPhoneNumbersInput
+    upsert?: TenantUpsertWithoutWhatsappPhoneNumbersInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutWhatsappPhoneNumbersInput, TenantUpdateWithoutWhatsappPhoneNumbersInput>, TenantUncheckedUpdateWithoutWhatsappPhoneNumbersInput>
+  }
+
+  export type ConversationUpdateManyWithoutWhatsappPhoneNumberNestedInput = {
+    create?: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput> | ConversationCreateWithoutWhatsappPhoneNumberInput[] | ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput | ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput | ConversationUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    createMany?: ConversationCreateManyWhatsappPhoneNumberInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput | ConversationUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutWhatsappPhoneNumberInput | ConversationUpdateManyWithWhereWithoutWhatsappPhoneNumberInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type WhatsappWebhookEventUpdateManyWithoutWhatsappPhoneNumberNestedInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput> | WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput[] | WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    upsert?: WhatsappWebhookEventUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    createMany?: WhatsappWebhookEventCreateManyWhatsappPhoneNumberInputEnvelope
+    set?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    disconnect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    delete?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    update?: WhatsappWebhookEventUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    updateMany?: WhatsappWebhookEventUpdateManyWithWhereWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpdateManyWithWhereWithoutWhatsappPhoneNumberInput[]
+    deleteMany?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput = {
+    create?: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput> | ConversationCreateWithoutWhatsappPhoneNumberInput[] | ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput | ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput | ConversationUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    createMany?: ConversationCreateManyWhatsappPhoneNumberInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput | ConversationUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutWhatsappPhoneNumberInput | ConversationUpdateManyWithWhereWithoutWhatsappPhoneNumberInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput = {
+    create?: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput> | WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput[] | WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput[]
+    connectOrCreate?: WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput[]
+    upsert?: WhatsappWebhookEventUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    createMany?: WhatsappWebhookEventCreateManyWhatsappPhoneNumberInputEnvelope
+    set?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    disconnect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    delete?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
+    update?: WhatsappWebhookEventUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput[]
+    updateMany?: WhatsappWebhookEventUpdateManyWithWhereWithoutWhatsappPhoneNumberInput | WhatsappWebhookEventUpdateManyWithWhereWithoutWhatsappPhoneNumberInput[]
+    deleteMany?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutWhatsappWebhookEventsInput = {
+    create?: XOR<TenantCreateWithoutWhatsappWebhookEventsInput, TenantUncheckedCreateWithoutWhatsappWebhookEventsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappWebhookEventsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type WhatsappPhoneNumberCreateNestedOneWithoutWebhookEventsInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedCreateWithoutWebhookEventsInput>
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutWebhookEventsInput
+    connect?: WhatsappPhoneNumberWhereUniqueInput
+  }
+
+  export type EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappWebhookEventType
+  }
+
+  export type EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappWebhookProcessingStatus
+  }
+
+  export type TenantUpdateOneRequiredWithoutWhatsappWebhookEventsNestedInput = {
+    create?: XOR<TenantCreateWithoutWhatsappWebhookEventsInput, TenantUncheckedCreateWithoutWhatsappWebhookEventsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappWebhookEventsInput
+    upsert?: TenantUpsertWithoutWhatsappWebhookEventsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutWhatsappWebhookEventsInput, TenantUpdateWithoutWhatsappWebhookEventsInput>, TenantUncheckedUpdateWithoutWhatsappWebhookEventsInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateOneRequiredWithoutWebhookEventsNestedInput = {
+    create?: XOR<WhatsappPhoneNumberCreateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedCreateWithoutWebhookEventsInput>
+    connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutWebhookEventsInput
+    upsert?: WhatsappPhoneNumberUpsertWithoutWebhookEventsInput
+    connect?: WhatsappPhoneNumberWhereUniqueInput
+    update?: XOR<XOR<WhatsappPhoneNumberUpdateToOneWithWhereWithoutWebhookEventsInput, WhatsappPhoneNumberUpdateWithoutWebhookEventsInput>, WhatsappPhoneNumberUncheckedUpdateWithoutWebhookEventsInput>
   }
 
   export type TenantCreateNestedOneWithoutPipelinesInput = {
@@ -25611,6 +29444,63 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookEventType | EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel> | $Enums.WhatsappWebhookEventType
+  }
+
+  export type NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookProcessingStatus | EnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel> | $Enums.WhatsappWebhookProcessingStatus
+  }
+
+  export type NestedEnumWhatsappWebhookEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookEventType | EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappWebhookEventType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumWhatsappWebhookProcessingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappWebhookProcessingStatus | EnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappWebhookProcessingStatus[] | ListEnumWhatsappWebhookProcessingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappWebhookProcessingStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappWebhookProcessingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappWebhookProcessingStatusFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -25751,6 +29641,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25758,6 +29649,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutConversationsInput
     contact: ContactCreateNestedOneWithoutConversationsInput
     lead?: LeadCreateNestedOneWithoutConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -25768,6 +29660,8 @@ export namespace Prisma {
     leadId?: string | null
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25939,6 +29833,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFilter<"Conversation"> | $Enums.ChannelType
     status?: EnumConversationStatusFilter<"Conversation"> | $Enums.ConversationStatus
     assigneeUserId?: StringNullableFilter<"Conversation"> | string | null
+    externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
+    whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
@@ -26310,6 +30206,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26317,6 +30214,7 @@ export namespace Prisma {
     contact: ContactCreateNestedOneWithoutConversationsInput
     lead?: LeadCreateNestedOneWithoutConversationsInput
     assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -26327,6 +30225,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26397,6 +30297,94 @@ export namespace Prisma {
 
   export type MessageCreateManyTenantInputEnvelope = {
     data: MessageCreateManyTenantInput | MessageCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WhatsappPhoneNumberCreateWithoutTenantInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationCreateNestedManyWithoutWhatsappPhoneNumberInput
+    webhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedCreateWithoutTenantInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+    webhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberCreateOrConnectWithoutTenantInput = {
+    where: WhatsappPhoneNumberWhereUniqueInput
+    create: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappPhoneNumberCreateManyTenantInputEnvelope = {
+    data: WhatsappPhoneNumberCreateManyTenantInput | WhatsappPhoneNumberCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WhatsappWebhookEventCreateWithoutTenantInput = {
+    id?: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    whatsappPhoneNumber: WhatsappPhoneNumberCreateNestedOneWithoutWebhookEventsInput
+  }
+
+  export type WhatsappWebhookEventUncheckedCreateWithoutTenantInput = {
+    id?: string
+    whatsappPhoneNumberId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappWebhookEventCreateOrConnectWithoutTenantInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    create: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappWebhookEventCreateManyTenantInputEnvelope = {
+    data: WhatsappWebhookEventCreateManyTenantInput | WhatsappWebhookEventCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -26669,6 +30657,78 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Message"> | Date | string
   }
 
+  export type WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappPhoneNumberWhereUniqueInput
+    update: XOR<WhatsappPhoneNumberUpdateWithoutTenantInput, WhatsappPhoneNumberUncheckedUpdateWithoutTenantInput>
+    create: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappPhoneNumberWhereUniqueInput
+    data: XOR<WhatsappPhoneNumberUpdateWithoutTenantInput, WhatsappPhoneNumberUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateManyWithWhereWithoutTenantInput = {
+    where: WhatsappPhoneNumberScalarWhereInput
+    data: XOR<WhatsappPhoneNumberUpdateManyMutationInput, WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type WhatsappPhoneNumberScalarWhereInput = {
+    AND?: WhatsappPhoneNumberScalarWhereInput | WhatsappPhoneNumberScalarWhereInput[]
+    OR?: WhatsappPhoneNumberScalarWhereInput[]
+    NOT?: WhatsappPhoneNumberScalarWhereInput | WhatsappPhoneNumberScalarWhereInput[]
+    id?: StringFilter<"WhatsappPhoneNumber"> | string
+    tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
+    wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
+    phoneNumberId?: StringFilter<"WhatsappPhoneNumber"> | string
+    displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
+  }
+
+  export type WhatsappWebhookEventUpsertWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    update: XOR<WhatsappWebhookEventUpdateWithoutTenantInput, WhatsappWebhookEventUncheckedUpdateWithoutTenantInput>
+    create: XOR<WhatsappWebhookEventCreateWithoutTenantInput, WhatsappWebhookEventUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappWebhookEventUpdateWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    data: XOR<WhatsappWebhookEventUpdateWithoutTenantInput, WhatsappWebhookEventUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type WhatsappWebhookEventUpdateManyWithWhereWithoutTenantInput = {
+    where: WhatsappWebhookEventScalarWhereInput
+    data: XOR<WhatsappWebhookEventUpdateManyMutationInput, WhatsappWebhookEventUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type WhatsappWebhookEventScalarWhereInput = {
+    AND?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
+    OR?: WhatsappWebhookEventScalarWhereInput[]
+    NOT?: WhatsappWebhookEventScalarWhereInput | WhatsappWebhookEventScalarWhereInput[]
+    id?: StringFilter<"WhatsappWebhookEvent"> | string
+    tenantId?: StringFilter<"WhatsappWebhookEvent"> | string
+    whatsappPhoneNumberId?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventType?: EnumWhatsappWebhookEventTypeFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFilter<"WhatsappWebhookEvent"> | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFilter<"WhatsappWebhookEvent"> | string
+    entryId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    changeField?: StringFilter<"WhatsappWebhookEvent"> | string
+    eventKey?: StringFilter<"WhatsappWebhookEvent"> | string
+    externalMessageId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    externalStatus?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    contactWaId?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    eventTimestamp?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    rawPayload?: JsonFilter<"WhatsappWebhookEvent">
+    processedAt?: DateTimeNullableFilter<"WhatsappWebhookEvent"> | Date | string | null
+    errorMessage?: StringNullableFilter<"WhatsappWebhookEvent"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappWebhookEvent"> | Date | string
+  }
+
   export type PipelineUpsertWithWhereUniqueWithoutTenantInput = {
     where: PipelineWhereUniqueInput
     update: XOR<PipelineUpdateWithoutTenantInput, PipelineUncheckedUpdateWithoutTenantInput>
@@ -26748,6 +30808,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -26770,6 +30832,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -26808,6 +30872,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -26830,6 +30896,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -26852,6 +30920,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -26874,6 +30944,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -26912,6 +30984,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -26934,6 +31008,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -26956,6 +31032,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -26978,6 +31056,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -27055,6 +31135,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -27077,6 +31159,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -27144,6 +31228,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -27166,6 +31252,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -27227,6 +31315,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27234,6 +31323,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutConversationsInput
     lead?: LeadCreateNestedOneWithoutConversationsInput
     assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -27244,6 +31334,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27290,6 +31382,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -27312,6 +31406,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -27366,6 +31462,8 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -27388,6 +31486,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -27539,6 +31639,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27546,6 +31647,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutConversationsInput
     contact: ContactCreateNestedOneWithoutConversationsInput
     assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -27556,6 +31658,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27602,6 +31706,8 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -27624,6 +31730,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -27824,6 +31932,8 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     leads?: LeadCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -27846,6 +31956,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -27978,6 +32090,39 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAssignedConversationsInput, UserUncheckedCreateWithoutAssignedConversationsInput>
   }
 
+  export type WhatsappPhoneNumberCreateWithoutConversationsInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
+    webhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedCreateWithoutConversationsInput = {
+    id?: string
+    tenantId: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    webhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberCreateOrConnectWithoutConversationsInput = {
+    where: WhatsappPhoneNumberWhereUniqueInput
+    create: XOR<WhatsappPhoneNumberCreateWithoutConversationsInput, WhatsappPhoneNumberUncheckedCreateWithoutConversationsInput>
+  }
+
   export type MessageCreateWithoutConversationInput = {
     id?: string
     direction: $Enums.MessageDirection
@@ -28063,6 +32208,8 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     leads?: LeadUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -28085,6 +32232,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -28230,6 +32379,45 @@ export namespace Prisma {
     ownedLeads?: LeadUncheckedUpdateManyWithoutOwnerUserNestedInput
   }
 
+  export type WhatsappPhoneNumberUpsertWithoutConversationsInput = {
+    update: XOR<WhatsappPhoneNumberUpdateWithoutConversationsInput, WhatsappPhoneNumberUncheckedUpdateWithoutConversationsInput>
+    create: XOR<WhatsappPhoneNumberCreateWithoutConversationsInput, WhatsappPhoneNumberUncheckedCreateWithoutConversationsInput>
+    where?: WhatsappPhoneNumberWhereInput
+  }
+
+  export type WhatsappPhoneNumberUpdateToOneWithWhereWithoutConversationsInput = {
+    where?: WhatsappPhoneNumberWhereInput
+    data: XOR<WhatsappPhoneNumberUpdateWithoutConversationsInput, WhatsappPhoneNumberUncheckedUpdateWithoutConversationsInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
+    webhookEvents?: WhatsappWebhookEventUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateWithoutConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    webhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutConversationInput, MessageUncheckedUpdateWithoutConversationInput>
@@ -28264,6 +32452,8 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
@@ -28286,6 +32476,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -28299,6 +32491,7 @@ export namespace Prisma {
     id?: string
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28307,6 +32500,7 @@ export namespace Prisma {
     contact: ContactCreateNestedOneWithoutConversationsInput
     lead?: LeadCreateNestedOneWithoutConversationsInput
     assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberCreateNestedOneWithoutConversationsInput
   }
 
   export type ConversationUncheckedCreateWithoutMessagesInput = {
@@ -28317,6 +32511,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28357,6 +32553,8 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
@@ -28379,6 +32577,8 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -28398,6 +32598,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28406,6 +32607,7 @@ export namespace Prisma {
     contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
     lead?: LeadUpdateOneWithoutConversationsNestedInput
     assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutMessagesInput = {
@@ -28416,10 +32618,432 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TenantCreateWithoutWhatsappPhoneNumbersInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutWhatsappPhoneNumbersInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutWhatsappPhoneNumbersInput, TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput>
+  }
+
+  export type ConversationCreateWithoutWhatsappPhoneNumberInput = {
+    id?: string
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    tenant: TenantCreateNestedOneWithoutConversationsInput
+    contact: ContactCreateNestedOneWithoutConversationsInput
+    lead?: LeadCreateNestedOneWithoutConversationsInput
+    assigneeUser?: UserCreateNestedOneWithoutAssignedConversationsInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutWhatsappPhoneNumberInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type ConversationCreateManyWhatsappPhoneNumberInputEnvelope = {
+    data: ConversationCreateManyWhatsappPhoneNumberInput | ConversationCreateManyWhatsappPhoneNumberInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput = {
+    id?: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappWebhookEventsInput
+  }
+
+  export type WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput = {
+    id?: string
+    tenantId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappWebhookEventCreateOrConnectWithoutWhatsappPhoneNumberInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    create: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type WhatsappWebhookEventCreateManyWhatsappPhoneNumberInputEnvelope = {
+    data: WhatsappWebhookEventCreateManyWhatsappPhoneNumberInput | WhatsappWebhookEventCreateManyWhatsappPhoneNumberInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutWhatsappPhoneNumbersInput = {
+    update: XOR<TenantUpdateWithoutWhatsappPhoneNumbersInput, TenantUncheckedUpdateWithoutWhatsappPhoneNumbersInput>
+    create: XOR<TenantCreateWithoutWhatsappPhoneNumbersInput, TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutWhatsappPhoneNumbersInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutWhatsappPhoneNumbersInput, TenantUncheckedUpdateWithoutWhatsappPhoneNumbersInput>
+  }
+
+  export type TenantUpdateWithoutWhatsappPhoneNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutWhatsappPhoneNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ConversationUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutWhatsappPhoneNumberInput, ConversationUncheckedUpdateWithoutWhatsappPhoneNumberInput>
+    create: XOR<ConversationCreateWithoutWhatsappPhoneNumberInput, ConversationUncheckedCreateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutWhatsappPhoneNumberInput, ConversationUncheckedUpdateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutWhatsappPhoneNumberInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type WhatsappWebhookEventUpsertWithWhereUniqueWithoutWhatsappPhoneNumberInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    update: XOR<WhatsappWebhookEventUpdateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedUpdateWithoutWhatsappPhoneNumberInput>
+    create: XOR<WhatsappWebhookEventCreateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedCreateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type WhatsappWebhookEventUpdateWithWhereUniqueWithoutWhatsappPhoneNumberInput = {
+    where: WhatsappWebhookEventWhereUniqueInput
+    data: XOR<WhatsappWebhookEventUpdateWithoutWhatsappPhoneNumberInput, WhatsappWebhookEventUncheckedUpdateWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type WhatsappWebhookEventUpdateManyWithWhereWithoutWhatsappPhoneNumberInput = {
+    where: WhatsappWebhookEventScalarWhereInput
+    data: XOR<WhatsappWebhookEventUpdateManyMutationInput, WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberInput>
+  }
+
+  export type TenantCreateWithoutWhatsappWebhookEventsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutWhatsappWebhookEventsInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutWhatsappWebhookEventsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutWhatsappWebhookEventsInput, TenantUncheckedCreateWithoutWhatsappWebhookEventsInput>
+  }
+
+  export type WhatsappPhoneNumberCreateWithoutWebhookEventsInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
+    conversations?: ConversationCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedCreateWithoutWebhookEventsInput = {
+    id?: string
+    tenantId: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
+  }
+
+  export type WhatsappPhoneNumberCreateOrConnectWithoutWebhookEventsInput = {
+    where: WhatsappPhoneNumberWhereUniqueInput
+    create: XOR<WhatsappPhoneNumberCreateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedCreateWithoutWebhookEventsInput>
+  }
+
+  export type TenantUpsertWithoutWhatsappWebhookEventsInput = {
+    update: XOR<TenantUpdateWithoutWhatsappWebhookEventsInput, TenantUncheckedUpdateWithoutWhatsappWebhookEventsInput>
+    create: XOR<TenantCreateWithoutWhatsappWebhookEventsInput, TenantUncheckedCreateWithoutWhatsappWebhookEventsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutWhatsappWebhookEventsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutWhatsappWebhookEventsInput, TenantUncheckedUpdateWithoutWhatsappWebhookEventsInput>
+  }
+
+  export type TenantUpdateWithoutWhatsappWebhookEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutWhatsappWebhookEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type WhatsappPhoneNumberUpsertWithoutWebhookEventsInput = {
+    update: XOR<WhatsappPhoneNumberUpdateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedUpdateWithoutWebhookEventsInput>
+    create: XOR<WhatsappPhoneNumberCreateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedCreateWithoutWebhookEventsInput>
+    where?: WhatsappPhoneNumberWhereInput
+  }
+
+  export type WhatsappPhoneNumberUpdateToOneWithWhereWithoutWebhookEventsInput = {
+    where?: WhatsappPhoneNumberWhereInput
+    data: XOR<WhatsappPhoneNumberUpdateWithoutWebhookEventsInput, WhatsappPhoneNumberUncheckedUpdateWithoutWebhookEventsInput>
+  }
+
+  export type WhatsappPhoneNumberUpdateWithoutWebhookEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
+    conversations?: ConversationUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateWithoutWebhookEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
   }
 
   export type TenantCreateWithoutPipelinesInput = {
@@ -28441,6 +33065,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
   }
 
@@ -28463,6 +33089,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -28585,6 +33213,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
   }
 
@@ -28607,6 +33237,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
   }
 
@@ -28661,6 +33293,8 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
   }
 
@@ -28683,6 +33317,8 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -28796,6 +33432,8 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
   }
 
@@ -28818,6 +33456,8 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
   }
 
@@ -28924,6 +33564,8 @@ export namespace Prisma {
     leadId?: string | null
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29077,6 +33719,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29084,6 +33727,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
     contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
     lead?: LeadUpdateOneWithoutConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -29094,6 +33738,8 @@ export namespace Prisma {
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29108,6 +33754,8 @@ export namespace Prisma {
     leadId?: NullableStringFieldUpdateOperationsInput | string | null
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29177,6 +33825,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29202,6 +33852,38 @@ export namespace Prisma {
     readAt?: Date | string | null
     failedAt?: Date | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappPhoneNumberCreateManyTenantInput = {
+    id?: string
+    wabaId: string
+    phoneNumberId: string
+    displayPhoneNumber?: string | null
+    verifiedName?: string | null
+    qualityRating?: string | null
+    codeVerificationStatus?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappWebhookEventCreateManyTenantInput = {
+    id?: string
+    whatsappPhoneNumberId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -29405,6 +34087,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29412,6 +34095,7 @@ export namespace Prisma {
     contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
     lead?: LeadUpdateOneWithoutConversationsNestedInput
     assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -29422,6 +34106,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29436,6 +34122,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29507,6 +34195,106 @@ export namespace Prisma {
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappPhoneNumberUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUpdateManyWithoutWhatsappPhoneNumberNestedInput
+    webhookEvents?: WhatsappWebhookEventUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
+    webhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
+  }
+
+  export type WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    wabaId?: StringFieldUpdateOperationsInput | string
+    phoneNumberId?: StringFieldUpdateOperationsInput | string
+    displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
+    qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
+    codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneRequiredWithoutWebhookEventsNestedInput
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whatsappPhoneNumberId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    whatsappPhoneNumberId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29605,6 +34393,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29671,6 +34461,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29678,6 +34469,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
     lead?: LeadUpdateOneWithoutConversationsNestedInput
     assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -29688,6 +34480,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29702,6 +34496,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29715,6 +34511,8 @@ export namespace Prisma {
     channel: $Enums.ChannelType
     status?: $Enums.ConversationStatus
     assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29725,6 +34523,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29732,6 +34531,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
     contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
     assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    whatsappPhoneNumber?: WhatsappPhoneNumberUpdateOneWithoutConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -29742,6 +34542,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29756,6 +34558,8 @@ export namespace Prisma {
     channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29850,6 +34654,148 @@ export namespace Prisma {
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversationCreateManyWhatsappPhoneNumberInput = {
+    id?: string
+    tenantId: string
+    contactId: string
+    leadId?: string | null
+    channel: $Enums.ChannelType
+    status?: $Enums.ConversationStatus
+    assigneeUserId?: string | null
+    externalThreadKey?: string | null
+    lastMessageAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    version?: number
+  }
+
+  export type WhatsappWebhookEventCreateManyWhatsappPhoneNumberInput = {
+    id?: string
+    tenantId: string
+    eventType: $Enums.WhatsappWebhookEventType
+    processingStatus?: $Enums.WhatsappWebhookProcessingStatus
+    objectType: string
+    entryId?: string | null
+    changeField: string
+    eventKey: string
+    externalMessageId?: string | null
+    externalStatus?: string | null
+    contactWaId?: string | null
+    eventTimestamp?: Date | string | null
+    rawPayload: JsonNullValueInput | InputJsonValue
+    processedAt?: Date | string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ConversationUpdateWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    tenant?: TenantUpdateOneRequiredWithoutConversationsNestedInput
+    contact?: ContactUpdateOneRequiredWithoutConversationsNestedInput
+    lead?: LeadUpdateOneWithoutConversationsNestedInput
+    assigneeUser?: UserUpdateOneWithoutAssignedConversationsNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    contactId?: StringFieldUpdateOperationsInput | string
+    leadId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumChannelTypeFieldUpdateOperationsInput | $Enums.ChannelType
+    status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
+    assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
+    lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type WhatsappWebhookEventUpdateWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappWebhookEventsNestedInput
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    eventType?: EnumWhatsappWebhookEventTypeFieldUpdateOperationsInput | $Enums.WhatsappWebhookEventType
+    processingStatus?: EnumWhatsappWebhookProcessingStatusFieldUpdateOperationsInput | $Enums.WhatsappWebhookProcessingStatus
+    objectType?: StringFieldUpdateOperationsInput | string
+    entryId?: NullableStringFieldUpdateOperationsInput | string | null
+    changeField?: StringFieldUpdateOperationsInput | string
+    eventKey?: StringFieldUpdateOperationsInput | string
+    externalMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    contactWaId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventTimestamp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: JsonNullValueInput | InputJsonValue
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
