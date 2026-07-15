@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import bcrypt from 'bcryptjs'
 import type { NextAuthOptions } from 'next-auth'

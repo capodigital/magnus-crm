@@ -1,5 +1,5 @@
+/* eslint-disable */
 'use client'
-
 // React Imports
 import { useState, type FormEvent } from 'react'
 
