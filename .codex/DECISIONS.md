@@ -18,6 +18,7 @@
 14. Persist WhatsApp webhook data as one raw event row per message or status item, keyed by a derived tenant-scoped `eventKey`, instead of one row per HTTP delivery.
 15. Resolve WhatsApp webhook tenancy through a trusted `phone_number_id -> WhatsappPhoneNumber -> tenantId` mapping and ignore unmapped numbers until onboarding exists.
 16. Use `externalThreadKey = phone_number_id:wa_id` so each tenant can keep a stable WhatsApp conversation thread per business number and contact pair.
+17. Store temporary or live Meta credentials only in ignored local env files such as `.env.local`, never in the journal or tracked examples.
 
 ## Rationale
 
@@ -32,3 +33,4 @@
 - Item-level raw event storage gives us better idempotency, better retries, and cleaner auditability than storing only the outer webhook POST.
 - Tenant resolution through Meta `phone_number_id` is the safest first contract because webhook hosts do not identify the tenant.
 - A stable external thread key lets inbound retries and future outbound/status reconciliation converge on the same conversation record.
+- Secrets shared during setup are still secrets; keeping them out of tracked notes reduces accidental leakage and makes rotation simpler.
