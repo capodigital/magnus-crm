@@ -35,6 +35,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The public site, login/register surfaces, and dashboard shell now inherit the teal, ink, mint, and gold brand palette instead of the original Vuexy purple theme.
 - The Meta-ready app icon is available at `public/images/brand/magnus-crm-app-icon-1024.png`; it is a square PNG under 5 MB.
 - Brand validation on July 31, 2026 passed `npx tsc --noEmit --pretty false`, `npm run lint`, `npm run build`, and local HTTP checks for `/`, manifest, favicon, app icons, SVG mark, Meta icon, and Open Graph image.
+- The production Meta app is being configured for WhatsApp webhooks. The current callback endpoint is `https://crm.magnusecosystems.com/api/webhooks/whatsapp`; production must set `META_VERIFY_TOKEN` to the same custom verify token entered in Meta and `META_APP_SECRET` to the live Meta app secret before real POST events can be accepted.
+- After webhook verification, subscribe at least to the `messages` field and register each production `phone_number_id` to a tenant through `npm run register:whatsapp-phone`; unmapped phone numbers are counted and ignored by the inbound service.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -113,4 +115,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Bootstrap the first real tenant workspace, connect the lightweight registration flow to that onboarding path, and then continue with Meta Embedded Signup plus `phone_number_id` registration for end-to-end WhatsApp validation.
+Finish production Meta webhook configuration, verify the callback URL with the production `META_VERIFY_TOKEN`, subscribe to `messages`, then bootstrap/register the first production tenant phone mapping for end-to-end WhatsApp validation.
