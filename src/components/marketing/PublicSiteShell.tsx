@@ -28,6 +28,9 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
             <Link href='/terms-of-service' className={styles.linkSoft}>
               Terminos
             </Link>
+            <Link href='/data-deletion' className={styles.linkSoft}>
+              Eliminar datos
+            </Link>
           </nav>
 
           <div className={styles.headerActions}>
@@ -66,6 +69,7 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
               <Link href='/login'>Login</Link>
               <Link href='/privacy-policy'>Politica de privacidad</Link>
               <Link href='/terms-of-service'>Condiciones de servicio</Link>
+              <Link href='/data-deletion'>Eliminar datos</Link>
             </div>
           </div>
         </div>

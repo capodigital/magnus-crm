@@ -25,6 +25,7 @@
 21. Keep `/login` and `/register` available to users but marked `noindex` so search engines do not treat them as landing pages.
 22. Expose authenticated self-service account deletion at `/settings/data-deletion` and `/api/account/delete` before deeper tenant administration exists.
 23. Keep registration intentionally lightweight for now: create the auth user and sign them in, while deferring full tenant/workspace onboarding to a later phase.
+24. Keep `/data-deletion` public and indexable as the human-readable data deletion instructions page, separate from the authenticated execution route.
 
 ## Rationale
 
@@ -44,3 +45,4 @@
 - A public launch shell is required for production readiness and Meta review even before the CRM workflow is fully complete.
 - Auth routes should be reachable for humans but not compete with the public landing in search results.
 - A lightweight self-service deletion path covers the immediate policy requirement without forcing us to finish the whole tenant settings module first.
+- A public data deletion instruction page gives reviewers and users a stable URL even when the actual deletion action still requires authentication.

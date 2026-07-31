@@ -7,7 +7,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - Local Codex skills were installed in `.codex/skills` inside this project only.
 - The repository is currently a Next.js admin template (`vuexy-mui-nextjs-admin-template`), not a CRM product yet.
 - Main app entry points now include CRM route shells for home, inbox, leads, pipeline, billing, settings, and login, all wired into the shared layout/theme code.
-- The root route and dashboard layout now redirect unauthenticated users to `/login`, and the login page handles credentials plus optional Google sign-in.
+- Dashboard routes redirect unauthenticated users to `/login`, while the root route now serves the public landing to unauthenticated visitors.
 - The current shell uses a shared provider stack, a vertical or horizontal layout wrapper, and theme settings driven partly by cookies.
 - The auth layer now uses NextAuth with Prisma, a `proxy.ts` guard, session helpers, and local NextAuth type augmentation.
 - A server-only app context helper now resolves request host, session, tenant, and membership in one place.
@@ -24,11 +24,12 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The real database was checked on July 31, 2026 and is still empty: there are no tenant workspaces and no WhatsApp phone mappings yet.
 - The repo now includes a `register:whatsapp-phone` CLI path to upsert `phone_number_id -> tenant` mappings once the first workspace exists.
 - The public launch surface now exists at `/` as a marketing landing for `crm.magnusecosystems.com` instead of redirecting straight to `/home`.
-- The repo now includes public `/privacy-policy` and `/terms-of-service` routes, plus `robots.ts` and `sitemap.ts`, for launch and Meta review basics.
+- The repo now includes public `/privacy-policy`, `/terms-of-service`, and `/data-deletion` routes, plus `robots.ts` and `sitemap.ts`, for launch and Meta review basics.
 - The auth surface is now adapted to the CRM: `/login` and `/register` use Magnus-specific copy, legal links, and Next.js 16-safe `searchParams` handling.
 - A lightweight registration API now creates a user and signs them in, while full tenant/workspace onboarding remains deferred.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
-- Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
+- Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
+- A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -64,6 +65,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/app/page.tsx`
 - `src/app/privacy-policy/page.tsx`
 - `src/app/terms-of-service/page.tsx`
+- `src/app/data-deletion/page.tsx`
 - `src/app/robots.ts`
 - `src/app/sitemap.ts`
 - `src/app/(blank-layout-pages)/register/page.tsx`

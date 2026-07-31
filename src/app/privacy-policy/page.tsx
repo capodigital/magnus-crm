@@ -96,6 +96,10 @@ const PrivacyPolicyPage = () => {
                   Los usuarios autenticados pueden gestionar la eliminacion de su cuenta desde la URL interna del CRM
                   <strong> /settings/data-deletion</strong>.
                 </p>
+                <p>
+                  Tambien publicamos instrucciones generales de eliminacion de datos en
+                  <strong> /data-deletion</strong>.
+                </p>
                 <p>Esta ruta requiere haber iniciado sesion con la cuenta que deseas eliminar.</p>
                 <p>
                   Si accedes al servicio a traves de un workspace administrado por tu empresa, algunas solicitudes

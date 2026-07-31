@@ -18,6 +18,12 @@ const sitemap = (): MetadataRoute.Sitemap => [
     lastModified: '2026-07-31',
     changeFrequency: 'monthly',
     priority: 0.5
+  },
+  {
+    url: 'https://crm.magnusecosystems.com/data-deletion',
+    lastModified: '2026-07-31',
+    changeFrequency: 'monthly',
+    priority: 0.5
   }
 ]
 

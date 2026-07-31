@@ -12,7 +12,7 @@
 - Prisma now also carries the first WhatsApp integration entities: `WhatsappPhoneNumber` and `WhatsappWebhookEvent`.
 - The backend now includes a production-oriented inbound WhatsApp webhook slice with signature validation, raw event persistence, and CRM upsert orchestration.
 - The repo now includes a CLI for binding Meta WhatsApp phone numbers to tenant workspaces after bootstrap.
-- The repo now also includes a public landing, legal pages, SEO metadata routes, a lightweight registration API, and an internal user data deletion route.
+- The repo now also includes a public landing, legal pages, a public data deletion instruction page, SEO metadata routes, a lightweight registration API, and an internal user data deletion route.
 
 ## Key files
 
@@ -23,6 +23,7 @@
 - `src/app/page.tsx` - public landing for unauthenticated visitors; redirects authenticated users to `/home`.
 - `src/app/privacy-policy/page.tsx` - public privacy policy page for launch and Meta review.
 - `src/app/terms-of-service/page.tsx` - public terms page for launch and Meta review.
+- `src/app/data-deletion/page.tsx` - public instructions explaining how users can delete their data.
 - `src/app/robots.ts` - robots rules for public vs internal routes.
 - `src/app/sitemap.ts` - sitemap entries for the public site.
 - `src/app/globals.css` - global styles and Tailwind/theme integration.
@@ -97,4 +98,4 @@
 - A `git status` check was not available from the current workspace view, so this index is based on the filesystem and package metadata.
 - The dashboard home now frames the workspace around leads, conversations, pipeline, billing, and settings instead of generic template content.
 - The remaining external values we still need from the user are the final Google OAuth pair plus the Meta app secret, verify token, WABA ID, and phone number ID for the first tenant integration.
-- Public launch QA on July 31, 2026 confirmed that `/`, `/privacy-policy`, `/terms-of-service`, `/login`, and `/register` rendered without console errors or horizontal overflow in the inspected viewports.
+- Public launch QA on July 31, 2026 confirmed that `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register` rendered without console errors or horizontal overflow in the inspected viewports.

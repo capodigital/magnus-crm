@@ -140,6 +140,7 @@
   - Marketing landing at `/`.
   - Public privacy policy page.
   - Public terms of service page.
+  - Public data deletion instruction page.
   - Basic SEO metadata, robots, and sitemap.
   - Lightweight register/login adaptation for Magnus CRM.
   - Internal authenticated data deletion route for users.
@@ -153,9 +154,10 @@
 - Status:
   - The root route now renders a public landing instead of redirecting to `/home`.
   - Privacy, terms, robots, and sitemap now exist and are wired for `crm.magnusecosystems.com`.
+  - The public `/data-deletion` page now explains how users can delete their account and points to the authenticated `/settings/data-deletion` route.
   - Login and register now use Magnus CRM copy and legal links, with registration kept intentionally lightweight.
   - Users now have an authenticated self-service data deletion route at `/settings/data-deletion`.
-  - Visual QA confirmed no console errors or horizontal overflow on the inspected public pages.
+  - Visual QA confirmed no console errors or horizontal overflow on the inspected public pages, including `/data-deletion`.
 
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.
