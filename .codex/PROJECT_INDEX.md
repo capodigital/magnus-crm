@@ -13,6 +13,7 @@
 - The backend now includes a production-oriented inbound WhatsApp webhook slice with signature validation, raw event persistence, and CRM upsert orchestration.
 - The repo now includes a CLI for binding Meta WhatsApp phone numbers to tenant workspaces after bootstrap.
 - The repo now also includes a public landing, legal pages, a public data deletion instruction page, SEO metadata routes, a lightweight registration API, and an internal user data deletion route.
+- The repo now includes a first generated Magnus CRM logo concept under `public/images/brand/`.
 
 ## Key files
 
@@ -26,6 +27,7 @@
 - `src/app/data-deletion/page.tsx` - public instructions explaining how users can delete their data.
 - `src/app/robots.ts` - robots rules for public vs internal routes.
 - `src/app/sitemap.ts` - sitemap entries for the public site.
+- `public/images/brand/magnus-crm-logo-concept.png` - generated PNG logo concept for Magnus CRM.
 - `src/app/globals.css` - global styles and Tailwind/theme integration.
 - `src/app/(dashboard)/home/page.tsx` - CRM dashboard landing page.
 - `src/app/(dashboard)/inbox/page.tsx` - inbox shell for WhatsApp conversations.

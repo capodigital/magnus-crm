@@ -30,6 +30,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
+- A first generated logo concept for Magnus CRM now exists at `public/images/brand/magnus-crm-logo-concept.png`.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -84,6 +85,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/components/crm/DeleteAccountPanel.tsx`
 - `src/app/api/account/delete/route.ts`
 - `src/lib/account/delete-user-account.ts`
+- `public/images/brand/magnus-crm-logo-concept.png`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
