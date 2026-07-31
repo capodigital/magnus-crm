@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 
 import Link from 'next/link'
 
+import MagnusLogoMark from '@core/svg/Logo'
+
 import styles from './public-site.module.css'
 
 type PublicSiteShellProps = {
@@ -14,7 +16,7 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
       <header className={styles.header}>
         <div className={`${styles.shell} ${styles.headerInner}`}>
           <Link href='/' className={styles.brand}>
-            <span className={styles.brandMark} aria-hidden='true' />
+            <MagnusLogoMark className={styles.brandLogo} aria-hidden='true' focusable='false' />
             <span className={styles.brandText}>
               <span className={styles.brandEyebrow}>Magnus Ecosystems</span>
               <span className={styles.brandTitle}>Magnus CRM</span>
@@ -51,7 +53,7 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
           <div className={styles.footerCard}>
             <div>
               <div className={styles.brand}>
-                <span className={styles.brandMark} aria-hidden='true' />
+                <MagnusLogoMark className={styles.brandLogo} aria-hidden='true' focusable='false' />
                 <span className={styles.brandText}>
                   <span className={styles.brandEyebrow}>Magnus Ecosystems</span>
                   <span className={styles.brandTitle}>Magnus CRM</span>

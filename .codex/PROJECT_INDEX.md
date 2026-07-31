@@ -14,10 +14,13 @@
 - The repo now includes a CLI for binding Meta WhatsApp phone numbers to tenant workspaces after bootstrap.
 - The repo now also includes a public landing, legal pages, a public data deletion instruction page, SEO metadata routes, a lightweight registration API, and an internal user data deletion route.
 - The repo now includes a first generated Magnus CRM logo concept under `public/images/brand/`.
+- The app shell and public site now use a reusable Magnus CRM SVG mark plus branded favicon, app icon, Apple icon, manifest, and Open Graph card.
 
 ## Key files
 
 - `package.json` - scripts, dependencies, and package identity.
+- `.eslintrc.js` - lint rules and generated-code ignore patterns.
+- `tsconfig.json` - TypeScript project settings, including generated-code exclusions.
 - `.env.example` - required environment placeholders for app, database, NextAuth, and Meta.
 - `next.config.ts` - Next.js config; the root redirect to `/home` has been removed so `/` can serve the marketing landing.
 - `src/app/layout.tsx` - root HTML/body shell and app metadata.
@@ -28,7 +31,13 @@
 - `src/app/robots.ts` - robots rules for public vs internal routes.
 - `src/app/sitemap.ts` - sitemap entries for the public site.
 - `public/images/brand/magnus-crm-logo-concept.png` - generated PNG logo concept for Magnus CRM.
+- `public/images/brand/magnus-crm-mark.svg` - reusable standalone Magnus CRM SVG mark for public/static usage.
+- `public/images/brand/magnus-crm-logo.svg` - reusable full lockup SVG for brand usage.
+- `public/images/brand/magnus-crm-app-icon-1024.png` - square PNG app icon suitable for Meta app review upload.
+- `public/images/brand/magnus-crm-og.png` - social preview image used by Open Graph and Twitter metadata.
+- `src/@core/svg/Logo.tsx` - shared inline logo mark used by the CRM shell and public site.
 - `src/app/globals.css` - global styles and Tailwind/theme integration.
+- `src/app/manifest.ts` - web app manifest and installable app icons.
 - `src/app/(dashboard)/home/page.tsx` - CRM dashboard landing page.
 - `src/app/(dashboard)/inbox/page.tsx` - inbox shell for WhatsApp conversations.
 - `src/app/(dashboard)/leads/page.tsx` - leads shell.

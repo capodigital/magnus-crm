@@ -1,35 +1,40 @@
 // React Imports
 import type { SVGAttributes } from 'react'
 
-const Logo = (props: SVGAttributes<SVGElement>) => {
+const Logo = (props: SVGAttributes<SVGSVGElement>) => {
   return (
-    <svg width='1.4583em' height='1em' viewBox='0 0 35 24' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <svg
+      width='1.42em'
+      height='1.18em'
+      viewBox='0 0 96 80'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+      {...props}
+    >
       <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M0.00188479 0V7.47707C0.00188479 7.47707 -0.145285 9.83135 2.161 11.8242L14.9358 23.9961L21.5792 23.9107L20.5136 10.7809L17.9947 7.82497L10.0778 0H0.00188479Z'
-        fill='currentColor'
+        d='M18 45V19C18 13.7 24.3 11.2 27.8 15.1L48 37L68.2 15.1C71.7 11.2 78 13.7 78 19V45'
+        stroke='var(--magnus-brand-teal, #0F766E)'
+        strokeWidth='8.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
-        opacity='0.06'
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.39807 17.9307L13.6581 3.53127L18.059 7.91564L8.39807 17.9307Z'
-        fill='#161616'
+        d='M17 51L31 38L48 55L65 38L79 51'
+        stroke='var(--magnus-brand-ink, #10212A)'
+        strokeWidth='7.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
-        opacity='0.06'
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.81183 17.3645L15.2093 5.06165L18.0926 7.94695L8.81183 17.3645Z'
-        fill='#161616'
+        d='M18 58V71L34 59H43'
+        stroke='var(--magnus-brand-teal, #0F766E)'
+        strokeWidth='8.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M8.47955 17.8436L25.8069 0H34.9091V7.50963C34.9091 7.50963 34.7195 10.0128 33.4463 11.3517L21.5808 24H14.9387L8.47955 17.8436Z'
-        fill='currentColor'
-      />
+      <circle cx='17' cy='51' r='9.5' fill='var(--magnus-brand-ink, #10212A)' />
+      <circle cx='48' cy='58' r='9.5' fill='var(--magnus-brand-mint, #7FD7C6)' />
+      <circle cx='79' cy='51' r='9.5' fill='var(--magnus-brand-gold, #C89B3C)' />
     </svg>
   )
 }

@@ -80,6 +80,14 @@
 }
 
 :root {
+  --magnus-brand-ink: #10212a;
+  --magnus-brand-teal: #0f766e;
+  --magnus-brand-teal-dark: #0a4f4a;
+  --magnus-brand-sea: #164e63;
+  --magnus-brand-mint: #7fd7c6;
+  --magnus-brand-gold: #c89b3c;
+  --magnus-brand-paper: #f6f8f5;
+  --magnus-brand-mist: #e6f4f0;
   --border-radius: var(--mui-shape-borderRadius);
   --border-color: var(--mui-palette-divider);
   --primary-color: var(--mui-palette-primary-main);

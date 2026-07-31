@@ -158,6 +158,7 @@
   - Login and register now use Magnus CRM copy and legal links, with registration kept intentionally lightweight.
   - Users now have an authenticated self-service data deletion route at `/settings/data-deletion`.
   - Visual QA confirmed no console errors or horizontal overflow on the inspected public pages, including `/data-deletion`.
+  - The public/auth/app shell brand now uses the Magnus CRM mark, favicon/app icons, manifest, and Open Graph image based on the logo palette.
 
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+
 declare module 'next-auth' {
   export interface DefaultSession {
     user?: {

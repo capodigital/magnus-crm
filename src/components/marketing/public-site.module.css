@@ -2,9 +2,9 @@
   min-height: 100vh;
   background:
     radial-gradient(circle at top left, rgb(15 118 110 / 0.18), transparent 32%),
-    radial-gradient(circle at top right, rgb(190 24 93 / 0.12), transparent 28%),
-    linear-gradient(180deg, #f6f1e9 0%, #f6f8f5 55%, #edf4f2 100%);
-  color: #10212a;
+    radial-gradient(circle at top right, rgb(200 155 60 / 0.14), transparent 28%),
+    linear-gradient(180deg, #f4f0e7 0%, var(--magnus-brand-paper) 55%, #edf4f2 100%);
+  color: var(--magnus-brand-ink);
 }
 
 .shell {
@@ -39,12 +39,11 @@
   text-decoration: none;
 }
 
-.brandMark {
-  width: 16px;
-  height: 16px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0f766e 0%, #164e63 100%);
-  box-shadow: 0 0 0 8px rgb(15 118 110 / 0.12);
+.brandLogo {
+  width: 34px;
+  height: auto;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 8px 16px rgb(15 118 110 / 0.16));
 }
 
 .brandText {
@@ -80,7 +79,7 @@
 
 .linkSoft:hover,
 .linkSoft:focus-visible {
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
 }
 
 .headerActions {
@@ -110,7 +109,7 @@
 
 .buttonPrimary {
   color: #f8fffd;
-  background: linear-gradient(135deg, #0f766e 0%, #164e63 100%);
+  background: linear-gradient(135deg, var(--magnus-brand-teal) 0%, var(--magnus-brand-sea) 100%);
   box-shadow: 0 18px 36px rgb(22 78 99 / 0.22);
 }
 
@@ -121,7 +120,7 @@
 }
 
 .buttonSecondary {
-  color: #10212a;
+  color: var(--magnus-brand-ink);
   background: rgb(255 255 255 / 0.72);
   border: 1px solid rgb(16 33 42 / 0.12);
 }
@@ -133,13 +132,13 @@
 }
 
 .buttonGhost {
-  color: #10212a;
+  color: var(--magnus-brand-ink);
   background: transparent;
 }
 
 .buttonGhost:hover,
 .buttonGhost:focus-visible {
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
 }
 
 .hero {
@@ -165,7 +164,7 @@
   border-radius: 999px;
   background: rgb(255 255 255 / 0.7);
   border: 1px solid rgb(16 33 42 / 0.08);
-  color: #164e63;
+  color: var(--magnus-brand-sea);
   font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -177,12 +176,12 @@
   font-size: clamp(3rem, 7vw, 5.4rem);
   line-height: 0.95;
   letter-spacing: -0.04em;
-  color: #10212a;
+  color: var(--magnus-brand-ink);
 }
 
 .heroHighlight {
   display: block;
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
 }
 
 .heroText {
@@ -216,7 +215,7 @@
   display: block;
   font-size: 1.55rem;
   font-weight: 800;
-  color: #164e63;
+  color: var(--magnus-brand-sea);
 }
 
 .metaLabel {
@@ -232,7 +231,7 @@
   overflow: hidden;
   padding: 28px;
   border-radius: 34px;
-  background: linear-gradient(160deg, #10212a 0%, #173847 62%, #0f766e 100%);
+  background: linear-gradient(160deg, var(--magnus-brand-ink) 0%, #173847 62%, var(--magnus-brand-teal) 100%);
   color: #f5fbfa;
   box-shadow: 0 34px 70px rgb(16 33 42 / 0.24);
 }
@@ -395,7 +394,7 @@
   height: 42px;
   border-radius: 999px;
   background: rgb(15 118 110 / 0.12);
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
   font-weight: 800;
 }
 
@@ -451,7 +450,7 @@
   align-items: center;
   justify-content: center;
   background: rgb(15 118 110 / 0.12);
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
   font-weight: 800;
 }
 
@@ -537,7 +536,7 @@
   font-size: 0.84rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #0f766e;
+  color: var(--magnus-brand-teal);
   font-weight: 700;
 }
 

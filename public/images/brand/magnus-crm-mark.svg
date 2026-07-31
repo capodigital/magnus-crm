@@ -1,0 +1,9 @@
+<svg width="96" height="80" viewBox="0 0 96 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="magnus-crm-mark-title">
+  <title id="magnus-crm-mark-title">Magnus CRM mark</title>
+  <path d="M18 45V19C18 13.7 24.3 11.2 27.8 15.1L48 37L68.2 15.1C71.7 11.2 78 13.7 78 19V45" stroke="#0F766E" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17 51L31 38L48 55L65 38L79 51" stroke="#10212A" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M18 58V71L34 59H43" stroke="#0F766E" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="17" cy="51" r="9.5" fill="#10212A"/>
+  <circle cx="48" cy="58" r="9.5" fill="#7FD7C6"/>
+  <circle cx="79" cy="51" r="9.5" fill="#C89B3C"/>
+</svg>

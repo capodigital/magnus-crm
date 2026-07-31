@@ -31,6 +31,10 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
 - A first generated logo concept for Magnus CRM now exists at `public/images/brand/magnus-crm-logo-concept.png`.
+- The CRM now has a reusable Magnus CRM mark in `src/@core/svg/Logo.tsx`, public SVG logo assets, favicon/app icons, a web manifest, and an Open Graph card based on the logo palette.
+- The public site, login/register surfaces, and dashboard shell now inherit the teal, ink, mint, and gold brand palette instead of the original Vuexy purple theme.
+- The Meta-ready app icon is available at `public/images/brand/magnus-crm-app-icon-1024.png`; it is a square PNG under 5 MB.
+- Brand validation on July 31, 2026 passed `npx tsc --noEmit --pretty false`, `npm run lint`, `npm run build`, and local HTTP checks for `/`, manifest, favicon, app icons, SVG mark, Meta icon, and Open Graph image.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -86,6 +90,25 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/app/api/account/delete/route.ts`
 - `src/lib/account/delete-user-account.ts`
 - `public/images/brand/magnus-crm-logo-concept.png`
+- `public/images/brand/magnus-crm-mark.svg`
+- `public/images/brand/magnus-crm-logo.svg`
+- `public/images/brand/magnus-crm-mark-512.png`
+- `public/images/brand/magnus-crm-app-icon-1024.png`
+- `public/images/brand/magnus-crm-og.png`
+- `src/@core/svg/Logo.tsx`
+- `src/@core/theme/colorSchemes.ts`
+- `src/app/favicon.ico`
+- `src/app/icon.png`
+- `src/app/apple-icon.png`
+- `src/app/manifest.ts`
+- `src/app/layout.tsx`
+- `src/app/globals.css`
+- `src/components/layout/shared/Logo.tsx`
+- `src/configs/primaryColorConfig.ts`
+- `.eslintrc.js`
+- `tsconfig.json`
+- `src/lib/prisma.ts`
+- `src/types/external/index.d.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 

@@ -26,6 +26,7 @@
 22. Expose authenticated self-service account deletion at `/settings/data-deletion` and `/api/account/delete` before deeper tenant administration exists.
 23. Keep registration intentionally lightweight for now: create the auth user and sign them in, while deferring full tenant/workspace onboarding to a later phase.
 24. Keep `/data-deletion` public and indexable as the human-readable data deletion instructions page, separate from the authenticated execution route.
+25. Use the Magnus CRM logo palette as the product brand foundation: deep ink `#10212A`, teal `#0F766E`, sea `#164E63`, mint `#7FD7C6`, gold `#C89B3C`, and paper `#F6F8F5`.
 
 ## Rationale
 
@@ -46,3 +47,4 @@
 - Auth routes should be reachable for humans but not compete with the public landing in search results.
 - A lightweight self-service deletion path covers the immediate policy requirement without forcing us to finish the whole tenant settings module first.
 - A public data deletion instruction page gives reviewers and users a stable URL even when the actual deletion action still requires authentication.
+- A shared logo mark and palette keep the public site, auth screens, dashboard shell, favicons, Meta app icon, and social previews visually aligned while deeper product work continues.
