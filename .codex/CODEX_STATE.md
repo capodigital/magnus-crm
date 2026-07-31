@@ -23,6 +23,12 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The WhatsApp inbound slice now typechecks and lints cleanly against the current generated Prisma client.
 - The real database was checked on July 31, 2026 and is still empty: there are no tenant workspaces and no WhatsApp phone mappings yet.
 - The repo now includes a `register:whatsapp-phone` CLI path to upsert `phone_number_id -> tenant` mappings once the first workspace exists.
+- The public launch surface now exists at `/` as a marketing landing for `crm.magnusecosystems.com` instead of redirecting straight to `/home`.
+- The repo now includes public `/privacy-policy` and `/terms-of-service` routes, plus `robots.ts` and `sitemap.ts`, for launch and Meta review basics.
+- The auth surface is now adapted to the CRM: `/login` and `/register` use Magnus-specific copy, legal links, and Next.js 16-safe `searchParams` handling.
+- A lightweight registration API now creates a user and signs them in, while full tenant/workspace onboarding remains deferred.
+- The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
+- Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -54,10 +60,30 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/lib/whatsapp/inbound-service.ts`
 - `src/lib/whatsapp/phone-number-registration.ts`
 - `src/app/api/webhooks/whatsapp/route.ts`
+- `next.config.ts`
+- `src/app/page.tsx`
+- `src/app/privacy-policy/page.tsx`
+- `src/app/terms-of-service/page.tsx`
+- `src/app/robots.ts`
+- `src/app/sitemap.ts`
+- `src/app/(blank-layout-pages)/register/page.tsx`
 - `scripts/bootstrap-workspace.ts`
 - `scripts/register-whatsapp-phone-number.ts`
+- `src/views/Register.tsx`
+- `src/views/Login.tsx`
+- `src/components/marketing/PublicSiteShell.tsx`
+- `src/components/marketing/LandingPage.tsx`
+- `src/components/marketing/LegalDocumentPage.tsx`
+- `src/components/marketing/public-site.module.css`
+- `src/app/api/register/route.ts`
+- `src/lib/auth/register-user.ts`
+- `src/app/(dashboard)/settings/page.tsx`
+- `src/app/(dashboard)/settings/data-deletion/page.tsx`
+- `src/components/crm/DeleteAccountPanel.tsx`
+- `src/app/api/account/delete/route.ts`
+- `src/lib/account/delete-user-account.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Bootstrap the first tenant workspace, then run the new WhatsApp phone registration CLI so the received Meta webhook can be mapped to that tenant before replaying or re-triggering `/api/webhooks/whatsapp`.
+Bootstrap the first real tenant workspace, connect the lightweight registration flow to that onboarding path, and then continue with Meta Embedded Signup plus `phone_number_id` registration for end-to-end WhatsApp validation.

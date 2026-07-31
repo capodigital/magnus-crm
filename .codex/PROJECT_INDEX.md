@@ -12,13 +12,19 @@
 - Prisma now also carries the first WhatsApp integration entities: `WhatsappPhoneNumber` and `WhatsappWebhookEvent`.
 - The backend now includes a production-oriented inbound WhatsApp webhook slice with signature validation, raw event persistence, and CRM upsert orchestration.
 - The repo now includes a CLI for binding Meta WhatsApp phone numbers to tenant workspaces after bootstrap.
+- The repo now also includes a public landing, legal pages, SEO metadata routes, a lightweight registration API, and an internal user data deletion route.
 
 ## Key files
 
 - `package.json` - scripts, dependencies, and package identity.
 - `.env.example` - required environment placeholders for app, database, NextAuth, and Meta.
+- `next.config.ts` - Next.js config; the root redirect to `/home` has been removed so `/` can serve the marketing landing.
 - `src/app/layout.tsx` - root HTML/body shell and app metadata.
-- `src/app/page.tsx` - root redirect into the CRM workspace.
+- `src/app/page.tsx` - public landing for unauthenticated visitors; redirects authenticated users to `/home`.
+- `src/app/privacy-policy/page.tsx` - public privacy policy page for launch and Meta review.
+- `src/app/terms-of-service/page.tsx` - public terms page for launch and Meta review.
+- `src/app/robots.ts` - robots rules for public vs internal routes.
+- `src/app/sitemap.ts` - sitemap entries for the public site.
 - `src/app/globals.css` - global styles and Tailwind/theme integration.
 - `src/app/(dashboard)/home/page.tsx` - CRM dashboard landing page.
 - `src/app/(dashboard)/inbox/page.tsx` - inbox shell for WhatsApp conversations.
@@ -26,9 +32,20 @@
 - `src/app/(dashboard)/pipeline/page.tsx` - pipeline shell.
 - `src/app/(dashboard)/billing/page.tsx` - billing shell.
 - `src/app/(dashboard)/settings/page.tsx` - workspace settings shell.
+- `src/app/(dashboard)/settings/data-deletion/page.tsx` - internal authenticated user data deletion screen.
 - `src/app/(blank-layout-pages)/login/page.tsx` - login route entry point.
+- `src/app/(blank-layout-pages)/register/page.tsx` - lightweight register route entry point.
 - `src/views/Login.tsx` - login view component.
+- `src/views/Register.tsx` - register view component adapted for Magnus CRM.
+- `src/components/marketing/PublicSiteShell.tsx` - shared public site frame for landing and legal pages.
+- `src/components/marketing/LandingPage.tsx` - conversion-focused public landing content.
+- `src/components/marketing/LegalDocumentPage.tsx` - reusable layout for privacy and terms content.
+- `src/components/marketing/public-site.module.css` - styling for the public marketing and legal surfaces.
 - `src/app/api/auth/[...nextauth]/route.ts` - NextAuth route handler.
+- `src/app/api/register/route.ts` - lightweight user registration endpoint.
+- `src/lib/auth/register-user.ts` - registration service that validates input and creates the auth user.
+- `src/app/api/account/delete/route.ts` - authenticated account deletion endpoint.
+- `src/lib/account/delete-user-account.ts` - deletion service for the current auth user.
 - `src/app/api/webhooks/whatsapp/route.ts` - Meta webhook verification and inbound event entry point.
 - `src/lib/auth.ts` - NextAuth options, callbacks, and session helper.
 - `src/lib/app-context.ts` - server-only resolver for request tenant, session, and membership.
@@ -80,3 +97,4 @@
 - A `git status` check was not available from the current workspace view, so this index is based on the filesystem and package metadata.
 - The dashboard home now frames the workspace around leads, conversations, pipeline, billing, and settings instead of generic template content.
 - The remaining external values we still need from the user are the final Google OAuth pair plus the Meta app secret, verify token, WABA ID, and phone number ID for the first tenant integration.
+- Public launch QA on July 31, 2026 confirmed that `/`, `/privacy-policy`, `/terms-of-service`, `/login`, and `/register` rendered without console errors or horizontal overflow in the inspected viewports.

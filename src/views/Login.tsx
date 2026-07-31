@@ -1,5 +1,6 @@
 /* eslint-disable */
 'use client'
+
 // React Imports
 import { useState, type FormEvent } from 'react'
 
@@ -39,7 +40,6 @@ import themeConfig from '@configs/themeConfig'
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
 
-// Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
   blockSize: 'auto',
@@ -70,14 +70,12 @@ type LoginProps = {
 }
 
 const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
-  // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  // Vars
   const darkImg = '/images/pages/auth-mask-dark.png'
   const lightImg = '/images/pages/auth-mask-light.png'
   const darkIllustration = '/images/illustrations/auth/v2-login-dark.png'
@@ -85,7 +83,6 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
   const borderedDarkIllustration = '/images/illustrations/auth/v2-login-dark-border.png'
   const borderedLightIllustration = '/images/illustrations/auth/v2-login-light-border.png'
 
-  // Hooks
   const router = useRouter()
   const { settings } = useSettings()
   const theme = useTheme()
@@ -119,7 +116,7 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
     setIsSubmitting(false)
 
     if (!response || response.error) {
-      setErrorMessage('No pudimos iniciar sesión. Revisa tus credenciales e intenta de nuevo.')
+      setErrorMessage('No pudimos iniciar sesion. Revisa tus credenciales e intenta de nuevo.')
       return
     }
 
@@ -143,10 +140,10 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
           }
         )}
       >
-        <LoginIllustration src={characterIllustration} alt='character-illustration' />
+        <LoginIllustration src={characterIllustration} alt='Magnus CRM login illustration' />
         {!hidden && (
           <MaskImg
-            alt='mask'
+            alt='Magnus CRM background mask'
             src={authBackground}
             className={classnames({ 'scale-x-[-1]': theme.direction === 'rtl' })}
           />
@@ -160,9 +157,10 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
           <div className='flex flex-col gap-1'>
             <Typography variant='h4'>{`Bienvenido a ${themeConfig.templateName}`}</Typography>
             <Typography color='text.secondary'>
-              Accede con tu correo y contraseña. Google aparecerá cuando el cliente esté configurado.
+              Entra a tu workspace con correo y contrasena. Google aparecera cuando terminemos esa configuracion.
             </Typography>
           </div>
+
           <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
             <CustomTextField
               autoFocus
@@ -176,8 +174,8 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
             />
             <CustomTextField
               fullWidth
-              label='Password'
-              placeholder='••••••••••••'
+              label='Contrasena'
+              placeholder='Ingresa tu contrasena'
               id='outlined-adornment-password'
               type={isPasswordShown ? 'text' : 'password'}
               autoComplete='current-password'
@@ -195,19 +193,23 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
                 }
               }}
             />
+
             {errorMessage ? <Alert severity='error'>{errorMessage}</Alert> : null}
+
             <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
-              <FormControlLabel control={<Checkbox />} label='Remember me' />
+              <FormControlLabel control={<Checkbox />} label='Recordarme' />
               <Typography component='span' variant='body2' color='text.secondary'>
-                Invite-based workspace access
+                Acceso de workspace
               </Typography>
             </div>
+
             <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
-              {isSubmitting ? 'Signing in...' : 'Sign in'}
+              {isSubmitting ? 'Iniciando sesion...' : 'Iniciar sesion'}
             </Button>
+
             {hasGoogleProvider ? (
               <>
-                <Divider className='gap-2 text-textPrimary'>or</Divider>
+                <Divider className='gap-2 text-textPrimary'>o</Divider>
                 <Button
                   fullWidth
                   variant='outlined'
@@ -215,19 +217,39 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
                   onClick={handleGoogleSignIn}
                   startIcon={<i className='tabler-brand-google-filled' />}
                 >
-                  Continue with Google
+                  Continuar con Google
                 </Button>
               </>
             ) : (
               <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
                 <Stack spacing={0.5}>
                   <Typography variant='body2' color='text.secondary'>
-                    Google sign-in will appear once the client credentials are configured.
+                    Google aparecera en cuanto terminemos de cargar las credenciales finales.
                   </Typography>
                 </Stack>
               </Box>
             )}
           </form>
+
+          <Stack spacing={1.5}>
+            <Typography variant='body2' color='text.secondary'>
+              No tienes cuenta todavia?{' '}
+              <Typography component={Link} href='/register' color='primary.main'>
+                Crear acceso
+              </Typography>
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              Al continuar aceptas nuestra{' '}
+              <Typography component={Link} href='/privacy-policy' color='primary.main'>
+                politica de privacidad
+              </Typography>{' '}
+              y las{' '}
+              <Typography component={Link} href='/terms-of-service' color='primary.main'>
+                condiciones de servicio
+              </Typography>
+              .
+            </Typography>
+          </Stack>
         </div>
       </div>
     </div>

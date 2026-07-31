@@ -1,22 +1,26 @@
 'use client'
 
 // React Imports
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 
 // Next Imports
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+
+import { signIn } from 'next-auth/react'
 
 // MUI Imports
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import Divider from '@mui/material/Divider'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Checkbox from '@mui/material/Checkbox'
-import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { styled, useTheme } from '@mui/material/styles'
 
 // Third-party Imports
 import classnames from 'classnames'
@@ -25,14 +29,17 @@ import classnames from 'classnames'
 import type { SystemMode } from '@core/types'
 
 // Component Imports
+import Link from '@components/Link'
 import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
+
+// Config Imports
+import themeConfig from '@configs/themeConfig'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
 
-// Styled Custom Components
 const RegisterIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
   blockSize: 'auto',
@@ -56,11 +63,21 @@ const MaskImg = styled('img')({
   zIndex: -1
 })
 
-const Register = ({ mode }: { mode: SystemMode }) => {
-  // States
-  const [isPasswordShown, setIsPasswordShown] = useState(false)
+type RegisterProps = {
+  mode: SystemMode
+  callbackUrl: string
+  hasGoogleProvider: boolean
+}
 
-  // Vars
+const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
+  const [isPasswordShown, setIsPasswordShown] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
   const darkImg = '/images/pages/auth-mask-dark.png'
   const lightImg = '/images/pages/auth-mask-light.png'
   const darkIllustration = '/images/illustrations/auth/v2-register-dark.png'
@@ -68,8 +85,7 @@ const Register = ({ mode }: { mode: SystemMode }) => {
   const borderedDarkIllustration = '/images/illustrations/auth/v2-register-dark-border.png'
   const borderedLightIllustration = '/images/illustrations/auth/v2-register-light-border.png'
 
-  // Hooks
-  const { lang: locale } = useParams()
+  const router = useRouter()
   const { settings } = useSettings()
   const theme = useTheme()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
@@ -83,7 +99,67 @@ const Register = ({ mode }: { mode: SystemMode }) => {
     borderedDarkIllustration
   )
 
+  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
+
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!acceptedTerms) {
+      setErrorMessage('Necesitas aceptar la politica de privacidad y las condiciones de servicio.')
+      
+return
+    }
+
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    })
+
+    const payload = (await response.json().catch(() => null)) as { error?: string } | null
+
+    if (!response.ok) {
+      setErrorMessage(payload?.error ?? 'No pudimos crear la cuenta ahora mismo.')
+      setIsSubmitting(false)
+      
+return
+    }
+
+    const signInResponse = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: safeCallbackUrl
+    })
+
+    setIsSubmitting(false)
+
+    if (!signInResponse || signInResponse.error) {
+      router.push(`/login?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`)
+      
+return
+    }
+
+    router.replace(signInResponse.url ?? safeCallbackUrl)
+    router.refresh()
+  }
+
+  const handleGoogleSignIn = async () => {
+    await signIn('google', {
+      callbackUrl: safeCallbackUrl
+    })
+  }
 
   return (
     <div className='flex bs-full justify-center'>
@@ -95,29 +171,48 @@ const Register = ({ mode }: { mode: SystemMode }) => {
           }
         )}
       >
-        <RegisterIllustration src={characterIllustration} alt='character-illustration' />
-        {!hidden && <MaskImg alt='mask' src={authBackground} />}
+        <RegisterIllustration src={characterIllustration} alt='Magnus CRM register illustration' />
+        {!hidden && <MaskImg alt='Magnus CRM background mask' src={authBackground} />}
       </div>
       <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link
-          href="/login"
-          className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'
-        >
+        <Link href='/' className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
           <Logo />
         </Link>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-8 sm:mbs-11 md:mbs-0'>
           <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>Adventure starts here 🚀</Typography>
-            <Typography>Make your app management easy and fun!</Typography>
+            <Typography variant='h4'>{`Crea tu acceso a ${themeConfig.templateName}`}</Typography>
+            <Typography color='text.secondary'>
+              Este registro inicial crea tu usuario para entrar al CRM. El onboarding completo del workspace seguira
+              dentro de la plataforma.
+            </Typography>
           </div>
-          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()} className='flex flex-col gap-6'>
-            <CustomTextField autoFocus fullWidth label='Username' placeholder='Enter your username' />
-            <CustomTextField fullWidth label='Email' placeholder='Enter your email' />
+
+          <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
+            <CustomTextField
+              autoFocus
+              fullWidth
+              label='Nombre'
+              placeholder='Tu nombre'
+              value={name}
+              onChange={event => setName(event.target.value)}
+            />
             <CustomTextField
               fullWidth
-              label='Password'
-              placeholder='············'
+              label='Email'
+              placeholder='tu@empresa.com'
+              type='email'
+              autoComplete='email'
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+            />
+            <CustomTextField
+              fullWidth
+              label='Contrasena'
+              placeholder='Minimo 8 caracteres'
               type={isPasswordShown ? 'text' : 'password'}
+              autoComplete='new-password'
+              value={password}
+              onChange={event => setPassword(event.target.value)}
               slotProps={{
                 input: {
                   endAdornment: (
@@ -130,42 +225,60 @@ const Register = ({ mode }: { mode: SystemMode }) => {
                 }
               }}
             />
+
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox checked={acceptedTerms} onChange={event => setAcceptedTerms(event.target.checked)} />}
               label={
-                <>
-                  <span>I agree to </span>
-                  <Link className='text-primary' href='/' onClick={e => e.preventDefault()}>
-                    privacy policy & terms
-                  </Link>
-                </>
+                <Typography variant='body2' color='text.secondary'>
+                  Acepto la{' '}
+                  <Typography component={Link} href='/privacy-policy' color='primary.main'>
+                    politica de privacidad
+                  </Typography>{' '}
+                  y las{' '}
+                  <Typography component={Link} href='/terms-of-service' color='primary.main'>
+                    condiciones de servicio
+                  </Typography>
+                  .
+                </Typography>
               }
             />
-            <Button fullWidth variant='contained' type='submit'>
-              Sign Up
+
+            {errorMessage ? <Alert severity='error'>{errorMessage}</Alert> : null}
+
+            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
             </Button>
-            <div className='flex justify-center items-center flex-wrap gap-2'>
-              <Typography>Already have an account?</Typography>
-              <Typography component={Link} href="/login" color='primary.main'>
-                Sign in instead
-              </Typography>
-            </div>
-            <Divider className='gap-2'>or</Divider>
-            <div className='flex justify-center items-center gap-1.5'>
-              <IconButton className='text-facebook' size='small'>
-                <i className='tabler-brand-facebook-filled' />
-              </IconButton>
-              <IconButton className='text-twitter' size='small'>
-                <i className='tabler-brand-twitter-filled' />
-              </IconButton>
-              <IconButton className='text-textPrimary' size='small'>
-                <i className='tabler-brand-github-filled' />
-              </IconButton>
-              <IconButton className='text-error' size='small'>
-                <i className='tabler-brand-google-filled' />
-              </IconButton>
-            </div>
+
+            {hasGoogleProvider ? (
+              <>
+                <Divider className='gap-2'>o</Divider>
+                <Button
+                  fullWidth
+                  variant='outlined'
+                  type='button'
+                  onClick={handleGoogleSignIn}
+                  startIcon={<i className='tabler-brand-google-filled' />}
+                >
+                  Continuar con Google
+                </Button>
+              </>
+            ) : (
+              <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
+                <Stack spacing={0.5}>
+                  <Typography variant='body2' color='text.secondary'>
+                    Google tambien podra usarse mas adelante cuando carguemos esas credenciales.
+                  </Typography>
+                </Stack>
+              </Box>
+            )}
           </form>
+
+          <Typography variant='body2' color='text.secondary'>
+            Ya tienes acceso?{' '}
+            <Typography component={Link} href='/login' color='primary.main'>
+              Iniciar sesion
+            </Typography>
+          </Typography>
         </div>
       </div>
     </div>

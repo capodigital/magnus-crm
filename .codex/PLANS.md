@@ -5,7 +5,8 @@
 1. Confirm the product shape from `deep-research-report.md` and lock the execution assumptions. Completed.
 2. Map the real repo surface area that will host the CRM shell, tenant routing, and auth. Completed.
 3. Implement the auth and multi-tenant persistence foundation as a verifiable goal, not as a broad rewrite. Completed.
-4. Expand into WhatsApp, billing, white-label, and hardening only after the foundation is stable. Next.
+4. Add the public launch surfaces required for access, legal review, and Meta publishing. Completed.
+5. Expand into tenant onboarding, WhatsApp, billing, white-label, and hardening after the public/auth foundation is stable. Next.
 
 ## Assumed defaults until overridden
 
@@ -133,6 +134,29 @@
 - Status:
   - A bootstrap service and `npm run bootstrap:workspace` command now exist and are typechecked.
 
+### Phase 4.7: Public launch surfaces
+- Objective: ship the public web surfaces needed for launch, conversion, and Meta app review while the deeper CRM flows continue behind the scenes.
+- Deliverables:
+  - Marketing landing at `/`.
+  - Public privacy policy page.
+  - Public terms of service page.
+  - Basic SEO metadata, robots, and sitemap.
+  - Lightweight register/login adaptation for Magnus CRM.
+  - Internal authenticated data deletion route for users.
+- Skills:
+  - `frontend-production-ui`
+  - `website-seo-finalization`
+  - `pixel-perfect-qa`
+  - `codex-progress-journal`
+- Goal output:
+  - A production-facing public shell that can be shared for review and launch while backend onboarding continues.
+- Status:
+  - The root route now renders a public landing instead of redirecting to `/home`.
+  - Privacy, terms, robots, and sitemap now exist and are wired for `crm.magnusecosystems.com`.
+  - Login and register now use Magnus CRM copy and legal links, with registration kept intentionally lightweight.
+  - Users now have an authenticated self-service data deletion route at `/settings/data-deletion`.
+  - Visual QA confirmed no console errors or horizontal overflow on the inspected public pages.
+
 ### Phase 5: WhatsApp integration
 - Objective: integrate the official Meta Cloud API with durable event handling.
 - Deliverables:
@@ -221,6 +245,7 @@
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
 3. Which concrete tenant slug, tenant name, owner email, and optional owner password should we use when we run the first workspace bootstrap?
 4. Which tenant slug, tenant name, and owner email should we use to bootstrap the first real workspace in the current database?
+5. Should post-registration create a starter workspace automatically, or should we keep account creation and tenant bootstrap separate for one more phase?
 
 ## Deferred for now
 - Any destructive or broad refactors.

@@ -13,22 +13,25 @@ import { auth } from '@/lib/auth'
 import { getServerMode } from '@core/utils/serverHelpers'
 
 export const metadata: Metadata = {
-  title: 'Sign in | Magnus CRM',
-  description: 'Access your Magnus CRM workspace'
+  title: 'Iniciar sesion',
+  description: 'Accede a tu workspace de Magnus CRM.',
+  robots: {
+    index: false,
+    follow: false
+  }
 }
 
 type Props = {
-  searchParams?: Record<string, string | string[] | undefined>
+  searchParams?: Promise<Record<string, string | string[] | undefined>>
 }
 
 const LoginPage = async ({ searchParams }: Props) => {
   // Vars
   const mode = await getServerMode()
   const session = await auth()
-  const resolvedSearchParams = searchParams ?? {}
+  const resolvedSearchParams = (await searchParams) ?? {}
 
-  const callbackUrl =
-    typeof resolvedSearchParams.callbackUrl === 'string' ? resolvedSearchParams.callbackUrl : '/home'
+  const callbackUrl = typeof resolvedSearchParams.callbackUrl === 'string' ? resolvedSearchParams.callbackUrl : '/home'
 
   const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
 

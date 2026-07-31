@@ -20,6 +20,11 @@
 16. Use `externalThreadKey = phone_number_id:wa_id` so each tenant can keep a stable WhatsApp conversation thread per business number and contact pair.
 17. Store temporary or live Meta credentials only in ignored local env files such as `.env.local`, never in the journal or tracked examples.
 18. Manage tenant WhatsApp number bindings through a CLI/service layer first, instead of direct DB edits, so Meta onboarding remains scriptable and auditable while the settings UI is unfinished.
+19. Use `/` as a public marketing landing for `crm.magnusecosystems.com` instead of redirecting unauthenticated visitors straight to `/home`.
+20. Keep `/privacy-policy` and `/terms-of-service` public and indexable, and pair them with `robots.ts` and `sitemap.ts` for launch readiness.
+21. Keep `/login` and `/register` available to users but marked `noindex` so search engines do not treat them as landing pages.
+22. Expose authenticated self-service account deletion at `/settings/data-deletion` and `/api/account/delete` before deeper tenant administration exists.
+23. Keep registration intentionally lightweight for now: create the auth user and sign them in, while deferring full tenant/workspace onboarding to a later phase.
 
 ## Rationale
 
@@ -36,3 +41,6 @@
 - A stable external thread key lets inbound retries and future outbound/status reconciliation converge on the same conversation record.
 - Secrets shared during setup are still secrets; keeping them out of tracked notes reduces accidental leakage and makes rotation simpler.
 - A small registration CLI reduces onboarding friction right now without forcing us to build the admin UI before end-to-end webhook tests.
+- A public launch shell is required for production readiness and Meta review even before the CRM workflow is fully complete.
+- Auth routes should be reachable for humans but not compete with the public landing in search results.
+- A lightweight self-service deletion path covers the immediate policy requirement without forcing us to finish the whole tenant settings module first.
