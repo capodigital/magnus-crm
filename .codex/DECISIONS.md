@@ -19,6 +19,7 @@
 15. Resolve WhatsApp webhook tenancy through a trusted `phone_number_id -> WhatsappPhoneNumber -> tenantId` mapping and ignore unmapped numbers until onboarding exists.
 16. Use `externalThreadKey = phone_number_id:wa_id` so each tenant can keep a stable WhatsApp conversation thread per business number and contact pair.
 17. Store temporary or live Meta credentials only in ignored local env files such as `.env.local`, never in the journal or tracked examples.
+18. Manage tenant WhatsApp number bindings through a CLI/service layer first, instead of direct DB edits, so Meta onboarding remains scriptable and auditable while the settings UI is unfinished.
 
 ## Rationale
 
@@ -34,3 +35,4 @@
 - Tenant resolution through Meta `phone_number_id` is the safest first contract because webhook hosts do not identify the tenant.
 - A stable external thread key lets inbound retries and future outbound/status reconciliation converge on the same conversation record.
 - Secrets shared during setup are still secrets; keeping them out of tracked notes reduces accidental leakage and makes rotation simpler.
+- A small registration CLI reduces onboarding friction right now without forcing us to build the admin UI before end-to-end webhook tests.

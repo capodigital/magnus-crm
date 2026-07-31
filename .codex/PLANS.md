@@ -152,6 +152,7 @@
   - Raw webhook items are now persisted one row per message/status with tenant-scoped idempotency via `eventKey`.
   - Inbound message events now upsert contact, lead, conversation, and message records through a dedicated inbox repository.
   - Status events are stored for audit and marked ignored until the status reconciliation slice is implemented.
+  - A dedicated CLI registration path now exists for mapping a Meta `phone_number_id` to a tenant after workspace bootstrap.
 
 ### Phase 6: CRM workflow
 - Objective: turn inbound WhatsApp activity into contacts, leads, and conversations.
@@ -219,7 +220,7 @@
 1. Which Google OAuth client ID and secret should we use to enable the Google provider?
 2. Which Meta app / WABA identifiers will be used when we start wiring WhatsApp Embedded Signup?
 3. Which concrete tenant slug, tenant name, owner email, and optional owner password should we use when we run the first workspace bootstrap?
-4. Once you share the Meta identifiers, do you want the next slice to be tenant integration registration/admin or status reconciliation plus outbound replies first?
+4. Which tenant slug, tenant name, and owner email should we use to bootstrap the first real workspace in the current database?
 
 ## Deferred for now
 - Any destructive or broad refactors.

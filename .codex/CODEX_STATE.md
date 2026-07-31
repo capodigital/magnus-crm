@@ -21,6 +21,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The repo now has an expanded `.env.example` that lists the initial App, Database, NextAuth, Google, and Meta placeholders we will need.
 - Google OAuth and Meta WhatsApp values are still pending from the user, as requested.
 - The WhatsApp inbound slice now typechecks and lints cleanly against the current generated Prisma client.
+- The real database was checked on July 31, 2026 and is still empty: there are no tenant workspaces and no WhatsApp phone mappings yet.
+- The repo now includes a `register:whatsapp-phone` CLI path to upsert `phone_number_id -> tenant` mappings once the first workspace exists.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -50,10 +52,12 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/lib/whatsapp/webhook-signature.ts`
 - `src/lib/whatsapp/webhook-event-store.ts`
 - `src/lib/whatsapp/inbound-service.ts`
+- `src/lib/whatsapp/phone-number-registration.ts`
 - `src/app/api/webhooks/whatsapp/route.ts`
 - `scripts/bootstrap-workspace.ts`
+- `scripts/register-whatsapp-phone-number.ts`
 - `prisma/schema.prisma`
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Register the first tenant WhatsApp phone mapping for the sandbox identifiers now stored locally and then exercise `/api/webhooks/whatsapp` with a signed Meta payload to verify raw event storage, idempotency, and CRM upserts end to end.
+Bootstrap the first tenant workspace, then run the new WhatsApp phone registration CLI so the received Meta webhook can be mapped to that tenant before replaying or re-triggering `/api/webhooks/whatsapp`.

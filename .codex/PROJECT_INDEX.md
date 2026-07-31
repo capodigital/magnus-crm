@@ -11,6 +11,7 @@
 - Prisma also now carries the first CRM workflow entities: contacts, leads, conversations, messages, pipelines, and pipeline stages.
 - Prisma now also carries the first WhatsApp integration entities: `WhatsappPhoneNumber` and `WhatsappWebhookEvent`.
 - The backend now includes a production-oriented inbound WhatsApp webhook slice with signature validation, raw event persistence, and CRM upsert orchestration.
+- The repo now includes a CLI for binding Meta WhatsApp phone numbers to tenant workspaces after bootstrap.
 
 ## Key files
 
@@ -38,6 +39,7 @@
 - `src/lib/whatsapp/webhook-signature.ts` - `X-Hub-Signature-256` validation helper.
 - `src/lib/whatsapp/webhook-event-store.ts` - tenant phone-number resolution plus raw webhook event persistence.
 - `src/lib/whatsapp/inbound-service.ts` - orchestration layer that connects webhook events to CRM upserts.
+- `src/lib/whatsapp/phone-number-registration.ts` - service for safely binding a Meta `phone_number_id` to an existing tenant.
 - `src/proxy.ts` - request guard and auth context injector.
 - `src/views/NotFound.tsx` - not-found view component.
 - `src/components/crm/SectionPage.tsx` - shared route shell for CRM sections.
@@ -58,6 +60,7 @@
 - `src/lib/whatsapp/` - Meta webhook parsing, validation, persistence, and orchestration.
 - `public/` - static images and assets.
 - `.codex/skills/` - project-local Codex skills installed for this repo.
+- `scripts/register-whatsapp-phone-number.ts` - CLI to register or refresh a tenant WhatsApp phone binding.
 
 ## Useful commands
 
@@ -66,6 +69,7 @@
 - `npm run lint` - run ESLint across the repo.
 - `npm run lint:fix` - apply automatic lint fixes.
 - `npm run bootstrap:workspace` - provision a tenant, owner membership, branding, primary domain, and default pipeline from env vars.
+- `npm run register:whatsapp-phone` - bind `META_PHONE_NUMBER_ID` and `META_WABA_ID` to an existing tenant slug.
 - `npm exec -- prisma generate` - refresh the generated Prisma client after schema changes.
 - `npm exec -- tsc --noEmit --pretty false` - run a fast typecheck without building the app.
 - `npm run format` - format `src/**/*.{js,jsx,ts,tsx}` with Prettier.
