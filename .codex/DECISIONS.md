@@ -27,6 +27,7 @@
 23. Registration should create the company workspace entered by the user plus the owner account, with no payment step, no hardcoded first tenant, and no per-company domain/subdomain creation for now.
 24. Keep `/data-deletion` public and indexable as the human-readable data deletion instructions page, separate from the authenticated execution route.
 25. Use the Magnus CRM logo palette as the product brand foundation: deep ink `#10212A`, teal `#0F766E`, sea `#164E63`, mint `#7FD7C6`, gold `#C89B3C`, and paper `#F6F8F5`.
+26. Do not use tenant-specific environment variables as the normal WhatsApp phone mapping path. Owners/admins should bind WABA IDs and `phone_number_id` values to their workspace through authenticated app flows; Embedded Signup will automate the same persistence later.
 
 ## Rationale
 
@@ -48,3 +49,4 @@
 - A lightweight self-service deletion path covers the immediate policy requirement without forcing us to finish the whole tenant settings module first.
 - A public data deletion instruction page gives reviewers and users a stable URL even when the actual deletion action still requires authentication.
 - A shared logo mark and palette keep the public site, auth screens, dashboard shell, favicons, Meta app icon, and social previews visually aligned while deeper product work continues.
+- Workspace-owned WhatsApp phone mappings belong in the database, scoped to the authenticated tenant, because a SaaS cannot scale with one environment variable per customer phone number.

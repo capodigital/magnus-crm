@@ -28,6 +28,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The auth surface is now adapted to the CRM: `/login` and `/register` use Magnus-specific copy, legal links, and Next.js 16-safe `searchParams` handling.
 - The registration API now creates a user owner plus a tenant workspace for the company entered in the form, without a payment step. The company is user-provided, is not hardcoded to Magnus Ecosystems, and does not create a per-company domain/subdomain for now; all access remains on the main CRM domain.
 - The internal `/settings` page now shows the active workspace and internal tenant slug so the production WhatsApp phone number can be mapped without querying the database manually.
+- The workspace settings page now includes a WhatsApp Cloud API panel that lets an owner/admin bind a WABA ID and `phone_number_id` directly to the active workspace. This replaces the tenant-specific `.env` mapping path for normal SaaS usage; the CLI/env path remains only as an internal fallback.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
@@ -68,6 +69,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/lib/whatsapp/webhook-event-store.ts`
 - `src/lib/whatsapp/inbound-service.ts`
 - `src/lib/whatsapp/phone-number-registration.ts`
+- `src/app/api/workspace/whatsapp-phone-number/route.ts`
 - `src/app/api/webhooks/whatsapp/route.ts`
 - `next.config.ts`
 - `src/app/page.tsx`
@@ -91,6 +93,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/app/(dashboard)/settings/page.tsx`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
 - `src/components/crm/DeleteAccountPanel.tsx`
+- `src/components/crm/WhatsappPhoneNumberPanel.tsx`
 - `src/app/api/account/delete/route.ts`
 - `src/lib/account/delete-user-account.ts`
 - `public/images/brand/magnus-crm-logo-concept.png`
