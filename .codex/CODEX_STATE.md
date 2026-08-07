@@ -27,6 +27,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The repo now includes public `/privacy-policy`, `/terms-of-service`, and `/data-deletion` routes, plus `robots.ts` and `sitemap.ts`, for launch and Meta review basics.
 - The auth surface is now adapted to the CRM: `/login` and `/register` use Magnus-specific copy, legal links, and Next.js 16-safe `searchParams` handling.
 - The registration API now creates a user owner plus a tenant workspace for the company entered in the form, without a payment step. The company is user-provided, is not hardcoded to Magnus Ecosystems, and does not create a per-company domain/subdomain for now; all access remains on the main CRM domain.
+- The internal `/settings` page now shows the active workspace and internal tenant slug so the production WhatsApp phone number can be mapped without querying the database manually.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
