@@ -13,7 +13,6 @@ import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -71,6 +70,7 @@ type RegisterProps = {
 
 const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
+  const [companyName, setCompanyName] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -101,6 +101,10 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
 
   const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
 
+  const googleProviderMessage = hasGoogleProvider
+    ? 'El acceso con Google quedara para login de usuarios despues de crear el workspace.'
+    : 'Google tambien podra usarse mas adelante cuando carguemos esas credenciales.'
+
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -108,8 +112,8 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
 
     if (!acceptedTerms) {
       setErrorMessage('Necesitas aceptar la politica de privacidad y las condiciones de servicio.')
-      
-return
+
+      return
     }
 
     setIsSubmitting(true)
@@ -121,6 +125,7 @@ return
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        companyName,
         name,
         email,
         password
@@ -130,10 +135,10 @@ return
     const payload = (await response.json().catch(() => null)) as { error?: string } | null
 
     if (!response.ok) {
-      setErrorMessage(payload?.error ?? 'No pudimos crear la cuenta ahora mismo.')
+      setErrorMessage(payload?.error ?? 'No pudimos crear la empresa ahora mismo.')
       setIsSubmitting(false)
-      
-return
+
+      return
     }
 
     const signInResponse = await signIn('credentials', {
@@ -147,18 +152,12 @@ return
 
     if (!signInResponse || signInResponse.error) {
       router.push(`/login?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`)
-      
-return
+
+      return
     }
 
     router.replace(signInResponse.url ?? safeCallbackUrl)
     router.refresh()
-  }
-
-  const handleGoogleSignIn = async () => {
-    await signIn('google', {
-      callbackUrl: safeCallbackUrl
-    })
   }
 
   return (
@@ -174,16 +173,16 @@ return
         <RegisterIllustration src={characterIllustration} alt='Magnus CRM register illustration' />
         {!hidden && <MaskImg alt='Magnus CRM background mask' src={authBackground} />}
       </div>
-      <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
+      <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[500px]'>
         <Link href='/' className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
           <Logo />
         </Link>
-        <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-8 sm:mbs-11 md:mbs-0'>
+        <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[420px] md:max-is-[unset] mbs-8 sm:mbs-11 md:mbs-0'>
           <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>{`Crea tu acceso a ${themeConfig.templateName}`}</Typography>
+            <Typography variant='h4'>{`Registra tu empresa en ${themeConfig.templateName}`}</Typography>
             <Typography color='text.secondary'>
-              Este registro inicial crea tu usuario para entrar al CRM. El onboarding completo del workspace seguira
-              dentro de la plataforma.
+              Crea el workspace de tu empresa y tu usuario owner para probar el CRM con WhatsApp. El pago queda fuera de
+              este primer flujo.
             </Typography>
           </div>
 
@@ -191,14 +190,21 @@ return
             <CustomTextField
               autoFocus
               fullWidth
-              label='Nombre'
-              placeholder='Tu nombre'
+              label='Empresa'
+              placeholder='Magnus Ecosystems'
+              value={companyName}
+              onChange={event => setCompanyName(event.target.value)}
+            />
+            <CustomTextField
+              fullWidth
+              label='Tu nombre'
+              placeholder='Nombre del owner'
               value={name}
               onChange={event => setName(event.target.value)}
             />
             <CustomTextField
               fullWidth
-              label='Email'
+              label='Email de trabajo'
               placeholder='tu@empresa.com'
               type='email'
               autoComplete='email'
@@ -246,31 +252,20 @@ return
             {errorMessage ? <Alert severity='error'>{errorMessage}</Alert> : null}
 
             <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
-              {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
+              {isSubmitting ? 'Creando empresa...' : 'Crear empresa y entrar'}
             </Button>
 
-            {hasGoogleProvider ? (
-              <>
-                <Divider className='gap-2'>o</Divider>
-                <Button
-                  fullWidth
-                  variant='outlined'
-                  type='button'
-                  onClick={handleGoogleSignIn}
-                  startIcon={<i className='tabler-brand-google-filled' />}
-                >
-                  Continuar con Google
-                </Button>
-              </>
-            ) : (
-              <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
-                <Stack spacing={0.5}>
-                  <Typography variant='body2' color='text.secondary'>
-                    Google tambien podra usarse mas adelante cuando carguemos esas credenciales.
-                  </Typography>
-                </Stack>
-              </Box>
-            )}
+            <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
+              <Stack spacing={0.5}>
+                <Typography variant='body2' color='text.secondary'>
+                  Por ahora todos los workspaces entran desde el dominio principal del CRM; no se creara un subdominio
+                  para tu empresa.
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  {googleProviderMessage}
+                </Typography>
+              </Stack>
+            </Box>
           </form>
 
           <Typography variant='body2' color='text.secondary'>

@@ -40,7 +40,7 @@ export type BootstrapWorkspaceResult = {
   tenantId: string
   tenantSlug: string
   ownerUserId: string
-  primaryDomainHost: string
+  primaryDomainHost: string | null
   pipelineId: string
   stageCount: number
 }
@@ -67,18 +67,16 @@ const normalizeStageSlug = (slug: string) => {
   return normalizedSlug
 }
 
-const buildPrimaryDomainHost = (tenantSlug: string, domainHost?: string | null) => {
-  if (domainHost?.trim()) {
-    return normalizeHost(domainHost)
-  }
+const normalizeOptionalDomainHost = (domainHost?: string | null) => (domainHost?.trim() ? normalizeHost(domainHost) : null)
 
+const getPlatformHost = () => {
   const platformHost = process.env.NEXT_PUBLIC_APP_URL ? new URL(process.env.NEXT_PUBLIC_APP_URL).host : 'localhost:3000'
 
-  return `${tenantSlug}.${normalizeHost(platformHost)}`
+  return normalizeHost(platformHost)
 }
 
 const resolveDomainKind = (domainHost: string) => {
-  const platformHost = process.env.NEXT_PUBLIC_APP_URL ? normalizeHost(new URL(process.env.NEXT_PUBLIC_APP_URL).host) : 'localhost'
+  const platformHost = getPlatformHost()
 
   return domainHost.endsWith(`.${platformHost}`) ? DomainKind.PLATFORM_SUBDOMAIN : DomainKind.CUSTOM_DOMAIN
 }
@@ -88,8 +86,8 @@ export const bootstrapWorkspace = async (input: BootstrapWorkspaceInput): Promis
   const tenantName = input.tenantName.trim()
   const ownerEmail = normalizeEmail(input.ownerEmail)
   const ownerName = input.ownerName?.trim() || null
-  const primaryDomainHost = buildPrimaryDomainHost(tenantSlug, input.domainHost)
-  const domainKind = resolveDomainKind(primaryDomainHost)
+  const primaryDomainHost = normalizeOptionalDomainHost(input.domainHost)
+  const domainKind = primaryDomainHost ? resolveDomainKind(primaryDomainHost) : null
   const pipelineName = input.pipelineName?.trim() || 'Pipeline comercial'
 
   const pipelineStages = (input.pipelineStages?.length ? input.pipelineStages : [...defaultPipelineStages]).map((stage, index) => ({
@@ -154,32 +152,34 @@ export const bootstrapWorkspace = async (input: BootstrapWorkspaceInput): Promis
       update: {
         appName: tenantName,
         supportEmail: input.supportEmail?.trim() || ownerEmail,
-        emailDomain: primaryDomainHost
+        emailDomain: primaryDomainHost ?? getPlatformHost()
       },
       create: {
         tenantId: tenant.id,
         appName: tenantName,
         supportEmail: input.supportEmail?.trim() || ownerEmail,
-        emailDomain: primaryDomainHost
+        emailDomain: primaryDomainHost ?? getPlatformHost()
       }
     })
 
-    await tx.tenantDomain.upsert({
-      where: {
-        host: primaryDomainHost
-      },
-      update: {
-        tenantId: tenant.id,
-        kind: domainKind,
-        isPrimary: true
-      },
-      create: {
-        tenantId: tenant.id,
-        host: primaryDomainHost,
-        kind: domainKind,
-        isPrimary: true
-      }
-    })
+    if (primaryDomainHost && domainKind) {
+      await tx.tenantDomain.upsert({
+        where: {
+          host: primaryDomainHost
+        },
+        update: {
+          tenantId: tenant.id,
+          kind: domainKind,
+          isPrimary: true
+        },
+        create: {
+          tenantId: tenant.id,
+          host: primaryDomainHost,
+          kind: domainKind,
+          isPrimary: true
+        }
+      })
+    }
 
     await tx.membership.upsert({
       where: {

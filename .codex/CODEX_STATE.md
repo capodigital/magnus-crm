@@ -13,7 +13,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - A server-only app context helper now resolves request host, session, tenant, and membership in one place.
 - Dashboard access is now tenant-aware: platform-host requests still work with session auth, while tenant-scoped hosts require both a resolved tenant and a matching membership.
 - The Prisma schema and generated client now include the tenant core plus the first CRM domain slice: contacts, leads, conversations, messages, pipelines, and pipeline stages.
-- The repo now includes a reusable workspace bootstrap service and a CLI script to provision the first tenant, owner membership, branding, primary domain, and default pipeline.
+- The repo now includes a reusable workspace bootstrap service and a CLI script to provision the first tenant, owner membership, branding, optional explicit domain, and default pipeline.
 - The Prisma schema now also includes the first WhatsApp integration slice: `WhatsappPhoneNumber`, `WhatsappWebhookEvent`, and conversation fields for `externalThreadKey` plus `whatsappPhoneNumberId`.
 - A new WhatsApp webhook route now verifies `hub.challenge`, validates `X-Hub-Signature-256`, stores raw message/status events idempotently, and processes inbound message events into CRM entities.
 - The backend now has dedicated modules for WhatsApp payload extraction, signature validation, raw event persistence, and CRM inbox upserts.
@@ -26,7 +26,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The public launch surface now exists at `/` as a marketing landing for `crm.magnusecosystems.com` instead of redirecting straight to `/home`.
 - The repo now includes public `/privacy-policy`, `/terms-of-service`, and `/data-deletion` routes, plus `robots.ts` and `sitemap.ts`, for launch and Meta review basics.
 - The auth surface is now adapted to the CRM: `/login` and `/register` use Magnus-specific copy, legal links, and Next.js 16-safe `searchParams` handling.
-- A lightweight registration API now creates a user and signs them in, while full tenant/workspace onboarding remains deferred.
+- The registration API now creates a user owner plus a tenant workspace for the company entered in the form, without a payment step. The company is user-provided, is not hardcoded to Magnus Ecosystems, and does not create a per-company domain/subdomain for now; all access remains on the main CRM domain.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
@@ -86,6 +86,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/components/marketing/public-site.module.css`
 - `src/app/api/register/route.ts`
 - `src/lib/auth/register-user.ts`
+- `src/lib/auth/register-company-workspace.ts`
 - `src/app/(dashboard)/settings/page.tsx`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
 - `src/components/crm/DeleteAccountPanel.tsx`
@@ -115,4 +116,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Finish production Meta webhook configuration, verify the callback URL with the production `META_VERIFY_TOKEN`, subscribe to `messages`, then bootstrap/register the first production tenant phone mapping for end-to-end WhatsApp validation.
+Register the first company through `/register` on the main CRM domain, then set `WHATSAPP_TENANT_SLUG` to the generated internal tenant slug and run `npm run register:whatsapp-phone` for the production Meta phone number.

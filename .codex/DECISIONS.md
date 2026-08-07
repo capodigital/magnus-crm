@@ -24,7 +24,7 @@
 20. Keep `/privacy-policy` and `/terms-of-service` public and indexable, and pair them with `robots.ts` and `sitemap.ts` for launch readiness.
 21. Keep `/login` and `/register` available to users but marked `noindex` so search engines do not treat them as landing pages.
 22. Expose authenticated self-service account deletion at `/settings/data-deletion` and `/api/account/delete` before deeper tenant administration exists.
-23. Keep registration intentionally lightweight for now: create the auth user and sign them in, while deferring full tenant/workspace onboarding to a later phase.
+23. Registration should create the company workspace entered by the user plus the owner account, with no payment step, no hardcoded first tenant, and no per-company domain/subdomain creation for now.
 24. Keep `/data-deletion` public and indexable as the human-readable data deletion instructions page, separate from the authenticated execution route.
 25. Use the Magnus CRM logo palette as the product brand foundation: deep ink `#10212A`, teal `#0F766E`, sea `#164E63`, mint `#7FD7C6`, gold `#C89B3C`, and paper `#F6F8F5`.
 
@@ -42,7 +42,7 @@
 - Tenant resolution through Meta `phone_number_id` is the safest first contract because webhook hosts do not identify the tenant.
 - A stable external thread key lets inbound retries and future outbound/status reconciliation converge on the same conversation record.
 - Secrets shared during setup are still secrets; keeping them out of tracked notes reduces accidental leakage and makes rotation simpler.
-- A small registration CLI reduces onboarding friction right now without forcing us to build the admin UI before end-to-end webhook tests.
+- A user-driven company registration flow lets the first real customer workspace be created from `/register` while all access remains on the main CRM domain; the internal tenant slug is still used for explicit WhatsApp phone mapping.
 - A public launch shell is required for production readiness and Meta review even before the CRM workflow is fully complete.
 - Auth routes should be reachable for humans but not compete with the public landing in search results.
 - A lightweight self-service deletion path covers the immediate policy requirement without forcing us to finish the whole tenant settings module first.

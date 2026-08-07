@@ -13,8 +13,8 @@ import { auth } from '@/lib/auth'
 import { getServerMode } from '@core/utils/serverHelpers'
 
 export const metadata: Metadata = {
-  title: 'Crear cuenta',
-  description: 'Crea tu acceso inicial a Magnus CRM.',
+  title: 'Registrar empresa',
+  description: 'Registra tu empresa y crea tu usuario owner en Magnus CRM.',
   robots: {
     index: false,
     follow: false
@@ -47,3 +47,4 @@ const RegisterPage = async ({ searchParams }: Props) => {
 }
 
 export default RegisterPage
+

@@ -124,7 +124,7 @@
   - Reusable bootstrap service.
   - CLI command for local provisioning.
   - Owner membership creation.
-  - Branding + primary domain creation.
+  - Branding + optional explicit domain creation.
   - Default commercial pipeline and stages.
 - Skills:
   - `backend-clean-architecture`
@@ -133,6 +133,7 @@
   - A repeatable way to create the first workspace and prepare the database for inbox and webhook work.
 - Status:
   - A bootstrap service and `npm run bootstrap:workspace` command now exist and are typechecked.
+  - The bootstrap path no longer generates a slug-based subdomain by default; domain creation is explicit via `BOOTSTRAP_DOMAIN_HOST`.
 
 ### Phase 4.7: Public launch surfaces
 - Objective: ship the public web surfaces needed for launch, conversion, and Meta app review while the deeper CRM flows continue behind the scenes.

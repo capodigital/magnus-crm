@@ -31,7 +31,7 @@ const main = async () => {
   console.log(`- tenantId: ${result.tenantId}`)
   console.log(`- tenantSlug: ${result.tenantSlug}`)
   console.log(`- ownerUserId: ${result.ownerUserId}`)
-  console.log(`- primaryDomainHost: ${result.primaryDomainHost}`)
+  console.log(`- primaryDomainHost: ${result.primaryDomainHost ?? 'not created; using main app domain'}`)
   console.log(`- pipelineId: ${result.pipelineId}`)
   console.log(`- stageCount: ${result.stageCount}`)
 }
