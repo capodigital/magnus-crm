@@ -42,6 +42,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - Brand validation on July 31, 2026 passed `npx tsc --noEmit --pretty false`, `npm run lint`, `npm run build`, and local HTTP checks for `/`, manifest, favicon, app icons, SVG mark, Meta icon, and Open Graph image.
 - The production Meta app is being configured for WhatsApp webhooks. The current callback endpoint is `https://crm.magnusecosystems.com/api/webhooks/whatsapp`; production must set `META_VERIFY_TOKEN` to the same custom verify token entered in Meta and `META_APP_SECRET` to the live Meta app secret before real POST events can be accepted.
 - Production Meta onboarding is currently at the registered-number send-message check for the company's live number. The test must use the production WABA and `phone_number_id` mapping in `/settings`; the generated permanent token is reserved for outbound API calls and must remain secret.
+- Diagnostic on August 7, 2026: production webhook GET responds to invalid verification with `403`, unsigned POST responds with `401`, and a locally signed empty POST reaches JSON parsing with `400`; the deployed endpoint and `META_APP_SECRET` are therefore present and accepting the configured signature.
+- The current inbound service skips persistence before creating `WhatsappWebhookEvent` when `metadata.phone_number_id` has no `WhatsappPhoneNumber` binding. This exactly explains an empty webhook table when the production phone ID was not saved or does not match the ID in Meta's payload. The local workstation could not reach the configured Neon database, so production row counts remain unverified.
 - After webhook verification, subscribe at least to the `messages` field and bind each production `phone_number_id` to its tenant from authenticated `/settings`; unmapped phone numbers are counted and ignored by the inbound service.
 
 ## Assumptions and constraints
@@ -129,4 +131,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Run the production WhatsApp inbound test with the live `phone_number_id` bound in `/settings`, then open `/inbox` and use `Actualizar` to confirm the persisted conversation. Implement outbound replies and assignment after this read-only inbox slice is verified.
+Confirm the production `phone_number_id` binding in `/settings`, send a new inbound message because previously discarded events are not replayed, then open `/inbox` and use `Actualizar` to confirm persistence. If the binding matches and no row appears, inspect the deployment log for the real Meta POST status before editing code.
