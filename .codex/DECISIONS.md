@@ -29,6 +29,7 @@
 25. Use the Magnus CRM logo palette as the product brand foundation: deep ink `#10212A`, teal `#0F766E`, sea `#164E63`, mint `#7FD7C6`, gold `#C89B3C`, and paper `#F6F8F5`.
 26. Do not use tenant-specific environment variables as the normal WhatsApp phone mapping path. Owners/admins should bind WABA IDs and `phone_number_id` values to their workspace through authenticated app flows; Embedded Signup will automate the same persistence later.
 27. Keep actions in Server-rendered CRM section pages serializable: pass URL strings to MUI components instead of function-valued `component` props such as `next/link`.
+28. Build the first inbox read path as a server-side tenant-scoped query that passes serialized conversation data to a client presentation component; do not accept a tenant identifier from the browser.
 
 ## Rationale
 
@@ -52,3 +53,4 @@
 - A shared logo mark and palette keep the public site, auth screens, dashboard shell, favicons, Meta app icon, and social previews visually aligned while deeper product work continues.
 - Workspace-owned WhatsApp phone mappings belong in the database, scoped to the authenticated tenant, because a SaaS cannot scale with one environment variable per customer phone number.
 - Next.js 16 enforces the Server/Client boundary at runtime, so the shared section page uses MUI's native `href` behavior to avoid serializing a function across that boundary.
+- The inbox page can resolve the active tenant from the authenticated app context and keep Prisma access on the server, while the client only manages selection, filtering, and refresh interactions.

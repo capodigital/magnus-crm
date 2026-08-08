@@ -202,6 +202,10 @@
   - `deep-code-review`
 - Goal output:
   - A usable CRM loop from message to pipeline action.
+- Status:
+  - The first read-only inbox slice now queries tenant-scoped WhatsApp conversations and latest messages.
+  - The UI includes search, status filters, responsive conversation/thread panels, manual refresh, loading, empty, and recoverable error states.
+  - Outbound replies, unread/read state, assignment, pagination, and realtime updates remain deferred.
 
 ### Phase 7: Billing and cost ledger
 - Objective: make Meta cost transparent and reconcilable.
