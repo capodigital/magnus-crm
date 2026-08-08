@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -41,7 +39,6 @@ const SectionPage = ({ eyebrow, title, description, status, actions, bullets }: 
             {actions.map(action => (
               <Button
                 key={action.label}
-                component={Link}
                 href={action.href}
                 variant={action.variant ?? 'contained'}
               >

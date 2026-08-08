@@ -8,6 +8,12 @@
 4. Add the public launch surfaces required for access, legal review, and Meta publishing. Completed.
 5. Expand into tenant onboarding, WhatsApp, billing, white-label, and hardening after the public/auth foundation is stable. Next.
 
+### Maintenance fix: Next.js 16 settings render error
+- Goal: keep Server/Client Component boundaries serializable in the shared CRM section surface.
+- Root cause: `SectionPage` passed the `next/link` function as MUI Button's `component` prop while rendered from a Server Component.
+- Resolution: use the existing action `href` directly on MUI Button.
+- Validation: `npm run lint`, `npx tsc --noEmit --pretty false`, and `npm run build` passed on August 7, 2026.
+
 ## Assumed defaults until overridden
 
 - Multi-tenant from day one.

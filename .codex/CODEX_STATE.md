@@ -29,6 +29,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The registration API now creates a user owner plus a tenant workspace for the company entered in the form, without a payment step. The company is user-provided, is not hardcoded to Magnus Ecosystems, and does not create a per-company domain/subdomain for now; all access remains on the main CRM domain.
 - The internal `/settings` page now shows the active workspace and internal tenant slug so the production WhatsApp phone number can be mapped without querying the database manually.
 - The workspace settings page now includes a WhatsApp Cloud API panel that lets an owner/admin bind a WABA ID and `phone_number_id` directly to the active workspace. This replaces the tenant-specific `.env` mapping path for normal SaaS usage; the CLI/env path remains only as an internal fallback.
+- The shared CRM `SectionPage` no longer passes `next/link` as a function prop from Server Components into MUI Buttons; its actions now use serializable `href` props, fixing the Next.js 16 settings render error.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
@@ -38,7 +39,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The Meta-ready app icon is available at `public/images/brand/magnus-crm-app-icon-1024.png`; it is a square PNG under 5 MB.
 - Brand validation on July 31, 2026 passed `npx tsc --noEmit --pretty false`, `npm run lint`, `npm run build`, and local HTTP checks for `/`, manifest, favicon, app icons, SVG mark, Meta icon, and Open Graph image.
 - The production Meta app is being configured for WhatsApp webhooks. The current callback endpoint is `https://crm.magnusecosystems.com/api/webhooks/whatsapp`; production must set `META_VERIFY_TOKEN` to the same custom verify token entered in Meta and `META_APP_SECRET` to the live Meta app secret before real POST events can be accepted.
-- After webhook verification, subscribe at least to the `messages` field and register each production `phone_number_id` to a tenant through `npm run register:whatsapp-phone`; unmapped phone numbers are counted and ignored by the inbound service.
+- After webhook verification, subscribe at least to the `messages` field and bind each production `phone_number_id` to its tenant from authenticated `/settings`; unmapped phone numbers are counted and ignored by the inbound service.
 
 ## Assumptions and constraints
 - Keep this journal local to the repo.
@@ -120,4 +121,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Register the first company through `/register` on the main CRM domain, then set `WHATSAPP_TENANT_SLUG` to the generated internal tenant slug and run `npm run register:whatsapp-phone` for the production Meta phone number.
+Register the first company through `/register` on the main CRM domain, then bind its production Meta phone number from `/settings`.
