@@ -39,6 +39,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The Meta-ready app icon is available at `public/images/brand/magnus-crm-app-icon-1024.png`; it is a square PNG under 5 MB.
 - Brand validation on July 31, 2026 passed `npx tsc --noEmit --pretty false`, `npm run lint`, `npm run build`, and local HTTP checks for `/`, manifest, favicon, app icons, SVG mark, Meta icon, and Open Graph image.
 - The production Meta app is being configured for WhatsApp webhooks. The current callback endpoint is `https://crm.magnusecosystems.com/api/webhooks/whatsapp`; production must set `META_VERIFY_TOKEN` to the same custom verify token entered in Meta and `META_APP_SECRET` to the live Meta app secret before real POST events can be accepted.
+- Production Meta onboarding is currently at the registered-number send-message check for the company's live number. The test must use the production WABA and `phone_number_id` mapping in `/settings`; the generated permanent token is reserved for outbound API calls and must remain secret.
 - After webhook verification, subscribe at least to the `messages` field and bind each production `phone_number_id` to its tenant from authenticated `/settings`; unmapped phone numbers are counted and ignored by the inbound service.
 
 ## Assumptions and constraints
