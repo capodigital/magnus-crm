@@ -30,6 +30,7 @@
 26. Do not use tenant-specific environment variables as the normal WhatsApp phone mapping path. Owners/admins should bind WABA IDs and `phone_number_id` values to their workspace through authenticated app flows; Embedded Signup will automate the same persistence later.
 27. Keep actions in Server-rendered CRM section pages serializable: pass URL strings to MUI components instead of function-valued `component` props such as `next/link`.
 28. Build the first inbox read path as a server-side tenant-scoped query that passes serialized conversation data to a client presentation component; do not accept a tenant identifier from the browser.
+29. Use `META_ACCESS_TOKEN` only on the server for the initial Magnus production tenant; keep the WhatsApp phone binding in the tenant database and move to encrypted per-tenant tokens when Embedded Signup onboarding is implemented.
 
 ## Rationale
 
@@ -54,3 +55,4 @@
 - Workspace-owned WhatsApp phone mappings belong in the database, scoped to the authenticated tenant, because a SaaS cannot scale with one environment variable per customer phone number.
 - Next.js 16 enforces the Server/Client boundary at runtime, so the shared section page uses MUI's native `href` behavior to avoid serializing a function across that boundary.
 - The inbox page can resolve the active tenant from the authenticated app context and keep Prisma access on the server, while the client only manages selection, filtering, and refresh interactions.
+- Keeping the first token server-only avoids exposing credentials in the browser while allowing the current production workspace to send text replies; a SaaS-wide token cannot be the final multi-tenant credential model.

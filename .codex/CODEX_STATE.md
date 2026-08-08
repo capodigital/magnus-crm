@@ -32,7 +32,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The shared CRM `SectionPage` no longer passes `next/link` as a function prop from Server Components into MUI Buttons; its actions now use serializable `href` props, fixing the Next.js 16 settings render error.
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - The `/inbox` route now reads tenant-scoped WhatsApp conversations and their latest messages from Prisma, with search, status filters, conversation selection, manual refresh, loading, empty, and recoverable error states.
-- The first inbox slice is read-only: outbound replies, unread/read tracking, assignment, pagination, and realtime updates remain deferred to the next CRM workflow increment.
+- The inbox now includes a text composer that sends through the WhatsApp Cloud API from a server-only route, persists successful outbound messages by returned `wamid`, and refreshes the active thread.
+- Unread/read tracking, assignment, pagination, realtime updates, templates, and media replies remain deferred to the next CRM workflow increment.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
 - A first generated logo concept for Magnus CRM now exists at `public/images/brand/magnus-crm-logo-concept.png`.
@@ -102,6 +103,9 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/app/(dashboard)/inbox/error.tsx`
 - `src/components/crm/InboxWorkspace.tsx`
 - `src/lib/crm/inbox-query.ts`
+- `src/app/api/inbox/conversations/[conversationId]/messages/route.ts`
+- `src/lib/whatsapp/outbound-service.ts`
+- `.env.example`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
 - `src/components/crm/DeleteAccountPanel.tsx`
 - `src/components/crm/WhatsappPhoneNumberPanel.tsx`
@@ -131,4 +135,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Confirm the production `phone_number_id` binding in `/settings`, send a new inbound message because previously discarded events are not replayed, then open `/inbox` and use `Actualizar` to confirm persistence. If the binding matches and no row appears, inspect the deployment log for the real Meta POST status before editing code.
+Set the production server variable `META_ACCESS_TOKEN`, deploy the composer, send an inbound message to open the 24-hour response window, and test a text reply from `/inbox`. Then verify the outbound `wamid` and status webhook; implement per-tenant tokens through Embedded Signup before opening onboarding to other tenants.

@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 
 import { useRouter } from 'next/navigation'
 
+import Alert from '@mui/material/Alert'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -24,6 +25,14 @@ import type { InboxConversation } from '@/lib/crm/inbox-query'
 type InboxWorkspaceProps = {
   workspaceName: string | null
   conversations: InboxConversation[]
+}
+
+type SendMessageResponse = {
+  result?: {
+    messageId: string
+    metaMessageId: string
+  }
+  error?: string
 }
 
 type StatusFilter = 'ALL' | 'OPEN' | 'PENDING' | 'CLOSED'
@@ -87,12 +96,50 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('ALL')
   const [search, setSearch] = useState('')
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [draft, setDraft] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const [sendError, setSendError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!selectedId || !conversations.some(conversation => conversation.id === selectedId)) {
       setSelectedId(conversations[0]?.id ?? null)
     }
   }, [conversations, selectedId])
+
+  const handleSend = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!selectedConversation || !draft.trim() || isSending) return
+
+    setIsSending(true)
+    setSendError(null)
+
+    try {
+      const response = await fetch(`/api/inbox/conversations/${encodeURIComponent(selectedConversation.id)}/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ body: draft })
+      })
+
+      const payload = (await response.json().catch(() => null)) as SendMessageResponse | null
+
+      if (!response.ok || !payload?.result) {
+        setSendError(payload?.error ?? 'No pudimos enviar el mensaje.')
+
+        return
+      }
+
+      setDraft('')
+
+      router.refresh()
+    } catch {
+      setSendError('No pudimos conectar con el servidor para enviar el mensaje.')
+    } finally {
+      setIsSending(false)
+    }
+  }
 
   const normalizedSearch = search.trim().toLowerCase()
 
@@ -335,6 +382,34 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                       </Typography>
                     </Stack>
                   )}
+                </Stack>
+                <Divider />
+                <Stack component='form' spacing={1.5} onSubmit={handleSend} sx={{ p: { xs: 3, md: 4 } }}>
+                  {sendError ? <Alert severity='error'>{sendError}</Alert> : null}
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'flex-end' }}>
+                    <TextField
+                      fullWidth
+                      multiline
+                      minRows={2}
+                      maxRows={6}
+                      label='Responder por WhatsApp'
+                      placeholder='Escribe una respuesta...'
+                      value={draft}
+                      onChange={event => setDraft(event.target.value)}
+                      disabled={isSending}
+                      inputProps={{ maxLength: 4096, 'aria-label': 'Mensaje de respuesta' }}
+                      helperText={`${draft.length}/4096 caracteres. Las respuestas de texto requieren una ventana activa de atencion.`}
+                    />
+                    <Button
+                      type='submit'
+                      variant='contained'
+                      disabled={!draft.trim() || isSending}
+                      startIcon={<i className='tabler-send' aria-hidden='true' />}
+                      sx={{ minWidth: { sm: 132 }, minHeight: 42 }}
+                    >
+                      {isSending ? 'Enviando...' : 'Enviar'}
+                    </Button>
+                  </Stack>
                 </Stack>
               </Stack>
             ) : (

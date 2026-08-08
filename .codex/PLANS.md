@@ -205,7 +205,8 @@
 - Status:
   - The first read-only inbox slice now queries tenant-scoped WhatsApp conversations and latest messages.
   - The UI includes search, status filters, responsive conversation/thread panels, manual refresh, loading, empty, and recoverable error states.
-  - Outbound replies, unread/read state, assignment, pagination, and realtime updates remain deferred.
+  - A server-only text composer now sends through Meta, persists the returned `wamid`, and refreshes the active thread.
+  - Unread/read state, assignment, pagination, realtime updates, templates, and media replies remain deferred.
 
 ### Phase 7: Billing and cost ledger
 - Objective: make Meta cost transparent and reconcilable.
