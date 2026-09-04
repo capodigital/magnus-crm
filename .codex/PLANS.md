@@ -227,7 +227,8 @@
   - Agents can answer normally within the window and use an approved tenant template when it expires, with the reason and next action visible in the UI.
 - Status:
   - Implemented in the inbox, settings, WhatsApp services, API routes, Prisma schema, and controlled migration.
-  - Production database migration and live Meta approval/E2E testing are still pending operator action.
+  - The configured database was updated with `prisma db push`, backfilled through the idempotent Prisma script, and the migration was marked applied with `prisma migrate resolve`.
+  - Live Meta approval/E2E testing and deployment of this validated build are still pending operator action.
 
 ### Phase 7: Billing and cost ledger
 - Objective: make Meta cost transparent and reconcilable.

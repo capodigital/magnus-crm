@@ -36,10 +36,16 @@ The CRM follows WhatsApp's customer-care window:
 - When the window is closed, the inbox blocks free-form text and only approved, active templates can be sent.
 - Templates belong to the connected customer's WhatsApp Business Account. They are not global assets of Magnus CRM.
 
-Before deploying the reply-window and template changes to an existing database, run the migration once with the production `DATABASE_URL`:
+For a new environment, deploy the tracked Prisma migration with the production `DATABASE_URL`:
 
 ```bash
 npm run db:migrate:deploy
+```
+
+If the schema was already applied with `prisma db push`, backfill existing conversation timestamps through Prisma instead of running SQL manually:
+
+```bash
+npm run db:backfill:whatsapp-reply-windows
 ```
 
 Keep `META_ACCESS_TOKEN` server-only. The app creates text templates in the tenant's connected WABA, sends them to Meta for review, and shows the resulting status in Settings. Existing templates created in Meta Business Manager can be imported from **Settings > WhatsApp > Sincronizar con Meta**.

@@ -35,6 +35,7 @@
 31. Make WhatsApp templates tenant-owned and create/sync them against the tenant's connected WABA; starter examples in Magnus CRM are editable drafts, not globally shared templates.
 32. Limit the initial in-app template creator to text `UTILITY` and `MARKETING` templates, require sequential variables with Meta review examples, and defer authentication, buttons, headers, media, and encrypted per-tenant access tokens until their specific contracts are implemented.
 33. Apply the reply-window/template schema change through a tracked Prisma migration and never run a remote database mutation automatically from the coding session.
+34. When an operator has already applied the schema with `prisma db push`, use a Prisma backfill script for existing data and `prisma migrate resolve --applied` to align migration history; do not ask the operator to run handwritten SQL or silently reapply the migration.
 
 ## Rationale
 
@@ -64,3 +65,4 @@
 - The 24-hour server-side gate keeps the user experience commercial and clear while preserving Meta's platform rule even when a client manipulates the browser.
 - WABA ownership is the correct isolation boundary for templates in a multi-tenant provider product; a global Magnus template library would not automatically be valid for every customer's WABA.
 - Meta template review needs representative variable values, so the creator asks for examples while keeping actual send-time values in the inbox flow.
+- The production database was verified through Prisma after `db push`; the reply-window backfill changed one existing conversation and is safe to rerun because updates only target rows whose `lastInboundAt` is still null.

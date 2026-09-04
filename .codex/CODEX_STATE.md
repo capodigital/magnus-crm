@@ -39,7 +39,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - Tenant-scoped WhatsApp templates now have local status tracking, Meta create/sync APIs, settings management, starter drafts, and approved-template sending from the inbox.
 - The first template creator supports text-only `UTILITY` and `MARKETING` templates, including Meta review examples for `{{1}}` variables; authentication, buttons, headers, media, and per-tenant encrypted tokens remain deferred.
 - Unread/read tracking, assignment, pagination, and realtime updates remain deferred to the next CRM workflow increment.
-- A controlled migration now adds `lastInboundAt`, template metadata, and the message-template relation. It must be applied once in production with `npm run db:migrate:deploy` before serving the new inbox/settings code.
+- A controlled migration adds `lastInboundAt`, template metadata, and the message-template relation. The configured production database was already updated with `prisma db push`; the existing conversation was backfilled through Prisma and the migration was marked applied with `prisma migrate resolve` so future deploys do not reapply it.
+- The reusable `npm run db:backfill:whatsapp-reply-windows` script is idempotent and uses Prisma only; the second run updated zero rows and confirmed `1/1` conversations have `lastInboundAt`.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
 - A first generated logo concept for Magnus CRM now exists at `public/images/brand/magnus-crm-logo-concept.png`.
@@ -125,6 +126,7 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/components/crm/InboxMessageList.tsx`
 - `src/components/crm/WhatsappTemplatesPanel.tsx`
 - `prisma/migrations/20260904_whatsapp_reply_window_templates/migration.sql`
+- `scripts/backfill-whatsapp-reply-windows.ts`
 - `src/lib/whatsapp/webhook-types.ts`
 - `.env.example`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
@@ -156,4 +158,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Apply `npm run db:migrate:deploy` against the production `DATABASE_URL`, deploy the validated build, and bind the production `phone_number_id` in `/settings`. Then sync or create a text `UTILITY` template in the tenant's WABA, wait for Meta approval, and verify both an in-window free-form reply and an out-of-window approved-template reply with their outbound `wamid` and status webhooks. Implement per-tenant encrypted tokens through Embedded Signup before opening onboarding to other tenants.
+Deploy the validated build, confirm the production `phone_number_id` remains bound in `/settings`, and sync or create a text `UTILITY` template in the tenant's WABA. Wait for Meta approval, then verify both an in-window free-form reply and an out-of-window approved-template reply with their outbound `wamid` and status webhooks. For a new environment, run `npm run db:migrate:deploy` followed by `npm run db:backfill:whatsapp-reply-windows`. Implement per-tenant encrypted tokens through Embedded Signup before opening onboarding to other tenants.
