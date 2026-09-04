@@ -31,6 +31,10 @@
 27. Keep actions in Server-rendered CRM section pages serializable: pass URL strings to MUI components instead of function-valued `component` props such as `next/link`.
 28. Build the first inbox read path as a server-side tenant-scoped query that passes serialized conversation data to a client presentation component; do not accept a tenant identifier from the browser.
 29. Use `META_ACCESS_TOKEN` only on the server for the initial Magnus production tenant; keep the WhatsApp phone binding in the tenant database and move to encrypted per-tenant tokens when Embedded Signup onboarding is implemented.
+30. Calculate WhatsApp's 24-hour customer-care window from the latest persisted inbound message per conversation, enforce the free-form gate in the server service, and expose the expiry to the inbox UI so the policy cannot be bypassed by browser state.
+31. Make WhatsApp templates tenant-owned and create/sync them against the tenant's connected WABA; starter examples in Magnus CRM are editable drafts, not globally shared templates.
+32. Limit the initial in-app template creator to text `UTILITY` and `MARKETING` templates, require sequential variables with Meta review examples, and defer authentication, buttons, headers, media, and encrypted per-tenant access tokens until their specific contracts are implemented.
+33. Apply the reply-window/template schema change through a tracked Prisma migration and never run a remote database mutation automatically from the coding session.
 
 ## Rationale
 
@@ -57,3 +61,6 @@
 - The inbox page can resolve the active tenant from the authenticated app context and keep Prisma access on the server, while the client only manages selection, filtering, and refresh interactions.
 - Keeping the first token server-only avoids exposing credentials in the browser while allowing the current production workspace to send text replies; a SaaS-wide token cannot be the final multi-tenant credential model.
 - Delivery confirmation must be modeled separately from API acceptance: Meta's send response provides the outbound `wamid`, while asynchronous status webhooks determine whether the message was sent, delivered, read, or failed. Keep unmatched status events pending so a fast webhook cannot be lost before the outbound database transaction completes.
+- The 24-hour server-side gate keeps the user experience commercial and clear while preserving Meta's platform rule even when a client manipulates the browser.
+- WABA ownership is the correct isolation boundary for templates in a multi-tenant provider product; a global Magnus template library would not automatically be valid for every customer's WABA.
+- Meta template review needs representative variable values, so the creator asks for examples while keeping actual send-time values in the inbox flow.

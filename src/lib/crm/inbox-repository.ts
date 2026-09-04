@@ -219,7 +219,8 @@ export const upsertInboundWhatsappMessage = async (
         leadId: lead.id,
         status: ConversationStatus.OPEN,
         whatsappPhoneNumberId: input.whatsappPhoneNumberId,
-        lastMessageAt: input.occurredAt
+        lastMessageAt: input.occurredAt,
+        lastInboundAt: input.occurredAt
       },
       create: {
         tenantId: input.tenantId,
@@ -229,7 +230,8 @@ export const upsertInboundWhatsappMessage = async (
         status: ConversationStatus.OPEN,
         externalThreadKey: input.externalThreadKey,
         whatsappPhoneNumberId: input.whatsappPhoneNumberId,
-        lastMessageAt: input.occurredAt
+        lastMessageAt: input.occurredAt,
+        lastInboundAt: input.occurredAt
       }
     })
 
@@ -259,16 +261,40 @@ export const upsertInboundWhatsappMessage = async (
           })
         : existingMessage
 
-    if (existingMessage !== null) {
-      await tx.conversation.update({
-        where: {
-          id: conversation.id
-        },
-        data: {
-          lastMessageAt: input.occurredAt
-        }
-      })
-    }
+    const latestMessage = await tx.message.findFirst({
+      where: {
+        conversationId: conversation.id
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      select: {
+        createdAt: true
+      }
+    })
+
+    const latestInboundMessage = await tx.message.findFirst({
+      where: {
+        conversationId: conversation.id,
+        direction: MessageDirection.INBOUND
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      select: {
+        createdAt: true
+      }
+    })
+
+    await tx.conversation.update({
+      where: {
+        id: conversation.id
+      },
+      data: {
+        lastMessageAt: latestMessage?.createdAt ?? input.occurredAt,
+        lastInboundAt: latestInboundMessage?.createdAt ?? input.occurredAt
+      }
+    })
 
     return {
       contactId: contact.id,

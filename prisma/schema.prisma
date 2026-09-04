@@ -8,20 +8,20 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  email         String?       @unique
-  password      String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  image         String?
-  role          Role          @default(USUARIO)
-  emailVerified DateTime?
-  name          String?
-  phone         String?       @db.VarChar(20)
-  accounts      Account[]
-  sessions      Session[]
-  memberships   Membership[]
-  ownedLeads    Lead[]        @relation("LeadOwner")
+  id                    String         @id @default(cuid())
+  email                 String?        @unique
+  password              String?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  image                 String?
+  role                  Role           @default(USUARIO)
+  emailVerified         DateTime?
+  name                  String?
+  phone                 String?        @db.VarChar(20)
+  accounts              Account[]
+  sessions              Session[]
+  memberships           Membership[]
+  ownedLeads            Lead[]         @relation("LeadOwner")
   assignedConversations Conversation[] @relation("ConversationAssignee")
 
   @@map("users")
@@ -137,6 +137,21 @@ enum MessageKind {
   SYSTEM
 }
 
+enum WhatsappTemplateCategory {
+  UTILITY
+  MARKETING
+  AUTHENTICATION
+}
+
+enum WhatsappTemplateStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+  PAUSED
+  DISABLED
+}
+
 enum WhatsappWebhookEventType {
   MESSAGE
   STATUS
@@ -151,66 +166,67 @@ enum WhatsappWebhookProcessingStatus {
 }
 
 model Tenant {
-  id           String            @id @default(cuid())
-  slug         String            @unique
-  name         String
-  mode         TenantMode        @default(SAAS)
-  billingMode  TenantBillingMode  @default(PLATFORM_PLUS_META)
-  status       TenantStatus      @default(ACTIVE)
-  timezone     String?           @default("UTC")
-  locale       String?           @default("es-419")
-  planCode     String?
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  domains      TenantDomain[]
-  branding     TenantBranding?
-  memberships  Membership[]
-  contacts     Contact[]
-  leads        Lead[]
-  conversations Conversation[]
-  messages     Message[]
-  whatsappPhoneNumbers WhatsappPhoneNumber[]
-  whatsappWebhookEvents WhatsappWebhookEvent[]
-  pipelines    Pipeline[]
-  pipelineStages PipelineStage[]
+  id                       String                    @id @default(cuid())
+  slug                     String                    @unique
+  name                     String
+  mode                     TenantMode                @default(SAAS)
+  billingMode              TenantBillingMode         @default(PLATFORM_PLUS_META)
+  status                   TenantStatus              @default(ACTIVE)
+  timezone                 String?                   @default("UTC")
+  locale                   String?                   @default("es-419")
+  planCode                 String?
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  domains                  TenantDomain[]
+  branding                 TenantBranding?
+  memberships              Membership[]
+  contacts                 Contact[]
+  leads                    Lead[]
+  conversations            Conversation[]
+  messages                 Message[]
+  whatsappMessageTemplates WhatsappMessageTemplate[]
+  whatsappPhoneNumbers     WhatsappPhoneNumber[]
+  whatsappWebhookEvents    WhatsappWebhookEvent[]
+  pipelines                Pipeline[]
+  pipelineStages           PipelineStage[]
 
-  @@map("tenants")
   @@index([status, createdAt])
+  @@map("tenants")
 }
 
 model TenantDomain {
-  id             String      @id @default(cuid())
+  id             String     @id @default(cuid())
   tenantId       String
-  host           String      @unique
-  kind           DomainKind   @default(CUSTOM_DOMAIN)
-  isPrimary      Boolean     @default(false)
+  host           String     @unique
+  kind           DomainKind @default(CUSTOM_DOMAIN)
+  isPrimary      Boolean    @default(false)
   verifiedAt     DateTime?
   sslStatus      String?
   dnsTarget      String?
   redirectToHost String?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  @@map("tenant_domains")
   @@index([tenantId, isPrimary])
+  @@map("tenant_domains")
 }
 
 model TenantBranding {
-  id           String   @id @default(cuid())
-  tenantId     String   @unique
-  appName      String
-  logoUrl      String?
-  faviconUrl   String?
-  primaryColor String?
+  id             String   @id @default(cuid())
+  tenantId       String   @unique
+  appName        String
+  logoUrl        String?
+  faviconUrl     String?
+  primaryColor   String?
   secondaryColor String?
-  supportEmail String?
-  fromName     String?
-  emailDomain  String?
-  customCss    String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  supportEmail   String?
+  fromName       String?
+  emailDomain    String?
+  customCss      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
@@ -218,20 +234,20 @@ model TenantBranding {
 }
 
 model Membership {
-  id          String      @id @default(cuid())
-  tenantId    String
-  userId      String
-  role        TenantRole
-  isOwner     Boolean     @default(false)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id        String     @id @default(cuid())
+  tenantId  String
+  userId    String
+  role      TenantRole
+  isOwner   Boolean    @default(false)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("memberships")
   @@unique([tenantId, userId])
   @@index([tenantId, role])
+  @@map("memberships")
 }
 
 model Contact {
@@ -253,100 +269,124 @@ model Contact {
   leads           Lead[]
   conversations   Conversation[]
 
-  @@map("contacts")
-  @@index([tenantId, updatedAt])
   @@unique([tenantId, whatsappWaId])
   @@unique([tenantId, normalizedPhone])
   @@unique([tenantId, email])
+  @@index([tenantId, updatedAt])
+  @@map("contacts")
 }
 
 model Lead {
-  id               String            @id @default(cuid())
-  tenantId         String
-  contactId        String
-  pipelineId       String?
-  stageId          String?
-  ownerUserId      String?
-  title            String?
-  sourceChannel    LeadSourceChannel
-  status           LeadStatus        @default(OPEN)
-  score            Int?
-  firstInboundAt   DateTime?
-  lastInboundAt    DateTime?
-  lastOutboundAt   DateTime?
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  version          Int               @default(1)
-  tenant           Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  contact          Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  pipeline         Pipeline?         @relation(fields: [pipelineId], references: [id])
-  stage            PipelineStage?    @relation(fields: [stageId], references: [id])
-  ownerUser        User?             @relation("LeadOwner", fields: [ownerUserId], references: [id])
-  conversations    Conversation[]
+  id             String            @id @default(cuid())
+  tenantId       String
+  contactId      String
+  pipelineId     String?
+  stageId        String?
+  ownerUserId    String?
+  title          String?
+  sourceChannel  LeadSourceChannel
+  status         LeadStatus        @default(OPEN)
+  score          Int?
+  firstInboundAt DateTime?
+  lastInboundAt  DateTime?
+  lastOutboundAt DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  version        Int               @default(1)
+  tenant         Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact        Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  pipeline       Pipeline?         @relation(fields: [pipelineId], references: [id])
+  stage          PipelineStage?    @relation(fields: [stageId], references: [id])
+  ownerUser      User?             @relation("LeadOwner", fields: [ownerUserId], references: [id])
+  conversations  Conversation[]
 
-  @@map("leads")
   @@index([tenantId, status, updatedAt])
   @@index([tenantId, ownerUserId, updatedAt])
   @@index([tenantId, pipelineId, stageId])
+  @@map("leads")
 }
 
 model Conversation {
-  id                 String              @id @default(cuid())
-  tenantId           String
-  contactId          String
-  leadId             String?
-  channel            ChannelType
-  status             ConversationStatus  @default(OPEN)
-  assigneeUserId     String?
-  externalThreadKey  String?
+  id                    String               @id @default(cuid())
+  tenantId              String
+  contactId             String
+  leadId                String?
+  channel               ChannelType
+  status                ConversationStatus   @default(OPEN)
+  assigneeUserId        String?
+  externalThreadKey     String?
   whatsappPhoneNumberId String?
-  lastMessageAt      DateTime?
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  version            Int                 @default(1)
-  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  contact            Contact             @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  lead               Lead?               @relation(fields: [leadId], references: [id])
-  assigneeUser       User?               @relation("ConversationAssignee", fields: [assigneeUserId], references: [id])
-  whatsappPhoneNumber WhatsappPhoneNumber? @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: SetNull)
-  messages           Message[]
+  lastMessageAt         DateTime?
+  lastInboundAt         DateTime?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  version               Int                  @default(1)
+  tenant                Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact               Contact              @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  lead                  Lead?                @relation(fields: [leadId], references: [id])
+  assigneeUser          User?                @relation("ConversationAssignee", fields: [assigneeUserId], references: [id])
+  whatsappPhoneNumber   WhatsappPhoneNumber? @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: SetNull)
+  messages              Message[]
 
-  @@map("conversations")
   @@unique([tenantId, channel, externalThreadKey])
   @@index([tenantId, channel, status, lastMessageAt])
   @@index([tenantId, assigneeUserId, lastMessageAt])
   @@index([tenantId, whatsappPhoneNumberId, lastMessageAt])
+  @@map("conversations")
 }
 
 model Message {
-  id                String            @id @default(cuid())
-  tenantId          String
-  conversationId    String
-  direction         MessageDirection
-  kind              MessageKind
-  bodyText          String?
-  mediaUrl          String?
-  mediaMimeType     String?
-  metaMessageId     String?
-  externalStatus    String?
-  pricingCategory   String?
-  pricingType       String?
-  currency          String?
-  estimatedMetaCost Decimal?          @db.Decimal(12, 6)
-  recipientCountry  String?
-  deliveredAt       DateTime?
-  readAt            DateTime?
-  failedAt          DateTime?
-  rawPayload        Json?
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  tenant            Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  conversation      Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  id                 String                   @id @default(cuid())
+  tenantId           String
+  conversationId     String
+  direction          MessageDirection
+  kind               MessageKind
+  bodyText           String?
+  mediaUrl           String?
+  mediaMimeType      String?
+  metaMessageId      String?
+  externalStatus     String?
+  pricingCategory    String?
+  pricingType        String?
+  currency           String?
+  estimatedMetaCost  Decimal?                 @db.Decimal(12, 6)
+  recipientCountry   String?
+  deliveredAt        DateTime?
+  readAt             DateTime?
+  failedAt           DateTime?
+  whatsappTemplateId String?
+  rawPayload         Json?
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+  tenant             Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversation       Conversation             @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  whatsappTemplate   WhatsappMessageTemplate? @relation(fields: [whatsappTemplateId], references: [id], onDelete: SetNull)
 
-  @@map("messages")
   @@unique([tenantId, metaMessageId])
   @@index([tenantId, conversationId, createdAt])
   @@index([tenantId, deliveredAt])
+  @@map("messages")
+}
+
+model WhatsappMessageTemplate {
+  id              String                   @id @default(cuid())
+  tenantId        String
+  name            String
+  language        String
+  category        WhatsappTemplateCategory
+  status          WhatsappTemplateStatus   @default(DRAFT)
+  metaTemplateId  String?
+  bodyText        String
+  rejectionReason String?
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+  tenant          Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  messages        Message[]
+
+  @@unique([tenantId, name, language])
+  @@unique([tenantId, metaTemplateId])
+  @@index([tenantId, status, updatedAt])
+  @@map("whatsapp_message_templates")
 }
 
 model WhatsappPhoneNumber {
@@ -364,13 +404,13 @@ model WhatsappPhoneNumber {
   conversations          Conversation[]
   webhookEvents          WhatsappWebhookEvent[]
 
-  @@map("whatsapp_phone_numbers")
   @@index([tenantId, wabaId])
   @@index([tenantId, displayPhoneNumber])
+  @@map("whatsapp_phone_numbers")
 }
 
 model WhatsappWebhookEvent {
-  id                    String                           @id @default(cuid())
+  id                    String                          @id @default(cuid())
   tenantId              String
   whatsappPhoneNumberId String
   eventType             WhatsappWebhookEventType
@@ -386,16 +426,16 @@ model WhatsappWebhookEvent {
   rawPayload            Json
   processedAt           DateTime?
   errorMessage          String?
-  createdAt             DateTime                         @default(now())
-  updatedAt             DateTime                         @updatedAt
-  tenant                Tenant                           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  whatsappPhoneNumber   WhatsappPhoneNumber              @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: Cascade)
+  createdAt             DateTime                        @default(now())
+  updatedAt             DateTime                        @updatedAt
+  tenant                Tenant                          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  whatsappPhoneNumber   WhatsappPhoneNumber             @relation(fields: [whatsappPhoneNumberId], references: [id], onDelete: Cascade)
 
-  @@map("whatsapp_webhook_events")
   @@unique([tenantId, eventKey])
   @@index([tenantId, processingStatus, createdAt])
   @@index([tenantId, externalMessageId])
   @@index([whatsappPhoneNumberId, createdAt])
+  @@map("whatsapp_webhook_events")
 }
 
 model Pipeline {
@@ -410,28 +450,28 @@ model Pipeline {
   stages      PipelineStage[]
   leads       Lead[]
 
-  @@map("pipelines")
   @@unique([tenantId, name])
   @@index([tenantId, isDefault])
+  @@map("pipelines")
 }
 
 model PipelineStage {
-  id          String     @id @default(cuid())
-  tenantId    String
-  pipelineId  String
-  name        String
-  slug        String
-  color       String?
-  position    Int
-  isFinal     Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  tenant      Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  pipeline    Pipeline   @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
-  leads       Lead[]
+  id         String   @id @default(cuid())
+  tenantId   String
+  pipelineId String
+  name       String
+  slug       String
+  color      String?
+  position   Int
+  isFinal    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  pipeline   Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  leads      Lead[]
 
-  @@map("pipeline_stages")
   @@unique([pipelineId, slug])
   @@unique([pipelineId, position])
   @@index([tenantId, pipelineId])
+  @@map("pipeline_stages")
 }

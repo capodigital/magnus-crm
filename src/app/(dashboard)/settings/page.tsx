@@ -2,9 +2,11 @@ import Stack from '@mui/material/Stack'
 
 import SectionPage from '@components/crm/SectionPage'
 import WhatsappPhoneNumberPanel from '@components/crm/WhatsappPhoneNumberPanel'
+import WhatsappTemplatesPanel from '@components/crm/WhatsappTemplatesPanel'
 
 import { requireTenantAccess } from '@/lib/app-context'
 import prisma from '@/lib/prisma'
+import { getTenantWhatsappTemplates } from '@/lib/whatsapp/template-service'
 
 const SettingsPage = async () => {
   const context = await requireTenantAccess()
@@ -26,6 +28,8 @@ const SettingsPage = async () => {
         }
       })
     : null
+
+  const whatsappTemplates = activeWorkspace ? await getTenantWhatsappTemplates(activeWorkspace.id) : []
 
   const workspaceBullet = activeWorkspace
     ? `Workspace activo: ${activeWorkspace.name}. Slug interno para WhatsApp: ${activeWorkspace.slug}.`
@@ -53,6 +57,7 @@ const SettingsPage = async () => {
         ]}
       />
       <WhatsappPhoneNumberPanel workspaceName={activeWorkspace?.name ?? null} initialPhoneNumber={whatsappPhoneNumber} />
+      <WhatsappTemplatesPanel workspaceName={activeWorkspace?.name ?? null} initialTemplates={whatsappTemplates} />
     </Stack>
   )
 }

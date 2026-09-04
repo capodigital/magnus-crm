@@ -9,6 +9,7 @@ const inboxConversationSelect = {
   id: true,
   status: true,
   lastMessageAt: true,
+  lastInboundAt: true,
   updatedAt: true,
   contact: {
     select: {
@@ -70,6 +71,8 @@ export type InboxConversation = {
   id: string
   status: string
   lastMessageAt: string | null
+  lastInboundAt: string | null
+  replyWindowExpiresAt: string | null
   updatedAt: string
   contact: {
     fullName: string | null
@@ -89,25 +92,37 @@ export type InboxConversation = {
   messages: InboxMessage[]
 }
 
-const serializeConversation = (conversation: InboxConversationRecord): InboxConversation => ({
-  id: conversation.id,
-  status: conversation.status,
-  lastMessageAt: conversation.lastMessageAt?.toISOString() ?? null,
-  updatedAt: conversation.updatedAt.toISOString(),
-  contact: conversation.contact,
-  lead: conversation.lead,
-  whatsappPhoneNumber: conversation.whatsappPhoneNumber,
-  messageCount: conversation._count.messages,
-  messages: conversation.messages.reverse().map(message => ({
-    id: message.id,
-    direction: message.direction,
-    kind: message.kind,
-    bodyText: message.bodyText,
-    mediaMimeType: message.mediaMimeType,
-    externalStatus: message.externalStatus,
-    createdAt: message.createdAt.toISOString()
-  }))
-})
+const serializeConversation = (conversation: InboxConversationRecord): InboxConversation => {
+  const lastInboundAt =
+    conversation.lastInboundAt ??
+    conversation.messages
+      .filter(message => message.direction === 'INBOUND')
+      .reduce<Date | null>((latest, message) => (!latest || message.createdAt > latest ? message.createdAt : latest), null)
+
+  return {
+    id: conversation.id,
+    status: conversation.status,
+    lastMessageAt: conversation.lastMessageAt?.toISOString() ?? null,
+    lastInboundAt: lastInboundAt?.toISOString() ?? null,
+    replyWindowExpiresAt: lastInboundAt
+      ? new Date(lastInboundAt.getTime() + 24 * 60 * 60 * 1000).toISOString()
+      : null,
+    updatedAt: conversation.updatedAt.toISOString(),
+    contact: conversation.contact,
+    lead: conversation.lead,
+    whatsappPhoneNumber: conversation.whatsappPhoneNumber,
+    messageCount: conversation._count.messages,
+    messages: conversation.messages.reverse().map(message => ({
+      id: message.id,
+      direction: message.direction,
+      kind: message.kind,
+      bodyText: message.bodyText,
+      mediaMimeType: message.mediaMimeType,
+      externalStatus: message.externalStatus,
+      createdAt: message.createdAt.toISOString()
+    }))
+  }
+}
 
 export const getTenantInbox = async (tenantId: string): Promise<InboxConversation[]> => {
   const conversations = await prisma.conversation.findMany({

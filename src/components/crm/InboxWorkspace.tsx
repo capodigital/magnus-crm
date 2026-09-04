@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import Alert from '@mui/material/Alert'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -15,24 +14,20 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
-import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
+import InboxComposer from '@/components/crm/InboxComposer'
+import InboxMessageList from '@/components/crm/InboxMessageList'
 import type { InboxConversation } from '@/lib/crm/inbox-query'
+import { formatReplyWindowRemaining, getWhatsappReplyWindowFromIso } from '@/lib/whatsapp/reply-window'
+import type { WhatsappTemplateView } from '@/lib/whatsapp/template-contract'
 
 type InboxWorkspaceProps = {
   workspaceName: string | null
   conversations: InboxConversation[]
-}
-
-type SendMessageResponse = {
-  result?: {
-    messageId: string
-    metaMessageId: string
-  }
-  error?: string
+  templates: WhatsappTemplateView[]
 }
 
 type StatusFilter = 'ALL' | 'OPEN' | 'PENDING' | 'CLOSED'
@@ -57,11 +52,10 @@ const filterLabels: Record<StatusFilter, string> = {
   CLOSED: 'Cerradas'
 }
 
-const outboundStatusLabels: Record<string, string> = {
-  sent: 'Enviado',
-  delivered: 'Entregado',
-  read: 'Leído',
-  failed: 'No entregado'
+const getReplyWindowLabel = (conversation: InboxConversation, now: number) => {
+  const replyWindow = getWhatsappReplyWindowFromIso(conversation.lastInboundAt, now)
+
+  return replyWindow.isOpen ? `Quedan ${formatReplyWindowRemaining(replyWindow.remainingMs)}` : 'Plantilla necesaria'
 }
 
 const getDisplayName = (conversation: InboxConversation) =>
@@ -97,15 +91,13 @@ const getMessagePreview = (conversation: InboxConversation) => {
   return lastMessage.bodyText ?? (lastMessage.mediaMimeType ? 'Mensaje multimedia' : 'Mensaje sin texto')
 }
 
-const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) => {
+const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorkspaceProps) => {
   const router = useRouter()
   const [selectedId, setSelectedId] = useState<string | null>(conversations[0]?.id ?? null)
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('ALL')
   const [search, setSearch] = useState('')
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [draft, setDraft] = useState('')
-  const [isSending, setIsSending] = useState(false)
-  const [sendError, setSendError] = useState<string | null>(null)
+  const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
     if (!selectedId || !conversations.some(conversation => conversation.id === selectedId)) {
@@ -113,40 +105,11 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
     }
   }, [conversations, selectedId])
 
-  const handleSend = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  useEffect(() => {
+    const interval = window.setInterval(() => setNow(Date.now()), 30000)
 
-    if (!selectedConversation || !draft.trim() || isSending) return
-
-    setIsSending(true)
-    setSendError(null)
-
-    try {
-      const response = await fetch(`/api/inbox/conversations/${encodeURIComponent(selectedConversation.id)}/messages`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ body: draft })
-      })
-
-      const payload = (await response.json().catch(() => null)) as SendMessageResponse | null
-
-      if (!response.ok || !payload?.result) {
-        setSendError(payload?.error ?? 'No pudimos enviar el mensaje.')
-
-        return
-      }
-
-      setDraft('')
-
-      router.refresh()
-    } catch {
-      setSendError('No pudimos conectar con el servidor para enviar el mensaje.')
-    } finally {
-      setIsSending(false)
-    }
-  }
+    return () => window.clearInterval(interval)
+  }, [])
 
   const normalizedSearch = search.trim().toLowerCase()
 
@@ -159,14 +122,9 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
 
   const selectedConversation = conversations.find(conversation => conversation.id === selectedId) ?? null
 
-  const latestInboundMessage = selectedConversation?.messages
-    .slice()
-    .reverse()
-    .find(message => message.direction === 'INBOUND')
-
-  const hasActiveReplyWindow = latestInboundMessage
-    ? Date.now() - new Date(latestInboundMessage.createdAt).getTime() < 24 * 60 * 60 * 1000
-    : false
+  const selectedReplyWindow = selectedConversation
+    ? getWhatsappReplyWindowFromIso(selectedConversation.lastInboundAt, now)
+    : null
 
   const handleRefresh = () => {
     setIsRefreshing(true)
@@ -293,6 +251,12 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                           <Typography variant='caption' color='text.secondary'>
                             {conversation.messageCount} {conversation.messageCount === 1 ? 'mensaje' : 'mensajes'}
                           </Typography>
+                          <Chip
+                            label={getReplyWindowLabel(conversation, now)}
+                            color={getWhatsappReplyWindowFromIso(conversation.lastInboundAt, now).isOpen ? 'success' : 'default'}
+                            size='small'
+                            variant='outlined'
+                          />
                         </Stack>
                       </Stack>
                     </ListItemButton>
@@ -337,6 +301,18 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                     color={statusColors[selectedConversation.status] ?? 'default'}
                     size='small'
                   />
+                  {selectedReplyWindow ? (
+                    <Chip
+                      label={
+                        selectedReplyWindow.isOpen
+                          ? `Ventana abierta · ${formatReplyWindowRemaining(selectedReplyWindow.remainingMs)}`
+                          : 'Ventana cerrada · plantilla'
+                      }
+                      color={selectedReplyWindow.isOpen ? 'success' : 'default'}
+                      size='small'
+                      variant='outlined'
+                    />
+                  ) : null}
                   <IconButton aria-label='Actualizar conversación' onClick={handleRefresh} disabled={isRefreshing}>
                     <i className='tabler-refresh' aria-hidden='true' />
                   </IconButton>
@@ -349,95 +325,10 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                       Los estados de entrega se actualizan cuando Meta notifica el resultado.
                     </Typography>
                   </Stack>
-                  {selectedConversation.messages.length ? (
-                    selectedConversation.messages.map(message => {
-                      const isInbound = message.direction === 'INBOUND'
-
-                      const messageText =
-                        message.bodyText ?? (message.mediaMimeType ? `Mensaje ${message.mediaMimeType}` : 'Mensaje sin texto')
-
-                      return (
-                        <Stack key={message.id} alignItems={isInbound ? 'flex-start' : 'flex-end'}>
-                          <Paper
-                            elevation={0}
-                            sx={{
-                              maxWidth: { xs: '90%', sm: '75%' },
-                              px: 2,
-                              py: 1.5,
-                              bgcolor: isInbound ? 'background.paper' : 'primary.main',
-                              color: isInbound ? 'text.primary' : 'primary.contrastText',
-                              border: '1px solid',
-                              borderColor: isInbound ? 'divider' : 'primary.main',
-                              borderRadius: 3,
-                              borderBottomLeftRadius: isInbound ? 0.75 : 3,
-                              borderBottomRightRadius: isInbound ? 3 : 0.75
-                            }}
-                          >
-                            <Typography variant='body2' sx={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
-                              {messageText}
-                            </Typography>
-                            <Typography
-                              variant='caption'
-                              sx={{
-                                display: 'block',
-                                mt: 0.75,
-                                textAlign: 'right',
-                                color: isInbound ? 'text.secondary' : 'rgba(255, 255, 255, 0.72)'
-                              }}
-                            >
-                              {formatTime(message.createdAt, true)}
-                              {!isInbound ? ` · ${outboundStatusLabels[message.externalStatus ?? ''] ?? 'Enviando'}` : ''}
-                            </Typography>
-                          </Paper>
-                        </Stack>
-                      )
-                    })
-                  ) : (
-                    <Stack alignItems='center' spacing={1} sx={{ py: 8, textAlign: 'center' }}>
-                      <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>
-                        Esta conversación aún no tiene mensajes
-                      </Typography>
-                    </Stack>
-                  )}
+                  <InboxMessageList messages={selectedConversation.messages} />
                 </Stack>
                 <Divider />
-                <Stack component='form' spacing={1.5} onSubmit={handleSend} sx={{ p: { xs: 3, md: 4 } }}>
-                  {sendError ? <Alert severity='error'>{sendError}</Alert> : null}
-                  {!hasActiveReplyWindow ? (
-                    <Alert severity='warning'>
-                      El texto libre solo se entrega dentro de las 24 horas posteriores al último mensaje del cliente. Para iniciar
-                      una conversación fuera de esa ventana, necesitarás una plantilla aprobada por Meta.
-                    </Alert>
-                  ) : null}
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'flex-end' }}>
-                    <TextField
-                      fullWidth
-                      multiline
-                      minRows={2}
-                      maxRows={6}
-                      label='Responder por WhatsApp'
-                      placeholder='Escribe una respuesta...'
-                      value={draft}
-                      onChange={event => setDraft(event.target.value)}
-                      disabled={isSending}
-                      inputProps={{ maxLength: 4096, 'aria-label': 'Mensaje de respuesta' }}
-                      helperText={`${draft.length}/4096 caracteres. ${
-                        hasActiveReplyWindow
-                          ? 'La ventana de respuesta del cliente está activa.'
-                          : 'Verifica la ventana de atención o utiliza una plantilla aprobada.'
-                      }`}
-                    />
-                    <Button
-                      type='submit'
-                      variant='contained'
-                      disabled={!draft.trim() || isSending}
-                      startIcon={<i className='tabler-send' aria-hidden='true' />}
-                      sx={{ minWidth: { sm: 132 }, minHeight: 42 }}
-                    >
-                      {isSending ? 'Enviando...' : 'Enviar'}
-                    </Button>
-                  </Stack>
-                </Stack>
+                <InboxComposer conversation={selectedConversation} templates={templates} now={now} />
               </Stack>
             ) : (
               <Stack alignItems='center' justifyContent='center' spacing={1.5} sx={{ minHeight: 500, p: 4, textAlign: 'center' }}>

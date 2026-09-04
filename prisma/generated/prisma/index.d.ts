@@ -74,6 +74,11 @@ export type Conversation = $Result.DefaultSelection<Prisma.$ConversationPayload>
  */
 export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
 /**
+ * Model WhatsappMessageTemplate
+ * 
+ */
+export type WhatsappMessageTemplate = $Result.DefaultSelection<Prisma.$WhatsappMessageTemplatePayload>
+/**
  * Model WhatsappPhoneNumber
  * 
  */
@@ -210,6 +215,27 @@ export const MessageKind: {
 export type MessageKind = (typeof MessageKind)[keyof typeof MessageKind]
 
 
+export const WhatsappTemplateCategory: {
+  UTILITY: 'UTILITY',
+  MARKETING: 'MARKETING',
+  AUTHENTICATION: 'AUTHENTICATION'
+};
+
+export type WhatsappTemplateCategory = (typeof WhatsappTemplateCategory)[keyof typeof WhatsappTemplateCategory]
+
+
+export const WhatsappTemplateStatus: {
+  DRAFT: 'DRAFT',
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  PAUSED: 'PAUSED',
+  DISABLED: 'DISABLED'
+};
+
+export type WhatsappTemplateStatus = (typeof WhatsappTemplateStatus)[keyof typeof WhatsappTemplateStatus]
+
+
 export const WhatsappWebhookEventType: {
   MESSAGE: 'MESSAGE',
   STATUS: 'STATUS',
@@ -277,6 +303,14 @@ export const MessageDirection: typeof $Enums.MessageDirection
 export type MessageKind = $Enums.MessageKind
 
 export const MessageKind: typeof $Enums.MessageKind
+
+export type WhatsappTemplateCategory = $Enums.WhatsappTemplateCategory
+
+export const WhatsappTemplateCategory: typeof $Enums.WhatsappTemplateCategory
+
+export type WhatsappTemplateStatus = $Enums.WhatsappTemplateStatus
+
+export const WhatsappTemplateStatus: typeof $Enums.WhatsappTemplateStatus
 
 export type WhatsappWebhookEventType = $Enums.WhatsappWebhookEventType
 
@@ -526,6 +560,16 @@ export class PrismaClient<
     * ```
     */
   get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.whatsappMessageTemplate`: Exposes CRUD operations for the **WhatsappMessageTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WhatsappMessageTemplates
+    * const whatsappMessageTemplates = await prisma.whatsappMessageTemplate.findMany()
+    * ```
+    */
+  get whatsappMessageTemplate(): Prisma.WhatsappMessageTemplateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.whatsappPhoneNumber`: Exposes CRUD operations for the **WhatsappPhoneNumber** model.
@@ -1012,6 +1056,7 @@ export namespace Prisma {
     Lead: 'Lead',
     Conversation: 'Conversation',
     Message: 'Message',
+    WhatsappMessageTemplate: 'WhatsappMessageTemplate',
     WhatsappPhoneNumber: 'WhatsappPhoneNumber',
     WhatsappWebhookEvent: 'WhatsappWebhookEvent',
     Pipeline: 'Pipeline',
@@ -1031,7 +1076,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership" | "contact" | "lead" | "conversation" | "message" | "whatsappPhoneNumber" | "whatsappWebhookEvent" | "pipeline" | "pipelineStage"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "tenant" | "tenantDomain" | "tenantBranding" | "membership" | "contact" | "lead" | "conversation" | "message" | "whatsappMessageTemplate" | "whatsappPhoneNumber" | "whatsappWebhookEvent" | "pipeline" | "pipelineStage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1923,6 +1968,80 @@ export namespace Prisma {
           }
         }
       }
+      WhatsappMessageTemplate: {
+        payload: Prisma.$WhatsappMessageTemplatePayload<ExtArgs>
+        fields: Prisma.WhatsappMessageTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WhatsappMessageTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WhatsappMessageTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.WhatsappMessageTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WhatsappMessageTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.WhatsappMessageTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.WhatsappMessageTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.WhatsappMessageTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WhatsappMessageTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.WhatsappMessageTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          update: {
+            args: Prisma.WhatsappMessageTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.WhatsappMessageTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WhatsappMessageTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WhatsappMessageTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.WhatsappMessageTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WhatsappMessageTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.WhatsappMessageTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWhatsappMessageTemplate>
+          }
+          groupBy: {
+            args: Prisma.WhatsappMessageTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappMessageTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WhatsappMessageTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<WhatsappMessageTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
       WhatsappPhoneNumber: {
         payload: Prisma.$WhatsappPhoneNumberPayload<ExtArgs>
         fields: Prisma.WhatsappPhoneNumberFieldRefs
@@ -2339,6 +2458,7 @@ export namespace Prisma {
     lead?: LeadOmit
     conversation?: ConversationOmit
     message?: MessageOmit
+    whatsappMessageTemplate?: WhatsappMessageTemplateOmit
     whatsappPhoneNumber?: WhatsappPhoneNumberOmit
     whatsappWebhookEvent?: WhatsappWebhookEventOmit
     pipeline?: PipelineOmit
@@ -2496,6 +2616,7 @@ export namespace Prisma {
     leads: number
     conversations: number
     messages: number
+    whatsappMessageTemplates: number
     whatsappPhoneNumbers: number
     whatsappWebhookEvents: number
     pipelines: number
@@ -2509,6 +2630,7 @@ export namespace Prisma {
     leads?: boolean | TenantCountOutputTypeCountLeadsArgs
     conversations?: boolean | TenantCountOutputTypeCountConversationsArgs
     messages?: boolean | TenantCountOutputTypeCountMessagesArgs
+    whatsappMessageTemplates?: boolean | TenantCountOutputTypeCountWhatsappMessageTemplatesArgs
     whatsappPhoneNumbers?: boolean | TenantCountOutputTypeCountWhatsappPhoneNumbersArgs
     whatsappWebhookEvents?: boolean | TenantCountOutputTypeCountWhatsappWebhookEventsArgs
     pipelines?: boolean | TenantCountOutputTypeCountPipelinesArgs
@@ -2566,6 +2688,13 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountWhatsappMessageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappMessageTemplateWhereInput
   }
 
   /**
@@ -2695,6 +2824,37 @@ export namespace Prisma {
    * ConversationCountOutputType without action
    */
   export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+
+  /**
+   * Count Type WhatsappMessageTemplateCountOutputType
+   */
+
+  export type WhatsappMessageTemplateCountOutputType = {
+    messages: number
+  }
+
+  export type WhatsappMessageTemplateCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    messages?: boolean | WhatsappMessageTemplateCountOutputTypeCountMessagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WhatsappMessageTemplateCountOutputType without action
+   */
+  export type WhatsappMessageTemplateCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplateCountOutputType
+     */
+    select?: WhatsappMessageTemplateCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappMessageTemplateCountOutputType without action
+   */
+  export type WhatsappMessageTemplateCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
   }
 
@@ -7497,6 +7657,7 @@ export namespace Prisma {
     leads?: boolean | Tenant$leadsArgs<ExtArgs>
     conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
     messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    whatsappMessageTemplates?: boolean | Tenant$whatsappMessageTemplatesArgs<ExtArgs>
     whatsappPhoneNumbers?: boolean | Tenant$whatsappPhoneNumbersArgs<ExtArgs>
     whatsappWebhookEvents?: boolean | Tenant$whatsappWebhookEventsArgs<ExtArgs>
     pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
@@ -7555,6 +7716,7 @@ export namespace Prisma {
     leads?: boolean | Tenant$leadsArgs<ExtArgs>
     conversations?: boolean | Tenant$conversationsArgs<ExtArgs>
     messages?: boolean | Tenant$messagesArgs<ExtArgs>
+    whatsappMessageTemplates?: boolean | Tenant$whatsappMessageTemplatesArgs<ExtArgs>
     whatsappPhoneNumbers?: boolean | Tenant$whatsappPhoneNumbersArgs<ExtArgs>
     whatsappWebhookEvents?: boolean | Tenant$whatsappWebhookEventsArgs<ExtArgs>
     pipelines?: boolean | Tenant$pipelinesArgs<ExtArgs>
@@ -7574,6 +7736,7 @@ export namespace Prisma {
       leads: Prisma.$LeadPayload<ExtArgs>[]
       conversations: Prisma.$ConversationPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
+      whatsappMessageTemplates: Prisma.$WhatsappMessageTemplatePayload<ExtArgs>[]
       whatsappPhoneNumbers: Prisma.$WhatsappPhoneNumberPayload<ExtArgs>[]
       whatsappWebhookEvents: Prisma.$WhatsappWebhookEventPayload<ExtArgs>[]
       pipelines: Prisma.$PipelinePayload<ExtArgs>[]
@@ -7992,6 +8155,7 @@ export namespace Prisma {
     leads<T extends Tenant$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversations<T extends Tenant$conversationsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends Tenant$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    whatsappMessageTemplates<T extends Tenant$whatsappMessageTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$whatsappMessageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     whatsappPhoneNumbers<T extends Tenant$whatsappPhoneNumbersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$whatsappPhoneNumbersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappPhoneNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     whatsappWebhookEvents<T extends Tenant$whatsappWebhookEventsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$whatsappWebhookEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pipelines<T extends Tenant$pipelinesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$pipelinesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8589,6 +8753,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.whatsappMessageTemplates
+   */
+  export type Tenant$whatsappMessageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    where?: WhatsappMessageTemplateWhereInput
+    orderBy?: WhatsappMessageTemplateOrderByWithRelationInput | WhatsappMessageTemplateOrderByWithRelationInput[]
+    cursor?: WhatsappMessageTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WhatsappMessageTemplateScalarFieldEnum | WhatsappMessageTemplateScalarFieldEnum[]
   }
 
   /**
@@ -14773,6 +14961,7 @@ export namespace Prisma {
     externalThreadKey: string | null
     whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
+    lastInboundAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     version: number | null
@@ -14789,6 +14978,7 @@ export namespace Prisma {
     externalThreadKey: string | null
     whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
+    lastInboundAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     version: number | null
@@ -14805,6 +14995,7 @@ export namespace Prisma {
     externalThreadKey: number
     whatsappPhoneNumberId: number
     lastMessageAt: number
+    lastInboundAt: number
     createdAt: number
     updatedAt: number
     version: number
@@ -14831,6 +15022,7 @@ export namespace Prisma {
     externalThreadKey?: true
     whatsappPhoneNumberId?: true
     lastMessageAt?: true
+    lastInboundAt?: true
     createdAt?: true
     updatedAt?: true
     version?: true
@@ -14847,6 +15039,7 @@ export namespace Prisma {
     externalThreadKey?: true
     whatsappPhoneNumberId?: true
     lastMessageAt?: true
+    lastInboundAt?: true
     createdAt?: true
     updatedAt?: true
     version?: true
@@ -14863,6 +15056,7 @@ export namespace Prisma {
     externalThreadKey?: true
     whatsappPhoneNumberId?: true
     lastMessageAt?: true
+    lastInboundAt?: true
     createdAt?: true
     updatedAt?: true
     version?: true
@@ -14966,6 +15160,7 @@ export namespace Prisma {
     externalThreadKey: string | null
     whatsappPhoneNumberId: string | null
     lastMessageAt: Date | null
+    lastInboundAt: Date | null
     createdAt: Date
     updatedAt: Date
     version: number
@@ -15001,6 +15196,7 @@ export namespace Prisma {
     externalThreadKey?: boolean
     whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
+    lastInboundAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     version?: boolean
@@ -15024,6 +15220,7 @@ export namespace Prisma {
     externalThreadKey?: boolean
     whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
+    lastInboundAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     version?: boolean
@@ -15045,6 +15242,7 @@ export namespace Prisma {
     externalThreadKey?: boolean
     whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
+    lastInboundAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     version?: boolean
@@ -15066,12 +15264,13 @@ export namespace Prisma {
     externalThreadKey?: boolean
     whatsappPhoneNumberId?: boolean
     lastMessageAt?: boolean
+    lastInboundAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     version?: boolean
   }
 
-  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "leadId" | "channel" | "status" | "assigneeUserId" | "externalThreadKey" | "whatsappPhoneNumberId" | "lastMessageAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["conversation"]>
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "contactId" | "leadId" | "channel" | "status" | "assigneeUserId" | "externalThreadKey" | "whatsappPhoneNumberId" | "lastMessageAt" | "lastInboundAt" | "createdAt" | "updatedAt" | "version", ExtArgs["result"]["conversation"]>
   export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     contact?: boolean | ContactDefaultArgs<ExtArgs>
@@ -15117,6 +15316,7 @@ export namespace Prisma {
       externalThreadKey: string | null
       whatsappPhoneNumberId: string | null
       lastMessageAt: Date | null
+      lastInboundAt: Date | null
       createdAt: Date
       updatedAt: Date
       version: number
@@ -15559,6 +15759,7 @@ export namespace Prisma {
     readonly externalThreadKey: FieldRef<"Conversation", 'String'>
     readonly whatsappPhoneNumberId: FieldRef<"Conversation", 'String'>
     readonly lastMessageAt: FieldRef<"Conversation", 'DateTime'>
+    readonly lastInboundAt: FieldRef<"Conversation", 'DateTime'>
     readonly createdAt: FieldRef<"Conversation", 'DateTime'>
     readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
     readonly version: FieldRef<"Conversation", 'Int'>
@@ -16101,6 +16302,7 @@ export namespace Prisma {
     deliveredAt: Date | null
     readAt: Date | null
     failedAt: Date | null
+    whatsappTemplateId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16124,6 +16326,7 @@ export namespace Prisma {
     deliveredAt: Date | null
     readAt: Date | null
     failedAt: Date | null
+    whatsappTemplateId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16147,6 +16350,7 @@ export namespace Prisma {
     deliveredAt: number
     readAt: number
     failedAt: number
+    whatsappTemplateId: number
     rawPayload: number
     createdAt: number
     updatedAt: number
@@ -16181,6 +16385,7 @@ export namespace Prisma {
     deliveredAt?: true
     readAt?: true
     failedAt?: true
+    whatsappTemplateId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16204,6 +16409,7 @@ export namespace Prisma {
     deliveredAt?: true
     readAt?: true
     failedAt?: true
+    whatsappTemplateId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16227,6 +16433,7 @@ export namespace Prisma {
     deliveredAt?: true
     readAt?: true
     failedAt?: true
+    whatsappTemplateId?: true
     rawPayload?: true
     createdAt?: true
     updatedAt?: true
@@ -16338,6 +16545,7 @@ export namespace Prisma {
     deliveredAt: Date | null
     readAt: Date | null
     failedAt: Date | null
+    whatsappTemplateId: string | null
     rawPayload: JsonValue | null
     createdAt: Date
     updatedAt: Date
@@ -16381,11 +16589,13 @@ export namespace Prisma {
     deliveredAt?: boolean
     readAt?: boolean
     failedAt?: boolean
+    whatsappTemplateId?: boolean
     rawPayload?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16407,11 +16617,13 @@ export namespace Prisma {
     deliveredAt?: boolean
     readAt?: boolean
     failedAt?: boolean
+    whatsappTemplateId?: boolean
     rawPayload?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16433,11 +16645,13 @@ export namespace Prisma {
     deliveredAt?: boolean
     readAt?: boolean
     failedAt?: boolean
+    whatsappTemplateId?: boolean
     rawPayload?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectScalar = {
@@ -16459,23 +16673,27 @@ export namespace Prisma {
     deliveredAt?: boolean
     readAt?: boolean
     failedAt?: boolean
+    whatsappTemplateId?: boolean
     rawPayload?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "conversationId" | "direction" | "kind" | "bodyText" | "mediaUrl" | "mediaMimeType" | "metaMessageId" | "externalStatus" | "pricingCategory" | "pricingType" | "currency" | "estimatedMetaCost" | "recipientCountry" | "deliveredAt" | "readAt" | "failedAt" | "rawPayload" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "conversationId" | "direction" | "kind" | "bodyText" | "mediaUrl" | "mediaMimeType" | "metaMessageId" | "externalStatus" | "pricingCategory" | "pricingType" | "currency" | "estimatedMetaCost" | "recipientCountry" | "deliveredAt" | "readAt" | "failedAt" | "whatsappTemplateId" | "rawPayload" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }
   export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }
   export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    whatsappTemplate?: boolean | Message$whatsappTemplateArgs<ExtArgs>
   }
 
   export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16483,6 +16701,7 @@ export namespace Prisma {
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
       conversation: Prisma.$ConversationPayload<ExtArgs>
+      whatsappTemplate: Prisma.$WhatsappMessageTemplatePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16503,6 +16722,7 @@ export namespace Prisma {
       deliveredAt: Date | null
       readAt: Date | null
       failedAt: Date | null
+      whatsappTemplateId: string | null
       rawPayload: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
@@ -16902,6 +17122,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    whatsappTemplate<T extends Message$whatsappTemplateArgs<ExtArgs> = {}>(args?: Subset<T, Message$whatsappTemplateArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16949,6 +17170,7 @@ export namespace Prisma {
     readonly deliveredAt: FieldRef<"Message", 'DateTime'>
     readonly readAt: FieldRef<"Message", 'DateTime'>
     readonly failedAt: FieldRef<"Message", 'DateTime'>
+    readonly whatsappTemplateId: FieldRef<"Message", 'String'>
     readonly rawPayload: FieldRef<"Message", 'Json'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
     readonly updatedAt: FieldRef<"Message", 'DateTime'>
@@ -17353,6 +17575,25 @@ export namespace Prisma {
   }
 
   /**
+   * Message.whatsappTemplate
+   */
+  export type Message$whatsappTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    where?: WhatsappMessageTemplateWhereInput
+  }
+
+  /**
    * Message without action
    */
   export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17368,6 +17609,1177 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WhatsappMessageTemplate
+   */
+
+  export type AggregateWhatsappMessageTemplate = {
+    _count: WhatsappMessageTemplateCountAggregateOutputType | null
+    _min: WhatsappMessageTemplateMinAggregateOutputType | null
+    _max: WhatsappMessageTemplateMaxAggregateOutputType | null
+  }
+
+  export type WhatsappMessageTemplateMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    language: string | null
+    category: $Enums.WhatsappTemplateCategory | null
+    status: $Enums.WhatsappTemplateStatus | null
+    metaTemplateId: string | null
+    bodyText: string | null
+    rejectionReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappMessageTemplateMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    language: string | null
+    category: $Enums.WhatsappTemplateCategory | null
+    status: $Enums.WhatsappTemplateStatus | null
+    metaTemplateId: string | null
+    bodyText: string | null
+    rejectionReason: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WhatsappMessageTemplateCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    name: number
+    language: number
+    category: number
+    status: number
+    metaTemplateId: number
+    bodyText: number
+    rejectionReason: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WhatsappMessageTemplateMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    language?: true
+    category?: true
+    status?: true
+    metaTemplateId?: true
+    bodyText?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappMessageTemplateMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    language?: true
+    category?: true
+    status?: true
+    metaTemplateId?: true
+    bodyText?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WhatsappMessageTemplateCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    language?: true
+    category?: true
+    status?: true
+    metaTemplateId?: true
+    bodyText?: true
+    rejectionReason?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WhatsappMessageTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappMessageTemplate to aggregate.
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessageTemplates to fetch.
+     */
+    orderBy?: WhatsappMessageTemplateOrderByWithRelationInput | WhatsappMessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WhatsappMessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WhatsappMessageTemplates
+    **/
+    _count?: true | WhatsappMessageTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WhatsappMessageTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WhatsappMessageTemplateMaxAggregateInputType
+  }
+
+  export type GetWhatsappMessageTemplateAggregateType<T extends WhatsappMessageTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateWhatsappMessageTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWhatsappMessageTemplate[P]>
+      : GetScalarType<T[P], AggregateWhatsappMessageTemplate[P]>
+  }
+
+
+
+
+  export type WhatsappMessageTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WhatsappMessageTemplateWhereInput
+    orderBy?: WhatsappMessageTemplateOrderByWithAggregationInput | WhatsappMessageTemplateOrderByWithAggregationInput[]
+    by: WhatsappMessageTemplateScalarFieldEnum[] | WhatsappMessageTemplateScalarFieldEnum
+    having?: WhatsappMessageTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WhatsappMessageTemplateCountAggregateInputType | true
+    _min?: WhatsappMessageTemplateMinAggregateInputType
+    _max?: WhatsappMessageTemplateMaxAggregateInputType
+  }
+
+  export type WhatsappMessageTemplateGroupByOutputType = {
+    id: string
+    tenantId: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status: $Enums.WhatsappTemplateStatus
+    metaTemplateId: string | null
+    bodyText: string
+    rejectionReason: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WhatsappMessageTemplateCountAggregateOutputType | null
+    _min: WhatsappMessageTemplateMinAggregateOutputType | null
+    _max: WhatsappMessageTemplateMaxAggregateOutputType | null
+  }
+
+  type GetWhatsappMessageTemplateGroupByPayload<T extends WhatsappMessageTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WhatsappMessageTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WhatsappMessageTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WhatsappMessageTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], WhatsappMessageTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WhatsappMessageTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    language?: boolean
+    category?: boolean
+    status?: boolean
+    metaTemplateId?: boolean
+    bodyText?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    messages?: boolean | WhatsappMessageTemplate$messagesArgs<ExtArgs>
+    _count?: boolean | WhatsappMessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappMessageTemplate"]>
+
+  export type WhatsappMessageTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    language?: boolean
+    category?: boolean
+    status?: boolean
+    metaTemplateId?: boolean
+    bodyText?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappMessageTemplate"]>
+
+  export type WhatsappMessageTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    language?: boolean
+    category?: boolean
+    status?: boolean
+    metaTemplateId?: boolean
+    bodyText?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["whatsappMessageTemplate"]>
+
+  export type WhatsappMessageTemplateSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    language?: boolean
+    category?: boolean
+    status?: boolean
+    metaTemplateId?: boolean
+    bodyText?: boolean
+    rejectionReason?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WhatsappMessageTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "language" | "category" | "status" | "metaTemplateId" | "bodyText" | "rejectionReason" | "createdAt" | "updatedAt", ExtArgs["result"]["whatsappMessageTemplate"]>
+  export type WhatsappMessageTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    messages?: boolean | WhatsappMessageTemplate$messagesArgs<ExtArgs>
+    _count?: boolean | WhatsappMessageTemplateCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WhatsappMessageTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type WhatsappMessageTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $WhatsappMessageTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WhatsappMessageTemplate"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      name: string
+      language: string
+      category: $Enums.WhatsappTemplateCategory
+      status: $Enums.WhatsappTemplateStatus
+      metaTemplateId: string | null
+      bodyText: string
+      rejectionReason: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["whatsappMessageTemplate"]>
+    composites: {}
+  }
+
+  type WhatsappMessageTemplateGetPayload<S extends boolean | null | undefined | WhatsappMessageTemplateDefaultArgs> = $Result.GetResult<Prisma.$WhatsappMessageTemplatePayload, S>
+
+  type WhatsappMessageTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WhatsappMessageTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WhatsappMessageTemplateCountAggregateInputType | true
+    }
+
+  export interface WhatsappMessageTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WhatsappMessageTemplate'], meta: { name: 'WhatsappMessageTemplate' } }
+    /**
+     * Find zero or one WhatsappMessageTemplate that matches the filter.
+     * @param {WhatsappMessageTemplateFindUniqueArgs} args - Arguments to find a WhatsappMessageTemplate
+     * @example
+     * // Get one WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WhatsappMessageTemplateFindUniqueArgs>(args: SelectSubset<T, WhatsappMessageTemplateFindUniqueArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WhatsappMessageTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WhatsappMessageTemplateFindUniqueOrThrowArgs} args - Arguments to find a WhatsappMessageTemplate
+     * @example
+     * // Get one WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WhatsappMessageTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, WhatsappMessageTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappMessageTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateFindFirstArgs} args - Arguments to find a WhatsappMessageTemplate
+     * @example
+     * // Get one WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WhatsappMessageTemplateFindFirstArgs>(args?: SelectSubset<T, WhatsappMessageTemplateFindFirstArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WhatsappMessageTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateFindFirstOrThrowArgs} args - Arguments to find a WhatsappMessageTemplate
+     * @example
+     * // Get one WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WhatsappMessageTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, WhatsappMessageTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WhatsappMessageTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WhatsappMessageTemplates
+     * const whatsappMessageTemplates = await prisma.whatsappMessageTemplate.findMany()
+     * 
+     * // Get first 10 WhatsappMessageTemplates
+     * const whatsappMessageTemplates = await prisma.whatsappMessageTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const whatsappMessageTemplateWithIdOnly = await prisma.whatsappMessageTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WhatsappMessageTemplateFindManyArgs>(args?: SelectSubset<T, WhatsappMessageTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WhatsappMessageTemplate.
+     * @param {WhatsappMessageTemplateCreateArgs} args - Arguments to create a WhatsappMessageTemplate.
+     * @example
+     * // Create one WhatsappMessageTemplate
+     * const WhatsappMessageTemplate = await prisma.whatsappMessageTemplate.create({
+     *   data: {
+     *     // ... data to create a WhatsappMessageTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends WhatsappMessageTemplateCreateArgs>(args: SelectSubset<T, WhatsappMessageTemplateCreateArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WhatsappMessageTemplates.
+     * @param {WhatsappMessageTemplateCreateManyArgs} args - Arguments to create many WhatsappMessageTemplates.
+     * @example
+     * // Create many WhatsappMessageTemplates
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WhatsappMessageTemplateCreateManyArgs>(args?: SelectSubset<T, WhatsappMessageTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WhatsappMessageTemplates and returns the data saved in the database.
+     * @param {WhatsappMessageTemplateCreateManyAndReturnArgs} args - Arguments to create many WhatsappMessageTemplates.
+     * @example
+     * // Create many WhatsappMessageTemplates
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WhatsappMessageTemplates and only return the `id`
+     * const whatsappMessageTemplateWithIdOnly = await prisma.whatsappMessageTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WhatsappMessageTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, WhatsappMessageTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WhatsappMessageTemplate.
+     * @param {WhatsappMessageTemplateDeleteArgs} args - Arguments to delete one WhatsappMessageTemplate.
+     * @example
+     * // Delete one WhatsappMessageTemplate
+     * const WhatsappMessageTemplate = await prisma.whatsappMessageTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one WhatsappMessageTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WhatsappMessageTemplateDeleteArgs>(args: SelectSubset<T, WhatsappMessageTemplateDeleteArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WhatsappMessageTemplate.
+     * @param {WhatsappMessageTemplateUpdateArgs} args - Arguments to update one WhatsappMessageTemplate.
+     * @example
+     * // Update one WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WhatsappMessageTemplateUpdateArgs>(args: SelectSubset<T, WhatsappMessageTemplateUpdateArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WhatsappMessageTemplates.
+     * @param {WhatsappMessageTemplateDeleteManyArgs} args - Arguments to filter WhatsappMessageTemplates to delete.
+     * @example
+     * // Delete a few WhatsappMessageTemplates
+     * const { count } = await prisma.whatsappMessageTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WhatsappMessageTemplateDeleteManyArgs>(args?: SelectSubset<T, WhatsappMessageTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappMessageTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WhatsappMessageTemplates
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WhatsappMessageTemplateUpdateManyArgs>(args: SelectSubset<T, WhatsappMessageTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WhatsappMessageTemplates and returns the data updated in the database.
+     * @param {WhatsappMessageTemplateUpdateManyAndReturnArgs} args - Arguments to update many WhatsappMessageTemplates.
+     * @example
+     * // Update many WhatsappMessageTemplates
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WhatsappMessageTemplates and only return the `id`
+     * const whatsappMessageTemplateWithIdOnly = await prisma.whatsappMessageTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WhatsappMessageTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, WhatsappMessageTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WhatsappMessageTemplate.
+     * @param {WhatsappMessageTemplateUpsertArgs} args - Arguments to update or create a WhatsappMessageTemplate.
+     * @example
+     * // Update or create a WhatsappMessageTemplate
+     * const whatsappMessageTemplate = await prisma.whatsappMessageTemplate.upsert({
+     *   create: {
+     *     // ... data to create a WhatsappMessageTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WhatsappMessageTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WhatsappMessageTemplateUpsertArgs>(args: SelectSubset<T, WhatsappMessageTemplateUpsertArgs<ExtArgs>>): Prisma__WhatsappMessageTemplateClient<$Result.GetResult<Prisma.$WhatsappMessageTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WhatsappMessageTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateCountArgs} args - Arguments to filter WhatsappMessageTemplates to count.
+     * @example
+     * // Count the number of WhatsappMessageTemplates
+     * const count = await prisma.whatsappMessageTemplate.count({
+     *   where: {
+     *     // ... the filter for the WhatsappMessageTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends WhatsappMessageTemplateCountArgs>(
+      args?: Subset<T, WhatsappMessageTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WhatsappMessageTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WhatsappMessageTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WhatsappMessageTemplateAggregateArgs>(args: Subset<T, WhatsappMessageTemplateAggregateArgs>): Prisma.PrismaPromise<GetWhatsappMessageTemplateAggregateType<T>>
+
+    /**
+     * Group by WhatsappMessageTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WhatsappMessageTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WhatsappMessageTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WhatsappMessageTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: WhatsappMessageTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WhatsappMessageTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWhatsappMessageTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WhatsappMessageTemplate model
+   */
+  readonly fields: WhatsappMessageTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WhatsappMessageTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WhatsappMessageTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    messages<T extends WhatsappMessageTemplate$messagesArgs<ExtArgs> = {}>(args?: Subset<T, WhatsappMessageTemplate$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WhatsappMessageTemplate model
+   */
+  interface WhatsappMessageTemplateFieldRefs {
+    readonly id: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly tenantId: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly name: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly language: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly category: FieldRef<"WhatsappMessageTemplate", 'WhatsappTemplateCategory'>
+    readonly status: FieldRef<"WhatsappMessageTemplate", 'WhatsappTemplateStatus'>
+    readonly metaTemplateId: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly bodyText: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly rejectionReason: FieldRef<"WhatsappMessageTemplate", 'String'>
+    readonly createdAt: FieldRef<"WhatsappMessageTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"WhatsappMessageTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WhatsappMessageTemplate findUnique
+   */
+  export type WhatsappMessageTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessageTemplate to fetch.
+     */
+    where: WhatsappMessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessageTemplate findUniqueOrThrow
+   */
+  export type WhatsappMessageTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessageTemplate to fetch.
+     */
+    where: WhatsappMessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessageTemplate findFirst
+   */
+  export type WhatsappMessageTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessageTemplate to fetch.
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessageTemplates to fetch.
+     */
+    orderBy?: WhatsappMessageTemplateOrderByWithRelationInput | WhatsappMessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappMessageTemplates.
+     */
+    cursor?: WhatsappMessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappMessageTemplates.
+     */
+    distinct?: WhatsappMessageTemplateScalarFieldEnum | WhatsappMessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessageTemplate findFirstOrThrow
+   */
+  export type WhatsappMessageTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessageTemplate to fetch.
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessageTemplates to fetch.
+     */
+    orderBy?: WhatsappMessageTemplateOrderByWithRelationInput | WhatsappMessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WhatsappMessageTemplates.
+     */
+    cursor?: WhatsappMessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappMessageTemplates.
+     */
+    distinct?: WhatsappMessageTemplateScalarFieldEnum | WhatsappMessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessageTemplate findMany
+   */
+  export type WhatsappMessageTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which WhatsappMessageTemplates to fetch.
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WhatsappMessageTemplates to fetch.
+     */
+    orderBy?: WhatsappMessageTemplateOrderByWithRelationInput | WhatsappMessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WhatsappMessageTemplates.
+     */
+    cursor?: WhatsappMessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WhatsappMessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WhatsappMessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WhatsappMessageTemplates.
+     */
+    distinct?: WhatsappMessageTemplateScalarFieldEnum | WhatsappMessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessageTemplate create
+   */
+  export type WhatsappMessageTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WhatsappMessageTemplate.
+     */
+    data: XOR<WhatsappMessageTemplateCreateInput, WhatsappMessageTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * WhatsappMessageTemplate createMany
+   */
+  export type WhatsappMessageTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WhatsappMessageTemplates.
+     */
+    data: WhatsappMessageTemplateCreateManyInput | WhatsappMessageTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WhatsappMessageTemplate createManyAndReturn
+   */
+  export type WhatsappMessageTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many WhatsappMessageTemplates.
+     */
+    data: WhatsappMessageTemplateCreateManyInput | WhatsappMessageTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappMessageTemplate update
+   */
+  export type WhatsappMessageTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WhatsappMessageTemplate.
+     */
+    data: XOR<WhatsappMessageTemplateUpdateInput, WhatsappMessageTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which WhatsappMessageTemplate to update.
+     */
+    where: WhatsappMessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessageTemplate updateMany
+   */
+  export type WhatsappMessageTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WhatsappMessageTemplates.
+     */
+    data: XOR<WhatsappMessageTemplateUpdateManyMutationInput, WhatsappMessageTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappMessageTemplates to update
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * Limit how many WhatsappMessageTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappMessageTemplate updateManyAndReturn
+   */
+  export type WhatsappMessageTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update WhatsappMessageTemplates.
+     */
+    data: XOR<WhatsappMessageTemplateUpdateManyMutationInput, WhatsappMessageTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which WhatsappMessageTemplates to update
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * Limit how many WhatsappMessageTemplates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WhatsappMessageTemplate upsert
+   */
+  export type WhatsappMessageTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WhatsappMessageTemplate to update in case it exists.
+     */
+    where: WhatsappMessageTemplateWhereUniqueInput
+    /**
+     * In case the WhatsappMessageTemplate found by the `where` argument doesn't exist, create a new WhatsappMessageTemplate with this data.
+     */
+    create: XOR<WhatsappMessageTemplateCreateInput, WhatsappMessageTemplateUncheckedCreateInput>
+    /**
+     * In case the WhatsappMessageTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WhatsappMessageTemplateUpdateInput, WhatsappMessageTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * WhatsappMessageTemplate delete
+   */
+  export type WhatsappMessageTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which WhatsappMessageTemplate to delete.
+     */
+    where: WhatsappMessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * WhatsappMessageTemplate deleteMany
+   */
+  export type WhatsappMessageTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WhatsappMessageTemplates to delete
+     */
+    where?: WhatsappMessageTemplateWhereInput
+    /**
+     * Limit how many WhatsappMessageTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WhatsappMessageTemplate.messages
+   */
+  export type WhatsappMessageTemplate$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * WhatsappMessageTemplate without action
+   */
+  export type WhatsappMessageTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WhatsappMessageTemplate
+     */
+    select?: WhatsappMessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WhatsappMessageTemplate
+     */
+    omit?: WhatsappMessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WhatsappMessageTemplateInclude<ExtArgs> | null
   }
 
 
@@ -22326,6 +23738,7 @@ export namespace Prisma {
     externalThreadKey: 'externalThreadKey',
     whatsappPhoneNumberId: 'whatsappPhoneNumberId',
     lastMessageAt: 'lastMessageAt',
+    lastInboundAt: 'lastInboundAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     version: 'version'
@@ -22353,12 +23766,30 @@ export namespace Prisma {
     deliveredAt: 'deliveredAt',
     readAt: 'readAt',
     failedAt: 'failedAt',
+    whatsappTemplateId: 'whatsappTemplateId',
     rawPayload: 'rawPayload',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const WhatsappMessageTemplateScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    name: 'name',
+    language: 'language',
+    category: 'category',
+    status: 'status',
+    metaTemplateId: 'metaTemplateId',
+    bodyText: 'bodyText',
+    rejectionReason: 'rejectionReason',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WhatsappMessageTemplateScalarFieldEnum = (typeof WhatsappMessageTemplateScalarFieldEnum)[keyof typeof WhatsappMessageTemplateScalarFieldEnum]
 
 
   export const WhatsappPhoneNumberScalarFieldEnum: {
@@ -22729,6 +24160,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'WhatsappTemplateCategory'
+   */
+  export type EnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappTemplateCategory'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappTemplateCategory[]'
+   */
+  export type ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappTemplateCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappTemplateStatus'
+   */
+  export type EnumWhatsappTemplateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappTemplateStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappTemplateStatus[]'
+   */
+  export type ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappTemplateStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'WhatsappWebhookEventType'
    */
   export type EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappWebhookEventType'>
@@ -23073,6 +24532,7 @@ export namespace Prisma {
     leads?: LeadListRelationFilter
     conversations?: ConversationListRelationFilter
     messages?: MessageListRelationFilter
+    whatsappMessageTemplates?: WhatsappMessageTemplateListRelationFilter
     whatsappPhoneNumbers?: WhatsappPhoneNumberListRelationFilter
     whatsappWebhookEvents?: WhatsappWebhookEventListRelationFilter
     pipelines?: PipelineListRelationFilter
@@ -23098,6 +24558,7 @@ export namespace Prisma {
     leads?: LeadOrderByRelationAggregateInput
     conversations?: ConversationOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateOrderByRelationAggregateInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberOrderByRelationAggregateInput
     whatsappWebhookEvents?: WhatsappWebhookEventOrderByRelationAggregateInput
     pipelines?: PipelineOrderByRelationAggregateInput
@@ -23126,6 +24587,7 @@ export namespace Prisma {
     leads?: LeadListRelationFilter
     conversations?: ConversationListRelationFilter
     messages?: MessageListRelationFilter
+    whatsappMessageTemplates?: WhatsappMessageTemplateListRelationFilter
     whatsappPhoneNumbers?: WhatsappPhoneNumberListRelationFilter
     whatsappWebhookEvents?: WhatsappWebhookEventListRelationFilter
     pipelines?: PipelineListRelationFilter
@@ -23667,6 +25129,7 @@ export namespace Prisma {
     externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
     whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     version?: IntFilter<"Conversation"> | number
@@ -23689,6 +25152,7 @@ export namespace Prisma {
     externalThreadKey?: SortOrderInput | SortOrder
     whatsappPhoneNumberId?: SortOrderInput | SortOrder
     lastMessageAt?: SortOrderInput | SortOrder
+    lastInboundAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     version?: SortOrder
@@ -23715,6 +25179,7 @@ export namespace Prisma {
     externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
     whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     version?: IntFilter<"Conversation"> | number
@@ -23737,6 +25202,7 @@ export namespace Prisma {
     externalThreadKey?: SortOrderInput | SortOrder
     whatsappPhoneNumberId?: SortOrderInput | SortOrder
     lastMessageAt?: SortOrderInput | SortOrder
+    lastInboundAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     version?: SortOrder
@@ -23761,6 +25227,7 @@ export namespace Prisma {
     externalThreadKey?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     whatsappPhoneNumberId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
+    lastInboundAt?: DateTimeNullableWithAggregatesFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
     version?: IntWithAggregatesFilter<"Conversation"> | number
@@ -23788,11 +25255,13 @@ export namespace Prisma {
     deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    whatsappTemplateId?: StringNullableFilter<"Message"> | string | null
     rawPayload?: JsonNullableFilter<"Message">
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+    whatsappTemplate?: XOR<WhatsappMessageTemplateNullableScalarRelationFilter, WhatsappMessageTemplateWhereInput> | null
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -23814,11 +25283,13 @@ export namespace Prisma {
     deliveredAt?: SortOrderInput | SortOrder
     readAt?: SortOrderInput | SortOrder
     failedAt?: SortOrderInput | SortOrder
+    whatsappTemplateId?: SortOrderInput | SortOrder
     rawPayload?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
     conversation?: ConversationOrderByWithRelationInput
+    whatsappTemplate?: WhatsappMessageTemplateOrderByWithRelationInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -23844,11 +25315,13 @@ export namespace Prisma {
     deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    whatsappTemplateId?: StringNullableFilter<"Message"> | string | null
     rawPayload?: JsonNullableFilter<"Message">
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+    whatsappTemplate?: XOR<WhatsappMessageTemplateNullableScalarRelationFilter, WhatsappMessageTemplateWhereInput> | null
   }, "id" | "tenantId_metaMessageId">
 
   export type MessageOrderByWithAggregationInput = {
@@ -23870,6 +25343,7 @@ export namespace Prisma {
     deliveredAt?: SortOrderInput | SortOrder
     readAt?: SortOrderInput | SortOrder
     failedAt?: SortOrderInput | SortOrder
+    whatsappTemplateId?: SortOrderInput | SortOrder
     rawPayload?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23902,9 +25376,100 @@ export namespace Prisma {
     deliveredAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
     readAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
     failedAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
+    whatsappTemplateId?: StringNullableWithAggregatesFilter<"Message"> | string | null
     rawPayload?: JsonNullableWithAggregatesFilter<"Message">
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+  }
+
+  export type WhatsappMessageTemplateWhereInput = {
+    AND?: WhatsappMessageTemplateWhereInput | WhatsappMessageTemplateWhereInput[]
+    OR?: WhatsappMessageTemplateWhereInput[]
+    NOT?: WhatsappMessageTemplateWhereInput | WhatsappMessageTemplateWhereInput[]
+    id?: StringFilter<"WhatsappMessageTemplate"> | string
+    tenantId?: StringFilter<"WhatsappMessageTemplate"> | string
+    name?: StringFilter<"WhatsappMessageTemplate"> | string
+    language?: StringFilter<"WhatsappMessageTemplate"> | string
+    category?: EnumWhatsappTemplateCategoryFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    bodyText?: StringFilter<"WhatsappMessageTemplate"> | string
+    rejectionReason?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    messages?: MessageListRelationFilter
+  }
+
+  export type WhatsappMessageTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    language?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    metaTemplateId?: SortOrderInput | SortOrder
+    bodyText?: SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    messages?: MessageOrderByRelationAggregateInput
+  }
+
+  export type WhatsappMessageTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_name_language?: WhatsappMessageTemplateTenantIdNameLanguageCompoundUniqueInput
+    tenantId_metaTemplateId?: WhatsappMessageTemplateTenantIdMetaTemplateIdCompoundUniqueInput
+    AND?: WhatsappMessageTemplateWhereInput | WhatsappMessageTemplateWhereInput[]
+    OR?: WhatsappMessageTemplateWhereInput[]
+    NOT?: WhatsappMessageTemplateWhereInput | WhatsappMessageTemplateWhereInput[]
+    tenantId?: StringFilter<"WhatsappMessageTemplate"> | string
+    name?: StringFilter<"WhatsappMessageTemplate"> | string
+    language?: StringFilter<"WhatsappMessageTemplate"> | string
+    category?: EnumWhatsappTemplateCategoryFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    bodyText?: StringFilter<"WhatsappMessageTemplate"> | string
+    rejectionReason?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    messages?: MessageListRelationFilter
+  }, "id" | "tenantId_name_language" | "tenantId_metaTemplateId">
+
+  export type WhatsappMessageTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    language?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    metaTemplateId?: SortOrderInput | SortOrder
+    bodyText?: SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WhatsappMessageTemplateCountOrderByAggregateInput
+    _max?: WhatsappMessageTemplateMaxOrderByAggregateInput
+    _min?: WhatsappMessageTemplateMinOrderByAggregateInput
+  }
+
+  export type WhatsappMessageTemplateScalarWhereWithAggregatesInput = {
+    AND?: WhatsappMessageTemplateScalarWhereWithAggregatesInput | WhatsappMessageTemplateScalarWhereWithAggregatesInput[]
+    OR?: WhatsappMessageTemplateScalarWhereWithAggregatesInput[]
+    NOT?: WhatsappMessageTemplateScalarWhereWithAggregatesInput | WhatsappMessageTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WhatsappMessageTemplate"> | string
+    tenantId?: StringWithAggregatesFilter<"WhatsappMessageTemplate"> | string
+    name?: StringWithAggregatesFilter<"WhatsappMessageTemplate"> | string
+    language?: StringWithAggregatesFilter<"WhatsappMessageTemplate"> | string
+    category?: EnumWhatsappTemplateCategoryWithAggregatesFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusWithAggregatesFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: StringNullableWithAggregatesFilter<"WhatsappMessageTemplate"> | string | null
+    bodyText?: StringWithAggregatesFilter<"WhatsappMessageTemplate"> | string
+    rejectionReason?: StringNullableWithAggregatesFilter<"WhatsappMessageTemplate"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"WhatsappMessageTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WhatsappMessageTemplate"> | Date | string
   }
 
   export type WhatsappPhoneNumberWhereInput = {
@@ -24603,6 +26168,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -24628,6 +26194,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -24653,6 +26220,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -24678,6 +26246,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -25266,6 +26835,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -25288,6 +26858,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -25300,6 +26871,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -25322,6 +26894,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -25339,6 +26912,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -25350,6 +26924,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -25366,6 +26941,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -25393,6 +26969,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutMessagesInput
     conversation: ConversationCreateNestedOneWithoutMessagesInput
+    whatsappTemplate?: WhatsappMessageTemplateCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -25414,6 +26991,7 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25441,6 +27019,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutMessagesNestedInput
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+    whatsappTemplate?: WhatsappMessageTemplateUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -25462,6 +27041,7 @@ export namespace Prisma {
     deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25486,6 +27066,7 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25532,7 +27113,109 @@ export namespace Prisma {
     deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageTemplateCreateInput = {
+    id?: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappMessageTemplatesInput
+    messages?: MessageCreateNestedManyWithoutWhatsappTemplateInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutWhatsappTemplateInput
+  }
+
+  export type WhatsappMessageTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappMessageTemplatesNestedInput
+    messages?: MessageUpdateManyWithoutWhatsappTemplateNestedInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutWhatsappTemplateNestedInput
+  }
+
+  export type WhatsappMessageTemplateCreateManyInput = {
+    id?: string
+    tenantId: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappMessageTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26355,6 +28038,12 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
+  export type WhatsappMessageTemplateListRelationFilter = {
+    every?: WhatsappMessageTemplateWhereInput
+    some?: WhatsappMessageTemplateWhereInput
+    none?: WhatsappMessageTemplateWhereInput
+  }
+
   export type WhatsappPhoneNumberListRelationFilter = {
     every?: WhatsappPhoneNumberWhereInput
     some?: WhatsappPhoneNumberWhereInput
@@ -26388,6 +28077,10 @@ export namespace Prisma {
   }
 
   export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WhatsappMessageTemplateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26925,6 +28618,7 @@ export namespace Prisma {
     externalThreadKey?: SortOrder
     whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
+    lastInboundAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     version?: SortOrder
@@ -26945,6 +28639,7 @@ export namespace Prisma {
     externalThreadKey?: SortOrder
     whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
+    lastInboundAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     version?: SortOrder
@@ -26961,6 +28656,7 @@ export namespace Prisma {
     externalThreadKey?: SortOrder
     whatsappPhoneNumberId?: SortOrder
     lastMessageAt?: SortOrder
+    lastInboundAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     version?: SortOrder
@@ -27043,6 +28739,11 @@ export namespace Prisma {
     isNot?: ConversationWhereInput
   }
 
+  export type WhatsappMessageTemplateNullableScalarRelationFilter = {
+    is?: WhatsappMessageTemplateWhereInput | null
+    isNot?: WhatsappMessageTemplateWhereInput | null
+  }
+
   export type MessageTenantIdMetaMessageIdCompoundUniqueInput = {
     tenantId: string
     metaMessageId: string
@@ -27067,6 +28768,7 @@ export namespace Prisma {
     deliveredAt?: SortOrder
     readAt?: SortOrder
     failedAt?: SortOrder
+    whatsappTemplateId?: SortOrder
     rawPayload?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27095,6 +28797,7 @@ export namespace Prisma {
     deliveredAt?: SortOrder
     readAt?: SortOrder
     failedAt?: SortOrder
+    whatsappTemplateId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27118,6 +28821,7 @@ export namespace Prisma {
     deliveredAt?: SortOrder
     readAt?: SortOrder
     failedAt?: SortOrder
+    whatsappTemplateId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27186,6 +28890,93 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type EnumWhatsappTemplateCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateCategory | EnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel> | $Enums.WhatsappTemplateCategory
+  }
+
+  export type EnumWhatsappTemplateStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateStatus | EnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel> | $Enums.WhatsappTemplateStatus
+  }
+
+  export type WhatsappMessageTemplateTenantIdNameLanguageCompoundUniqueInput = {
+    tenantId: string
+    name: string
+    language: string
+  }
+
+  export type WhatsappMessageTemplateTenantIdMetaTemplateIdCompoundUniqueInput = {
+    tenantId: string
+    metaTemplateId: string
+  }
+
+  export type WhatsappMessageTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    language?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    metaTemplateId?: SortOrder
+    bodyText?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappMessageTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    language?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    metaTemplateId?: SortOrder
+    bodyText?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WhatsappMessageTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    language?: SortOrder
+    category?: SortOrder
+    status?: SortOrder
+    metaTemplateId?: SortOrder
+    bodyText?: SortOrder
+    rejectionReason?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumWhatsappTemplateCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateCategory | EnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateCategoryWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappTemplateCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel>
+  }
+
+  export type EnumWhatsappTemplateStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateStatus | EnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappTemplateStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
   }
 
   export type WhatsappPhoneNumberCountOrderByAggregateInput = {
@@ -27792,6 +29583,13 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type WhatsappMessageTemplateCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput> | WhatsappMessageTemplateCreateWithoutTenantInput[] | WhatsappMessageTemplateUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutTenantInput | WhatsappMessageTemplateCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappMessageTemplateCreateManyTenantInputEnvelope
+    connect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+  }
+
   export type WhatsappPhoneNumberCreateNestedManyWithoutTenantInput = {
     create?: XOR<WhatsappPhoneNumberCreateWithoutTenantInput, WhatsappPhoneNumberUncheckedCreateWithoutTenantInput> | WhatsappPhoneNumberCreateWithoutTenantInput[] | WhatsappPhoneNumberUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: WhatsappPhoneNumberCreateOrConnectWithoutTenantInput | WhatsappPhoneNumberCreateOrConnectWithoutTenantInput[]
@@ -27866,6 +29664,13 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutTenantInput | MessageCreateOrConnectWithoutTenantInput[]
     createMany?: MessageCreateManyTenantInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput> | WhatsappMessageTemplateCreateWithoutTenantInput[] | WhatsappMessageTemplateUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutTenantInput | WhatsappMessageTemplateCreateOrConnectWithoutTenantInput[]
+    createMany?: WhatsappMessageTemplateCreateManyTenantInputEnvelope
+    connect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
   }
 
   export type WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput = {
@@ -28000,6 +29805,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutTenantInput | MessageUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutTenantInput | MessageUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput> | WhatsappMessageTemplateCreateWithoutTenantInput[] | WhatsappMessageTemplateUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutTenantInput | WhatsappMessageTemplateCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappMessageTemplateUpsertWithWhereUniqueWithoutTenantInput | WhatsappMessageTemplateUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappMessageTemplateCreateManyTenantInputEnvelope
+    set?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    disconnect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    delete?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    connect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    update?: WhatsappMessageTemplateUpdateWithWhereUniqueWithoutTenantInput | WhatsappMessageTemplateUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappMessageTemplateUpdateManyWithWhereWithoutTenantInput | WhatsappMessageTemplateUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappMessageTemplateScalarWhereInput | WhatsappMessageTemplateScalarWhereInput[]
   }
 
   export type WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput = {
@@ -28150,6 +29969,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutTenantInput | MessageUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutTenantInput | MessageUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput> | WhatsappMessageTemplateCreateWithoutTenantInput[] | WhatsappMessageTemplateUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutTenantInput | WhatsappMessageTemplateCreateOrConnectWithoutTenantInput[]
+    upsert?: WhatsappMessageTemplateUpsertWithWhereUniqueWithoutTenantInput | WhatsappMessageTemplateUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WhatsappMessageTemplateCreateManyTenantInputEnvelope
+    set?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    disconnect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    delete?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    connect?: WhatsappMessageTemplateWhereUniqueInput | WhatsappMessageTemplateWhereUniqueInput[]
+    update?: WhatsappMessageTemplateUpdateWithWhereUniqueWithoutTenantInput | WhatsappMessageTemplateUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WhatsappMessageTemplateUpdateManyWithWhereWithoutTenantInput | WhatsappMessageTemplateUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WhatsappMessageTemplateScalarWhereInput | WhatsappMessageTemplateScalarWhereInput[]
   }
 
   export type WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput = {
@@ -28655,6 +30488,12 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput
   }
 
+  export type WhatsappMessageTemplateCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutMessagesInput, WhatsappMessageTemplateUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutMessagesInput
+    connect?: WhatsappMessageTemplateWhereUniqueInput
+  }
+
   export type EnumMessageDirectionFieldUpdateOperationsInput = {
     set?: $Enums.MessageDirection
   }
@@ -28685,6 +30524,80 @@ export namespace Prisma {
     upsert?: ConversationUpsertWithoutMessagesInput
     connect?: ConversationWhereUniqueInput
     update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutMessagesInput, ConversationUpdateWithoutMessagesInput>, ConversationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type WhatsappMessageTemplateUpdateOneWithoutMessagesNestedInput = {
+    create?: XOR<WhatsappMessageTemplateCreateWithoutMessagesInput, WhatsappMessageTemplateUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: WhatsappMessageTemplateCreateOrConnectWithoutMessagesInput
+    upsert?: WhatsappMessageTemplateUpsertWithoutMessagesInput
+    disconnect?: WhatsappMessageTemplateWhereInput | boolean
+    delete?: WhatsappMessageTemplateWhereInput | boolean
+    connect?: WhatsappMessageTemplateWhereUniqueInput
+    update?: XOR<XOR<WhatsappMessageTemplateUpdateToOneWithWhereWithoutMessagesInput, WhatsappMessageTemplateUpdateWithoutMessagesInput>, WhatsappMessageTemplateUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type TenantCreateNestedOneWithoutWhatsappMessageTemplatesInput = {
+    create?: XOR<TenantCreateWithoutWhatsappMessageTemplatesInput, TenantUncheckedCreateWithoutWhatsappMessageTemplatesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappMessageTemplatesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type MessageCreateNestedManyWithoutWhatsappTemplateInput = {
+    create?: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput> | MessageCreateWithoutWhatsappTemplateInput[] | MessageUncheckedCreateWithoutWhatsappTemplateInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutWhatsappTemplateInput | MessageCreateOrConnectWithoutWhatsappTemplateInput[]
+    createMany?: MessageCreateManyWhatsappTemplateInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutWhatsappTemplateInput = {
+    create?: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput> | MessageCreateWithoutWhatsappTemplateInput[] | MessageUncheckedCreateWithoutWhatsappTemplateInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutWhatsappTemplateInput | MessageCreateOrConnectWithoutWhatsappTemplateInput[]
+    createMany?: MessageCreateManyWhatsappTemplateInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type EnumWhatsappTemplateCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappTemplateCategory
+  }
+
+  export type EnumWhatsappTemplateStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappTemplateStatus
+  }
+
+  export type TenantUpdateOneRequiredWithoutWhatsappMessageTemplatesNestedInput = {
+    create?: XOR<TenantCreateWithoutWhatsappMessageTemplatesInput, TenantUncheckedCreateWithoutWhatsappMessageTemplatesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWhatsappMessageTemplatesInput
+    upsert?: TenantUpsertWithoutWhatsappMessageTemplatesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutWhatsappMessageTemplatesInput, TenantUpdateWithoutWhatsappMessageTemplatesInput>, TenantUncheckedUpdateWithoutWhatsappMessageTemplatesInput>
+  }
+
+  export type MessageUpdateManyWithoutWhatsappTemplateNestedInput = {
+    create?: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput> | MessageCreateWithoutWhatsappTemplateInput[] | MessageUncheckedCreateWithoutWhatsappTemplateInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutWhatsappTemplateInput | MessageCreateOrConnectWithoutWhatsappTemplateInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutWhatsappTemplateInput | MessageUpsertWithWhereUniqueWithoutWhatsappTemplateInput[]
+    createMany?: MessageCreateManyWhatsappTemplateInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutWhatsappTemplateInput | MessageUpdateWithWhereUniqueWithoutWhatsappTemplateInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutWhatsappTemplateInput | MessageUpdateManyWithWhereWithoutWhatsappTemplateInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutWhatsappTemplateNestedInput = {
+    create?: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput> | MessageCreateWithoutWhatsappTemplateInput[] | MessageUncheckedCreateWithoutWhatsappTemplateInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutWhatsappTemplateInput | MessageCreateOrConnectWithoutWhatsappTemplateInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutWhatsappTemplateInput | MessageUpsertWithWhereUniqueWithoutWhatsappTemplateInput[]
+    createMany?: MessageCreateManyWhatsappTemplateInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutWhatsappTemplateInput | MessageUpdateWithWhereUniqueWithoutWhatsappTemplateInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutWhatsappTemplateInput | MessageUpdateManyWithWhereWithoutWhatsappTemplateInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput = {
@@ -29444,6 +31357,40 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateCategory | EnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel> | $Enums.WhatsappTemplateCategory
+  }
+
+  export type NestedEnumWhatsappTemplateStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateStatus | EnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel> | $Enums.WhatsappTemplateStatus
+  }
+
+  export type NestedEnumWhatsappTemplateCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateCategory | EnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateCategory[] | ListEnumWhatsappTemplateCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateCategoryWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappTemplateCategory
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappTemplateCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumWhatsappTemplateStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappTemplateStatus | EnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappTemplateStatus[] | ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappTemplateStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappTemplateStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.WhatsappWebhookEventType | EnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
     in?: $Enums.WhatsappWebhookEventType[] | ListEnumWhatsappWebhookEventTypeFieldRefInput<$PrismaModel>
@@ -29643,6 +31590,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -29663,6 +31611,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -29836,6 +31785,7 @@ export namespace Prisma {
     externalThreadKey?: StringNullableFilter<"Conversation"> | string | null
     whatsappPhoneNumberId?: StringNullableFilter<"Conversation"> | string | null
     lastMessageAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
+    lastInboundAt?: DateTimeNullableFilter<"Conversation"> | Date | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
     version?: IntFilter<"Conversation"> | number
@@ -30208,6 +32158,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -30228,6 +32179,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -30265,6 +32217,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     conversation: ConversationCreateNestedOneWithoutMessagesInput
+    whatsappTemplate?: WhatsappMessageTemplateCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateWithoutTenantInput = {
@@ -30285,6 +32238,7 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30297,6 +32251,44 @@ export namespace Prisma {
 
   export type MessageCreateManyTenantInputEnvelope = {
     data: MessageCreateManyTenantInput | MessageCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WhatsappMessageTemplateCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutWhatsappTemplateInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutWhatsappTemplateInput
+  }
+
+  export type WhatsappMessageTemplateCreateOrConnectWithoutTenantInput = {
+    where: WhatsappMessageTemplateWhereUniqueInput
+    create: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappMessageTemplateCreateManyTenantInputEnvelope = {
+    data: WhatsappMessageTemplateCreateManyTenantInput | WhatsappMessageTemplateCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -30652,9 +32644,43 @@ export namespace Prisma {
     deliveredAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     failedAt?: DateTimeNullableFilter<"Message"> | Date | string | null
+    whatsappTemplateId?: StringNullableFilter<"Message"> | string | null
     rawPayload?: JsonNullableFilter<"Message">
     createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
+  }
+
+  export type WhatsappMessageTemplateUpsertWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappMessageTemplateWhereUniqueInput
+    update: XOR<WhatsappMessageTemplateUpdateWithoutTenantInput, WhatsappMessageTemplateUncheckedUpdateWithoutTenantInput>
+    create: XOR<WhatsappMessageTemplateCreateWithoutTenantInput, WhatsappMessageTemplateUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WhatsappMessageTemplateUpdateWithWhereUniqueWithoutTenantInput = {
+    where: WhatsappMessageTemplateWhereUniqueInput
+    data: XOR<WhatsappMessageTemplateUpdateWithoutTenantInput, WhatsappMessageTemplateUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type WhatsappMessageTemplateUpdateManyWithWhereWithoutTenantInput = {
+    where: WhatsappMessageTemplateScalarWhereInput
+    data: XOR<WhatsappMessageTemplateUpdateManyMutationInput, WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type WhatsappMessageTemplateScalarWhereInput = {
+    AND?: WhatsappMessageTemplateScalarWhereInput | WhatsappMessageTemplateScalarWhereInput[]
+    OR?: WhatsappMessageTemplateScalarWhereInput[]
+    NOT?: WhatsappMessageTemplateScalarWhereInput | WhatsappMessageTemplateScalarWhereInput[]
+    id?: StringFilter<"WhatsappMessageTemplate"> | string
+    tenantId?: StringFilter<"WhatsappMessageTemplate"> | string
+    name?: StringFilter<"WhatsappMessageTemplate"> | string
+    language?: StringFilter<"WhatsappMessageTemplate"> | string
+    category?: EnumWhatsappTemplateCategoryFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFilter<"WhatsappMessageTemplate"> | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    bodyText?: StringFilter<"WhatsappMessageTemplate"> | string
+    rejectionReason?: StringNullableFilter<"WhatsappMessageTemplate"> | string | null
+    createdAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"WhatsappMessageTemplate"> | Date | string
   }
 
   export type WhatsappPhoneNumberUpsertWithWhereUniqueWithoutTenantInput = {
@@ -30808,6 +32834,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -30832,6 +32859,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -30872,6 +32900,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -30896,6 +32925,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -30920,6 +32950,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -30944,6 +32975,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -30984,6 +33016,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -31008,6 +33041,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -31032,6 +33066,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -31056,6 +33091,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -31135,6 +33171,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -31159,6 +33196,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -31228,6 +33266,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -31252,6 +33291,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -31317,6 +33357,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -31337,6 +33378,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -31382,6 +33424,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -31406,6 +33449,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -31462,6 +33506,7 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -31486,6 +33531,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -31641,6 +33687,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -31661,6 +33708,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -31706,6 +33754,7 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -31730,6 +33779,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -31932,6 +33982,7 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     leads?: LeadCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -31956,6 +34007,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -32144,6 +34196,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutMessagesInput
+    whatsappTemplate?: WhatsappMessageTemplateCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateWithoutConversationInput = {
@@ -32164,6 +34217,7 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32208,6 +34262,7 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     leads?: LeadUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -32232,6 +34287,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -32452,6 +34508,7 @@ export namespace Prisma {
     contacts?: ContactCreateNestedManyWithoutTenantInput
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -32476,6 +34533,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -32493,6 +34551,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -32514,6 +34573,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -32522,6 +34582,39 @@ export namespace Prisma {
   export type ConversationCreateOrConnectWithoutMessagesInput = {
     where: ConversationWhereUniqueInput
     create: XOR<ConversationCreateWithoutMessagesInput, ConversationUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type WhatsappMessageTemplateCreateWithoutMessagesInput = {
+    id?: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWhatsappMessageTemplatesInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappMessageTemplateCreateOrConnectWithoutMessagesInput = {
+    where: WhatsappMessageTemplateWhereUniqueInput
+    create: XOR<WhatsappMessageTemplateCreateWithoutMessagesInput, WhatsappMessageTemplateUncheckedCreateWithoutMessagesInput>
   }
 
   export type TenantUpsertWithoutMessagesInput = {
@@ -32553,6 +34646,7 @@ export namespace Prisma {
     contacts?: ContactUpdateManyWithoutTenantNestedInput
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -32577,6 +34671,7 @@ export namespace Prisma {
     contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -32600,6 +34695,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -32621,9 +34717,239 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type WhatsappMessageTemplateUpsertWithoutMessagesInput = {
+    update: XOR<WhatsappMessageTemplateUpdateWithoutMessagesInput, WhatsappMessageTemplateUncheckedUpdateWithoutMessagesInput>
+    create: XOR<WhatsappMessageTemplateCreateWithoutMessagesInput, WhatsappMessageTemplateUncheckedCreateWithoutMessagesInput>
+    where?: WhatsappMessageTemplateWhereInput
+  }
+
+  export type WhatsappMessageTemplateUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: WhatsappMessageTemplateWhereInput
+    data: XOR<WhatsappMessageTemplateUpdateWithoutMessagesInput, WhatsappMessageTemplateUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type WhatsappMessageTemplateUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWhatsappMessageTemplatesNestedInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantCreateWithoutWhatsappMessageTemplatesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingCreateNestedOneWithoutTenantInput
+    memberships?: MembershipCreateNestedManyWithoutTenantInput
+    contacts?: ContactCreateNestedManyWithoutTenantInput
+    leads?: LeadCreateNestedManyWithoutTenantInput
+    conversations?: ConversationCreateNestedManyWithoutTenantInput
+    messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutWhatsappMessageTemplatesInput = {
+    id?: string
+    slug: string
+    name: string
+    mode?: $Enums.TenantMode
+    billingMode?: $Enums.TenantBillingMode
+    status?: $Enums.TenantStatus
+    timezone?: string | null
+    locale?: string | null
+    planCode?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    domains?: TenantDomainUncheckedCreateNestedManyWithoutTenantInput
+    branding?: TenantBrandingUncheckedCreateNestedOneWithoutTenantInput
+    memberships?: MembershipUncheckedCreateNestedManyWithoutTenantInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutTenantInput
+    leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
+    conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
+    messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
+    pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
+    pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutWhatsappMessageTemplatesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutWhatsappMessageTemplatesInput, TenantUncheckedCreateWithoutWhatsappMessageTemplatesInput>
+  }
+
+  export type MessageCreateWithoutWhatsappTemplateInput = {
+    id?: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMessagesInput
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutWhatsappTemplateInput = {
+    id?: string
+    tenantId: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutWhatsappTemplateInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput>
+  }
+
+  export type MessageCreateManyWhatsappTemplateInputEnvelope = {
+    data: MessageCreateManyWhatsappTemplateInput | MessageCreateManyWhatsappTemplateInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutWhatsappMessageTemplatesInput = {
+    update: XOR<TenantUpdateWithoutWhatsappMessageTemplatesInput, TenantUncheckedUpdateWithoutWhatsappMessageTemplatesInput>
+    create: XOR<TenantCreateWithoutWhatsappMessageTemplatesInput, TenantUncheckedCreateWithoutWhatsappMessageTemplatesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutWhatsappMessageTemplatesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutWhatsappMessageTemplatesInput, TenantUncheckedUpdateWithoutWhatsappMessageTemplatesInput>
+  }
+
+  export type TenantUpdateWithoutWhatsappMessageTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUpdateManyWithoutTenantNestedInput
+    leads?: LeadUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUpdateManyWithoutTenantNestedInput
+    messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutWhatsappMessageTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    mode?: EnumTenantModeFieldUpdateOperationsInput | $Enums.TenantMode
+    billingMode?: EnumTenantBillingModeFieldUpdateOperationsInput | $Enums.TenantBillingMode
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    planCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    domains?: TenantDomainUncheckedUpdateManyWithoutTenantNestedInput
+    branding?: TenantBrandingUncheckedUpdateOneWithoutTenantNestedInput
+    memberships?: MembershipUncheckedUpdateManyWithoutTenantNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutTenantNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
+    conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
+    pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
+    pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutWhatsappTemplateInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutWhatsappTemplateInput, MessageUncheckedUpdateWithoutWhatsappTemplateInput>
+    create: XOR<MessageCreateWithoutWhatsappTemplateInput, MessageUncheckedCreateWithoutWhatsappTemplateInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutWhatsappTemplateInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutWhatsappTemplateInput, MessageUncheckedUpdateWithoutWhatsappTemplateInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutWhatsappTemplateInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutWhatsappTemplateInput>
   }
 
   export type TenantCreateWithoutWhatsappPhoneNumbersInput = {
@@ -32645,6 +34971,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
@@ -32669,6 +34996,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
@@ -32685,6 +35013,7 @@ export namespace Prisma {
     status?: $Enums.ConversationStatus
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -32705,6 +35034,7 @@ export namespace Prisma {
     assigneeUserId?: string | null
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -32801,6 +35131,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
@@ -32825,6 +35156,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
@@ -32881,6 +35213,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
@@ -32905,6 +35238,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
@@ -32978,6 +35312,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
@@ -33002,6 +35337,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
@@ -33065,6 +35401,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageCreateNestedManyWithoutTenantInput
@@ -33089,6 +35426,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelineStages?: PipelineStageUncheckedCreateNestedManyWithoutTenantInput
@@ -33213,6 +35551,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUpdateManyWithoutTenantNestedInput
@@ -33237,6 +35576,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelineStages?: PipelineStageUncheckedUpdateManyWithoutTenantNestedInput
@@ -33293,6 +35633,7 @@ export namespace Prisma {
     leads?: LeadCreateNestedManyWithoutTenantInput
     conversations?: ConversationCreateNestedManyWithoutTenantInput
     messages?: MessageCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventCreateNestedManyWithoutTenantInput
     pipelines?: PipelineCreateNestedManyWithoutTenantInput
@@ -33317,6 +35658,7 @@ export namespace Prisma {
     leads?: LeadUncheckedCreateNestedManyWithoutTenantInput
     conversations?: ConversationUncheckedCreateNestedManyWithoutTenantInput
     messages?: MessageUncheckedCreateNestedManyWithoutTenantInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedCreateNestedManyWithoutTenantInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedCreateNestedManyWithoutTenantInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutTenantInput
     pipelines?: PipelineUncheckedCreateNestedManyWithoutTenantInput
@@ -33432,6 +35774,7 @@ export namespace Prisma {
     leads?: LeadUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUpdateManyWithoutTenantNestedInput
     messages?: MessageUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUpdateManyWithoutTenantNestedInput
@@ -33456,6 +35799,7 @@ export namespace Prisma {
     leads?: LeadUncheckedUpdateManyWithoutTenantNestedInput
     conversations?: ConversationUncheckedUpdateManyWithoutTenantNestedInput
     messages?: MessageUncheckedUpdateManyWithoutTenantNestedInput
+    whatsappMessageTemplates?: WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantNestedInput
     whatsappPhoneNumbers?: WhatsappPhoneNumberUncheckedUpdateManyWithoutTenantNestedInput
     whatsappWebhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutTenantNestedInput
     pipelines?: PipelineUncheckedUpdateManyWithoutTenantNestedInput
@@ -33567,6 +35911,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -33721,6 +36066,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -33741,6 +36087,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -33757,6 +36104,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -33828,6 +36176,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -33851,7 +36200,21 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WhatsappMessageTemplateCreateManyTenantInput = {
+    id?: string
+    name: string
+    language: string
+    category: $Enums.WhatsappTemplateCategory
+    status?: $Enums.WhatsappTemplateStatus
+    metaTemplateId?: string | null
+    bodyText: string
+    rejectionReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34089,6 +36452,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34109,6 +36473,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34125,6 +36490,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34151,6 +36517,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+    whatsappTemplate?: WhatsappMessageTemplateUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutTenantInput = {
@@ -34171,6 +36538,7 @@ export namespace Prisma {
     deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34194,7 +36562,49 @@ export namespace Prisma {
     deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WhatsappMessageTemplateUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUpdateManyWithoutWhatsappTemplateNestedInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutWhatsappTemplateNestedInput
+  }
+
+  export type WhatsappMessageTemplateUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    category?: EnumWhatsappTemplateCategoryFieldUpdateOperationsInput | $Enums.WhatsappTemplateCategory
+    status?: EnumWhatsappTemplateStatusFieldUpdateOperationsInput | $Enums.WhatsappTemplateStatus
+    metaTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    bodyText?: StringFieldUpdateOperationsInput | string
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34396,6 +36806,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -34463,6 +36874,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34483,6 +36895,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34499,6 +36912,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34514,6 +36928,7 @@ export namespace Prisma {
     externalThreadKey?: string | null
     whatsappPhoneNumberId?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -34525,6 +36940,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34545,6 +36961,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34561,6 +36978,7 @@ export namespace Prisma {
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     whatsappPhoneNumberId?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34584,6 +37002,7 @@ export namespace Prisma {
     deliveredAt?: Date | string | null
     readAt?: Date | string | null
     failedAt?: Date | string | null
+    whatsappTemplateId?: string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34610,6 +37029,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutMessagesNestedInput
+    whatsappTemplate?: WhatsappMessageTemplateUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutConversationInput = {
@@ -34630,6 +37050,7 @@ export namespace Prisma {
     deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
     rawPayload?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34638,6 +37059,103 @@ export namespace Prisma {
   export type MessageUncheckedUpdateManyWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    whatsappTemplateId?: NullableStringFieldUpdateOperationsInput | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateManyWhatsappTemplateInput = {
+    id?: string
+    tenantId: string
+    conversationId: string
+    direction: $Enums.MessageDirection
+    kind: $Enums.MessageKind
+    bodyText?: string | null
+    mediaUrl?: string | null
+    mediaMimeType?: string | null
+    metaMessageId?: string | null
+    externalStatus?: string | null
+    pricingCategory?: string | null
+    pricingType?: string | null
+    currency?: string | null
+    estimatedMetaCost?: Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: string | null
+    deliveredAt?: Date | string | null
+    readAt?: Date | string | null
+    failedAt?: Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageUpdateWithoutWhatsappTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMessagesNestedInput
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutWhatsappTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
+    kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
+    bodyText?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    mediaMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    metaMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    externalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    pricingType?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedMetaCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    recipientCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    failedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rawPayload?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutWhatsappTemplateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
     direction?: EnumMessageDirectionFieldUpdateOperationsInput | $Enums.MessageDirection
     kind?: EnumMessageKindFieldUpdateOperationsInput | $Enums.MessageKind
     bodyText?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34668,6 +37186,7 @@ export namespace Prisma {
     assigneeUserId?: string | null
     externalThreadKey?: string | null
     lastMessageAt?: Date | string | null
+    lastInboundAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     version?: number
@@ -34699,6 +37218,7 @@ export namespace Prisma {
     status?: EnumConversationStatusFieldUpdateOperationsInput | $Enums.ConversationStatus
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34719,6 +37239,7 @@ export namespace Prisma {
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
@@ -34735,6 +37256,7 @@ export namespace Prisma {
     assigneeUserId?: NullableStringFieldUpdateOperationsInput | string | null
     externalThreadKey?: NullableStringFieldUpdateOperationsInput | string | null
     lastMessageAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastInboundAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number

@@ -262,6 +262,7 @@ exports.Prisma.ConversationScalarFieldEnum = {
   externalThreadKey: 'externalThreadKey',
   whatsappPhoneNumberId: 'whatsappPhoneNumberId',
   lastMessageAt: 'lastMessageAt',
+  lastInboundAt: 'lastInboundAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   version: 'version'
@@ -286,7 +287,22 @@ exports.Prisma.MessageScalarFieldEnum = {
   deliveredAt: 'deliveredAt',
   readAt: 'readAt',
   failedAt: 'failedAt',
+  whatsappTemplateId: 'whatsappTemplateId',
   rawPayload: 'rawPayload',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WhatsappMessageTemplateScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  language: 'language',
+  category: 'category',
+  status: 'status',
+  metaTemplateId: 'metaTemplateId',
+  bodyText: 'bodyText',
+  rejectionReason: 'rejectionReason',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -453,6 +469,21 @@ exports.MessageKind = exports.$Enums.MessageKind = {
   SYSTEM: 'SYSTEM'
 };
 
+exports.WhatsappTemplateCategory = exports.$Enums.WhatsappTemplateCategory = {
+  UTILITY: 'UTILITY',
+  MARKETING: 'MARKETING',
+  AUTHENTICATION: 'AUTHENTICATION'
+};
+
+exports.WhatsappTemplateStatus = exports.$Enums.WhatsappTemplateStatus = {
+  DRAFT: 'DRAFT',
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  PAUSED: 'PAUSED',
+  DISABLED: 'DISABLED'
+};
+
 exports.WhatsappWebhookEventType = exports.$Enums.WhatsappWebhookEventType = {
   MESSAGE: 'MESSAGE',
   STATUS: 'STATUS',
@@ -479,6 +510,7 @@ exports.Prisma.ModelName = {
   Lead: 'Lead',
   Conversation: 'Conversation',
   Message: 'Message',
+  WhatsappMessageTemplate: 'WhatsappMessageTemplate',
   WhatsappPhoneNumber: 'WhatsappPhoneNumber',
   WhatsappWebhookEvent: 'WhatsappWebhookEvent',
   Pipeline: 'Pipeline',

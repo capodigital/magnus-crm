@@ -27,6 +27,23 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## WhatsApp operations
+
+The CRM follows WhatsApp's customer-care window:
+
+- A customer message opens a 24-hour window for free-form replies.
+- Each new customer message refreshes the window.
+- When the window is closed, the inbox blocks free-form text and only approved, active templates can be sent.
+- Templates belong to the connected customer's WhatsApp Business Account. They are not global assets of Magnus CRM.
+
+Before deploying the reply-window and template changes to an existing database, run the migration once with the production `DATABASE_URL`:
+
+```bash
+npm run db:migrate:deploy
+```
+
+Keep `META_ACCESS_TOKEN` server-only. The app creates text templates in the tenant's connected WABA, sends them to Meta for review, and shows the resulting status in Settings. Existing templates created in Meta Business Manager can be imported from **Settings > WhatsApp > Sincronizar con Meta**.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

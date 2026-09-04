@@ -1,68 +1,61 @@
 import 'server-only'
 
-import { ChannelType, ConversationStatus, MessageDirection, MessageKind } from '../../../prisma/generated/prisma'
+import { ChannelType, ConversationStatus, MessageDirection, MessageKind, WhatsappTemplateStatus } from '../../../prisma/generated/prisma'
 import type { Prisma } from '../../../prisma/generated/prisma'
 
 import prisma from '@/lib/prisma'
 import { postMetaMessage, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
-import { getWhatsappReplyWindow } from '@/lib/whatsapp/reply-window'
+import { WhatsappOutboundError } from '@/lib/whatsapp/outbound-service'
+import { getWhatsappTemplateVariableIndexes, renderWhatsappTemplateBody } from '@/lib/whatsapp/template-utils'
 
-const MAX_TEXT_LENGTH = 4096
-
-type SendWhatsappTextInput = {
+type SendWhatsappTemplateInput = {
   tenantId: string
   conversationId: string
-  body: string
+  templateId: string
+  variables: string[]
 }
 
-export type SendWhatsappTextResult = {
+export type SendWhatsappTemplateResult = {
   conversationId: string
   messageId: string
   metaMessageId: string
   recipient: string
+  templateId: string
 }
 
-export class WhatsappOutboundError extends Error {
-  statusCode: number
-  code: string | null
-
-  constructor(message: string, statusCode = 400, code: string | null = null) {
-    super(message)
-    this.name = 'WhatsappOutboundError'
-    this.statusCode = statusCode
-    this.code = code
-  }
+const getTemplateVariableIndexes = (bodyText: string) => {
+  return getWhatsappTemplateVariableIndexes(bodyText)
 }
 
-const normalizeBody = (body: string) => {
-  const normalizedBody = body.trim()
+const normalizeVariables = (bodyText: string, variables: string[]) => {
+  const indexes = getTemplateVariableIndexes(bodyText)
 
-  if (!normalizedBody) {
-    throw new WhatsappOutboundError('Escribe un mensaje antes de enviarlo.')
+  if (indexes.length !== variables.length) {
+    throw new WhatsappOutboundError('Completa todos los campos variables de la plantilla antes de enviarla.')
   }
 
-  if (normalizedBody.length > MAX_TEXT_LENGTH) {
-    throw new WhatsappOutboundError(`El mensaje no puede superar los ${MAX_TEXT_LENGTH} caracteres.`)
-  }
+  return variables.map((variable, index) => {
+    const normalized = variable.trim()
 
-  return normalizedBody
+    if (!normalized) {
+      throw new WhatsappOutboundError(`Completa el valor de la variable {{${indexes[index]}}}.`)
+    }
+
+    return normalized
+  })
 }
 
 const normalizeRecipient = (whatsappWaId?: string | null, phoneE164?: string | null) => {
   const recipient = whatsappWaId?.trim() || phoneE164?.replace(/\D/g, '')
 
-  if (!recipient) {
-    throw new WhatsappOutboundError('El contacto no tiene un numero de WhatsApp valido.')
-  }
+  if (!recipient) throw new WhatsappOutboundError('El contacto no tiene un numero de WhatsApp valido.')
 
   return recipient
 }
 
-export const sendWhatsappTextMessage = async (
-  input: SendWhatsappTextInput
-): Promise<SendWhatsappTextResult> => {
-  const body = normalizeBody(input.body)
-
+export const sendWhatsappTemplateMessage = async (
+  input: SendWhatsappTemplateInput
+): Promise<SendWhatsappTemplateResult> => {
   const conversation = await prisma.conversation.findFirst({
     where: {
       id: input.conversationId,
@@ -74,7 +67,7 @@ export const sendWhatsappTextMessage = async (
     },
     select: {
       id: true,
-      lastInboundAt: true,
+      leadId: true,
       contact: {
         select: {
           whatsappWaId: true,
@@ -85,22 +78,6 @@ export const sendWhatsappTextMessage = async (
         select: {
           phoneNumberId: true
         }
-      },
-      messages: {
-        where: {
-          direction: MessageDirection.INBOUND,
-          metaMessageId: {
-            not: null
-          }
-        },
-        orderBy: {
-          createdAt: 'desc'
-        },
-        take: 1,
-        select: {
-          metaMessageId: true,
-          createdAt: true
-        }
       }
     }
   })
@@ -109,15 +86,31 @@ export const sendWhatsappTextMessage = async (
     throw new WhatsappOutboundError('La conversacion no existe o no pertenece a este workspace.', 404)
   }
 
-  const lastInboundAt = conversation.lastInboundAt ?? conversation.messages[0]?.createdAt ?? null
-  const replyWindow = getWhatsappReplyWindow(lastInboundAt)
+  const template = await prisma.whatsappMessageTemplate.findFirst({
+    where: {
+      id: input.templateId,
+      tenantId: input.tenantId
+    },
+    select: {
+      id: true,
+      name: true,
+      language: true,
+      category: true,
+      status: true,
+      bodyText: true
+    }
+  })
 
-  if (!replyWindow.isOpen) {
-    throw new WhatsappOutboundError(
-      'La ventana de atencion de 24 horas termino. Selecciona una plantilla aprobada para contactar a este cliente.',
-      409,
-      'REPLY_WINDOW_CLOSED'
-    )
+  if (!template) {
+    throw new WhatsappOutboundError('La plantilla no existe en este workspace.', 404)
+  }
+
+  if (template.status !== WhatsappTemplateStatus.APPROVED) {
+    throw new WhatsappOutboundError('Esta plantilla todavía no está aprobada por Meta.', 409)
+  }
+
+  if (template.category === 'AUTHENTICATION') {
+    throw new WhatsappOutboundError('Las plantillas de autenticacion se habilitaran en una version posterior.', 409)
   }
 
   const phoneNumberId = conversation.whatsappPhoneNumber?.phoneNumberId
@@ -126,8 +119,20 @@ export const sendWhatsappTextMessage = async (
     throw new WhatsappOutboundError('La conversacion no tiene un numero de WhatsApp vinculado.')
   }
 
+  const normalizedVariables = normalizeVariables(template.bodyText, input.variables)
   const recipient = normalizeRecipient(conversation.contact.whatsappWaId, conversation.contact.phoneE164)
-  const latestInboundMetaMessageId = conversation.messages[0]?.metaMessageId
+
+  const components = normalizedVariables.length
+    ? [
+        {
+          type: 'body',
+          parameters: normalizedVariables.map(text => ({
+            type: 'text',
+            text
+          }))
+        }
+      ]
+    : undefined
 
   let payload
 
@@ -136,11 +141,13 @@ export const sendWhatsappTextMessage = async (
       messaging_product: 'whatsapp',
       recipient_type: 'individual',
       to: recipient,
-      ...(latestInboundMetaMessageId ? { context: { message_id: latestInboundMetaMessageId } } : {}),
-      type: 'text',
-      text: {
-        preview_url: false,
-        body
+      type: 'template',
+      template: {
+        name: template.name,
+        language: {
+          code: template.language
+        },
+        ...(components ? { components } : {})
       }
     })
   } catch (error) {
@@ -165,6 +172,8 @@ export const sendWhatsappTextMessage = async (
     messages: [{ id: metaMessageId }]
   } as Prisma.InputJsonValue
 
+  const renderedBody = renderWhatsappTemplateBody(template.bodyText, normalizedVariables)
+
   const message = await prisma.$transaction(async tx => {
     const currentConversation = await tx.conversation.findFirst({
       where: {
@@ -187,9 +196,10 @@ export const sendWhatsappTextMessage = async (
         tenantId: input.tenantId,
         conversationId: currentConversation.id,
         direction: MessageDirection.OUTBOUND,
-        kind: MessageKind.TEXT,
-        bodyText: body,
+        kind: MessageKind.TEMPLATE,
+        bodyText: renderedBody,
         metaMessageId,
+        whatsappTemplateId: template.id,
         rawPayload,
         createdAt
       },
@@ -226,6 +236,7 @@ export const sendWhatsappTextMessage = async (
     conversationId: conversation.id,
     messageId: message.id,
     metaMessageId,
-    recipient
+    recipient,
+    templateId: template.id
   }
 }

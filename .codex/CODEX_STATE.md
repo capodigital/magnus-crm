@@ -35,7 +35,11 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The inbox now includes a text composer that sends through the WhatsApp Cloud API from a server-only route, persists successful outbound messages by returned `wamid`, and refreshes the active thread.
 - Outbound WhatsApp status webhooks now reconcile `sent`, `delivered`, `read`, and `failed` states against the stored outbound message; unmatched status events remain pending for retry.
 - The composer now shows the current delivery state and warns when the latest inbound message is outside the 24-hour free-form reply window.
-- Unread/read tracking, assignment, pagination, realtime updates, templates, and media replies remain deferred to the next CRM workflow increment.
+- The inbox now calculates and displays the remaining 24-hour customer-care window per conversation; free-form text is blocked in the server service once that window closes.
+- Tenant-scoped WhatsApp templates now have local status tracking, Meta create/sync APIs, settings management, starter drafts, and approved-template sending from the inbox.
+- The first template creator supports text-only `UTILITY` and `MARKETING` templates, including Meta review examples for `{{1}}` variables; authentication, buttons, headers, media, and per-tenant encrypted tokens remain deferred.
+- Unread/read tracking, assignment, pagination, and realtime updates remain deferred to the next CRM workflow increment.
+- A controlled migration now adds `lastInboundAt`, template metadata, and the message-template relation. It must be applied once in production with `npm run db:migrate:deploy` before serving the new inbox/settings code.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
 - A first generated logo concept for Magnus CRM now exists at `public/images/brand/magnus-crm-logo-concept.png`.
@@ -108,6 +112,19 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/app/api/inbox/conversations/[conversationId]/messages/route.ts`
 - `src/lib/whatsapp/outbound-service.ts`
 - `src/lib/whatsapp/status-service.ts`
+- `src/lib/whatsapp/reply-window.ts`
+- `src/lib/whatsapp/meta-client.ts`
+- `src/lib/whatsapp/template-contract.ts`
+- `src/lib/whatsapp/template-utils.ts`
+- `src/lib/whatsapp/template-service.ts`
+- `src/lib/whatsapp/template-send-service.ts`
+- `src/app/api/whatsapp/templates/route.ts`
+- `src/app/api/whatsapp/templates/sync/route.ts`
+- `src/app/api/inbox/conversations/[conversationId]/template-messages/route.ts`
+- `src/components/crm/InboxComposer.tsx`
+- `src/components/crm/InboxMessageList.tsx`
+- `src/components/crm/WhatsappTemplatesPanel.tsx`
+- `prisma/migrations/20260904_whatsapp_reply_window_templates/migration.sql`
 - `src/lib/whatsapp/webhook-types.ts`
 - `.env.example`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
@@ -139,4 +156,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Deploy the status reconciliation changes, send a fresh inbound message from the recipient phone to open the 24-hour response window, reply from `/inbox`, and verify the outbound `wamid` plus its delivery state. For a business-initiated review video outside that window, use an approved template; implement per-tenant tokens through Embedded Signup before opening onboarding to other tenants.
+Apply `npm run db:migrate:deploy` against the production `DATABASE_URL`, deploy the validated build, and bind the production `phone_number_id` in `/settings`. Then sync or create a text `UTILITY` template in the tenant's WABA, wait for Meta approval, and verify both an in-window free-form reply and an out-of-window approved-template reply with their outbound `wamid` and status webhooks. Implement per-tenant encrypted tokens through Embedded Signup before opening onboarding to other tenants.

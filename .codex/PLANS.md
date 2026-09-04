@@ -207,7 +207,27 @@
   - The UI includes search, status filters, responsive conversation/thread panels, manual refresh, loading, empty, and recoverable error states.
   - A server-only text composer now sends through Meta, persists the returned `wamid`, and refreshes the active thread.
   - Outbound bubbles now show Meta delivery state, and the composer warns when free-form replies are outside the 24-hour customer-care window.
-  - Unread/read state, assignment, pagination, realtime updates, templates, and media replies remain deferred.
+  - The server blocks free-form sends outside the 24-hour window and exposes a tenant-scoped approved-template send path.
+  - Unread/read state, assignment, pagination, and realtime updates remain deferred; template management is tracked in the next workflow increment.
+
+### Phase 6.5: WhatsApp reply window and templates
+- Objective: make the WhatsApp policy understandable and operational for every tenant without exposing Meta complexity to agents.
+- Deliverables:
+  - Persist the latest inbound timestamp and calculate the 24-hour window on the server.
+  - Show remaining time per conversation and clearly switch the composer from free text to template mode.
+  - Create and synchronize tenant-owned text templates with Meta, including review examples and readable statuses.
+  - Send only approved non-authentication templates outside the window and persist their outbound `wamid` for status reconciliation.
+- Skills:
+  - `backend-clean-architecture`
+  - `frontend-production-ui`
+  - `deep-code-review`
+  - `refactor-large-file`
+  - `codex-progress-journal`
+- Goal output:
+  - Agents can answer normally within the window and use an approved tenant template when it expires, with the reason and next action visible in the UI.
+- Status:
+  - Implemented in the inbox, settings, WhatsApp services, API routes, Prisma schema, and controlled migration.
+  - Production database migration and live Meta approval/E2E testing are still pending operator action.
 
 ### Phase 7: Billing and cost ledger
 - Objective: make Meta cost transparent and reconcilable.
