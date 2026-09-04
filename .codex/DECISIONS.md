@@ -56,3 +56,4 @@
 - Next.js 16 enforces the Server/Client boundary at runtime, so the shared section page uses MUI's native `href` behavior to avoid serializing a function across that boundary.
 - The inbox page can resolve the active tenant from the authenticated app context and keep Prisma access on the server, while the client only manages selection, filtering, and refresh interactions.
 - Keeping the first token server-only avoids exposing credentials in the browser while allowing the current production workspace to send text replies; a SaaS-wide token cannot be the final multi-tenant credential model.
+- Delivery confirmation must be modeled separately from API acceptance: Meta's send response provides the outbound `wamid`, while asynchronous status webhooks determine whether the message was sent, delivered, read, or failed. Keep unmatched status events pending so a fast webhook cannot be lost before the outbound database transaction completes.

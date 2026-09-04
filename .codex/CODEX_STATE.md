@@ -33,6 +33,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - The CRM now exposes an authenticated self-service deletion route at `/settings/data-deletion` plus a matching `/api/account/delete` endpoint.
 - The `/inbox` route now reads tenant-scoped WhatsApp conversations and their latest messages from Prisma, with search, status filters, conversation selection, manual refresh, loading, empty, and recoverable error states.
 - The inbox now includes a text composer that sends through the WhatsApp Cloud API from a server-only route, persists successful outbound messages by returned `wamid`, and refreshes the active thread.
+- Outbound WhatsApp status webhooks now reconcile `sent`, `delivered`, `read`, and `failed` states against the stored outbound message; unmatched status events remain pending for retry.
+- The composer now shows the current delivery state and warns when the latest inbound message is outside the 24-hour free-form reply window.
 - Unread/read tracking, assignment, pagination, realtime updates, templates, and media replies remain deferred to the next CRM workflow increment.
 - Public QA was run on July 31, 2026 against `/`, `/privacy-policy`, `/terms-of-service`, `/data-deletion`, `/login`, and `/register`; the checked pages returned `200`, showed no console errors, and had no horizontal overflow in the inspected viewports.
 - A public `/data-deletion` instruction page now explains how authenticated users can delete their account from `/settings/data-deletion`, what data is affected, and what to do if they cannot sign in.
@@ -105,6 +107,8 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `src/lib/crm/inbox-query.ts`
 - `src/app/api/inbox/conversations/[conversationId]/messages/route.ts`
 - `src/lib/whatsapp/outbound-service.ts`
+- `src/lib/whatsapp/status-service.ts`
+- `src/lib/whatsapp/webhook-types.ts`
 - `.env.example`
 - `src/app/(dashboard)/settings/data-deletion/page.tsx`
 - `src/components/crm/DeleteAccountPanel.tsx`
@@ -135,4 +139,4 @@ Plan and execute the CRM described in `deep-research-report.md` using explicit g
 - `prisma/generated/prisma/*`
 
 ## Next safe action
-Set the production server variable `META_ACCESS_TOKEN`, deploy the composer, send an inbound message to open the 24-hour response window, and test a text reply from `/inbox`. Then verify the outbound `wamid` and status webhook; implement per-tenant tokens through Embedded Signup before opening onboarding to other tenants.
+Deploy the status reconciliation changes, send a fresh inbound message from the recipient phone to open the 24-hour response window, reply from `/inbox`, and verify the outbound `wamid` plus its delivery state. For a business-initiated review video outside that window, use an approved template; implement per-tenant tokens through Embedded Signup before opening onboarding to other tenants.

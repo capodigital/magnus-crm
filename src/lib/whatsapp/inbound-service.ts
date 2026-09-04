@@ -6,6 +6,7 @@ import {
 } from '../../../prisma/generated/prisma'
 
 import { upsertInboundWhatsappMessage } from '@/lib/crm/inbox-repository'
+import { reconcileWhatsappStatus } from '@/lib/whatsapp/status-service'
 import {
   findWhatsappPhoneNumberBinding,
   getOrCreateWhatsappWebhookEvent,
@@ -137,11 +138,17 @@ export const processWhatsappWebhookPayload = async (
     }
 
     if (event.eventType === 'STATUS') {
+      const statusResult = await reconcileWhatsappStatus(event, phoneNumberBinding.tenantId)
+
       await markEventProcessing(
         phoneNumberBinding.tenantId,
         event.eventKey,
-        WhatsappWebhookProcessingStatus.IGNORED,
-        'Status events are stored for audit and will be reconciled in a later slice.'
+        statusResult.matched
+          ? WhatsappWebhookProcessingStatus.PROCESSED
+          : statusResult.retryable
+            ? WhatsappWebhookProcessingStatus.PENDING
+            : WhatsappWebhookProcessingStatus.IGNORED,
+        statusResult.note
       )
 
       result.storedStatuses += 1

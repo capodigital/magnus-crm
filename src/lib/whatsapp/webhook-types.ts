@@ -38,6 +38,14 @@ type MetaWebhookStatus = {
   status?: string
   timestamp?: string
   recipient_id?: string
+  errors?: Array<{
+    code?: number
+    title?: string
+    message?: string
+    error_data?: {
+      details?: string
+    }
+  }>
 }
 
 type MetaWebhookValue = {
@@ -96,6 +104,7 @@ export type ExtractedWhatsappStatusEvent = BaseExtractedWhatsappEvent & {
   externalMessageId: string | null
   externalStatus: string | null
   contactWaId: string | null
+  statusError: string | null
 }
 
 export type ExtractedWhatsappWebhookEvent = ExtractedWhatsappMessageEvent | ExtractedWhatsappStatusEvent
@@ -114,6 +123,20 @@ const normalizeOptionalString = (value?: string | null) => {
   const normalizedValue = value?.trim()
 
   return normalizedValue ? normalizedValue : null
+}
+
+const resolveStatusError = (status: MetaWebhookStatus) => {
+  const error = status.errors?.[0]
+
+  if (!error) return null
+
+  const details = [error.title, error.message, error.error_data?.details]
+    .map(value => normalizeOptionalString(value))
+    .filter((value): value is string => Boolean(value))
+
+  if (!details.length) return error.code ? `Meta error ${error.code}` : null
+
+  return error.code ? `[${error.code}] ${details.join(': ')}` : details.join(': ')
 }
 
 const resolveMessageKind = (messageType?: string | null) => {
@@ -257,6 +280,7 @@ export const extractWhatsappWebhookEvents = (payload: WhatsappWebhookPayload): E
           externalMessageId: statusMessageId,
           externalStatus: statusCode,
           contactWaId: normalizeOptionalString(status.recipient_id),
+          statusError: resolveStatusError(status),
           eventTimestamp: timestamp,
           rawPayload: buildStatusPayload(entry, change, value, status)
         })

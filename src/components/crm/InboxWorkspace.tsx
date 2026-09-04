@@ -57,6 +57,13 @@ const filterLabels: Record<StatusFilter, string> = {
   CLOSED: 'Cerradas'
 }
 
+const outboundStatusLabels: Record<string, string> = {
+  sent: 'Enviado',
+  delivered: 'Entregado',
+  read: 'Leído',
+  failed: 'No entregado'
+}
+
 const getDisplayName = (conversation: InboxConversation) =>
   conversation.contact.fullName ??
   conversation.contact.firstName ??
@@ -151,6 +158,15 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
   })
 
   const selectedConversation = conversations.find(conversation => conversation.id === selectedId) ?? null
+
+  const latestInboundMessage = selectedConversation?.messages
+    .slice()
+    .reverse()
+    .find(message => message.direction === 'INBOUND')
+
+  const hasActiveReplyWindow = latestInboundMessage
+    ? Date.now() - new Date(latestInboundMessage.createdAt).getTime() < 24 * 60 * 60 * 1000
+    : false
 
   const handleRefresh = () => {
     setIsRefreshing(true)
@@ -330,7 +346,7 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                   <Stack spacing={0.5} alignItems='center' sx={{ pb: 1 }}>
                     <Chip label='Historial recibido desde Meta' size='small' variant='outlined' />
                     <Typography variant='caption' color='text.secondary'>
-                      El composer de respuestas salientes se habilitara en el siguiente corte.
+                      Los estados de entrega se actualizan cuando Meta notifica el resultado.
                     </Typography>
                   </Stack>
                   {selectedConversation.messages.length ? (
@@ -370,6 +386,7 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                               }}
                             >
                               {formatTime(message.createdAt, true)}
+                              {!isInbound ? ` · ${outboundStatusLabels[message.externalStatus ?? ''] ?? 'Enviando'}` : ''}
                             </Typography>
                           </Paper>
                         </Stack>
@@ -386,6 +403,12 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                 <Divider />
                 <Stack component='form' spacing={1.5} onSubmit={handleSend} sx={{ p: { xs: 3, md: 4 } }}>
                   {sendError ? <Alert severity='error'>{sendError}</Alert> : null}
+                  {!hasActiveReplyWindow ? (
+                    <Alert severity='warning'>
+                      El texto libre solo se entrega dentro de las 24 horas posteriores al último mensaje del cliente. Para iniciar
+                      una conversación fuera de esa ventana, necesitarás una plantilla aprobada por Meta.
+                    </Alert>
+                  ) : null}
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'flex-end' }}>
                     <TextField
                       fullWidth
@@ -398,7 +421,11 @@ const InboxWorkspace = ({ workspaceName, conversations }: InboxWorkspaceProps) =
                       onChange={event => setDraft(event.target.value)}
                       disabled={isSending}
                       inputProps={{ maxLength: 4096, 'aria-label': 'Mensaje de respuesta' }}
-                      helperText={`${draft.length}/4096 caracteres. Las respuestas de texto requieren una ventana activa de atencion.`}
+                      helperText={`${draft.length}/4096 caracteres. ${
+                        hasActiveReplyWindow
+                          ? 'La ventana de respuesta del cliente está activa.'
+                          : 'Verifica la ventana de atención o utiliza una plantilla aprobada.'
+                      }`}
                     />
                     <Button
                       type='submit'

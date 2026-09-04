@@ -185,7 +185,7 @@
   - A node-runtime webhook route now handles `hub.challenge`, validates `X-Hub-Signature-256`, and ignores non-WhatsApp objects safely.
   - Raw webhook items are now persisted one row per message/status with tenant-scoped idempotency via `eventKey`.
   - Inbound message events now upsert contact, lead, conversation, and message records through a dedicated inbox repository.
-  - Status events are stored for audit and marked ignored until the status reconciliation slice is implemented.
+  - Status events are stored for audit and now reconcile outbound messages by `wamid`, including `sent`, `delivered`, `read`, and `failed` states; unmatched status events remain pending for retry.
   - A dedicated CLI registration path now exists for mapping a Meta `phone_number_id` to a tenant after workspace bootstrap.
 
 ### Phase 6: CRM workflow
@@ -206,6 +206,7 @@
   - The first read-only inbox slice now queries tenant-scoped WhatsApp conversations and latest messages.
   - The UI includes search, status filters, responsive conversation/thread panels, manual refresh, loading, empty, and recoverable error states.
   - A server-only text composer now sends through Meta, persists the returned `wamid`, and refreshes the active thread.
+  - Outbound bubbles now show Meta delivery state, and the composer warns when free-form replies are outside the 24-hour customer-care window.
   - Unread/read state, assignment, pagination, realtime updates, templates, and media replies remain deferred.
 
 ### Phase 7: Billing and cost ledger
