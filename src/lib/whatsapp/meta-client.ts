@@ -14,6 +14,9 @@ export type MetaMessageResponse = {
     type?: string
     code?: number
     error_subcode?: number
+    error_data?: {
+      details?: string
+    }
   }
 }
 
@@ -42,10 +45,12 @@ export const getGraphApiVersion = () => process.env.META_GRAPH_API_VERSION?.trim
 const getMetaErrorMessage = (payload: MetaMessageResponse) => {
   const message = payload.error?.message?.trim()
   const code = payload.error?.code
+  const details = payload.error?.error_data?.details?.trim()
+  const suffix = [code ? `[${code}]` : null, details ? ` ${details}` : null].filter(Boolean).join('')
 
-  if (!message) return 'Meta no pudo procesar el mensaje.'
+  if (!message) return suffix ? `Meta no pudo procesar la solicitud de WhatsApp${suffix}.` : 'Meta no pudo procesar la solicitud de WhatsApp.'
 
-  return code ? `Meta no pudo procesar el mensaje [${code}]: ${message}` : `Meta no pudo procesar el mensaje: ${message}`
+  return `Meta no pudo procesar la solicitud de WhatsApp${suffix}: ${message}${details ? ` (${details})` : ''}`
 }
 
 export const requestMetaApi = async <T = MetaMessageResponse>(path: string, init: RequestInit = {}) => {

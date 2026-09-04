@@ -258,6 +258,7 @@ export const createWhatsappTemplate = async (input: CreateWhatsappTemplateInput)
         name: normalized.name,
         language: normalized.language,
         category: normalized.category,
+        parameter_format: 'positional',
         components: [
           {
             type: 'BODY',
