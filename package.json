@@ -12,6 +12,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "build:icons": "tsx src/assets/iconify-icons/bundle-icons-css.ts",
     "db:migrate:deploy": "prisma migrate deploy",
+    "db:backfill:whatsapp-reply-windows": "tsx scripts/backfill-whatsapp-reply-windows.ts",
     "bootstrap:workspace": "tsx scripts/bootstrap-workspace.ts",
     "register:whatsapp-phone": "tsx scripts/register-whatsapp-phone-number.ts",
     "postinstall": "npm run build:icons",
