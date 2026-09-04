@@ -37,6 +37,7 @@
 33. Apply the reply-window/template schema change through a tracked Prisma migration and never run a remote database mutation automatically from the coding session.
 34. When an operator has already applied the schema with `prisma db push`, use a Prisma backfill script for existing data and `prisma migrate resolve --applied` to align migration history; do not ask the operator to run handwritten SQL or silently reapply the migration.
 35. Make the starter template creation payload explicitly positional and preserve Meta's optional error details; production diagnosis must distinguish the Vercel deployment/env from local workspace validation.
+36. Treat a structurally valid template payload plus Meta error `100 Invalid parameter` as unresolved until the production WABA/token path is verified; use the existing template sync operation as a non-mutating access check before changing template semantics.
 
 ## Rationale
 
