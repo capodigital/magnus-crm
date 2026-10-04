@@ -1,12 +1,19 @@
 import 'server-only'
 
-import { ChannelType, ConversationStatus, MessageDirection, MessageKind, WhatsappTemplateStatus } from '../../../prisma/generated/prisma'
+import {
+  ChannelType,
+  ConversationStatus,
+  MessageDirection,
+  MessageKind,
+  WhatsappTemplateStatus
+} from '../../../prisma/generated/prisma'
 import type { Prisma } from '../../../prisma/generated/prisma'
 
 import prisma from '@/lib/prisma'
-import { postMetaMessage, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
+import { postMetaMessageWithAccessToken, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
 import { WhatsappOutboundError } from '@/lib/whatsapp/outbound-service'
 import { getWhatsappTemplateVariableIndexes, renderWhatsappTemplateBody } from '@/lib/whatsapp/template-utils'
+import { resolveMetaAccessToken } from '@/lib/whatsapp/token-vault'
 
 type SendWhatsappTemplateInput = {
   tenantId: string
@@ -76,7 +83,11 @@ export const sendWhatsappTemplateMessage = async (
       },
       whatsappPhoneNumber: {
         select: {
-          phoneNumberId: true
+          phoneNumberId: true,
+          accessTokenCiphertext: true,
+          accessTokenIv: true,
+          accessTokenAuthTag: true,
+          accessTokenExpiresAt: true
         }
       }
     }
@@ -137,19 +148,23 @@ export const sendWhatsappTemplateMessage = async (
   let payload
 
   try {
-    payload = await postMetaMessage(phoneNumberId, {
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: recipient,
-      type: 'template',
-      template: {
-        name: template.name,
-        language: {
-          code: template.language
-        },
-        ...(components ? { components } : {})
-      }
-    })
+    payload = await postMetaMessageWithAccessToken(
+      phoneNumberId,
+      {
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to: recipient,
+        type: 'template',
+        template: {
+          name: template.name,
+          language: {
+            code: template.language
+          },
+          ...(components ? { components } : {})
+        }
+      },
+      resolveMetaAccessToken(conversation.whatsappPhoneNumber)
+    )
   } catch (error) {
     if (error instanceof WhatsappMetaApiError) {
       throw new WhatsappOutboundError(error.message, error.statusCode)

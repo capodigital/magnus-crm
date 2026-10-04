@@ -1,13 +1,12 @@
 import 'server-only'
 
-import {
-  Prisma
-} from '../../../prisma/generated/prisma'
+import { Prisma } from '../../../prisma/generated/prisma'
 import type { WhatsappTemplateCategory, WhatsappTemplateStatus } from '../../../prisma/generated/prisma'
 
 import prisma from '@/lib/prisma'
 import { requestMetaApi, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
 import { getWhatsappTemplateVariableIndexes } from '@/lib/whatsapp/template-utils'
+import { resolveMetaAccessToken } from '@/lib/whatsapp/token-vault'
 import {
   whatsappTemplateCategories,
   type WhatsappTemplateCategoryValue,
@@ -163,7 +162,11 @@ const getWhatsappWabaId = async (tenantId: string) => {
       tenantId
     },
     select: {
-      wabaId: true
+      wabaId: true,
+      accessTokenCiphertext: true,
+      accessTokenIv: true,
+      accessTokenAuthTag: true,
+      accessTokenExpiresAt: true
     },
     orderBy: {
       createdAt: 'desc'
@@ -174,7 +177,10 @@ const getWhatsappWabaId = async (tenantId: string) => {
     throw new WhatsappTemplateError('Vincula primero el WhatsApp Business Account de este workspace.', 409)
   }
 
-  return phoneNumber.wabaId
+  return {
+    wabaId: phoneNumber.wabaId,
+    accessToken: resolveMetaAccessToken(phoneNumber)
+  }
 }
 
 const serializeTemplate = (template: {
@@ -230,7 +236,7 @@ export const getTenantWhatsappTemplates = async (tenantId: string): Promise<What
 
 export const createWhatsappTemplate = async (input: CreateWhatsappTemplateInput): Promise<WhatsappTemplateView> => {
   const normalized = normalizeTemplateInput(input)
-  const wabaId = await getWhatsappWabaId(input.tenantId)
+  const { wabaId, accessToken } = await getWhatsappWabaId(input.tenantId)
 
   const existingTemplate = await prisma.whatsappMessageTemplate.findUnique({
     where: {
@@ -252,28 +258,32 @@ export const createWhatsappTemplate = async (input: CreateWhatsappTemplateInput)
   let remoteTemplate: MetaTemplateCreateResponse
 
   try {
-    remoteTemplate = await requestMetaApi<MetaTemplateCreateResponse>(`${encodeURIComponent(wabaId)}/message_templates`, {
-      method: 'POST',
-      body: JSON.stringify({
-        name: normalized.name,
-        language: normalized.language,
-        category: normalized.category,
-        parameter_format: 'positional',
-        components: [
-          {
-            type: 'BODY',
-            text: normalized.bodyText,
-            ...(normalized.exampleValues.length
-              ? {
-                  example: {
-                    body_text: [normalized.exampleValues]
+    remoteTemplate = await requestMetaApi<MetaTemplateCreateResponse>(
+      `${encodeURIComponent(wabaId)}/message_templates`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          name: normalized.name,
+          language: normalized.language,
+          category: normalized.category,
+          parameter_format: 'positional',
+          components: [
+            {
+              type: 'BODY',
+              text: normalized.bodyText,
+              ...(normalized.exampleValues.length
+                ? {
+                    example: {
+                      body_text: [normalized.exampleValues]
+                    }
                   }
-                }
-              : {})
-          }
-        ]
-      })
-    })
+                : {})
+            }
+          ]
+        })
+      },
+      accessToken
+    )
   } catch (error) {
     throw metaErrorToTemplateError(error)
   }
@@ -310,13 +320,17 @@ export const createWhatsappTemplate = async (input: CreateWhatsappTemplateInput)
 }
 
 export const syncWhatsappTemplates = async (tenantId: string): Promise<WhatsappTemplateView[]> => {
-  const wabaId = await getWhatsappWabaId(tenantId)
+  const { wabaId, accessToken } = await getWhatsappWabaId(tenantId)
   let remoteTemplates: MetaTemplateRecord[]
 
   try {
-    const response = await requestMetaApi<MetaTemplateListResponse>(`${encodeURIComponent(wabaId)}/message_templates?limit=100`, {
-      method: 'GET'
-    })
+    const response = await requestMetaApi<MetaTemplateListResponse>(
+      `${encodeURIComponent(wabaId)}/message_templates?limit=100`,
+      {
+        method: 'GET'
+      },
+      accessToken
+    )
 
     remoteTemplates = response.data ?? []
   } catch (error) {

@@ -4,8 +4,9 @@ import { ChannelType, ConversationStatus, MessageDirection, MessageKind } from '
 import type { Prisma } from '../../../prisma/generated/prisma'
 
 import prisma from '@/lib/prisma'
-import { postMetaMessage, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
+import { postMetaMessageWithAccessToken, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
 import { getWhatsappReplyWindow } from '@/lib/whatsapp/reply-window'
+import { resolveMetaAccessToken } from '@/lib/whatsapp/token-vault'
 
 const MAX_TEXT_LENGTH = 4096
 
@@ -58,9 +59,7 @@ const normalizeRecipient = (whatsappWaId?: string | null, phoneE164?: string | n
   return recipient
 }
 
-export const sendWhatsappTextMessage = async (
-  input: SendWhatsappTextInput
-): Promise<SendWhatsappTextResult> => {
+export const sendWhatsappTextMessage = async (input: SendWhatsappTextInput): Promise<SendWhatsappTextResult> => {
   const body = normalizeBody(input.body)
 
   const conversation = await prisma.conversation.findFirst({
@@ -83,7 +82,11 @@ export const sendWhatsappTextMessage = async (
       },
       whatsappPhoneNumber: {
         select: {
-          phoneNumberId: true
+          phoneNumberId: true,
+          accessTokenCiphertext: true,
+          accessTokenIv: true,
+          accessTokenAuthTag: true,
+          accessTokenExpiresAt: true
         }
       },
       messages: {
@@ -132,17 +135,21 @@ export const sendWhatsappTextMessage = async (
   let payload
 
   try {
-    payload = await postMetaMessage(phoneNumberId, {
-      messaging_product: 'whatsapp',
-      recipient_type: 'individual',
-      to: recipient,
-      ...(latestInboundMetaMessageId ? { context: { message_id: latestInboundMetaMessageId } } : {}),
-      type: 'text',
-      text: {
-        preview_url: false,
-        body
-      }
-    })
+    payload = await postMetaMessageWithAccessToken(
+      phoneNumberId,
+      {
+        messaging_product: 'whatsapp',
+        recipient_type: 'individual',
+        to: recipient,
+        ...(latestInboundMetaMessageId ? { context: { message_id: latestInboundMetaMessageId } } : {}),
+        type: 'text',
+        text: {
+          preview_url: false,
+          body
+        }
+      },
+      resolveMetaAccessToken(conversation.whatsappPhoneNumber)
+    )
   } catch (error) {
     if (error instanceof WhatsappMetaApiError) {
       throw new WhatsappOutboundError(error.message, error.statusCode)

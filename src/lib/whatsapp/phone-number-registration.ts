@@ -1,17 +1,24 @@
 import 'server-only'
 
-import type { Prisma } from '../../../prisma/generated/prisma/client'
+import { WhatsappConnectionSource } from '../../../prisma/generated/prisma/client'
+import type { Prisma , WhatsappPhoneRegistrationStatus } from '../../../prisma/generated/prisma/client'
 
 import prisma from '@/lib/prisma'
+import { encryptMetaAccessToken } from '@/lib/whatsapp/token-vault'
 
 export type RegisterWhatsappPhoneNumberInput = {
   tenantSlug: string
   wabaId: string
   phoneNumberId: string
+  businessId?: string | null
   displayPhoneNumber?: string | null
   verifiedName?: string | null
   qualityRating?: string | null
   codeVerificationStatus?: string | null
+  accessToken?: string | null
+  accessTokenExpiresAt?: Date | null
+  registrationStatus?: WhatsappPhoneRegistrationStatus
+  connectionSource?: WhatsappConnectionSource
 }
 
 export type RegisterTenantWhatsappPhoneNumberInput = Omit<RegisterWhatsappPhoneNumberInput, 'tenantSlug'> & {
@@ -24,7 +31,10 @@ export type RegisterWhatsappPhoneNumberResult = {
   whatsappPhoneNumberId: string
   phoneNumberId: string
   wabaId: string
+  businessId: string | null
   displayPhoneNumber: string | null
+  connectionSource: WhatsappConnectionSource
+  connectedAt: Date | null
   created: boolean
 }
 
@@ -50,10 +60,15 @@ const upsertWhatsappPhoneNumberForTenant = async (
     tenantSlug: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    accessToken?: string | null
+    accessTokenExpiresAt?: Date | null
+    registrationStatus?: WhatsappPhoneRegistrationStatus
+    connectionSource?: WhatsappConnectionSource
   },
   tx: Prisma.TransactionClient
 ): Promise<RegisterWhatsappPhoneNumberResult> => {
@@ -73,6 +88,19 @@ const upsertWhatsappPhoneNumberForTenant = async (
     )
   }
 
+  const encryptedToken = input.accessToken ? encryptMetaAccessToken(input.accessToken) : null
+
+  const connectionData = encryptedToken
+    ? {
+        businessId: input.businessId ?? null,
+        ...encryptedToken,
+        accessTokenExpiresAt: input.accessTokenExpiresAt ?? null,
+        ...(input.registrationStatus ? { registrationStatus: input.registrationStatus } : {}),
+        connectionSource: input.connectionSource ?? WhatsappConnectionSource.EMBEDDED_SIGNUP,
+        connectedAt: new Date()
+      }
+    : {}
+
   const phoneBinding = existingPhoneNumber
     ? await tx.whatsappPhoneNumber.update({
         where: {
@@ -83,7 +111,8 @@ const upsertWhatsappPhoneNumberForTenant = async (
           displayPhoneNumber: input.displayPhoneNumber,
           verifiedName: input.verifiedName,
           qualityRating: input.qualityRating,
-          codeVerificationStatus: input.codeVerificationStatus
+          codeVerificationStatus: input.codeVerificationStatus,
+          ...connectionData
         }
       })
     : await tx.whatsappPhoneNumber.create({
@@ -94,7 +123,8 @@ const upsertWhatsappPhoneNumberForTenant = async (
           displayPhoneNumber: input.displayPhoneNumber,
           verifiedName: input.verifiedName,
           qualityRating: input.qualityRating,
-          codeVerificationStatus: input.codeVerificationStatus
+          codeVerificationStatus: input.codeVerificationStatus,
+          ...connectionData
         }
       })
 
@@ -104,7 +134,10 @@ const upsertWhatsappPhoneNumberForTenant = async (
     whatsappPhoneNumberId: phoneBinding.id,
     phoneNumberId: phoneBinding.phoneNumberId,
     wabaId: phoneBinding.wabaId,
+    businessId: phoneBinding.businessId,
     displayPhoneNumber: phoneBinding.displayPhoneNumber,
+    connectionSource: phoneBinding.connectionSource,
+    connectedAt: phoneBinding.connectedAt,
     created: existingPhoneNumber === null
   }
 }
@@ -115,6 +148,7 @@ export const registerTenantWhatsappPhoneNumber = async (
   const tenantId = normalizeRequiredValue(input.tenantId, 'tenantId')
   const wabaId = normalizeRequiredValue(input.wabaId, 'META_WABA_ID')
   const phoneNumberId = normalizeRequiredValue(input.phoneNumberId, 'META_PHONE_NUMBER_ID')
+  const businessId = normalizeOptionalValue(input.businessId)
   const displayPhoneNumber = normalizeOptionalValue(input.displayPhoneNumber)
   const verifiedName = normalizeOptionalValue(input.verifiedName)
   const qualityRating = normalizeOptionalValue(input.qualityRating)
@@ -141,10 +175,15 @@ export const registerTenantWhatsappPhoneNumber = async (
         tenantSlug: tenant.slug,
         wabaId,
         phoneNumberId,
+        businessId,
         displayPhoneNumber,
         verifiedName,
         qualityRating,
-        codeVerificationStatus
+        codeVerificationStatus,
+        accessToken: input.accessToken,
+        accessTokenExpiresAt: input.accessTokenExpiresAt,
+        registrationStatus: input.registrationStatus,
+        connectionSource: input.connectionSource
       },
       tx
     )
@@ -157,6 +196,7 @@ export const registerWhatsappPhoneNumber = async (
   const tenantSlug = normalizeRequiredValue(input.tenantSlug, 'WHATSAPP_TENANT_SLUG').toLowerCase()
   const wabaId = normalizeRequiredValue(input.wabaId, 'META_WABA_ID')
   const phoneNumberId = normalizeRequiredValue(input.phoneNumberId, 'META_PHONE_NUMBER_ID')
+  const businessId = normalizeOptionalValue(input.businessId)
   const displayPhoneNumber = normalizeOptionalValue(input.displayPhoneNumber)
   const verifiedName = normalizeOptionalValue(input.verifiedName)
   const qualityRating = normalizeOptionalValue(input.qualityRating)
@@ -183,10 +223,15 @@ export const registerWhatsappPhoneNumber = async (
         tenantSlug: tenant.slug,
         wabaId,
         phoneNumberId,
+        businessId,
         displayPhoneNumber,
         verifiedName,
         qualityRating,
-        codeVerificationStatus
+        codeVerificationStatus,
+        accessToken: input.accessToken,
+        accessTokenExpiresAt: input.accessTokenExpiresAt,
+        registrationStatus: input.registrationStatus,
+        connectionSource: input.connectionSource
       },
       tx
     )

@@ -254,6 +254,23 @@ export const WhatsappWebhookProcessingStatus: {
 
 export type WhatsappWebhookProcessingStatus = (typeof WhatsappWebhookProcessingStatus)[keyof typeof WhatsappWebhookProcessingStatus]
 
+
+export const WhatsappConnectionSource: {
+  MANUAL: 'MANUAL',
+  EMBEDDED_SIGNUP: 'EMBEDDED_SIGNUP'
+};
+
+export type WhatsappConnectionSource = (typeof WhatsappConnectionSource)[keyof typeof WhatsappConnectionSource]
+
+
+export const WhatsappPhoneRegistrationStatus: {
+  PENDING: 'PENDING',
+  REGISTERED: 'REGISTERED',
+  FAILED: 'FAILED'
+};
+
+export type WhatsappPhoneRegistrationStatus = (typeof WhatsappPhoneRegistrationStatus)[keyof typeof WhatsappPhoneRegistrationStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -319,6 +336,14 @@ export const WhatsappWebhookEventType: typeof $Enums.WhatsappWebhookEventType
 export type WhatsappWebhookProcessingStatus = $Enums.WhatsappWebhookProcessingStatus
 
 export const WhatsappWebhookProcessingStatus: typeof $Enums.WhatsappWebhookProcessingStatus
+
+export type WhatsappConnectionSource = $Enums.WhatsappConnectionSource
+
+export const WhatsappConnectionSource: typeof $Enums.WhatsappConnectionSource
+
+export type WhatsappPhoneRegistrationStatus = $Enums.WhatsappPhoneRegistrationStatus
+
+export const WhatsappPhoneRegistrationStatus: typeof $Enums.WhatsappPhoneRegistrationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -18798,10 +18823,18 @@ export namespace Prisma {
     tenantId: string | null
     wabaId: string | null
     phoneNumberId: string | null
+    businessId: string | null
     displayPhoneNumber: string | null
     verifiedName: string | null
     qualityRating: string | null
     codeVerificationStatus: string | null
+    connectionSource: $Enums.WhatsappConnectionSource | null
+    registrationStatus: $Enums.WhatsappPhoneRegistrationStatus | null
+    accessTokenCiphertext: string | null
+    accessTokenIv: string | null
+    accessTokenAuthTag: string | null
+    accessTokenExpiresAt: Date | null
+    connectedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -18811,10 +18844,18 @@ export namespace Prisma {
     tenantId: string | null
     wabaId: string | null
     phoneNumberId: string | null
+    businessId: string | null
     displayPhoneNumber: string | null
     verifiedName: string | null
     qualityRating: string | null
     codeVerificationStatus: string | null
+    connectionSource: $Enums.WhatsappConnectionSource | null
+    registrationStatus: $Enums.WhatsappPhoneRegistrationStatus | null
+    accessTokenCiphertext: string | null
+    accessTokenIv: string | null
+    accessTokenAuthTag: string | null
+    accessTokenExpiresAt: Date | null
+    connectedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -18824,10 +18865,18 @@ export namespace Prisma {
     tenantId: number
     wabaId: number
     phoneNumberId: number
+    businessId: number
     displayPhoneNumber: number
     verifiedName: number
     qualityRating: number
     codeVerificationStatus: number
+    connectionSource: number
+    registrationStatus: number
+    accessTokenCiphertext: number
+    accessTokenIv: number
+    accessTokenAuthTag: number
+    accessTokenExpiresAt: number
+    connectedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -18839,10 +18888,18 @@ export namespace Prisma {
     tenantId?: true
     wabaId?: true
     phoneNumberId?: true
+    businessId?: true
     displayPhoneNumber?: true
     verifiedName?: true
     qualityRating?: true
     codeVerificationStatus?: true
+    connectionSource?: true
+    registrationStatus?: true
+    accessTokenCiphertext?: true
+    accessTokenIv?: true
+    accessTokenAuthTag?: true
+    accessTokenExpiresAt?: true
+    connectedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -18852,10 +18909,18 @@ export namespace Prisma {
     tenantId?: true
     wabaId?: true
     phoneNumberId?: true
+    businessId?: true
     displayPhoneNumber?: true
     verifiedName?: true
     qualityRating?: true
     codeVerificationStatus?: true
+    connectionSource?: true
+    registrationStatus?: true
+    accessTokenCiphertext?: true
+    accessTokenIv?: true
+    accessTokenAuthTag?: true
+    accessTokenExpiresAt?: true
+    connectedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -18865,10 +18930,18 @@ export namespace Prisma {
     tenantId?: true
     wabaId?: true
     phoneNumberId?: true
+    businessId?: true
     displayPhoneNumber?: true
     verifiedName?: true
     qualityRating?: true
     codeVerificationStatus?: true
+    connectionSource?: true
+    registrationStatus?: true
+    accessTokenCiphertext?: true
+    accessTokenIv?: true
+    accessTokenAuthTag?: true
+    accessTokenExpiresAt?: true
+    connectedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -18951,10 +19024,18 @@ export namespace Prisma {
     tenantId: string
     wabaId: string
     phoneNumberId: string
+    businessId: string | null
     displayPhoneNumber: string | null
     verifiedName: string | null
     qualityRating: string | null
     codeVerificationStatus: string | null
+    connectionSource: $Enums.WhatsappConnectionSource
+    registrationStatus: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext: string | null
+    accessTokenIv: string | null
+    accessTokenAuthTag: string | null
+    accessTokenExpiresAt: Date | null
+    connectedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: WhatsappPhoneNumberCountAggregateOutputType | null
@@ -18981,10 +19062,18 @@ export namespace Prisma {
     tenantId?: boolean
     wabaId?: boolean
     phoneNumberId?: boolean
+    businessId?: boolean
     displayPhoneNumber?: boolean
     verifiedName?: boolean
     qualityRating?: boolean
     codeVerificationStatus?: boolean
+    connectionSource?: boolean
+    registrationStatus?: boolean
+    accessTokenCiphertext?: boolean
+    accessTokenIv?: boolean
+    accessTokenAuthTag?: boolean
+    accessTokenExpiresAt?: boolean
+    connectedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
@@ -18998,10 +19087,18 @@ export namespace Prisma {
     tenantId?: boolean
     wabaId?: boolean
     phoneNumberId?: boolean
+    businessId?: boolean
     displayPhoneNumber?: boolean
     verifiedName?: boolean
     qualityRating?: boolean
     codeVerificationStatus?: boolean
+    connectionSource?: boolean
+    registrationStatus?: boolean
+    accessTokenCiphertext?: boolean
+    accessTokenIv?: boolean
+    accessTokenAuthTag?: boolean
+    accessTokenExpiresAt?: boolean
+    connectedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
@@ -19012,10 +19109,18 @@ export namespace Prisma {
     tenantId?: boolean
     wabaId?: boolean
     phoneNumberId?: boolean
+    businessId?: boolean
     displayPhoneNumber?: boolean
     verifiedName?: boolean
     qualityRating?: boolean
     codeVerificationStatus?: boolean
+    connectionSource?: boolean
+    registrationStatus?: boolean
+    accessTokenCiphertext?: boolean
+    accessTokenIv?: boolean
+    accessTokenAuthTag?: boolean
+    accessTokenExpiresAt?: boolean
+    connectedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
@@ -19026,15 +19131,23 @@ export namespace Prisma {
     tenantId?: boolean
     wabaId?: boolean
     phoneNumberId?: boolean
+    businessId?: boolean
     displayPhoneNumber?: boolean
     verifiedName?: boolean
     qualityRating?: boolean
     codeVerificationStatus?: boolean
+    connectionSource?: boolean
+    registrationStatus?: boolean
+    accessTokenCiphertext?: boolean
+    accessTokenIv?: boolean
+    accessTokenAuthTag?: boolean
+    accessTokenExpiresAt?: boolean
+    connectedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WhatsappPhoneNumberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "wabaId" | "phoneNumberId" | "displayPhoneNumber" | "verifiedName" | "qualityRating" | "codeVerificationStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["whatsappPhoneNumber"]>
+  export type WhatsappPhoneNumberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "wabaId" | "phoneNumberId" | "businessId" | "displayPhoneNumber" | "verifiedName" | "qualityRating" | "codeVerificationStatus" | "connectionSource" | "registrationStatus" | "accessTokenCiphertext" | "accessTokenIv" | "accessTokenAuthTag" | "accessTokenExpiresAt" | "connectedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["whatsappPhoneNumber"]>
   export type WhatsappPhoneNumberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     conversations?: boolean | WhatsappPhoneNumber$conversationsArgs<ExtArgs>
@@ -19060,10 +19173,18 @@ export namespace Prisma {
       tenantId: string
       wabaId: string
       phoneNumberId: string
+      businessId: string | null
       displayPhoneNumber: string | null
       verifiedName: string | null
       qualityRating: string | null
       codeVerificationStatus: string | null
+      connectionSource: $Enums.WhatsappConnectionSource
+      registrationStatus: $Enums.WhatsappPhoneRegistrationStatus
+      accessTokenCiphertext: string | null
+      accessTokenIv: string | null
+      accessTokenAuthTag: string | null
+      accessTokenExpiresAt: Date | null
+      connectedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["whatsappPhoneNumber"]>
@@ -19496,10 +19617,18 @@ export namespace Prisma {
     readonly tenantId: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly wabaId: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly phoneNumberId: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly businessId: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly displayPhoneNumber: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly verifiedName: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly qualityRating: FieldRef<"WhatsappPhoneNumber", 'String'>
     readonly codeVerificationStatus: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly connectionSource: FieldRef<"WhatsappPhoneNumber", 'WhatsappConnectionSource'>
+    readonly registrationStatus: FieldRef<"WhatsappPhoneNumber", 'WhatsappPhoneRegistrationStatus'>
+    readonly accessTokenCiphertext: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly accessTokenIv: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly accessTokenAuthTag: FieldRef<"WhatsappPhoneNumber", 'String'>
+    readonly accessTokenExpiresAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
+    readonly connectedAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
     readonly createdAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
     readonly updatedAt: FieldRef<"WhatsappPhoneNumber", 'DateTime'>
   }
@@ -23797,10 +23926,18 @@ export namespace Prisma {
     tenantId: 'tenantId',
     wabaId: 'wabaId',
     phoneNumberId: 'phoneNumberId',
+    businessId: 'businessId',
     displayPhoneNumber: 'displayPhoneNumber',
     verifiedName: 'verifiedName',
     qualityRating: 'qualityRating',
     codeVerificationStatus: 'codeVerificationStatus',
+    connectionSource: 'connectionSource',
+    registrationStatus: 'registrationStatus',
+    accessTokenCiphertext: 'accessTokenCiphertext',
+    accessTokenIv: 'accessTokenIv',
+    accessTokenAuthTag: 'accessTokenAuthTag',
+    accessTokenExpiresAt: 'accessTokenExpiresAt',
+    connectedAt: 'connectedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -24184,6 +24321,34 @@ export namespace Prisma {
    * Reference to a field of type 'WhatsappTemplateStatus[]'
    */
   export type ListEnumWhatsappTemplateStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappTemplateStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappConnectionSource'
+   */
+  export type EnumWhatsappConnectionSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappConnectionSource'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappConnectionSource[]'
+   */
+  export type ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappConnectionSource[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappPhoneRegistrationStatus'
+   */
+  export type EnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappPhoneRegistrationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'WhatsappPhoneRegistrationStatus[]'
+   */
+  export type ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsappPhoneRegistrationStatus[]'>
     
 
 
@@ -25480,10 +25645,18 @@ export namespace Prisma {
     tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
     wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
     phoneNumberId?: StringFilter<"WhatsappPhoneNumber"> | string
+    businessId?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenIv?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenAuthTag?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenExpiresAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
+    connectedAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
     createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
     updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
@@ -25496,10 +25669,18 @@ export namespace Prisma {
     tenantId?: SortOrder
     wabaId?: SortOrder
     phoneNumberId?: SortOrder
+    businessId?: SortOrderInput | SortOrder
     displayPhoneNumber?: SortOrderInput | SortOrder
     verifiedName?: SortOrderInput | SortOrder
     qualityRating?: SortOrderInput | SortOrder
     codeVerificationStatus?: SortOrderInput | SortOrder
+    connectionSource?: SortOrder
+    registrationStatus?: SortOrder
+    accessTokenCiphertext?: SortOrderInput | SortOrder
+    accessTokenIv?: SortOrderInput | SortOrder
+    accessTokenAuthTag?: SortOrderInput | SortOrder
+    accessTokenExpiresAt?: SortOrderInput | SortOrder
+    connectedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
@@ -25515,10 +25696,18 @@ export namespace Prisma {
     NOT?: WhatsappPhoneNumberWhereInput | WhatsappPhoneNumberWhereInput[]
     tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
     wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
+    businessId?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenIv?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenAuthTag?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenExpiresAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
+    connectedAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
     createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
     updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
@@ -25531,10 +25720,18 @@ export namespace Prisma {
     tenantId?: SortOrder
     wabaId?: SortOrder
     phoneNumberId?: SortOrder
+    businessId?: SortOrderInput | SortOrder
     displayPhoneNumber?: SortOrderInput | SortOrder
     verifiedName?: SortOrderInput | SortOrder
     qualityRating?: SortOrderInput | SortOrder
     codeVerificationStatus?: SortOrderInput | SortOrder
+    connectionSource?: SortOrder
+    registrationStatus?: SortOrder
+    accessTokenCiphertext?: SortOrderInput | SortOrder
+    accessTokenIv?: SortOrderInput | SortOrder
+    accessTokenAuthTag?: SortOrderInput | SortOrder
+    accessTokenExpiresAt?: SortOrderInput | SortOrder
+    connectedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WhatsappPhoneNumberCountOrderByAggregateInput
@@ -25550,10 +25747,18 @@ export namespace Prisma {
     tenantId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
     wabaId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
     phoneNumberId?: StringWithAggregatesFilter<"WhatsappPhoneNumber"> | string
+    businessId?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
     displayPhoneNumber?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
     verifiedName?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
     qualityRating?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
     codeVerificationStatus?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    connectionSource?: EnumWhatsappConnectionSourceWithAggregatesFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusWithAggregatesFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenIv?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenAuthTag?: StringNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenExpiresAt?: DateTimeNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string | null
+    connectedAt?: DateTimeNullableWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"WhatsappPhoneNumber"> | Date | string
   }
@@ -27224,10 +27429,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
@@ -27240,10 +27453,18 @@ export namespace Prisma {
     tenantId: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
@@ -27254,10 +27475,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
@@ -27270,10 +27499,18 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
@@ -27285,10 +27522,18 @@ export namespace Prisma {
     tenantId: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27297,10 +27542,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27310,10 +27563,18 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28979,15 +29240,37 @@ export namespace Prisma {
     _max?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
   }
 
+  export type EnumWhatsappConnectionSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappConnectionSource | EnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel> | $Enums.WhatsappConnectionSource
+  }
+
+  export type EnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappPhoneRegistrationStatus | EnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel> | $Enums.WhatsappPhoneRegistrationStatus
+  }
+
   export type WhatsappPhoneNumberCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
     wabaId?: SortOrder
     phoneNumberId?: SortOrder
+    businessId?: SortOrder
     displayPhoneNumber?: SortOrder
     verifiedName?: SortOrder
     qualityRating?: SortOrder
     codeVerificationStatus?: SortOrder
+    connectionSource?: SortOrder
+    registrationStatus?: SortOrder
+    accessTokenCiphertext?: SortOrder
+    accessTokenIv?: SortOrder
+    accessTokenAuthTag?: SortOrder
+    accessTokenExpiresAt?: SortOrder
+    connectedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -28997,10 +29280,18 @@ export namespace Prisma {
     tenantId?: SortOrder
     wabaId?: SortOrder
     phoneNumberId?: SortOrder
+    businessId?: SortOrder
     displayPhoneNumber?: SortOrder
     verifiedName?: SortOrder
     qualityRating?: SortOrder
     codeVerificationStatus?: SortOrder
+    connectionSource?: SortOrder
+    registrationStatus?: SortOrder
+    accessTokenCiphertext?: SortOrder
+    accessTokenIv?: SortOrder
+    accessTokenAuthTag?: SortOrder
+    accessTokenExpiresAt?: SortOrder
+    connectedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29010,12 +29301,40 @@ export namespace Prisma {
     tenantId?: SortOrder
     wabaId?: SortOrder
     phoneNumberId?: SortOrder
+    businessId?: SortOrder
     displayPhoneNumber?: SortOrder
     verifiedName?: SortOrder
     qualityRating?: SortOrder
     codeVerificationStatus?: SortOrder
+    connectionSource?: SortOrder
+    registrationStatus?: SortOrder
+    accessTokenCiphertext?: SortOrder
+    accessTokenIv?: SortOrder
+    accessTokenAuthTag?: SortOrder
+    accessTokenExpiresAt?: SortOrder
+    connectedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumWhatsappConnectionSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappConnectionSource | EnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappConnectionSourceWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappConnectionSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel>
+  }
+
+  export type EnumWhatsappPhoneRegistrationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappPhoneRegistrationStatus | EnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappPhoneRegistrationStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappPhoneRegistrationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel>
   }
 
   export type EnumWhatsappWebhookEventTypeFilter<$PrismaModel = never> = {
@@ -30634,6 +30953,14 @@ export namespace Prisma {
     connect?: WhatsappWebhookEventWhereUniqueInput | WhatsappWebhookEventWhereUniqueInput[]
   }
 
+  export type EnumWhatsappConnectionSourceFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappConnectionSource
+  }
+
+  export type EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.WhatsappPhoneRegistrationStatus
+  }
+
   export type TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput = {
     create?: XOR<TenantCreateWithoutWhatsappPhoneNumbersInput, TenantUncheckedCreateWithoutWhatsappPhoneNumbersInput>
     connectOrCreate?: TenantCreateOrConnectWithoutWhatsappPhoneNumbersInput
@@ -31389,6 +31716,40 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
     _max?: NestedEnumWhatsappTemplateStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumWhatsappConnectionSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappConnectionSource | EnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel> | $Enums.WhatsappConnectionSource
+  }
+
+  export type NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappPhoneRegistrationStatus | EnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel> | $Enums.WhatsappPhoneRegistrationStatus
+  }
+
+  export type NestedEnumWhatsappConnectionSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappConnectionSource | EnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappConnectionSource[] | ListEnumWhatsappConnectionSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappConnectionSourceWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappConnectionSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappConnectionSourceFilter<$PrismaModel>
+  }
+
+  export type NestedEnumWhatsappPhoneRegistrationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WhatsappPhoneRegistrationStatus | EnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WhatsappPhoneRegistrationStatus[] | ListEnumWhatsappPhoneRegistrationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWhatsappPhoneRegistrationStatusWithAggregatesFilter<$PrismaModel> | $Enums.WhatsappPhoneRegistrationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel>
+    _max?: NestedEnumWhatsappPhoneRegistrationStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumWhatsappWebhookEventTypeFilter<$PrismaModel = never> = {
@@ -32296,10 +32657,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     conversations?: ConversationCreateNestedManyWithoutWhatsappPhoneNumberInput
@@ -32310,10 +32679,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
@@ -32707,10 +33084,18 @@ export namespace Prisma {
     tenantId?: StringFilter<"WhatsappPhoneNumber"> | string
     wabaId?: StringFilter<"WhatsappPhoneNumber"> | string
     phoneNumberId?: StringFilter<"WhatsappPhoneNumber"> | string
+    businessId?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     displayPhoneNumber?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     verifiedName?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     qualityRating?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
     codeVerificationStatus?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFilter<"WhatsappPhoneNumber"> | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenIv?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenAuthTag?: StringNullableFilter<"WhatsappPhoneNumber"> | string | null
+    accessTokenExpiresAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
+    connectedAt?: DateTimeNullableFilter<"WhatsappPhoneNumber"> | Date | string | null
     createdAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
     updatedAt?: DateTimeFilter<"WhatsappPhoneNumber"> | Date | string
   }
@@ -34146,10 +34531,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
@@ -34161,10 +34554,18 @@ export namespace Prisma {
     tenantId: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     webhookEvents?: WhatsappWebhookEventUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
@@ -34450,10 +34851,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
@@ -34465,10 +34874,18 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     webhookEvents?: WhatsappWebhookEventUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
@@ -35253,10 +35670,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutWhatsappPhoneNumbersInput
@@ -35268,10 +35693,18 @@ export namespace Prisma {
     tenantId: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     conversations?: ConversationUncheckedCreateNestedManyWithoutWhatsappPhoneNumberInput
@@ -35358,10 +35791,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutWhatsappPhoneNumbersNestedInput
@@ -35373,10 +35814,18 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
@@ -36223,10 +36672,18 @@ export namespace Prisma {
     id?: string
     wabaId: string
     phoneNumberId: string
+    businessId?: string | null
     displayPhoneNumber?: string | null
     verifiedName?: string | null
     qualityRating?: string | null
     codeVerificationStatus?: string | null
+    connectionSource?: $Enums.WhatsappConnectionSource
+    registrationStatus?: $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: string | null
+    accessTokenIv?: string | null
+    accessTokenAuthTag?: string | null
+    accessTokenExpiresAt?: Date | string | null
+    connectedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36613,10 +37070,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUpdateManyWithoutWhatsappPhoneNumberNestedInput
@@ -36627,10 +37092,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversations?: ConversationUncheckedUpdateManyWithoutWhatsappPhoneNumberNestedInput
@@ -36641,10 +37114,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     wabaId?: StringFieldUpdateOperationsInput | string
     phoneNumberId?: StringFieldUpdateOperationsInput | string
+    businessId?: NullableStringFieldUpdateOperationsInput | string | null
     displayPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     verifiedName?: NullableStringFieldUpdateOperationsInput | string | null
     qualityRating?: NullableStringFieldUpdateOperationsInput | string | null
     codeVerificationStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    connectionSource?: EnumWhatsappConnectionSourceFieldUpdateOperationsInput | $Enums.WhatsappConnectionSource
+    registrationStatus?: EnumWhatsappPhoneRegistrationStatusFieldUpdateOperationsInput | $Enums.WhatsappPhoneRegistrationStatus
+    accessTokenCiphertext?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenIv?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenAuthTag?: NullableStringFieldUpdateOperationsInput | string | null
+    accessTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    connectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

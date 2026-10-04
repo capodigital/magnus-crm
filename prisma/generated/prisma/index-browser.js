@@ -312,10 +312,18 @@ exports.Prisma.WhatsappPhoneNumberScalarFieldEnum = {
   tenantId: 'tenantId',
   wabaId: 'wabaId',
   phoneNumberId: 'phoneNumberId',
+  businessId: 'businessId',
   displayPhoneNumber: 'displayPhoneNumber',
   verifiedName: 'verifiedName',
   qualityRating: 'qualityRating',
   codeVerificationStatus: 'codeVerificationStatus',
+  connectionSource: 'connectionSource',
+  registrationStatus: 'registrationStatus',
+  accessTokenCiphertext: 'accessTokenCiphertext',
+  accessTokenIv: 'accessTokenIv',
+  accessTokenAuthTag: 'accessTokenAuthTag',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  connectedAt: 'connectedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -482,6 +490,17 @@ exports.WhatsappTemplateStatus = exports.$Enums.WhatsappTemplateStatus = {
   REJECTED: 'REJECTED',
   PAUSED: 'PAUSED',
   DISABLED: 'DISABLED'
+};
+
+exports.WhatsappConnectionSource = exports.$Enums.WhatsappConnectionSource = {
+  MANUAL: 'MANUAL',
+  EMBEDDED_SIGNUP: 'EMBEDDED_SIGNUP'
+};
+
+exports.WhatsappPhoneRegistrationStatus = exports.$Enums.WhatsappPhoneRegistrationStatus = {
+  PENDING: 'PENDING',
+  REGISTERED: 'REGISTERED',
+  FAILED: 'FAILED'
 };
 
 exports.WhatsappWebhookEventType = exports.$Enums.WhatsappWebhookEventType = {

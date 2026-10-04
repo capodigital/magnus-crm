@@ -165,6 +165,17 @@ enum WhatsappWebhookProcessingStatus {
   FAILED
 }
 
+enum WhatsappConnectionSource {
+  MANUAL
+  EMBEDDED_SIGNUP
+}
+
+enum WhatsappPhoneRegistrationStatus {
+  PENDING
+  REGISTERED
+  FAILED
+}
+
 model Tenant {
   id                       String                    @id @default(cuid())
   slug                     String                    @unique
@@ -390,17 +401,25 @@ model WhatsappMessageTemplate {
 }
 
 model WhatsappPhoneNumber {
-  id                     String                 @id @default(cuid())
+  id                     String                          @id @default(cuid())
   tenantId               String
   wabaId                 String
-  phoneNumberId          String                 @unique
+  phoneNumberId          String                          @unique
+  businessId             String?
   displayPhoneNumber     String?
   verifiedName           String?
   qualityRating          String?
   codeVerificationStatus String?
-  createdAt              DateTime               @default(now())
-  updatedAt              DateTime               @updatedAt
-  tenant                 Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  connectionSource       WhatsappConnectionSource        @default(MANUAL)
+  registrationStatus     WhatsappPhoneRegistrationStatus @default(PENDING)
+  accessTokenCiphertext  String?
+  accessTokenIv          String?
+  accessTokenAuthTag     String?
+  accessTokenExpiresAt   DateTime?
+  connectedAt            DateTime?
+  createdAt              DateTime                        @default(now())
+  updatedAt              DateTime                        @updatedAt
+  tenant                 Tenant                          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   conversations          Conversation[]
   webhookEvents          WhatsappWebhookEvent[]
 
