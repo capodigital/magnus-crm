@@ -43,6 +43,8 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - Added a focused Spanish error message for the missing `business_management` permission while preserving Meta's original diagnostic detail; the behavior is covered by the Embedded Signup utility test.
 - After the diagnostic change, the Embedded Signup utility test, token-vault test, TypeScript, ESLint, production build, production protected-route smoke test, and diff check passed.
 - The Settings Embedded Signup panel now states that advanced `business_management` access is required before the Business Portfolio ownership check can succeed.
+- Business Portfolio WABA verification now follows Meta pagination with a bounded cursor loop, preventing valid WABAs on later pages from being rejected and avoiding unbounded requests.
+- The pagination helper is covered by the Embedded Signup utility checks; after this change TypeScript, ESLint, build, and diff validation passed.
 
 ## Next safe action
 
