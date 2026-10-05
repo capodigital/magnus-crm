@@ -5,6 +5,7 @@ import { WhatsappConnectionSource, WhatsappPhoneRegistrationStatus } from '../..
 import { type EmbeddedSignupSessionInfo } from '@/lib/whatsapp/embedded-signup-message'
 import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedded-signup-errors'
 import { exchangeMetaEmbeddedSignupCode, requestMetaApi, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
+import { getNextMetaPageCursor } from '@/lib/whatsapp/meta-pagination'
 import { registerTenantWhatsappPhoneNumber } from '@/lib/whatsapp/phone-number-registration'
 
 type MetaWabaResponse = {
@@ -35,6 +36,12 @@ type MetaBusinessWabaListResponse = {
     id?: string
     name?: string
   }>
+  paging?: {
+    next?: string
+    cursors?: {
+      after?: string
+    }
+  }
 }
 
 type MetaSubscribeResponse = {
@@ -43,6 +50,8 @@ type MetaSubscribeResponse = {
     message?: string
   }
 }
+
+const MAX_BUSINESS_WABA_PAGES = 100
 
 export class EmbeddedSignupError extends Error {
   statusCode: number
@@ -147,14 +156,37 @@ const verifyConnectedResources = async (sessionInfo: EmbeddedSignupSessionInfo, 
 }
 
 const verifyWabaBelongsToBusiness = async (businessId: string, wabaId: string, accessToken: string) => {
-  let response: MetaBusinessWabaListResponse
+  const wabas: MetaBusinessWabaListResponse['data'] = []
+  let cursor: string | null = null
+  let hasMorePages = false
 
   try {
-    response = await requestMetaApi<MetaBusinessWabaListResponse>(
-      `${encodeURIComponent(businessId)}/client_whatsapp_business_accounts?fields=id,name`,
-      { method: 'GET' },
-      accessToken
-    )
+    for (let page = 0; page < MAX_BUSINESS_WABA_PAGES; page += 1) {
+      const query = new URLSearchParams({
+        fields: 'id,name',
+        limit: '100'
+      })
+
+      if (cursor) query.set('after', cursor)
+
+      const response = await requestMetaApi<MetaBusinessWabaListResponse>(
+        `${encodeURIComponent(businessId)}/client_whatsapp_business_accounts?${query.toString()}`,
+        { method: 'GET' },
+        accessToken
+      )
+
+      wabas.push(...(response.data ?? []))
+
+      const nextCursor = getNextMetaPageCursor(cursor, response)
+
+      if (!nextCursor) {
+        hasMorePages = false
+        break
+      }
+
+      cursor = nextCursor
+      hasMorePages = true
+    }
   } catch (error) {
     if (error instanceof WhatsappMetaApiError) {
       throw new EmbeddedSignupError(formatEmbeddedSignupWabaVerificationError(error.message), error.statusCode)
@@ -163,7 +195,14 @@ const verifyWabaBelongsToBusiness = async (businessId: string, wabaId: string, a
     throw error
   }
 
-  if (!response.data?.some(item => item.id === wabaId)) {
+  if (hasMorePages) {
+    throw new EmbeddedSignupError(
+      'Meta devolvió demasiadas páginas de WABAs para verificar el Business Portfolio. Inténtalo nuevamente.',
+      502
+    )
+  }
+
+  if (!wabas.some(item => item.id === wabaId)) {
     throw new EmbeddedSignupError(
       'El WABA seleccionado no pertenece al Business Portfolio autorizado para este workspace.',
       403

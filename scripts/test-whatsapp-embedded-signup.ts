@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 
 import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedded-signup-errors'
 import { parseEmbeddedSignupMessage } from '@/lib/whatsapp/embedded-signup-message'
+import { getNextMetaPageCursor } from '@/lib/whatsapp/meta-pagination'
 
 assert.deepEqual(
   parseEmbeddedSignupMessage({
@@ -99,5 +100,15 @@ assert.equal(
   formatEmbeddedSignupWabaVerificationError('Meta devolvió una respuesta inválida.'),
   'No pudimos verificar el WABA dentro del Business Portfolio: Meta devolvió una respuesta inválida.'
 )
+
+assert.equal(
+  getNextMetaPageCursor(null, { paging: { next: 'https://graph.facebook.com/next', cursors: { after: 'cursor-1' } } }),
+  'cursor-1'
+)
+assert.equal(
+  getNextMetaPageCursor('cursor-1', { paging: { next: 'https://graph.facebook.com/next', cursors: { after: 'cursor-1' } } }),
+  null
+)
+assert.equal(getNextMetaPageCursor(null, { paging: { cursors: { after: 'cursor-1' } } }), null)
 
 console.log('WhatsApp Embedded Signup utility checks passed.')
