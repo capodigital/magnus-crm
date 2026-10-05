@@ -27,3 +27,9 @@
 - Subscribe the connected WABA to the app during onboarding and require phone registration with a six-digit PIN that is never persisted.
 - Store the exchanged token expiry and fall back to the configured provider System User token after it expires.
 - Make provider System User attachment optional until Meta grants the required `business_management` access and the production System User credentials are configured.
+
+## 2026-10-04: Embedded Signup v4 launch contract
+
+- Use Meta's generated `extras.version: "v4"` launch contract instead of the older `featureType` field.
+- Keep `extras.setup` empty for the shared SaaS configuration; tenant-specific prefill data must be supplied dynamically only after the tenant provides it.
+- Accept a single-item `waba_ids` fallback from session logging, but reject ambiguous multi-WABA events because the current tenant connection persists one WABA and one phone number.

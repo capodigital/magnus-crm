@@ -52,11 +52,22 @@ export const parseEmbeddedSignupMessage = (value: unknown): EmbeddedSignupMessag
 
   if (errorMessage) return { error: errorMessage }
 
-  const wabaId = String(nestedData.waba_id ?? message.waba_id ?? '')
+  const wabaIds = Array.isArray(nestedData.waba_ids)
+    ? nestedData.waba_ids.filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
+    : []
+
+  const primaryWabaId = nestedData.waba_id ?? message.waba_id ?? (wabaIds.length === 1 ? wabaIds[0] : '')
+  const wabaId = String(primaryWabaId)
   const phoneNumberId = String(nestedData.phone_number_id ?? message.phone_number_id ?? '')
   const businessId = String(nestedData.business_id ?? message.business_id ?? '')
 
-  if (!wabaId) return null
+  if (!wabaId) {
+    if (wabaIds.length > 1) {
+      return { error: 'Meta devolvió varios WABA. Selecciona una configuración de un solo WABA e inténtalo nuevamente.' }
+    }
+
+    return null
+  }
 
   return {
     wabaId,

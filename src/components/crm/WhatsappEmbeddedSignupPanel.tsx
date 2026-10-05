@@ -319,8 +319,8 @@ const WhatsappEmbeddedSignupPanel = ({
         response_type: 'code',
         override_default_response_type: true,
         extras: {
+          version: 'v4',
           setup: {},
-          featureType: 'whatsapp_business_app_onboarding',
           ...(process.env.NEXT_PUBLIC_META_EMBEDDED_SIGNUP_SOLUTION_ID
             ? { solutionID: process.env.NEXT_PUBLIC_META_EMBEDDED_SIGNUP_SOLUTION_ID }
             : {})

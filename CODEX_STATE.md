@@ -37,6 +37,7 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - The local implementation is uncommitted on `main`; Vercel CLI has no authenticated session, so deployment and production environment changes require an explicitly authorized user action.
 - The local Git remote contains an embedded credential; never print or reuse it, and rotate it before the next push.
 - Added `npm run check:production-embedded-signup`; it currently fails against production with `200 text/html` because the old deployment is still active. After deploy it must pass with `401 application/json` before using Meta.
+- Aligned the Facebook login payload with Meta Embedded Signup v4 (`extras.version`) and added a parser fallback for single-item `waba_ids`; multi-WABA events without a primary WABA are rejected explicitly.
 
 ## Next safe action
 
