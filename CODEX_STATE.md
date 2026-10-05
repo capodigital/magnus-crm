@@ -33,12 +33,13 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - The reviewer workspace is isolated and does not contain customer data.
 - Do not add Meta access tokens, passwords, or other secrets to source control or progress notes.
 - The Prisma schema is synchronized with the configured Neon database through `npm run db:push`; a direct `tsx` query must preload dotenv because the application Prisma module expects Next.js to provide environment loading.
-- Production currently serves the previous deployment: `POST /api/workspace/whatsapp-embedded-signup/state` returns the landing HTML instead of the local handler's unauthenticated JSON response.
-- The local implementation is uncommitted on `main`; Vercel CLI has no authenticated session, so deployment and production environment changes require an explicitly authorized user action.
+- Production now serves the protected Embedded Signup route: `npm run check:production-embedded-signup` returned the expected `401 application/json` response.
+- The v4 implementation is committed and published on `main` at `d2b767a`, matching `origin/main`; Vercel environment values were configured and deployed by the user, but secret values were not inspected.
 - The local Git remote contains an embedded credential; never print or reuse it, and rotate it before the next push.
-- Added `npm run check:production-embedded-signup`; it currently fails against production with `200 text/html` because the old deployment is still active. After deploy it must pass with `401 application/json` before using Meta.
+- Added `npm run check:production-embedded-signup`; it passes against production with `401 application/json`.
 - Aligned the Facebook login payload with Meta Embedded Signup v4 (`extras.version`) and added a parser fallback for single-item `waba_ids`; multi-WABA events without a primary WABA are rejected explicitly.
+- Release-readiness verification passed on 2026-10-04: Embedded Signup utility tests, token-vault tests, TypeScript, ESLint, production build, diff check, and the production protected-route smoke test.
 
 ## Next safe action
 
-After rotating the Git credential, deploy the current checkout and configure the new Meta variables in Vercel. Then complete one real Embedded Signup connection and phone registration, record the English review video, and resubmit `business_management`; do not reuse the rejected screencast.
+Complete one real production Embedded Signup connection and phone registration, record the English review video, and resubmit `business_management`; do not reuse the rejected screencast. Confirm separately that previously exposed Meta tokens and the embedded Git remote credential have been rotated.

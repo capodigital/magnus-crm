@@ -30,8 +30,9 @@
 ## Pending production activation
 
 - [ ] Goal: Rotate the credential embedded in the local Git remote before pushing changes.
-- [ ] Goal: Commit/deploy the current Embedded Signup implementation to the Vercel project.
-- [ ] Goal: Configure the Meta App ID, Embedded Signup Config ID, Meta App Secret, and encryption key in Vercel.
+- [x] Goal: Commit/deploy the current Embedded Signup implementation to the Vercel project; production smoke check passes.
+- [x] Goal: Configure the Meta App ID, Embedded Signup Config ID, Meta App Secret, and encryption key in Vercel (reported by the user; secret values were not inspected).
 - [ ] Goal: Configure the provider System User ID and token when the `business_management` access is approved.
 - [x] Goal: Apply the Prisma schema with `npm run db:push` against the configured Neon database.
 - [ ] Goal: Complete one real production Embedded Signup connection with a review-safe WABA and phone number.
+- [x] Goal: Run release-readiness validation against the published Embedded Signup implementation.
