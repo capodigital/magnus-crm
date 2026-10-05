@@ -40,6 +40,8 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - Aligned the Facebook login payload with Meta Embedded Signup v4 (`extras.version`) and added a parser fallback for single-item `waba_ids`; multi-WABA events without a primary WABA are rejected explicitly.
 - Release-readiness verification passed on 2026-10-04: Embedded Signup utility tests, token-vault tests, TypeScript, ESLint, production build, diff check, and the production protected-route smoke test.
 - The first real production Embedded Signup reached the server, but Meta rejected the Business Portfolio ownership query with `(#200) Requires business_management permission to manage the object`; this confirms the remaining blocker is App Review access, not the WABA ID or CRM persistence flow.
+- Added a focused Spanish error message for the missing `business_management` permission while preserving Meta's original diagnostic detail; the behavior is covered by the Embedded Signup utility test.
+- After the diagnostic change, the Embedded Signup utility test, token-vault test, TypeScript, ESLint, production build, production protected-route smoke test, and diff check passed.
 
 ## Next safe action
 

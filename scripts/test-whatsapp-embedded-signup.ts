@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 
+import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedded-signup-errors'
 import { parseEmbeddedSignupMessage } from '@/lib/whatsapp/embedded-signup-message'
 
 assert.deepEqual(
@@ -85,6 +86,18 @@ assert.deepEqual(
     businessId: null,
     skipPhoneRegistration: true
   }
+)
+
+assert.equal(
+  formatEmbeddedSignupWabaVerificationError(
+    'Meta no pudo procesar la solicitud de WhatsApp[200]: (#200) Requires business_management permission to manage the object'
+  ),
+  'Meta requiere acceso avanzado a business_management para verificar el WABA dentro del Business Portfolio. Vuelve a solicitar ese permiso en App Review y repite la conexión. Detalle de Meta: Meta no pudo procesar la solicitud de WhatsApp[200]: (#200) Requires business_management permission to manage the object'
+)
+
+assert.equal(
+  formatEmbeddedSignupWabaVerificationError('Meta devolvió una respuesta inválida.'),
+  'No pudimos verificar el WABA dentro del Business Portfolio: Meta devolvió una respuesta inválida.'
 )
 
 console.log('WhatsApp Embedded Signup utility checks passed.')

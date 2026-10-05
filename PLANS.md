@@ -25,6 +25,7 @@
 - [x] Goal 11: Add a production smoke gate that detects the old landing fallback instead of the protected API route.
 - [x] Goal 12: Align the browser launch payload with Meta Embedded Signup v4 and cover the v4 WABA session-event variants.
 - [x] Goal 13: Diagnose the first real production failure and confirm that Meta's rejected `business_management` access is the blocking condition.
+- [x] Goal 14: Make the missing-permission failure actionable in the CRM and add a regression check without bypassing Business Portfolio ownership validation.
 - [ ] Goal: Record an English end-to-end screencast showing Meta login, consent, business/WABA selection, connection, and the resulting CRM state.
 - [ ] Goal: Resubmit only after the video matches the actual production flow and the server-to-server token model is explicitly documented.
 

@@ -3,6 +3,7 @@ import 'server-only'
 import { WhatsappConnectionSource, WhatsappPhoneRegistrationStatus } from '../../../prisma/generated/prisma/client'
 
 import { type EmbeddedSignupSessionInfo } from '@/lib/whatsapp/embedded-signup-message'
+import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedded-signup-errors'
 import { exchangeMetaEmbeddedSignupCode, requestMetaApi, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
 import { registerTenantWhatsappPhoneNumber } from '@/lib/whatsapp/phone-number-registration'
 
@@ -156,10 +157,7 @@ const verifyWabaBelongsToBusiness = async (businessId: string, wabaId: string, a
     )
   } catch (error) {
     if (error instanceof WhatsappMetaApiError) {
-      throw new EmbeddedSignupError(
-        `No pudimos verificar el WABA dentro del Business Portfolio: ${error.message}`,
-        error.statusCode
-      )
+      throw new EmbeddedSignupError(formatEmbeddedSignupWabaVerificationError(error.message), error.statusCode)
     }
 
     throw error
