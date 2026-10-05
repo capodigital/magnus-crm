@@ -42,6 +42,7 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - The first real production Embedded Signup reached the server, but Meta rejected the Business Portfolio ownership query with `(#200) Requires business_management permission to manage the object`; this confirms the remaining blocker is App Review access, not the WABA ID or CRM persistence flow.
 - Added a focused Spanish error message for the missing `business_management` permission while preserving Meta's original diagnostic detail; the behavior is covered by the Embedded Signup utility test.
 - After the diagnostic change, the Embedded Signup utility test, token-vault test, TypeScript, ESLint, production build, production protected-route smoke test, and diff check passed.
+- The Settings Embedded Signup panel now states that advanced `business_management` access is required before the Business Portfolio ownership check can succeed.
 
 ## Next safe action
 
