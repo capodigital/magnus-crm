@@ -399,7 +399,8 @@ const WhatsappEmbeddedSignupPanel = ({
 
           <Alert severity='info'>
             Necesitas ser administrador del Business Portfolio. Meta abrirá su flujo seguro para seleccionar el WABA y
-            el número; el CRM no solicita ni muestra tu contraseña de Meta.
+            el número; el CRM no solicita ni muestra tu contraseña de Meta. La app también debe tener acceso avanzado
+            a `business_management` aprobado en App Review para verificar que el WABA pertenece a ese portfolio.
           </Alert>
 
           {!isConfigured ? (
