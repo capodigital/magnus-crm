@@ -39,7 +39,8 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - Added `npm run check:production-embedded-signup`; it passes against production with `401 application/json`.
 - Aligned the Facebook login payload with Meta Embedded Signup v4 (`extras.version`) and added a parser fallback for single-item `waba_ids`; multi-WABA events without a primary WABA are rejected explicitly.
 - Release-readiness verification passed on 2026-10-04: Embedded Signup utility tests, token-vault tests, TypeScript, ESLint, production build, diff check, and the production protected-route smoke test.
+- The first real production Embedded Signup reached the server, but Meta rejected the Business Portfolio ownership query with `(#200) Requires business_management permission to manage the object`; this confirms the remaining blocker is App Review access, not the WABA ID or CRM persistence flow.
 
 ## Next safe action
 
-Complete one real production Embedded Signup connection and phone registration, record the English review video, and resubmit `business_management`; do not reuse the rejected screencast. Confirm separately that previously exposed Meta tokens and the embedded Git remote credential have been rotated.
+Complete one real production Embedded Signup connection and phone registration after `business_management` is approved, record the English review video using the working end-to-end flow, and resubmit the permission; do not bypass the Business Portfolio ownership check or reuse the rejected screencast. Confirm separately that previously exposed Meta tokens and the embedded Git remote credential have been rotated.
