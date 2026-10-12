@@ -11,6 +11,7 @@ import type { ChildrenType } from '@core/types'
 
 // Util Imports
 import { getSystemMode } from '@core/utils/serverHelpers'
+import themeConfig from '@configs/themeConfig'
 
 // Style Imports
 import '@/app/globals.css'
@@ -21,7 +22,7 @@ import '@assets/iconify-icons/generated-icons.css'
 const appUrl = 'https://crm.magnusecosystems.com'
 
 const appDescription =
-  'CRM de WhatsApp para equipos comerciales que necesitan captar leads, centralizar conversaciones y operar con orden.'
+  'CRM para equipos comerciales: organiza contactos, oportunidades y conversaciones, y conecta las herramientas de tu negocio.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
         url: '/images/brand/magnus-crm-og.png',
         width: 1200,
         height: 630,
-        alt: 'Magnus CRM - CRM de WhatsApp para captar leads'
+        alt: 'Magnus CRM - Contactos, oportunidades y conversaciones'
       }
     ]
   },
@@ -81,7 +82,11 @@ const RootLayout = async (props: ChildrenType) => {
   return (
     <html id='__next' lang='es' dir={direction} suppressHydrationWarning>
       <body className='flex is-full min-bs-full flex-auto flex-col'>
-        <InitColorSchemeScript attribute='data' defaultMode={systemMode} />
+        <InitColorSchemeScript
+          attribute='data'
+          defaultMode={systemMode}
+          modeStorageKey={`${themeConfig.settingsCookieName}-mode`}
+        />
         {children}
       </body>
     </html>

@@ -1,5 +1,13 @@
 # Decisions
 
+## 2026-10-12: General CRM and light visual system
+
+- Keep contacts, opportunities, pipeline and conversations as the primary product surfaces; WhatsApp is one integration under Configuration → Integrations.
+- Preserve the existing Meta Embedded Signup and messaging/security contracts while relocating their UI.
+- Use light mode as the initial appearance, with a versioned preference cookie/MUI storage key to apply the redesign to existing browsers. Users can subsequently choose another appearance.
+- Replace fictitious metrics with tenant-scoped reads. Contact/opportunity/pipeline views remain read-only in this redesign.
+- Clearly label future integration placeholders as unavailable; do not imply that email or calendar backends already exist.
+
 ## 2026-09-05: Meta reviewer account isolation
 
 - Create a dedicated `meta-review@magnusecosystems.com` owner account instead of sharing an administrator account.

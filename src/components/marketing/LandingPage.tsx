@@ -10,7 +10,7 @@ const softwareApplicationSchema = {
   operatingSystem: 'Web',
   url: 'https://crm.magnusecosystems.com',
   description:
-    'CRM de WhatsApp para equipos comerciales que necesitan centralizar conversaciones, leads, pipeline y visibilidad operativa.',
+    'CRM para equipos comerciales que necesitan organizar contactos, oportunidades, conversaciones e integraciones.',
   provider: {
     '@type': 'Organization',
     name: 'Magnus Ecosystems',
@@ -21,18 +21,18 @@ const softwareApplicationSchema = {
 const features = [
   {
     id: '01',
-    title: 'Inbox de WhatsApp con criterio comercial',
+    title: 'Contactos y conversaciones en un mismo lugar',
     text: 'Centraliza conversaciones, identifica contexto del contacto y evita perder oportunidades entre mensajes sueltos.'
   },
   {
     id: '02',
     title: 'Pipeline listo para seguimiento',
-    text: 'Convierte cada conversacion en lead accionable y mueve el trabajo comercial desde una sola vista operativa.'
+    text: 'Consulta tus oportunidades por etapa, identifica sus responsables y mantén una visión compartida del trabajo comercial.'
   },
   {
     id: '03',
-    title: 'Multi-tenant desde el inicio',
-    text: 'Pensado para SaaS: cada cliente conecta sus propios activos de Meta, su dominio y su flujo operativo.'
+    title: 'Tus herramientas, conectadas al CRM',
+    text: 'Administra tus conexiones desde Configuración → Integraciones. Empieza con WhatsApp Business y descubre nuevos canales a medida que estén disponibles.'
   }
 ] as const
 
@@ -48,18 +48,18 @@ const LandingPage = () => {
         <section className={styles.shell}>
           <div className={styles.hero}>
             <div className={styles.heroCopy}>
-              <span className={styles.eyebrowPill}>CRM de WhatsApp para equipos comerciales</span>
+              <span className={styles.eyebrowPill}>CRM para equipos comerciales</span>
 
               <div>
                 <h1 className={styles.heroTitle}>
-                  Convierte conversaciones en pipeline.
-                  <span className={styles.heroHighlight}>Sin salir del CRM.</span>
+                  Tus clientes. Tu equipo. Tu negocio.
+                  <span className={styles.heroHighlight}>Todo en un mismo CRM.</span>
                 </h1>
               </div>
 
               <p className={styles.heroText}>
-                Magnus CRM ayuda a captar leads desde WhatsApp, responder con contexto y mover cada oportunidad hacia
-                cierre con mas orden, menos friccion y mejor trazabilidad.
+                Magnus CRM reúne tus contactos, oportunidades y conversaciones para que tu equipo trabaje con contexto,
+                dé seguimiento a sus clientes y mantenga el negocio organizado.
               </p>
 
               <div className={styles.heroActions}>
@@ -93,9 +93,9 @@ const LandingPage = () => {
               <div className={styles.panelHeader}>
                 <div>
                   <div className={styles.panelLabel}>Vista del workspace</div>
-                  <div className={styles.panelTitle}>Una capa comercial encima de tu canal de WhatsApp</div>
+                  <div className={styles.panelTitle}>Una visión compartida de tu actividad comercial</div>
                 </div>
-                <div className={styles.panelBadge}>Meta-ready</div>
+                <div className={styles.panelBadge}>Magnus CRM</div>
               </div>
 
               <div className={styles.conversationStack}>

@@ -4,11 +4,11 @@ const manifest = (): MetadataRoute.Manifest => ({
   name: 'Magnus CRM',
   short_name: 'Magnus CRM',
   description:
-    'CRM de WhatsApp para equipos comerciales que necesitan captar leads, centralizar conversaciones y operar con orden.',
+    'CRM para organizar contactos, oportunidades y conversaciones y conectar las herramientas de tu negocio.',
   start_url: '/',
   scope: '/',
   display: 'standalone',
-  background_color: '#F6F8F5',
+  background_color: '#F4F7FA',
   theme_color: '#0F766E',
   icons: [
     {

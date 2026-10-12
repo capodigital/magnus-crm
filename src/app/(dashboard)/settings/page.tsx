@@ -1,83 +1,93 @@
-import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box'
 
-import SectionPage from '@components/crm/SectionPage'
-import WhatsappEmbeddedSignupPanel from '@components/crm/WhatsappEmbeddedSignupPanel'
-import WhatsappPhoneNumberPanel from '@components/crm/WhatsappPhoneNumberPanel'
-import WhatsappTemplatesPanel from '@components/crm/WhatsappTemplatesPanel'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Divider from '@mui/material/Divider'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+
+import Button from '@components/crm/LinkButton'
+
+import PageHeading from '@components/crm/PageHeading'
 
 import { requireTenantAccess } from '@/lib/app-context'
-import prisma from '@/lib/prisma'
-import { getTenantWhatsappTemplates } from '@/lib/whatsapp/template-service'
-import { hasValidMetaEncryptionKey } from '@/lib/whatsapp/token-vault'
 
-const SettingsPage = async () => {
+export default async function SettingsPage() {
   const context = await requireTenantAccess()
-  const activeWorkspace = context.tenant ?? context.memberships[0]?.tenant ?? null
+  const workspace = context.tenant ?? context.memberships[0]?.tenant
+  const membership = context.membership ?? context.memberships[0]
 
-  const whatsappPhoneNumber = activeWorkspace
-    ? await prisma.whatsappPhoneNumber.findFirst({
-        where: {
-          tenantId: activeWorkspace.id
-        },
-        select: {
-          wabaId: true,
-          phoneNumberId: true,
-          displayPhoneNumber: true,
-          verifiedName: true,
-          connectionSource: true,
-          registrationStatus: true
-        },
-        orderBy: {
-          createdAt: 'desc'
-        }
-      })
-    : null
+  const roleLabels: Record<string, string> = {
+    OWNER: 'Propietario',
+    ADMIN: 'Administrador',
+    AGENT: 'Agente',
+    VIEWER: 'Observador'
+  }
 
-  const whatsappTemplates = activeWorkspace ? await getTenantWhatsappTemplates(activeWorkspace.id) : []
-
-  const workspaceBullet = activeWorkspace
-    ? `Workspace activo: ${activeWorkspace.name}. Slug interno para WhatsApp: ${activeWorkspace.slug}.`
-    : 'Aun no encontramos un workspace asociado a tu usuario.'
+  const details = [
+    { label: 'Nombre del espacio', value: workspace?.name ?? 'Sin espacio de trabajo' },
+    { label: 'Tu acceso', value: roleLabels[membership?.role ?? ''] ?? membership?.role ?? 'Sin asignar' },
+    { label: 'Correo de tu cuenta', value: context.session.user.email ?? 'Sin correo' },
+    { label: 'Estado', value: workspace?.status === 'ACTIVE' ? 'Activo' : 'Sin espacio activo' }
+  ]
 
   return (
-    <Stack spacing={4}>
-      <SectionPage
-        eyebrow='Configuracion del workspace'
-        title='Prepara tenant, autenticacion e integraciones'
-        description='Aqui ya viven el estado de acceso, los controles de lanzamiento y la primera superficie de gestion de cuenta mientras terminamos la configuracion completa del tenant.'
-        status='Acceso y lanzamiento en progreso'
-        actions={[
-          { label: 'Abrir home', href: '/home', variant: 'outlined' },
-          { label: 'Abrir inbox', href: '/inbox', variant: 'outlined' },
-          { label: 'Eliminar mis datos', href: '/settings/data-deletion' }
-        ]}
-        bullets={[
-          workspaceBullet,
-          'Email/password access is active and Google sign-in will appear once the final client credentials are configured.',
-          'Por ahora todos los workspaces operan desde el dominio principal del CRM; no se crean subdominios por empresa.',
-          'Tenant branding and white-label controls are intentionally deferred for now.',
-          'Embedded Signup conecta el WABA y el número de cada workspace sin copiar IDs ni tokens en variables de entorno por cliente.',
-          'Users can now manage account deletion from the internal route /settings/data-deletion.'
-        ]}
+    <Stack spacing={5}>
+      <PageHeading
+        eyebrow='Configuración'
+        title='Tu espacio de trabajo'
+        description='Consulta la información de tu empresa y administra las herramientas conectadas a tu CRM.'
       />
-      <WhatsappEmbeddedSignupPanel
-        workspaceName={activeWorkspace?.name ?? null}
-        isConfigured={Boolean(
-          process.env.META_APP_ID?.trim() &&
-          process.env.NEXT_PUBLIC_META_APP_ID?.trim() &&
-            process.env.NEXT_PUBLIC_META_EMBEDDED_SIGNUP_CONFIG_ID?.trim() &&
-            process.env.META_APP_SECRET?.trim() &&
-            hasValidMetaEncryptionKey()
-        )}
-        initialPhoneNumber={whatsappPhoneNumber}
-      />
-      <WhatsappPhoneNumberPanel
-        workspaceName={activeWorkspace?.name ?? null}
-        initialPhoneNumber={whatsappPhoneNumber}
-      />
-      <WhatsappTemplatesPanel workspaceName={activeWorkspace?.name ?? null} initialTemplates={whatsappTemplates} />
+      <Box sx={{ display: 'grid', gap: 4, gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1.3fr) minmax(0, 1fr)' } }}>
+        <Card>
+          <CardContent sx={{ p: 5 }}>
+            <Stack spacing={4}>
+              <Stack direction='row' alignItems='center' spacing={2}>
+                <i className='tabler-building' aria-hidden='true' />
+                <Typography variant='h6'>Información general</Typography>
+              </Stack>
+              <Divider />
+              <Box
+                component='dl'
+                sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 5, m: 0 }}
+              >
+                {details.map(detail => (
+                  <Stack key={detail.label} spacing={1}>
+                    <Typography component='dt' variant='body2' color='text.secondary'>
+                      {detail.label}
+                    </Typography>
+                    <Typography component='dd' sx={{ fontWeight: 600, overflowWrap: 'anywhere' }}>
+                      {detail.value}
+                    </Typography>
+                  </Stack>
+                ))}
+              </Box>
+            </Stack>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent sx={{ p: 5 }}>
+            <Stack spacing={3}>
+              <Box sx={{ color: 'primary.main' }}>
+                <i className='tabler-plug-connected text-[2rem]' aria-hidden='true' />
+              </Box>
+              <Typography variant='h6'>Conecta tus herramientas</Typography>
+              <Typography variant='body2' color='text.secondary'>
+                Gestiona tus canales de comunicación desde Integraciones. Allí puedes conectar WhatsApp y consultar los
+                próximos canales disponibles.
+              </Typography>
+              <Button
+                href='/settings/integrations'
+                variant='contained'
+                endIcon={<i className='tabler-arrow-right' aria-hidden='true' />}
+                sx={{ alignSelf: 'flex-start' }}
+              >
+                Ver integraciones
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
+      </Box>
     </Stack>
   )
 }
-
-export default SettingsPage

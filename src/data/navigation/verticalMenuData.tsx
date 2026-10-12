@@ -1,36 +1,36 @@
-// Type Imports
 import type { VerticalMenuDataType } from '@/types/menuTypes'
 
 const verticalMenuData = (): VerticalMenuDataType[] => [
+  { label: 'Inicio', href: '/home', icon: 'tabler-layout-dashboard' },
   {
-    label: 'Home',
-    href: '/home',
-    icon: 'tabler-smart-home'
+    label: 'CRM',
+    isSection: true,
+    children: [
+      { label: 'Contactos', href: '/contacts', icon: 'tabler-address-book' },
+      { label: 'Oportunidades', href: '/leads', icon: 'tabler-target-arrow' },
+      { label: 'Pipeline', href: '/pipeline', icon: 'tabler-layout-kanban' },
+      { label: 'Conversaciones', href: '/inbox', icon: 'tabler-messages' }
+    ]
   },
   {
-    label: 'Inbox',
-    href: '/inbox',
-    icon: 'tabler-message-2'
-  },
-  {
-    label: 'Leads',
-    href: '/leads',
-    icon: 'tabler-users'
-  },
-  {
-    label: 'Pipeline',
-    href: '/pipeline',
-    icon: 'tabler-route'
-  },
-  {
-    label: 'Billing',
-    href: '/billing',
-    icon: 'tabler-file-dollar'
-  },
-  {
-    label: 'Settings',
-    href: '/settings',
-    icon: 'tabler-settings-2'
+    label: 'Administración',
+    isSection: true,
+    children: [
+      { label: 'Facturación', href: '/billing', icon: 'tabler-receipt' },
+      {
+        label: 'Configuración',
+        icon: 'tabler-settings-2',
+        children: [
+          { label: 'General', href: '/settings', exactMatch: true },
+          {
+            label: 'Integraciones',
+            href: '/settings/integrations',
+            exactMatch: false,
+            activeUrl: '/settings/integrations'
+          }
+        ]
+      }
+    ]
   }
 ]
 

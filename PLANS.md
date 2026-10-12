@@ -1,5 +1,17 @@
 # Plans
 
+## Light general CRM redesign — 2026-10-12
+
+- [x] Define a light visual direction and make it the appearance default.
+- [x] Restore complete CRM navigation and add a contacts view.
+- [x] Replace development copy and fictitious dashboard metrics with tenant-scoped data.
+- [x] Move WhatsApp onboarding, phone registration, manual connection and templates into Configuration → Integrations → WhatsApp Business.
+- [x] Add a catalog ready for future integrations and shared settings navigation.
+- [x] Run TypeScript, ESLint, WhatsApp regression checks, read-only database query checks and responsive fixture QA.
+- [x] Complete the final production build.
+- [ ] Review a real authenticated Meta connection after the required external approval.
+
+
 ## Meta reviewer account
 
 - [x] Inspect the authentication and multi-tenant bootstrap flow.
@@ -31,6 +43,8 @@
 - [x] Goal 17: Fail clearly on incomplete provider System User configuration and document the required environment-variable pair.
 - [x] Goal 18: Add pure regression coverage for provider System User environment validation.
 - [x] Goal 19: Consume the Embedded Signup state cookie after accepted callback attempts, including controlled failures.
+- [x] Goal 20: Prepare a secret-free English App Review guide covering the complete Embedded Signup use case and server-side permission rationale.
+- [x] Goal 21: Run a release-readiness audit covering tests, build, production protection, secret tracking, documentation, and remaining external blockers.
 - [ ] Goal: Record an English end-to-end screencast showing Meta login, consent, business/WABA selection, connection, and the resulting CRM state.
 - [ ] Goal: Resubmit only after the video matches the actual production flow and the server-to-server token model is explicitly documented.
 

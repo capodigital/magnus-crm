@@ -181,8 +181,8 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
           <div className='flex flex-col gap-1'>
             <Typography variant='h4'>{`Registra tu empresa en ${themeConfig.templateName}`}</Typography>
             <Typography color='text.secondary'>
-              Crea el workspace de tu empresa y tu usuario owner para probar el CRM con WhatsApp. El pago queda fuera de
-              este primer flujo.
+              Crea el espacio de trabajo de tu empresa para organizar clientes, oportunidades y conversaciones. El pago
+              queda fuera de este primer flujo.
             </Typography>
           </div>
 

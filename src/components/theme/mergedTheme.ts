@@ -8,7 +8,7 @@
 
 // MUI Imports
 import { deepmerge } from '@mui/utils'
-import type { Theme } from '@mui/material/styles'
+import type { Theme, ThemeOptions } from '@mui/material/styles'
 
 // Type Imports
 import type { Settings } from '@core/contexts/settingsContext'
@@ -19,9 +19,42 @@ import coreTheme from '@core/theme'
 
 const mergedTheme = (settings: Settings, mode: SystemMode, direction: Theme['direction']) => {
   // Vars
-  const userTheme = {
-    // Write your overrides here.
-  } as Theme
+  const userTheme: ThemeOptions = {
+    colorSchemes: {
+      light: {
+        palette: {
+          background: { default: '#F4F7FA', paper: '#FFFFFF' },
+          text: { primary: '#203346', secondary: '#5E7083' },
+          divider: '#E5EBF0',
+          action: { hover: '#F3F7F9', selected: '#EAF5F3' }
+        }
+      }
+    },
+    shape: { borderRadius: 10 },
+    components: {
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            border: '1px solid var(--mui-palette-divider)',
+            boxShadow: 'none',
+            backgroundImage: 'none'
+          }
+        }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: { fontWeight: 600, boxShadow: 'none' },
+          contained: { '&:hover': { boxShadow: 'none' } }
+        }
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          head: { backgroundColor: 'var(--mui-palette-action-hover)', fontSize: '0.75rem', fontWeight: 600 },
+          root: { borderColor: 'var(--mui-palette-divider)' }
+        }
+      }
+    }
+  }
 
   return deepmerge(coreTheme(settings, mode, direction), userTheme)
 }

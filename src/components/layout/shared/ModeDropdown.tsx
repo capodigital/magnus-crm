@@ -60,13 +60,20 @@ const ModeDropdown = () => {
   return (
     <>
       <Tooltip
-        title={settings.mode + ' Mode'}
+        title='Cambiar apariencia'
         onOpen={() => setTooltipOpen(true)}
         onClose={() => setTooltipOpen(false)}
         open={open ? false : tooltipOpen ? true : false}
         slotProps={{ popper: { className: 'capitalize' } }}
       >
-        <IconButton ref={anchorRef} onClick={handleToggle} className='text-textPrimary'>
+        <IconButton
+          ref={anchorRef}
+          onClick={handleToggle}
+          className='text-textPrimary'
+          aria-label='Cambiar apariencia'
+          aria-expanded={open}
+          aria-haspopup='menu'
+        >
           <i className={getModeIcon()} />
         </IconButton>
       </Tooltip>
@@ -92,7 +99,7 @@ const ModeDropdown = () => {
                     selected={settings.mode === 'light'}
                   >
                     <i className='tabler-sun' />
-                    Light
+                    Claro
                   </MenuItem>
                   <MenuItem
                     className='gap-3'
@@ -100,7 +107,7 @@ const ModeDropdown = () => {
                     selected={settings.mode === 'dark'}
                   >
                     <i className='tabler-moon-stars' />
-                    Dark
+                    Oscuro
                   </MenuItem>
                   <MenuItem
                     className='gap-3'
@@ -108,7 +115,7 @@ const ModeDropdown = () => {
                     selected={settings.mode === 'system'}
                   >
                     <i className='tabler-device-laptop' />
-                    System
+                    Sistema
                   </MenuItem>
                 </MenuList>
               </ClickAwayListener>

@@ -157,7 +157,7 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
           <div className='flex flex-col gap-1'>
             <Typography variant='h4'>{`Bienvenido a ${themeConfig.templateName}`}</Typography>
             <Typography color='text.secondary'>
-              Entra a tu workspace con correo y contrasena. Google aparecera cuando terminemos esa configuracion.
+              Accede a tu espacio de trabajo para consultar clientes, oportunidades y conversaciones.
             </Typography>
           </div>
 
@@ -224,7 +224,7 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
               <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
                 <Stack spacing={0.5}>
                   <Typography variant='body2' color='text.secondary'>
-                    Google aparecera en cuanto terminemos de cargar las credenciales finales.
+                    Utiliza el correo y la contraseña de tu cuenta.
                   </Typography>
                 </Stack>
               </Box>

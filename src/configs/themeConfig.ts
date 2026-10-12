@@ -52,8 +52,8 @@ export type Config = {
 const themeConfig: Config = {
   templateName: 'Magnus CRM',
   homePageUrl: '/home',
-  settingsCookieName: 'magnus-crm-settings',
-  mode: 'system', // 'system', 'light', 'dark'
+  settingsCookieName: 'magnus-crm-settings-v2',
+  mode: 'light', // 'system', 'light', 'dark'
   skin: 'default', // 'default', 'bordered'
   semiDark: false, // true, false
   layout: 'vertical', // 'vertical', 'collapsed', 'horizontal'

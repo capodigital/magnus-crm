@@ -115,7 +115,9 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
 
   const filteredConversations = conversations.filter(conversation => {
     const matchesStatus = statusFilter === 'ALL' || conversation.status === statusFilter
-    const searchableText = `${getDisplayName(conversation)} ${conversation.contact.phoneE164 ?? ''} ${getMessagePreview(conversation)}`.toLowerCase()
+
+    const searchableText =
+      `${getDisplayName(conversation)} ${conversation.contact.phoneE164 ?? ''} ${getMessagePreview(conversation)}`.toLowerCase()
 
     return matchesStatus && (!normalizedSearch || searchableText.includes(normalizedSearch))
   })
@@ -137,14 +139,15 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
       <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent='space-between' spacing={2}>
         <Stack spacing={0.75}>
           <Typography variant='overline' color='primary.main' sx={{ letterSpacing: 1.4, fontWeight: 700 }}>
-            Bandeja de WhatsApp
+            CRM / Conversaciones
           </Typography>
           <Typography variant='h4' component='h1' sx={{ fontWeight: 800 }}>
-            Conversaciones que necesitan contexto
+            Conversaciones
           </Typography>
           <Typography color='text.secondary'>
-            {workspaceName ? `Mensajes del workspace ${workspaceName}.` : 'Mensajes del workspace activo.'} Actualiza para
-            ver los eventos recién recibidos desde Meta.
+            {workspaceName
+              ? `La comunicación con tus clientes en ${workspaceName}.`
+              : 'La comunicación con tus clientes en un mismo lugar.'}
           </Typography>
         </Stack>
         <Button
@@ -241,7 +244,7 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
                         <Typography variant='body2' color='text.secondary' noWrap>
                           {getMessagePreview(conversation)}
                         </Typography>
-                        <Stack direction='row' spacing={1} alignItems='center'>
+                        <Stack direction='row' spacing={1} alignItems='center' useFlexGap flexWrap='wrap'>
                           <Chip
                             label={statusLabels[conversation.status] ?? conversation.status}
                             color={statusColors[conversation.status] ?? 'default'}
@@ -253,7 +256,11 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
                           </Typography>
                           <Chip
                             label={getReplyWindowLabel(conversation, now)}
-                            color={getWhatsappReplyWindowFromIso(conversation.lastInboundAt, now).isOpen ? 'success' : 'default'}
+                            color={
+                              getWhatsappReplyWindowFromIso(conversation.lastInboundAt, now).isOpen
+                                ? 'success'
+                                : 'default'
+                            }
                             size='small'
                             variant='outlined'
                           />
@@ -266,7 +273,7 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
             ) : (
               <Stack spacing={1} alignItems='center' sx={{ px: 3, py: 8, textAlign: 'center' }}>
                 <i
-                  className={`${conversations.length ? 'tabler-search-off' : 'tabler-brand-whatsapp'} text-[2rem]`}
+                  className={`${conversations.length ? 'tabler-search-off' : 'tabler-messages'} text-[2rem]`}
                   aria-hidden='true'
                 />
                 <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>
@@ -275,8 +282,13 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
                 <Typography variant='body2' color='text.secondary'>
                   {conversations.length
                     ? 'Prueba otra busqueda o cambia el filtro de estado.'
-                    : 'Cuando un contacto escriba al numero productivo vinculado, el hilo aparecera aqui.'}
+                    : 'Los mensajes de tus canales conectados aparecerán aquí. Puedes gestionarlos desde Configuración → Integraciones.'}
                 </Typography>
+                {!conversations.length ? (
+                  <Button href='/settings/integrations' size='small'>
+                    Ver integraciones
+                  </Button>
+                ) : null}
               </Stack>
             )}
           </Box>
@@ -284,16 +296,25 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
           <Box sx={{ minWidth: 0, bgcolor: 'background.default' }}>
             {selectedConversation ? (
               <Stack sx={{ height: '100%' }}>
-                <Stack direction='row' alignItems='center' spacing={1.5} sx={{ p: { xs: 3, md: 4 } }}>
+                <Stack
+                  direction='row'
+                  alignItems='center'
+                  spacing={1.5}
+                  useFlexGap
+                  flexWrap='wrap'
+                  sx={{ p: { xs: 3, md: 4 } }}
+                >
                   <Avatar sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>
                     {getInitials(getDisplayName(selectedConversation))}
                   </Avatar>
-                  <Stack spacing={0.35} sx={{ minWidth: 0, flex: 1 }}>
+                  <Stack spacing={0.35} sx={{ minWidth: 140, flex: 1 }}>
                     <Typography variant='h6' noWrap sx={{ fontWeight: 800 }}>
                       {getDisplayName(selectedConversation)}
                     </Typography>
                     <Typography variant='body2' color='text.secondary' noWrap>
-                      {selectedConversation.contact.phoneE164 ?? selectedConversation.contact.whatsappWaId ?? 'WhatsApp'}
+                      {selectedConversation.contact.phoneE164 ??
+                        selectedConversation.contact.whatsappWaId ??
+                        'WhatsApp'}
                     </Typography>
                   </Stack>
                   <Chip
@@ -331,13 +352,18 @@ const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorksp
                 <InboxComposer conversation={selectedConversation} templates={templates} now={now} />
               </Stack>
             ) : (
-              <Stack alignItems='center' justifyContent='center' spacing={1.5} sx={{ minHeight: 500, p: 4, textAlign: 'center' }}>
-                <i className='tabler-brand-whatsapp text-[3rem]' aria-hidden='true' />
+              <Stack
+                alignItems='center'
+                justifyContent='center'
+                spacing={1.5}
+                sx={{ minHeight: { xs: 260, lg: 500 }, p: 4, textAlign: 'center' }}
+              >
+                <i className='tabler-messages text-[3rem]' aria-hidden='true' />
                 <Typography variant='h6' sx={{ fontWeight: 800 }}>
                   Selecciona una conversación
                 </Typography>
                 <Typography variant='body2' color='text.secondary' sx={{ maxWidth: 360 }}>
-                  Cuando llegue un mensaje a tu número productivo y el teléfono esté vinculado al workspace, aparecerá aquí.
+                  Abre un hilo para consultar su historial y continuar la conversación con tu cliente.
                 </Typography>
               </Stack>
             )}

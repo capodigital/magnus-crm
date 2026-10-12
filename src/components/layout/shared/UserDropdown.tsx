@@ -1,154 +1,82 @@
 'use client'
 
-// React Imports
-import { useRef, useState } from 'react'
-import type { MouseEvent } from 'react'
+import { useState } from 'react'
 
-// Next Imports
-import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
-// MUI Imports
-import { styled } from '@mui/material/styles'
-import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
-import Popper from '@mui/material/Popper'
-import Fade from '@mui/material/Fade'
-import Paper from '@mui/material/Paper'
-import ClickAwayListener from '@mui/material/ClickAwayListener'
-import MenuList from '@mui/material/MenuList'
-import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 
-// Hook Imports
-import { useSettings } from '@core/hooks/useSettings'
+import { useWorkspaceIdentity } from '@components/crm/WorkspaceIdentity'
 
-// Styled component for badge content
-const BadgeContentSpan = styled('span')({
-  width: 8,
-  height: 8,
-  borderRadius: '50%',
-  cursor: 'pointer',
-  backgroundColor: 'var(--mui-palette-success-main)',
-  boxShadow: '0 0 0 2px var(--mui-palette-background-paper)'
-})
+export default function UserDropdown() {
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null)
+  const { userName, userEmail, userImage } = useWorkspaceIdentity()
+  const name = userName ?? userEmail ?? 'Mi cuenta'
 
-const UserDropdown = () => {
-  // States
-  const [open, setOpen] = useState(false)
-
-  // Refs
-  const anchorRef = useRef<HTMLDivElement>(null)
-
-  // Hooks
-  const router = useRouter()
-
-  const { settings } = useSettings()
-
-  const handleDropdownOpen = () => {
-    !open ? setOpen(true) : setOpen(false)
-  }
-
-  const handleDropdownClose = (event?: MouseEvent<HTMLLIElement> | (MouseEvent | TouchEvent), url?: string) => {
-    if (url) {
-      router.push(url)
-    }
-
-    if (anchorRef.current && anchorRef.current.contains(event?.target as HTMLElement)) {
-      return
-    }
-
-    setOpen(false)
-  }
-
-  const handleUserLogout = async () => {
-    // Redirect to login page
-    router.push('/login')
-  }
+  const initials = name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase()
 
   return (
     <>
-      <Badge
-        ref={anchorRef}
-        overlap='circular'
-        badgeContent={<BadgeContentSpan onClick={handleDropdownOpen} />}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        className='mis-2'
+      <IconButton
+        aria-label='Abrir menú de cuenta'
+        aria-haspopup='menu'
+        aria-expanded={Boolean(anchor)}
+        onClick={event => setAnchor(event.currentTarget)}
       >
         <Avatar
-          ref={anchorRef}
-          alt='John Doe'
-          src='/images/avatars/1.png'
-          onClick={handleDropdownOpen}
-          className='cursor-pointer bs-[38px] is-[38px]'
-        />
-      </Badge>
-      <Popper
-        open={open}
-        transition
-        disablePortal
-        placement='bottom-end'
-        anchorEl={anchorRef.current}
-        className='min-is-[240px] !mbs-3 z-[1]'
+          alt={name}
+          src={userImage ?? undefined}
+          sx={{
+            width: 34,
+            height: 34,
+            bgcolor: 'primary.lighterOpacity',
+            color: 'primary.main',
+            fontSize: 13,
+            fontWeight: 600
+          }}
+        >
+          {initials}
+        </Avatar>
+      </IconButton>
+      <Menu
+        anchorEl={anchor}
+        open={Boolean(anchor)}
+        onClose={() => setAnchor(null)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        {({ TransitionProps, placement }) => (
-          <Fade
-            {...TransitionProps}
-            style={{
-              transformOrigin: placement === 'bottom-end' ? 'right top' : 'left top'
-            }}
-          >
-            <Paper className={settings.skin === 'bordered' ? 'border shadow-none' : 'shadow-lg'}>
-              <ClickAwayListener onClickAway={e => handleDropdownClose(e as MouseEvent | TouchEvent)}>
-                <MenuList>
-                  <div className='flex items-center plb-2 pli-6 gap-2' tabIndex={-1}>
-                    <Avatar alt='John Doe' src='/images/avatars/1.png' />
-                    <div className='flex items-start flex-col'>
-                      <Typography className='font-medium' color='text.primary'>
-                        John Doe
-                      </Typography>
-                      <Typography variant='caption'>admin@vuexy.com</Typography>
-                    </div>
-                  </div>
-                  <Divider className='mlb-1' />
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-user' />
-                    <Typography color='text.primary'>My Profile</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-settings' />
-                    <Typography color='text.primary'>Settings</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-currency-dollar' />
-                    <Typography color='text.primary'>Pricing</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-help-circle' />
-                    <Typography color='text.primary'>FAQ</Typography>
-                  </MenuItem>
-                  <div className='flex items-center plb-2 pli-3'>
-                    <Button
-                      fullWidth
-                      variant='contained'
-                      color='error'
-                      size='small'
-                      endIcon={<i className='tabler-logout' />}
-                      onClick={handleUserLogout}
-                      sx={{ '& .MuiButton-endIcon': { marginInlineStart: 1.5 } }}
-                    >
-                      Logout
-                    </Button>
-                  </div>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
+        <Stack spacing={0.5} sx={{ px: 4, py: 2, maxWidth: 280 }}>
+          <Typography sx={{ fontWeight: 600, overflowWrap: 'anywhere' }}>{name}</Typography>
+          <Typography variant='caption' color='text.secondary' sx={{ overflowWrap: 'anywhere' }}>
+            {userEmail}
+          </Typography>
+        </Stack>
+        <Divider />
+        <MenuItem component='a' href='/settings' onClick={() => setAnchor(null)}>
+          Configuración
+        </MenuItem>
+        <MenuItem component='a' href='/settings/integrations' onClick={() => setAnchor(null)}>
+          Integraciones
+        </MenuItem>
+        <MenuItem component='a' href='/settings/data-deletion' onClick={() => setAnchor(null)}>
+          Cuenta y privacidad
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={() => void signOut({ callbackUrl: '/login' })} sx={{ color: 'error.main' }}>
+          Cerrar sesión
+        </MenuItem>
+      </Menu>
     </>
   )
 }
-
-export default UserDropdown

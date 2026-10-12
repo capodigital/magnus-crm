@@ -28,7 +28,7 @@ import themeConfig from '@configs/themeConfig'
 import { useSettings } from '@core/hooks/useSettings'
 
 // Core Theme Imports
-import defaultCoreTheme from '@core/theme'
+import defaultCoreTheme from './mergedTheme'
 
 type Props = ChildrenType & {
   direction: Direction
@@ -105,7 +105,7 @@ const CustomThemeProvider = (props: Props) => {
       <ThemeProvider
         theme={theme}
         defaultMode={systemMode}
-        modeStorageKey={`${themeConfig.templateName.toLowerCase().split(' ').join('-')}-mui-template-mode`}
+        modeStorageKey={`${themeConfig.settingsCookieName}-mode`}
         forceThemeRerender
       >
         <>

@@ -1,24 +1,44 @@
-import SectionPage from '@components/crm/SectionPage'
+import { redirect } from 'next/navigation'
 
-const LeadsPage = () => {
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Stack from '@mui/material/Stack'
+
+import LeadsTable from '@components/crm/LeadsTable'
+import PageHeading from '@components/crm/PageHeading'
+import RecordsPagination, { parsePage } from '@components/crm/RecordsPagination'
+
+import { requireTenantAccess } from '@/lib/app-context'
+import { getWorkspaceLeads } from '@/lib/crm/workspace-query'
+
+export default async function LeadsPage({ searchParams }: { searchParams: Promise<{ page?: string | string[] }> }) {
+  const context = await requireTenantAccess()
+  const workspace = context.tenant ?? context.memberships[0]?.tenant
+  const page = parsePage((await searchParams).page)
+  const leads = workspace ? await getWorkspaceLeads(workspace.id, page) : { records: [], total: 0 }
+
+  if (page > Math.max(1, Math.ceil(leads.total / 25))) redirect('/leads')
+
   return (
-    <SectionPage
-      eyebrow='Lead management'
-      title='Turn inbound chats into qualified opportunities'
-      description='Leads will be created or reopened from WhatsApp activity and then moved through qualification, assignment, and follow-up.'
-      status='Goal 6 CRM workflow'
-      actions={[
-        { label: 'Open inbox', href: '/inbox', variant: 'outlined' },
-        { label: 'See billing', href: '/billing' }
-      ]}
-      bullets={[
-        'Track first inbound, last inbound, and ownership changes on the lead record.',
-        'Keep lead state separate from contact identity so a single contact can return later.',
-        'Support scoring, tags, and assignment once the backend models are in place.',
-        'Expose pipeline stages without forcing a white-label redesign first.'
-      ]}
-    />
+    <Stack spacing={5}>
+      <PageHeading
+        eyebrow='CRM'
+        title='Oportunidades'
+        description='Consulta tus negocios, sus responsables y el avance de cada relación comercial.'
+        action={
+          <Button
+            href='/pipeline'
+            variant='outlined'
+            startIcon={<i className='tabler-layout-kanban' aria-hidden='true' />}
+          >
+            Ver pipeline
+          </Button>
+        }
+      />
+      <Card>
+        <LeadsTable leads={leads.records} />
+        <RecordsPagination page={page} total={leads.total} href='/leads' />
+      </Card>
+    </Stack>
   )
 }
-
-export default LeadsPage

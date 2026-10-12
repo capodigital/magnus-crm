@@ -36,8 +36,8 @@ const navigationCustomStyles = (verticalNavOptions: VerticalNavState, theme: The
         duration: transitionDuration,
         easing: 'ease-in-out'
       }),
-      borderColor: 'transparent',
-      boxShadow: 'var(--mui-customShadows-sm)',
+      borderColor: 'var(--mui-palette-divider)',
+      boxShadow: 'none',
       '[data-skin="bordered"] &': {
         boxShadow: 'none',
         ...(collapsedHovered && {
