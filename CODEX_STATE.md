@@ -49,6 +49,8 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - After this change the Embedded Signup utility test, TypeScript, ESLint, build, and diff validation passed.
 - Extracted provider System User environment validation into a pure helper with coverage for empty, complete, partial, and invalid configurations.
 - The final validation after this helper passed: Embedded Signup utility test, TypeScript, ESLint, build, and diff check.
+- The callback now consumes the HttpOnly Embedded Signup state cookie on accepted callback attempts even when Meta or validation fails, preventing state reuse after an error.
+- After this callback hardening, the Embedded Signup utility test, TypeScript, ESLint, build, and diff check passed.
 
 ## Next safe action
 

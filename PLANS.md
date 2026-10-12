@@ -30,6 +30,7 @@
 - [x] Goal 16: Make Business Portfolio WABA verification safe for paginated multi-tenant portfolios and add cursor regression coverage.
 - [x] Goal 17: Fail clearly on incomplete provider System User configuration and document the required environment-variable pair.
 - [x] Goal 18: Add pure regression coverage for provider System User environment validation.
+- [x] Goal 19: Consume the Embedded Signup state cookie after accepted callback attempts, including controlled failures.
 - [ ] Goal: Record an English end-to-end screencast showing Meta login, consent, business/WABA selection, connection, and the resulting CRM state.
 - [ ] Goal: Resubmit only after the video matches the actual production flow and the server-to-server token model is explicitly documented.
 
