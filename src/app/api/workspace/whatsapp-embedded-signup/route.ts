@@ -60,10 +60,14 @@ export async function POST(request: Request) {
   const phoneNumberId = asOptionalString(payload.phoneNumberId)
 
   if (!code || !wabaId) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: 'Meta no devolvió los datos necesarios para conectar el WABA.' },
       { status: 400 }
     )
+
+    response.cookies.delete(EMBEDDED_SIGNUP_STATE_COOKIE)
+
+    return response
   }
 
   const sessionInfo: EmbeddedSignupSessionInfo = {
@@ -89,9 +93,13 @@ export async function POST(request: Request) {
     const errorMessage = error instanceof Error ? error.message : 'Could not connect the WhatsApp account.'
     const statusCode = error && typeof error === 'object' && 'statusCode' in error ? Number(error.statusCode) : 400
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: errorMessage },
       { status: statusCode >= 400 && statusCode < 600 ? statusCode : 400 }
     )
+
+    response.cookies.delete(EMBEDDED_SIGNUP_STATE_COOKIE)
+
+    return response
   }
 }

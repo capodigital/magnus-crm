@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedded-signup-errors'
 import { parseEmbeddedSignupMessage } from '@/lib/whatsapp/embedded-signup-message'
 import { getNextMetaPageCursor } from '@/lib/whatsapp/meta-pagination'
+import { getProviderSystemUserConfiguration } from '@/lib/whatsapp/provider-system-user'
 
 assert.deepEqual(
   parseEmbeddedSignupMessage({
@@ -110,5 +111,29 @@ assert.equal(
   null
 )
 assert.equal(getNextMetaPageCursor(null, { paging: { cursors: { after: 'cursor-1' } } }), null)
+
+assert.equal(getProviderSystemUserConfiguration({}), null)
+assert.deepEqual(
+  getProviderSystemUserConfiguration({
+    META_SYSTEM_USER_ID: '123456789012345',
+    META_SYSTEM_USER_ACCESS_TOKEN: 'test-system-user-token'
+  }),
+  {
+    systemUserId: '123456789012345',
+    systemUserToken: 'test-system-user-token'
+  }
+)
+assert.throws(
+  () => getProviderSystemUserConfiguration({ META_SYSTEM_USER_ID: '123456789012345' }),
+  /META_SYSTEM_USER_ID y META_SYSTEM_USER_ACCESS_TOKEN juntos/
+)
+assert.throws(
+  () =>
+    getProviderSystemUserConfiguration({
+      META_SYSTEM_USER_ID: 'invalid-id',
+      META_SYSTEM_USER_ACCESS_TOKEN: 'test-system-user-token'
+    }),
+  /META_SYSTEM_USER_ID no tiene un formato válido/
+)
 
 console.log('WhatsApp Embedded Signup utility checks passed.')

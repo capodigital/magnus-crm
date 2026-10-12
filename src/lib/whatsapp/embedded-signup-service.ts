@@ -7,6 +7,7 @@ import { formatEmbeddedSignupWabaVerificationError } from '@/lib/whatsapp/embedd
 import { exchangeMetaEmbeddedSignupCode, requestMetaApi, WhatsappMetaApiError } from '@/lib/whatsapp/meta-client'
 import { getNextMetaPageCursor } from '@/lib/whatsapp/meta-pagination'
 import { registerTenantWhatsappPhoneNumber } from '@/lib/whatsapp/phone-number-registration'
+import { getProviderSystemUserConfiguration } from '@/lib/whatsapp/provider-system-user'
 
 type MetaWabaResponse = {
   id?: string
@@ -230,10 +231,21 @@ const subscribeAppToWaba = async (wabaId: string, accessToken: string) => {
 }
 
 const attachProviderSystemUser = async (wabaId: string) => {
-  const systemUserId = process.env.META_SYSTEM_USER_ID?.trim()
-  const systemUserToken = process.env.META_SYSTEM_USER_ACCESS_TOKEN?.trim()
+  let configuration
 
-  if (!systemUserId || !systemUserToken) return
+  try {
+    configuration = getProviderSystemUserConfiguration()
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new EmbeddedSignupError(error.message, 503)
+    }
+
+    throw error
+  }
+
+  if (!configuration) return
+
+  const { systemUserId, systemUserToken } = configuration
 
   try {
     await requestMetaApi(

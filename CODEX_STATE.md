@@ -45,6 +45,10 @@ Implement the tenant-scoped Meta Embedded Signup foundation needed for multi-ten
 - The Settings Embedded Signup panel now states that advanced `business_management` access is required before the Business Portfolio ownership check can succeed.
 - Business Portfolio WABA verification now follows Meta pagination with a bounded cursor loop, preventing valid WABAs on later pages from being rejected and avoiding unbounded requests.
 - The pagination helper is covered by the Embedded Signup utility checks; after this change TypeScript, ESLint, build, and diff validation passed.
+- Provider System User configuration now fails explicitly when only one of `META_SYSTEM_USER_ID` or `META_SYSTEM_USER_ACCESS_TOKEN` is present, and validates the ID format; both absent remains a supported pre-approval configuration.
+- After this change the Embedded Signup utility test, TypeScript, ESLint, build, and diff validation passed.
+- Extracted provider System User environment validation into a pure helper with coverage for empty, complete, partial, and invalid configurations.
+- The final validation after this helper passed: Embedded Signup utility test, TypeScript, ESLint, build, and diff check.
 
 ## Next safe action
 

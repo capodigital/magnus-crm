@@ -28,6 +28,8 @@
 - [x] Goal 14: Make the missing-permission failure actionable in the CRM and add a regression check without bypassing Business Portfolio ownership validation.
 - [x] Goal 15: Surface the App Review permission prerequisite directly in the Embedded Signup Settings panel and revalidate the production build.
 - [x] Goal 16: Make Business Portfolio WABA verification safe for paginated multi-tenant portfolios and add cursor regression coverage.
+- [x] Goal 17: Fail clearly on incomplete provider System User configuration and document the required environment-variable pair.
+- [x] Goal 18: Add pure regression coverage for provider System User environment validation.
 - [ ] Goal: Record an English end-to-end screencast showing Meta login, consent, business/WABA selection, connection, and the resulting CRM state.
 - [ ] Goal: Resubmit only after the video matches the actual production flow and the server-to-server token model is explicitly documented.
 
