@@ -14,11 +14,6 @@ type Props = { hasConnection: boolean; needsRegistration: boolean; phoneNumber: 
 
 const plannedIntegrations = [
   {
-    name: 'Correo electrónico',
-    icon: 'tabler-mail',
-    description: 'Reúne los correos de tus clientes en el mismo espacio de trabajo.'
-  },
-  {
     name: 'Calendario',
     icon: 'tabler-calendar',
     description: 'Conecta reuniones y próximos seguimientos con tu actividad comercial.'
@@ -35,7 +30,7 @@ export default function IntegrationsCatalog({ hasConnection, needsRegistration, 
       />
       <Stack direction='row' alignItems='center' spacing={2}>
         <Typography variant='h6'>Canales y herramientas</Typography>
-        <Chip size='small' variant='outlined' label='1 disponible' />
+        <Chip size='small' variant='outlined' label='2 disponibles' />
       </Stack>
       <Box
         sx={{
@@ -87,6 +82,20 @@ export default function IntegrationsCatalog({ hasConnection, needsRegistration, 
             >
               {hasConnection ? 'Gestionar integración' : 'Conectar WhatsApp'}
             </Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent sx={{ p: 5 }}>
+            <Stack spacing={3}>
+              <i className='tabler-mail' />
+              <Typography variant='h5'>Resend · Email marketing</Typography>
+              <Typography color='text.secondary'>
+                Campañas segmentadas y emails automáticos con historial por contacto.
+              </Typography>
+              <Button href='/settings/integrations/email' variant='outlined'>
+                Gestionar integración
+              </Button>
+            </Stack>
           </CardContent>
         </Card>
         {plannedIntegrations.map(integration => (

@@ -2,16 +2,16 @@
 
 ## Current objective
 
-Redesign Magnus as a general CRM with a light default theme and move the complete WhatsApp flow under Configuration → Integrations → WhatsApp Business.
+Expand Magnus CRM with clients, leads/opportunities, editable stages, contact history and AI proposals, segmented campaigns and Resend email automation.
 
 ## Current status
 
-- The light CRM redesign is implemented locally. Contacts, opportunities, pipeline and conversations now define the navigation.
-- WhatsApp onboarding, phone registration, advanced manual connection and templates moved to `/settings/integrations/whatsapp`; `/settings` now contains the general workspace summary.
-- Home uses real tenant-scoped data; contacts/opportunities have read-only paginated tables, and pipeline displays existing stages.
-- TypeScript, ESLint, Embedded Signup and token-vault checks pass. All six new workspace query functions passed a read-only smoke check in the isolated reviewer workspace.
-- Responsive browser QA used isolated fixtures; all temporary preview routes/scripts were removed. Final production build passed and includes the new protected CRM/integration routes.
-- Design, routes and validation details are documented in `docs/crm-redesign.md`.
+- Implemented locally: editable contacts, separate leads/opportunities, editable pipelines/stages, contact detail with chats, activities and proposals, agenda, campaigns and automation rules.
+- Resend outbox includes scheduling, pause/resume, consent, unsubscribe, tenant checks, idempotency, bounded retries and a protected cron endpoint. OpenAI proposal generation is server-only and optional.
+- Prisma migration and generated client are ready. Migration applied successfully to isolated local PostgreSQL; schema comparison returned no differences. Remote Neon connection failed with P1001, so no remote schema changes were made.
+- TypeScript, ESLint, production build, WhatsApp utility/token-vault checks, CRM integration tests and authenticated HTTP tests passed. Resend/OpenAI calls were mocked; no real messages were sent.
+- Desktop/mobile UI QA passed with local fixtures, including creation, stage changes, timeline updates, task completion and segment preview. Temporary preview seed script removed.
+- Implementation, activation steps and explicit limits: docs/crm-growth.md.
 
 ## WhatsApp integration baseline
 
@@ -65,6 +65,6 @@ Redesign Magnus as a general CRM with a light default theme and move the complet
 
 ## Next safe action
 
-Review the redesigned app through a real authenticated session and deploy only when requested. Then perform the existing post-approval Meta validation described below.
+Restore Neon connectivity and apply the additive CRM schema before deploying. For the existing db-push baseline, run npm run db:push and npm run db:backfill:crm; use migration deploy only with an initialized migration history. Configure Resend, a verified sender, CRON_SECRET, a scheduler for /api/cron/email, and optional OpenAI credentials/model. Then validate one authorized internal real email and its unsubscribe flow. Deployment was not requested or performed.
 
-Complete one real production Embedded Signup connection and phone registration after `business_management` is approved, record the English review video using the working end-to-end flow, and resubmit the permission; do not bypass the Business Portfolio ownership check or reuse the rejected screencast. Confirm separately that previously exposed Meta tokens and the embedded Git remote credential have been rotated.
+Retain the prior Meta approval/connection follow-up and credential-rotation constraints above.

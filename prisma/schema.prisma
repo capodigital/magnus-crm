@@ -200,6 +200,11 @@ model Tenant {
   whatsappWebhookEvents    WhatsappWebhookEvent[]
   pipelines                Pipeline[]
   pipelineStages           PipelineStage[]
+  activities               Activity[]
+  proposals                Proposal[]
+  campaigns                EmailCampaign[]
+  automations              EmailAutomation[]
+  emailDeliveries          EmailDelivery[]
 
   @@index([status, createdAt])
   @@map("tenants")
@@ -262,23 +267,32 @@ model Membership {
 }
 
 model Contact {
-  id              String         @id @default(cuid())
-  tenantId        String
-  firstName       String?
-  lastName        String?
-  fullName        String?
-  email           String?
-  phoneE164       String?
-  whatsappWaId    String?
-  normalizedPhone String?
-  source          String?
-  tags            String[]
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  version         Int            @default(1)
-  tenant          Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  leads           Lead[]
-  conversations   Conversation[]
+  id               String          @id @default(cuid())
+  tenantId         String
+  firstName        String?
+  lastName         String?
+  fullName         String?
+  email            String?
+  phoneE164        String?
+  whatsappWaId     String?
+  normalizedPhone  String?
+  source           String?
+  tags             String[]
+  company          String?
+  jobTitle         String?
+  notes            String?
+  lifecycle        String          @default("PROSPECT")
+  marketingConsent Boolean         @default(false)
+  unsubscribedAt   DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  version          Int             @default(1)
+  tenant           Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  leads            Lead[]
+  conversations    Conversation[]
+  activities       Activity[]
+  proposals        Proposal[]
+  emailDeliveries  EmailDelivery[]
 
   @@unique([tenantId, whatsappWaId])
   @@unique([tenantId, normalizedPhone])
@@ -288,28 +302,32 @@ model Contact {
 }
 
 model Lead {
-  id             String            @id @default(cuid())
-  tenantId       String
-  contactId      String
-  pipelineId     String?
-  stageId        String?
-  ownerUserId    String?
-  title          String?
-  sourceChannel  LeadSourceChannel
-  status         LeadStatus        @default(OPEN)
-  score          Int?
-  firstInboundAt DateTime?
-  lastInboundAt  DateTime?
-  lastOutboundAt DateTime?
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
-  version        Int               @default(1)
-  tenant         Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  contact        Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  pipeline       Pipeline?         @relation(fields: [pipelineId], references: [id])
-  stage          PipelineStage?    @relation(fields: [stageId], references: [id])
-  ownerUser      User?             @relation("LeadOwner", fields: [ownerUserId], references: [id])
-  conversations  Conversation[]
+  id              String            @id @default(cuid())
+  tenantId        String
+  contactId       String
+  pipelineId      String?
+  stageId         String?
+  ownerUserId     String?
+  title           String?
+  kind            String            @default("OPPORTUNITY")
+  valueCents      Int               @default(0)
+  currency        String            @default("USD")
+  expectedCloseAt DateTime?
+  sourceChannel   LeadSourceChannel
+  status          LeadStatus        @default(OPEN)
+  score           Int?
+  firstInboundAt  DateTime?
+  lastInboundAt   DateTime?
+  lastOutboundAt  DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  version         Int               @default(1)
+  tenant          Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact         Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  pipeline        Pipeline?         @relation(fields: [pipelineId], references: [id])
+  stage           PipelineStage?    @relation(fields: [stageId], references: [id])
+  ownerUser       User?             @relation("LeadOwner", fields: [ownerUserId], references: [id])
+  conversations   Conversation[]
 
   @@index([tenantId, status, updatedAt])
   @@index([tenantId, ownerUserId, updatedAt])
@@ -401,25 +419,25 @@ model WhatsappMessageTemplate {
 }
 
 model WhatsappPhoneNumber {
-  id                     String                 @id @default(cuid())
+  id                     String                          @id @default(cuid())
   tenantId               String
   wabaId                 String
-  phoneNumberId          String                 @unique
+  phoneNumberId          String                          @unique
   businessId             String?
   displayPhoneNumber     String?
   verifiedName           String?
   qualityRating          String?
   codeVerificationStatus String?
-  connectionSource       WhatsappConnectionSource @default(MANUAL)
+  connectionSource       WhatsappConnectionSource        @default(MANUAL)
   registrationStatus     WhatsappPhoneRegistrationStatus @default(PENDING)
   accessTokenCiphertext  String?
-  accessTokenIv           String?
-  accessTokenAuthTag      String?
-  accessTokenExpiresAt    DateTime?
-  connectedAt             DateTime?
-  createdAt              DateTime               @default(now())
-  updatedAt              DateTime               @updatedAt
-  tenant                 Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  accessTokenIv          String?
+  accessTokenAuthTag     String?
+  accessTokenExpiresAt   DateTime?
+  connectedAt            DateTime?
+  createdAt              DateTime                        @default(now())
+  updatedAt              DateTime                        @updatedAt
+  tenant                 Tenant                          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   conversations          Conversation[]
   webhookEvents          WhatsappWebhookEvent[]
 
@@ -475,22 +493,126 @@ model Pipeline {
 }
 
 model PipelineStage {
-  id         String   @id @default(cuid())
+  id         String     @id @default(cuid())
   tenantId   String
   pipelineId String
   name       String
   slug       String
   color      String?
   position   Int
-  isFinal    Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  pipeline   Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  isFinal    Boolean    @default(false)
+  outcome    LeadStatus @default(OPEN)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  tenant     Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  pipeline   Pipeline   @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
   leads      Lead[]
 
   @@unique([pipelineId, slug])
   @@unique([pipelineId, position])
   @@index([tenantId, pipelineId])
   @@map("pipeline_stages")
+}
+
+model Activity {
+  id          String    @id @default(cuid())
+  tenantId    String
+  contactId   String
+  type        String
+  title       String
+  description String?
+  occursAt    DateTime
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  tenant      Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact     Contact   @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, contactId, occursAt])
+  @@index([tenantId, completedAt, occursAt])
+  @@map("activities")
+}
+
+model Proposal {
+  id          String   @id @default(cuid())
+  tenantId    String
+  contactId   String
+  title       String
+  body        String
+  aiGenerated Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact     Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, contactId, createdAt])
+  @@map("proposals")
+}
+
+model EmailCampaign {
+  id          String          @id @default(cuid())
+  tenantId    String
+  name        String
+  subject     String
+  body        String
+  segment     Json
+  status      String          @default("DRAFT")
+  scheduledAt DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  tenant      Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  deliveries  EmailDelivery[]
+
+  @@index([tenantId, status, scheduledAt])
+  @@map("email_campaigns")
+}
+
+model EmailAutomation {
+  id           String          @id @default(cuid())
+  tenantId     String
+  name         String
+  trigger      String
+  stageId      String?
+  delayMinutes Int             @default(0)
+  subject      String
+  body         String
+  active       Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  tenant       Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  deliveries   EmailDelivery[]
+
+  @@index([tenantId, active, trigger])
+  @@map("email_automations")
+}
+
+model EmailDelivery {
+  id               String           @id @default(cuid())
+  tenantId         String
+  contactId        String
+  campaignId       String?
+  automationId     String?
+  dedupeKey        String           @unique
+  unsubscribeToken String           @unique @default(uuid())
+  toEmail          String
+  fromEmail        String
+  publicBaseUrl    String
+  subject          String
+  body             String
+  status           String           @default("QUEUED")
+  dueAt            DateTime
+  lockedAt         DateTime?
+  firstAttemptAt   DateTime?
+  attempts         Int              @default(0)
+  providerId       String?
+  error            String?
+  sentAt           DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  tenant           Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  contact          Contact          @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  campaign         EmailCampaign?   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  automation       EmailAutomation? @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, status, dueAt])
+  @@map("email_deliveries")
 }

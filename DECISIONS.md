@@ -1,5 +1,14 @@
 # Decisions
 
+## 2026-11-13: Editable CRM and email marketing
+
+- Supersede the read-only CRM limitation with tenant-scoped mutations and separate lead/opportunity views. Keep existing records classified as opportunities; classify newly received WhatsApp leads as leads.
+- Use Resend as explicitly selected by the user. Persist per-recipient outbox snapshots and stable provider keys; require consent and honor unsubscribe at dispatch.
+- Restrict marketing mutations to owner/admin roles. A protected scheduler endpoint performs dispatch; no live sending or deployment was performed in this session.
+- Generate optional proposal drafts through the OpenAI Responses API, configured only on the server. Require review; never send generated proposals automatically.
+- Use additive schema changes and preserve the existing db-push activation path. Remote Neon was unreachable, so verify migration and behavior on an isolated local PostgreSQL instance.
+- Retain WhatsApp onboarding and messaging contracts.
+
 ## 2026-10-12: General CRM and light visual system
 
 - Keep contacts, opportunities, pipeline and conversations as the primary product surfaces; WhatsApp is one integration under Configuration → Integrations.

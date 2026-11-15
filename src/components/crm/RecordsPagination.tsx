@@ -11,6 +11,7 @@ export const parsePage = (value: string | string[] | undefined) => {
 
 export default function RecordsPagination({ page, total, href }: { page: number; total: number; href: string }) {
   const lastPage = Math.max(1, Math.ceil(total / 25))
+  const separator = href.includes('?') ? '&' : '?'
 
   return (
     <Stack
@@ -24,10 +25,20 @@ export default function RecordsPagination({ page, total, href }: { page: number;
         {total} registros · Página {page} de {lastPage}
       </Typography>
       <Stack direction='row' spacing={1}>
-        <Button href={`${href}?page=${Math.max(1, page - 1)}`} disabled={page <= 1} size='small' variant='outlined'>
+        <Button
+          href={`${href}${separator}page=${Math.max(1, page - 1)}`}
+          disabled={page <= 1}
+          size='small'
+          variant='outlined'
+        >
           Anterior
         </Button>
-        <Button href={`${href}?page=${page + 1}`} disabled={page >= lastPage} size='small' variant='outlined'>
+        <Button
+          href={`${href}${separator}page=${page + 1}`}
+          disabled={page >= lastPage}
+          size='small'
+          variant='outlined'
+        >
           Siguiente
         </Button>
       </Stack>

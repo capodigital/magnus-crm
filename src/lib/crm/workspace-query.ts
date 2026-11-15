@@ -20,11 +20,16 @@ const leadSelect = {
 export const getWorkspaceSummary = cache(async (tenantId: string) => {
   const [contacts, opportunities, conversations, won, recentLeads, leadStatuses] = await Promise.all([
     prisma.contact.count({ where: { tenantId } }),
-    prisma.lead.count({ where: { tenantId, status: 'OPEN' } }),
+    prisma.lead.count({ where: { tenantId, kind: 'OPPORTUNITY', status: 'OPEN' } }),
     prisma.conversation.count({ where: { tenantId, status: { in: ['OPEN', 'PENDING'] } } }),
-    prisma.lead.count({ where: { tenantId, status: 'WON' } }),
-    prisma.lead.findMany({ where: { tenantId }, select: leadSelect, orderBy: { updatedAt: 'desc' }, take: 5 }),
-    prisma.lead.groupBy({ by: ['status'], where: { tenantId }, _count: { _all: true } })
+    prisma.lead.count({ where: { tenantId, kind: 'OPPORTUNITY', status: 'WON' } }),
+    prisma.lead.findMany({
+      where: { tenantId, kind: 'OPPORTUNITY' },
+      select: leadSelect,
+      orderBy: { updatedAt: 'desc' },
+      take: 5
+    }),
+    prisma.lead.groupBy({ by: ['status'], where: { tenantId, kind: 'OPPORTUNITY' }, _count: { _all: true } })
   ])
 
   return { contacts, opportunities, conversations, won, recentLeads, leadStatuses }

@@ -238,6 +238,7 @@ export const bootstrapWorkspace = async (input: BootstrapWorkspaceInput): Promis
           name: stage.name,
           color: stage.color,
           isFinal: stage.isFinal,
+          outcome: stage.slug === 'ganado' ? 'WON' : stage.slug === 'perdido' ? 'LOST' : 'OPEN',
           position: stage.position,
           tenantId: tenant.id
         },
@@ -248,6 +249,7 @@ export const bootstrapWorkspace = async (input: BootstrapWorkspaceInput): Promis
           slug: stage.slug,
           color: stage.color,
           isFinal: stage.isFinal,
+          outcome: stage.slug === 'ganado' ? 'WON' : stage.slug === 'perdido' ? 'LOST' : 'OPEN',
           position: stage.position
         }
       })

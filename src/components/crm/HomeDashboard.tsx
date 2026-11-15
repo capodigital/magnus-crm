@@ -38,7 +38,7 @@ export default function HomeDashboard({ workspaceName, summary }: Props) {
       value: summary?.opportunities ?? 0,
       description: 'Negocios en seguimiento',
       icon: 'tabler-target-arrow',
-      href: '/leads'
+      href: '/opportunities'
     },
     {
       label: 'Conversaciones activas',
@@ -124,7 +124,7 @@ export default function HomeDashboard({ workspaceName, summary }: Props) {
                 Los últimos movimientos de tu equipo.
               </Typography>
             </Stack>
-            <Button href='/leads' size='small' sx={{ flexShrink: 0 }}>
+            <Button href='/opportunities' size='small' sx={{ flexShrink: 0 }}>
               Ver todas
             </Button>
           </Stack>

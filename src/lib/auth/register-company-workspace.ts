@@ -200,6 +200,7 @@ export const registerCompanyWorkspace = async (input: RegisterCompanyWorkspaceIn
             slug: stage.slug,
             color: stage.color,
             isFinal: stage.isFinal,
+          outcome: stage.slug === 'ganado' ? 'WON' : stage.slug === 'perdido' ? 'LOST' : 'OPEN',
             position: index + 1
           }
         })

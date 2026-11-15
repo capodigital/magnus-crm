@@ -1,5 +1,18 @@
 # Plans
 
+## CRM expansion and Resend — 2026-11-13
+
+- [x] Add editable clients, prospects, separate leads/opportunities and stages.
+- [x] Add contact detail, WhatsApp context, activity timeline, tasks/reminders and proposal drafts/AI integration.
+- [x] Add segmented campaigns, scheduled outbox, consent/baja handling and automation rules.
+- [x] Add tenant/role checks, protected email cron, idempotency and retry safeguards.
+- [x] Prepare additive migration and validate it on isolated local PostgreSQL.
+- [x] Pass typecheck, lint, production build, CRM service/HTTP tests and WhatsApp regressions.
+- [x] Verify desktop/mobile UI with isolated fixtures and document activation.
+- [ ] Restore Neon connectivity and apply schema/backfill remotely (P1001 during implementation).
+- [ ] Configure Resend, verified sender, external scheduler, and optional OpenAI integration.
+- [ ] Deploy when requested and verify an authorized internal real email and unsubscribe.
+
 ## Light general CRM redesign — 2026-10-12
 
 - [x] Define a light visual direction and make it the appearance default.

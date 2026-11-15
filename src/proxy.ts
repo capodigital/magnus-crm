@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { resolveTenantContext } from '@/lib/tenant'
 
-const protectedRoutes = ['/home', '/inbox', '/leads', '/pipeline', '/billing', '/settings']
+const protectedRoutes = ['/home', '/contacts', '/opportunities', '/activities', '/campaigns', '/automations', '/inbox', '/leads', '/pipeline', '/billing', '/settings']
 
 const isProtectedRoute = (pathname: string) =>
   protectedRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))

@@ -97,16 +97,17 @@ const serializeConversation = (conversation: InboxConversationRecord): InboxConv
     conversation.lastInboundAt ??
     conversation.messages
       .filter(message => message.direction === 'INBOUND')
-      .reduce<Date | null>((latest, message) => (!latest || message.createdAt > latest ? message.createdAt : latest), null)
+      .reduce<Date | null>(
+        (latest, message) => (!latest || message.createdAt > latest ? message.createdAt : latest),
+        null
+      )
 
   return {
     id: conversation.id,
     status: conversation.status,
     lastMessageAt: conversation.lastMessageAt?.toISOString() ?? null,
     lastInboundAt: lastInboundAt?.toISOString() ?? null,
-    replyWindowExpiresAt: lastInboundAt
-      ? new Date(lastInboundAt.getTime() + 24 * 60 * 60 * 1000).toISOString()
-      : null,
+    replyWindowExpiresAt: lastInboundAt ? new Date(lastInboundAt.getTime() + 24 * 60 * 60 * 1000).toISOString() : null,
     updatedAt: conversation.updatedAt.toISOString(),
     contact: conversation.contact,
     lead: conversation.lead,
@@ -124,7 +125,7 @@ const serializeConversation = (conversation: InboxConversationRecord): InboxConv
   }
 }
 
-export const getTenantInbox = async (tenantId: string): Promise<InboxConversation[]> => {
+export const getTenantInbox = async (tenantId: string, selectedId?: string): Promise<InboxConversation[]> => {
   const conversations = await prisma.conversation.findMany({
     where: {
       tenantId,
@@ -137,6 +138,15 @@ export const getTenantInbox = async (tenantId: string): Promise<InboxConversatio
     take: 50,
     select: inboxConversationSelect
   })
+
+  if (selectedId && !conversations.some(item => item.id === selectedId)) {
+    const selected = await prisma.conversation.findFirst({
+      where: { id: selectedId, tenantId, channel: ChannelType.WHATSAPP },
+      select: inboxConversationSelect
+    })
+
+    if (selected) conversations.unshift(selected)
+  }
 
   return conversations.map(serializeConversation)
 }

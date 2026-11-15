@@ -11,7 +11,11 @@ import { useWorkspaceIdentity } from '@components/crm/WorkspaceIdentity'
 const pageNames: Record<string, string> = {
   home: 'Inicio',
   contacts: 'Contactos',
-  leads: 'Oportunidades',
+  leads: 'Leads',
+  opportunities: 'Oportunidades',
+  activities: 'Interacciones',
+  campaigns: 'Campañas',
+  automations: 'Automatizaciones',
   pipeline: 'Pipeline',
   inbox: 'Conversaciones',
   billing: 'Facturación',

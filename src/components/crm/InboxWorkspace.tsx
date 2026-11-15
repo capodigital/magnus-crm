@@ -25,6 +25,7 @@ import { formatReplyWindowRemaining, getWhatsappReplyWindowFromIso } from '@/lib
 import type { WhatsappTemplateView } from '@/lib/whatsapp/template-contract'
 
 type InboxWorkspaceProps = {
+  initialSelectedId?: string
   workspaceName: string | null
   conversations: InboxConversation[]
   templates: WhatsappTemplateView[]
@@ -91,9 +92,9 @@ const getMessagePreview = (conversation: InboxConversation) => {
   return lastMessage.bodyText ?? (lastMessage.mediaMimeType ? 'Mensaje multimedia' : 'Mensaje sin texto')
 }
 
-const InboxWorkspace = ({ workspaceName, conversations, templates }: InboxWorkspaceProps) => {
+const InboxWorkspace = ({ workspaceName, conversations, templates, initialSelectedId }: InboxWorkspaceProps) => {
   const router = useRouter()
-  const [selectedId, setSelectedId] = useState<string | null>(conversations[0]?.id ?? null)
+  const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId ?? conversations[0]?.id ?? null)
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('ALL')
   const [search, setSearch] = useState('')
   const [isRefreshing, setIsRefreshing] = useState(false)

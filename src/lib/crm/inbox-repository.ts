@@ -189,6 +189,7 @@ export const upsertInboundWhatsappMessage = async (
               stageId: defaultStage?.id ?? null,
               title: buildLeadTitle(contact.fullName, contact.normalizedPhone),
               sourceChannel: LeadSourceChannel.WHATSAPP,
+              kind: 'LEAD',
               status: LeadStatus.OPEN,
               firstInboundAt: input.occurredAt,
               lastInboundAt: input.occurredAt

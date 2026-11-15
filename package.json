@@ -21,7 +21,10 @@
     "register:whatsapp-phone": "tsx scripts/register-whatsapp-phone-number.ts",
     "postinstall": "npm run build:icons",
     "clean": "rm -rf .next",
-    "clear": "rm -rf node_modules .next"
+    "clear": "rm -rf node_modules .next",
+    "test:crm": "node --conditions=react-server --import tsx scripts/test-crm.ts",
+    "test:crm:http": "node --import tsx scripts/test-crm-http.ts",
+    "db:backfill:crm": "tsx scripts/backfill-crm-classification.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

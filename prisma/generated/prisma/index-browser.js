@@ -227,6 +227,12 @@ exports.Prisma.ContactScalarFieldEnum = {
   normalizedPhone: 'normalizedPhone',
   source: 'source',
   tags: 'tags',
+  company: 'company',
+  jobTitle: 'jobTitle',
+  notes: 'notes',
+  lifecycle: 'lifecycle',
+  marketingConsent: 'marketingConsent',
+  unsubscribedAt: 'unsubscribedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   version: 'version'
@@ -240,6 +246,10 @@ exports.Prisma.LeadScalarFieldEnum = {
   stageId: 'stageId',
   ownerUserId: 'ownerUserId',
   title: 'title',
+  kind: 'kind',
+  valueCents: 'valueCents',
+  currency: 'currency',
+  expectedCloseAt: 'expectedCloseAt',
   sourceChannel: 'sourceChannel',
   status: 'status',
   score: 'score',
@@ -368,6 +378,82 @@ exports.Prisma.PipelineStageScalarFieldEnum = {
   color: 'color',
   position: 'position',
   isFinal: 'isFinal',
+  outcome: 'outcome',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ActivityScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  occursAt: 'occursAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ProposalScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  title: 'title',
+  body: 'body',
+  aiGenerated: 'aiGenerated',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailCampaignScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  subject: 'subject',
+  body: 'body',
+  segment: 'segment',
+  status: 'status',
+  scheduledAt: 'scheduledAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailAutomationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  trigger: 'trigger',
+  stageId: 'stageId',
+  delayMinutes: 'delayMinutes',
+  subject: 'subject',
+  body: 'body',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailDeliveryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  contactId: 'contactId',
+  campaignId: 'campaignId',
+  automationId: 'automationId',
+  dedupeKey: 'dedupeKey',
+  unsubscribeToken: 'unsubscribeToken',
+  toEmail: 'toEmail',
+  fromEmail: 'fromEmail',
+  publicBaseUrl: 'publicBaseUrl',
+  subject: 'subject',
+  body: 'body',
+  status: 'status',
+  dueAt: 'dueAt',
+  lockedAt: 'lockedAt',
+  firstAttemptAt: 'firstAttemptAt',
+  attempts: 'attempts',
+  providerId: 'providerId',
+  error: 'error',
+  sentAt: 'sentAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -533,7 +619,12 @@ exports.Prisma.ModelName = {
   WhatsappPhoneNumber: 'WhatsappPhoneNumber',
   WhatsappWebhookEvent: 'WhatsappWebhookEvent',
   Pipeline: 'Pipeline',
-  PipelineStage: 'PipelineStage'
+  PipelineStage: 'PipelineStage',
+  Activity: 'Activity',
+  Proposal: 'Proposal',
+  EmailCampaign: 'EmailCampaign',
+  EmailAutomation: 'EmailAutomation',
+  EmailDelivery: 'EmailDelivery'
 };
 
 /**
