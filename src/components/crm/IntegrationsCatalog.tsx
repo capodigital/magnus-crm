@@ -88,12 +88,12 @@ export default function IntegrationsCatalog({ hasConnection, needsRegistration, 
           <CardContent sx={{ p: 5 }}>
             <Stack spacing={3}>
               <i className='tabler-mail' />
-              <Typography variant='h5'>Resend · Email marketing</Typography>
+              <Typography variant='h5'>Email marketing</Typography>
               <Typography color='text.secondary'>
                 Campañas segmentadas y emails automáticos con historial por contacto.
               </Typography>
               <Button href='/settings/integrations/email' variant='outlined'>
-                Gestionar integración
+                Ver campañas y automatizaciones
               </Button>
             </Stack>
           </CardContent>

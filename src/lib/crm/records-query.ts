@@ -1,5 +1,7 @@
 import 'server-only'
 
+import { emailDeliveryNotice } from './email-delivery-presentation'
+
 import type { Prisma } from '../../../prisma/generated/prisma'
 
 import prisma from '@/lib/prisma'
@@ -24,7 +26,17 @@ export async function contactList(tenantId: string, page: number, search = '', l
       orderBy: [{ updatedAt: 'desc' }, { id: 'desc' }],
       skip: (page - 1) * 25,
       take: 25,
-      select: { id: true, fullName: true, firstName: true, email: true, phoneE164: true, company: true, lifecycle: true, tags: true, _count: { select: { leads: true, conversations: true } } }
+      select: {
+        id: true,
+        fullName: true,
+        firstName: true,
+        email: true,
+        phoneE164: true,
+        company: true,
+        lifecycle: true,
+        tags: true,
+        _count: { select: { leads: true, conversations: true } }
+      }
     }),
     prisma.contact.count({ where }),
     prisma.contact.count({ where: { tenantId, lifecycle: 'CUSTOMER' } }),
@@ -71,7 +83,17 @@ export async function contactDetail(tenantId: string, id: string) {
     }
   })
 
-  return toClient(contact)
+  return toClient(
+    contact
+      ? {
+          ...contact,
+          emailDeliveries: contact.emailDeliveries.map(delivery => ({
+            ...delivery,
+            error: emailDeliveryNotice(delivery)
+          }))
+        }
+      : null
+  )
 }
 
 export async function salesOptions(tenantId: string) {

@@ -5,7 +5,11 @@ import RecordsPagination, { parsePage } from '@/components/crm/RecordsPagination
 import { crmPageAccess as crmAccess } from '@/lib/crm/access'
 import { contactList } from '@/lib/crm/records-query'
 
-export default async function ContactsPage({ searchParams }: { searchParams: Promise<{ page?: string; q?: string; lifecycle?: string }> }) {
+export default async function ContactsPage({
+  searchParams
+}: {
+  searchParams: Promise<{ page?: string; q?: string; lifecycle?: string; create?: string }>
+}) {
   const access = await crmAccess()
   const params = await searchParams
   const page = parsePage(params.page)
@@ -13,6 +17,21 @@ export default async function ContactsPage({ searchParams }: { searchParams: Pro
   const lifecycle = ['PROSPECT', 'CUSTOMER', 'INACTIVE'].includes(params.lifecycle ?? '') ? params.lifecycle! : ''
   const data = await contactList(access.tenantId, page, search, lifecycle)
 
-
-return <Stack spacing={3}><ContactsWorkspace data={data} search={search} lifecycle={lifecycle} canWrite={access.canWrite} /><RecordsPagination page={page} total={data.total} href={`/contacts?q=${encodeURIComponent(search)}&lifecycle=${lifecycle}`} /></Stack>
+  return (
+    <Stack spacing={3}>
+      <ContactsWorkspace
+        key={`${search}-${lifecycle}-${params.create ?? ''}`}
+        data={data}
+        search={search}
+        lifecycle={lifecycle}
+        canWrite={access.canWrite}
+        initialCreate={params.create === 'customer' ? 'CUSTOMER' : ''}
+      />
+      <RecordsPagination
+        page={page}
+        total={data.total}
+        href={`/contacts?q=${encodeURIComponent(search)}&lifecycle=${lifecycle}`}
+      />
+    </Stack>
+  )
 }

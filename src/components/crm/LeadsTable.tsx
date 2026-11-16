@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Chip from '@mui/material/Chip'
 import Stack from '@mui/material/Stack'
 import Table from '@mui/material/Table'
@@ -56,9 +58,11 @@ export default function LeadsTable({ leads }: { leads: WorkspaceLead[] }) {
                   <Typography variant='body2' sx={{ fontWeight: 600 }}>
                     {lead.title ?? lead.contact.fullName ?? lead.contact.firstName ?? 'Sin título'}
                   </Typography>
-                  <Typography variant='caption' color='text.secondary'>
-                    {lead.contact.fullName ?? lead.contact.email ?? lead.contact.phoneE164 ?? 'Contacto sin nombre'}
-                  </Typography>
+                  <Link href={`/contacts/${lead.contactId}`}>
+                    <Typography variant='caption' color='primary'>
+                      {lead.contact.fullName ?? lead.contact.email ?? lead.contact.phoneE164 ?? 'Contacto sin nombre'}
+                    </Typography>
+                  </Link>
                 </Stack>
               </TableCell>
               <TableCell>{lead.stage?.name ?? 'Sin etapa'}</TableCell>

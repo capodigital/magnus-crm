@@ -77,6 +77,11 @@ async function main() {
       })
 
     assert.equal((await mutate('/api/crm/contacts', payload)).status, 403, 'Viewer must not write')
+    assert.equal(
+      (await mutate('/api/crm/ai/email', { action: 'campaign_email', brief: 'Test' })).status,
+      403,
+      'Viewer must not generate paid AI drafts'
+    )
     assert.equal((await request('/api/crm/contacts/search?q=Foreign')).status, 200)
     assert.equal((await (await request('/api/crm/contacts/search?q=Foreign')).json()).result.length, 0)
     await prisma.membership.update({
@@ -84,6 +89,11 @@ async function main() {
       data: { role: 'MEMBER' }
     })
     assert.equal((await mutate('/api/crm/campaigns', {})).status, 403, 'Member must not manage campaigns')
+    assert.equal(
+      (await mutate('/api/crm/ai/email', { action: 'campaign_email', brief: 'Test' })).status,
+      403,
+      'Member must not generate marketing drafts'
+    )
     assert.equal(
       (await mutate('/api/crm/contacts', payload, 'POST', 'https://foreign.example.test')).status,
       403,
@@ -104,6 +114,11 @@ async function main() {
       where: { tenantId_userId: { tenantId: tenant.id, userId: user.id } },
       data: { role: 'ADMIN' }
     })
+    assert.equal(
+      (await mutate('/api/crm/ai/email', { action: 'invalid', brief: 'Test' })).status,
+      400,
+      'Admin reaches draft validation without provider call'
+    )
     assert.equal(
       (await mutate('/api/crm/campaigns', { name: 'HTTP draft', subject: 'Hello', body: 'Local test', segment: {} }))
         .status,

@@ -1,5 +1,18 @@
 # Plans
 
+## CRM navigation and AI by action — 2026-11-16
+
+- [x] Diagnose production UI mismatch: domain serves October 12 build.
+- [x] Add clear client/lead creation and inline contact creation.
+- [x] Expose detail tabs, individual timeline actions and marketing navigation.
+- [x] Add configurable action-based model selection and email drafting.
+- [x] Keep models, key status and provider configuration internal, per user clarification; remove public model choices and technical setup instructions.
+- [x] Verify configured database schema matches Prisma without mutations.
+- [x] Run typecheck, lint, build, mocked AI/service tests and HTTP security tests.
+- [x] Finish desktop/mobile QA and final build after UI fixes; final cosmetic edits passed typecheck and lint.
+- [x] Hand off the reviewed local version and activation instructions. User will publish and configure production; no remote changes are authorized.
+
+
 ## CRM expansion and Resend — 2026-11-13
 
 - [x] Add editable clients, prospects, separate leads/opportunities and stages.
@@ -9,9 +22,9 @@
 - [x] Prepare additive migration and validate it on isolated local PostgreSQL.
 - [x] Pass typecheck, lint, production build, CRM service/HTTP tests and WhatsApp regressions.
 - [x] Verify desktop/mobile UI with isolated fixtures and document activation.
-- [ ] Restore Neon connectivity and apply schema/backfill remotely (P1001 during implementation).
-- [ ] Configure Resend, verified sender, external scheduler, and optional OpenAI integration.
-- [ ] Deploy when requested and verify an authorized internal real email and unsubscribe.
+- [x] Recheck Neon connectivity and schema: reachable and full Prisma diff empty on November 16. No remote schema mutation was needed.
+- [ ] User activation: verify whether the CRM data backfill has already run; configure Resend, verified sender, external scheduler and OpenAI.
+- [ ] User publication: deploy and verify an authorized internal real email and unsubscribe.
 
 ## Light general CRM redesign — 2026-10-12
 

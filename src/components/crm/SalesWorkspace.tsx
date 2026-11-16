@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
@@ -30,7 +31,8 @@ export default function SalesWorkspace({
   kind,
   search,
   status,
-  canWrite
+  canWrite,
+  initialCreate = false
 }: {
   data: SalesList
   options: SalesOptions
@@ -38,8 +40,14 @@ export default function SalesWorkspace({
   search: string
   status: string
   canWrite: boolean
+  initialCreate?: boolean
 }) {
-  const [editing, setEditing] = useState<SalesList['records'][number] | 'new' | null>(null)
+  const router = useRouter()
+
+  const [editing, setEditing] = useState<SalesList['records'][number] | 'new' | null>(
+    initialCreate && canWrite ? 'new' : null
+  )
+
   const isLead = kind === 'LEAD'
 
   return (
@@ -49,7 +57,7 @@ export default function SalesWorkspace({
         title={isLead ? 'Leads' : 'Oportunidades'}
         description={
           isLead
-            ? 'Califica contactos, asigna responsables y convierte el interés en oportunidades.'
+            ? 'Crea leads manualmente, asigna responsables y convierte el interés en oportunidades.'
             : 'Gestiona el valor, la etapa y el próximo cierre de cada negocio.'
         }
         action={
@@ -58,7 +66,7 @@ export default function SalesWorkspace({
               Ver etapas
             </Button>
             {canWrite ? (
-              <Button onClick={() => setEditing('new')} variant='contained'>
+              <Button onClick={() => setEditing('new')} variant='contained' startIcon={<i className='tabler-plus' />}>
                 {isLead ? 'Nuevo lead' : 'Nueva oportunidad'}
               </Button>
             ) : null}
@@ -167,7 +175,10 @@ export default function SalesWorkspace({
           lead={editing === 'new' ? undefined : editing}
           kind={kind}
           options={options}
-          onClose={() => setEditing(null)}
+          onClose={() => {
+            setEditing(null)
+            if (initialCreate) router.replace(isLead ? '/leads' : '/opportunities')
+          }}
         />
       ) : null}
     </Stack>

@@ -13,6 +13,7 @@ const inboxConversationSelect = {
   updatedAt: true,
   contact: {
     select: {
+      id: true,
       fullName: true,
       firstName: true,
       phoneE164: true,
@@ -75,6 +76,7 @@ export type InboxConversation = {
   replyWindowExpiresAt: string | null
   updatedAt: string
   contact: {
+    id: string
     fullName: string | null
     firstName: string | null
     phoneE164: string | null

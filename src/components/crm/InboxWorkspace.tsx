@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
@@ -309,7 +310,13 @@ const InboxWorkspace = ({ workspaceName, conversations, templates, initialSelect
                     {getInitials(getDisplayName(selectedConversation))}
                   </Avatar>
                   <Stack spacing={0.35} sx={{ minWidth: 140, flex: 1 }}>
-                    <Typography variant='h6' noWrap sx={{ fontWeight: 800 }}>
+                    <Typography
+                      component={Link}
+                      href={`/contacts/${selectedConversation.contact.id}`}
+                      variant='h6'
+                      noWrap
+                      sx={{ fontWeight: 800 }}
+                    >
                       {getDisplayName(selectedConversation)}
                     </Typography>
                     <Typography variant='body2' color='text.secondary' noWrap>
@@ -323,6 +330,9 @@ const InboxWorkspace = ({ workspaceName, conversations, templates, initialSelect
                     color={statusColors[selectedConversation.status] ?? 'default'}
                     size='small'
                   />
+                  <Button component={Link} href={`/contacts/${selectedConversation.contact.id}`} size='small'>
+                    Ver ficha
+                  </Button>
                   {selectedReplyWindow ? (
                     <Chip
                       label={

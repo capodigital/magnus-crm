@@ -38,7 +38,7 @@ const campaignLabels: Record<string, string> = {
 const deliveryLabels: Record<string, string> = {
   QUEUED: 'En cola',
   PROCESSING: 'Procesando',
-  SENT: 'Aceptado por Resend',
+  SENT: 'Enviado',
   FAILED: 'Fallido',
   SKIPPED: 'Omitido'
 }
@@ -75,8 +75,7 @@ export default function MarketingWorkspace({
     }
   }
 
-
-return (
+  return (
     <Stack spacing={4}>
       <PageHeading
         eyebrow='Marketing / Email'
@@ -95,20 +94,10 @@ return (
         }
       />
       {!data.email.ready ? (
-        <Alert
-          severity='warning'
-          action={
-            <Button href='/settings/integrations/email' size='small'>
-              Configurar
-            </Button>
-          }
-        >
-          Resend aún no está configurado. Puedes guardar borradores; los envíos y la activación estarán disponibles al
-          conectar el servicio.
+        <Alert severity='warning'>
+          Los envíos no están disponibles en este momento. Puedes seguir preparando y guardando borradores.
         </Alert>
-      ) : (
-        <Alert severity='success'>Resend configurado · {data.email.from}</Alert>
-      )}
+      ) : null}
       {!canMarket ? (
         <Alert severity='info'>
           Puedes consultar el historial. La gestión de campañas y reglas corresponde a los administradores.
@@ -118,7 +107,7 @@ return (
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: 3 }}>
         {[
           ['QUEUED', 'Emails en cola'],
-          ['SENT', 'Aceptados por Resend'],
+          ['SENT', 'Emails enviados'],
           ['FAILED', 'Fallidos'],
           ['SKIPPED', 'Omitidos']
         ].map(([status, label]) => (
@@ -231,7 +220,7 @@ return (
         <Stack spacing={1} sx={{ p: 3 }}>
           <Typography variant='h6'>Historial de envíos</Typography>
           <Typography variant='body2' color='text.secondary'>
-            Últimos 50 emails. Aceptado por Resend indica recepción por el proveedor, no entrega ni apertura.
+            Últimos 50 emails. El estado Enviado no confirma la entrega ni la lectura del mensaje.
           </Typography>
         </Stack>
         {data.deliveries.length ? (

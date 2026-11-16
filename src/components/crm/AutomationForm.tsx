@@ -1,8 +1,11 @@
 'use client'
 
+import { useState } from 'react'
+
 import Alert from '@mui/material/Alert'
 
 import RecordForm, { crmRequest, optionsFrom } from './RecordForm'
+import AiEmailAssistant from './AiEmailAssistant'
 import { triggerLabels } from '@/lib/crm/contracts'
 import type { MarketingData } from '@/lib/crm/marketing-service'
 import type { SalesOptions } from '@/lib/crm/records-query'
@@ -16,10 +19,14 @@ export default function AutomationForm({
   options: SalesOptions
   onClose: () => void
 }) {
+  const [body, setBody] = useState(rule?.body ?? '')
+  const [aiBusy, setAiBusy] = useState(false)
+
   return (
     <RecordForm
       title={rule ? 'Editar automatización' : 'Nueva automatización'}
       onClose={onClose}
+      busy={aiBusy}
       onSave={values =>
         crmRequest(
           `automations${rule ? `/${rule.id}` : ''}`,
@@ -56,7 +63,8 @@ export default function AutomationForm({
         {
           name: 'body',
           label: 'Mensaje',
-          value: rule?.body,
+          value: body,
+          onChange: setBody,
           required: true,
           multiline: true,
           helper: 'Personaliza con {{nombre}} y {{empresa}}.'
@@ -64,6 +72,7 @@ export default function AutomationForm({
         { name: 'active', label: 'Activar esta automatización', type: 'checkbox', value: rule?.active ?? false }
       ]}
     >
+      <AiEmailAssistant action='automation_email' onApply={setBody} onBusy={setAiBusy} />
       <Alert severity='info'>
         Aplica a eventos nuevos registrados desde el CRM, solo para contactos con consentimiento. Al pausar una regla se
         detienen sus envíos pendientes. Editar el mensaje afecta a eventos futuros.

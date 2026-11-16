@@ -10,7 +10,7 @@ import { useWorkspaceIdentity } from '@components/crm/WorkspaceIdentity'
 
 const pageNames: Record<string, string> = {
   home: 'Inicio',
-  contacts: 'Contactos',
+  contacts: 'Clientes y contactos',
   leads: 'Leads',
   opportunities: 'Oportunidades',
   activities: 'Interacciones',
@@ -42,12 +42,18 @@ export default function WorkspaceHeader() {
       >
         <Typography
           component={Link}
-          href={segments[0] === 'settings' ? '/settings' : pathname}
+          href={`/${segments[0]}`}
           variant='body2'
-          sx={{ fontWeight: 600 }}
+          noWrap
+          sx={{ fontWeight: 600, minWidth: 0 }}
         >
           {pageNames[segments[0]] ?? 'Magnus CRM'}
         </Typography>
+        {segments[0] === 'contacts' && segments[1] ? (
+          <Typography variant='body2' color='text.secondary' sx={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
+            / Ficha
+          </Typography>
+        ) : null}
         {segments[1] === 'integrations' ? (
           <>
             <i className='tabler-chevron-right text-sm' aria-hidden='true' />

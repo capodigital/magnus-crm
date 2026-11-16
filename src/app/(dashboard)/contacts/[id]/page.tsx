@@ -10,5 +10,5 @@ export default async function ContactPage({ params }: { params: Promise<{ id: st
 
   if (!contact) notFound()
 
-return <ContactWorkspace contact={contact} canWrite={canWrite} aiReady={Boolean(process.env.OPENAI_API_KEY && process.env.OPENAI_MODEL)} />
+  return <ContactWorkspace contact={contact} canWrite={canWrite} />
 }

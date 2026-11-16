@@ -2,9 +2,23 @@
 
 ## Current objective
 
-Expand Magnus CRM with clients, leads/opportunities, editable stages, contact history and AI proposals, segmented campaigns and Resend email automation.
+CRM creation, contact details, interactions, marketing navigation and action-based AI selection are implemented and validated locally. The user will handle publication and production configuration.
 
-## Current status
+## Follow-up — 2026-11-16
+
+- Added explicit Nuevo cliente (CUSTOMER), existing Nuevo contacto (PROSPECT), automatic navigation to the saved contact, and inline contact creation inside manual lead/opportunity forms.
+- Added persistent CRM section navigation, home shortcuts, a Marketing menu group, direct contact tabs, an Information tab and individual activity creation shortcuts. Contacts use cards on mobile. Home/inbox now link to the contact detail.
+- Added server-side AI routing: emails default to gpt-6-luna, proposals to gpt-6.1-sol, with environment overrides and existing OPENAI_MODEL preserved as a fallback. Email drafts can be reviewed and applied to the editable message.
+- User clarified that keys/models are managed behind the scenes. Removed the AI configuration page, model selectors/labels, configuration status banners and technical setup links from the CRM. Removed AI configuration from client props and model IDs from public draft responses. Marketing and contact history show operational errors while provider diagnostics stay in the database. Email settings now explain campaign workflows only.
+- Follow-up validation: AI tests cover server-owned selection, metadata-free public responses and generic provider errors; local CRM and HTTP suites, typecheck, targeted lint and final production build pass. Browser QA verified the proposal form and unavailable-service message, email workflow page and campaign composer without technical configuration. No real provider calls were made; the temporary seed script was removed and local preview services stopped. Build initially found stale generated types for the removed AI settings route; regeneration resolved them.
+- Confirmed via authenticated browser and Vercel CLI that crm.magnusecosystems.com still serves the October 12 production deployment (dpl_Cf7XBHbBzcE1dD9HqTvLcTBAvyA6). It has the old navigation; this explains missing features.
+- Configured Neon database is reachable. Full read-only Prisma schema diff is empty; no DB migration was needed or applied in this follow-up. The earlier table-presence probe used Prisma model names instead of mapped table names and was corrected.
+- Local .env contains configured OpenAI, Resend and cron credentials (values never printed). Production Vercel env listing does not yet contain the new email/AI variables. No real provider request or email send performed.
+- Vercel project linked locally for diagnosis. CLI unexpectedly regenerated .env.local from Development; removed its generated OIDC token and restored three WhatsApp overrides using existing .env values. Exact previous override values were not retained; .env itself was not modified. No remote env changes, deployment, commit or push performed.
+- Local typecheck, lint, production build, service integration, AI mocked-provider tests and HTTP roles/isolation tests passed. Visual QA verified customer creation, manual lead with nested contact creation, information/chats/proposals, reminder creation and campaign draft/segment preview. Mobile QA at 390px has no horizontal document overflow or new console errors. Fixed duplicate dialog/field title IDs and wrapping tab indicators. Temporary seed script removed.
+- User explicitly chose “Dejar los cambios locales” and confirmed “Yo me encargo de publicarlo”. Leave the implementation local; do not deploy or configure remote variables. Activation instructions are in docs/crm-growth.md.
+
+## Previous implementation status — 2026-11-13
 
 - Implemented locally: editable contacts, separate leads/opportunities, editable pipelines/stages, contact detail with chats, activities and proposals, agenda, campaigns and automation rules.
 - Resend outbox includes scheduling, pause/resume, consent, unsubscribe, tenant checks, idempotency, bounded retries and a protected cron endpoint. OpenAI proposal generation is server-only and optional.
@@ -63,7 +77,7 @@ Expand Magnus CRM with clients, leads/opportunities, editable stages, contact hi
 - Added `docs/meta-business-management-review.md` with secret-free English reviewer instructions, the complete test flow, and the server-side rationale for `business_management`.
 - Release-readiness audit passed on 2026-10-12: Embedded Signup and token-vault tests, TypeScript, ESLint, production build, production protected-route smoke check, secret-file tracking check, and diff validation all passed. The only release blocker is Meta approval plus a real post-approval E2E connection.
 
-## Next safe action
+## Prior next action (superseded by the follow-up status above)
 
 Restore Neon connectivity and apply the additive CRM schema before deploying. For the existing db-push baseline, run npm run db:push and npm run db:backfill:crm; use migration deploy only with an initialized migration history. Configure Resend, a verified sender, CRON_SECRET, a scheduler for /api/cron/email, and optional OpenAI credentials/model. Then validate one authorized internal real email and its unsubscribe flow. Deployment was not requested or performed.
 

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@components/crm/LinkButton'
 
 import PageHeading from './PageHeading'
+import CrmShortcuts from './CrmShortcuts'
 import LeadsTable, { leadStatusLabels } from './LeadsTable'
 
 import type { WorkspaceSummary } from '@/lib/crm/workspace-query'
@@ -74,6 +75,7 @@ export default function HomeDashboard({ workspaceName, summary }: Props) {
           </Button>
         }
       />
+      <CrmShortcuts />
       <Box
         sx={{
           display: 'grid',

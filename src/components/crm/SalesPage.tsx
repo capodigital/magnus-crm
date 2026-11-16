@@ -5,7 +5,7 @@ import RecordsPagination, { parsePage } from './RecordsPagination'
 import { crmPageAccess as crmAccess } from '@/lib/crm/access'
 import { salesList, salesOptions } from '@/lib/crm/records-query'
 
-export type SalesParams = Promise<{ page?: string; q?: string; status?: string }>
+export type SalesParams = Promise<{ page?: string; q?: string; status?: string; create?: string }>
 
 export default async function SalesPage({ kind, searchParams }: { kind: string; searchParams: SalesParams }) {
   const access = await crmAccess()
@@ -19,16 +19,17 @@ export default async function SalesPage({ kind, searchParams }: { kind: string; 
     salesOptions(access.tenantId)
   ])
 
-
-return (
+  return (
     <Stack spacing={3}>
       <SalesWorkspace
+        key={`${kind}-${params.create ?? ''}`}
         data={data}
         options={options}
         kind={kind}
         search={search}
         status={status}
         canWrite={access.canWrite}
+        initialCreate={params.create === '1'}
       />
       <RecordsPagination
         page={page}

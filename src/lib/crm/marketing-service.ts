@@ -15,6 +15,7 @@ import {
   personalize
 } from './contracts'
 import { eligibleContacts, emailConfiguration, requireEmailConfiguration } from './email-queue'
+import { emailDeliveryNotice } from './email-delivery-presentation'
 
 export async function marketingData(tenantId: string) {
   const [campaigns, automations, deliveries, statuses] = await Promise.all([
@@ -43,7 +44,13 @@ export async function marketingData(tenantId: string) {
     prisma.emailDelivery.groupBy({ by: ['status'], where: { tenantId }, _count: { _all: true } })
   ])
 
-  return toClient({ campaigns, automations, deliveries, statuses, email: emailConfiguration() })
+  return toClient({
+    campaigns,
+    automations,
+    deliveries: deliveries.map(delivery => ({ ...delivery, error: emailDeliveryNotice(delivery) })),
+    statuses,
+    email: { ready: emailConfiguration().ready }
+  })
 }
 
 export async function previewSegment(tenantId: string, input: unknown) {

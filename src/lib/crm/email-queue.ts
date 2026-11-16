@@ -23,7 +23,7 @@ export function emailConfiguration() {
   try {
     validUrl = new URL(baseUrl ?? '').protocol === 'https:'
   } catch {
-    /* Missing configuration is displayed in the UI. */
+    /* An invalid public URL keeps sending unavailable. */
   }
 
   return {
@@ -38,7 +38,7 @@ export function requireEmailConfiguration() {
 
   if (!config.ready)
     throw new CrmError(
-      'Configura Resend, un remitente verificado, CRON_SECRET y la URL pública HTTPS antes de activar envíos.',
+      'Los envíos no están disponibles en este momento. Guarda el borrador e inténtalo de nuevo más tarde.',
       503
     )
 

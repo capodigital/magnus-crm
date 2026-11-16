@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import RecordForm, { crmRequest, localDateTime } from './RecordForm'
+import AiEmailAssistant from './AiEmailAssistant'
 import { lifecycleLabels, parseSegment } from '@/lib/crm/contracts'
 import type { MarketingData } from '@/lib/crm/marketing-service'
 
@@ -17,6 +18,9 @@ type Campaign = MarketingData['campaigns'][number]
 type Preview = { count: number; sample: { fullName: string | null; email: string | null }[] }
 
 export default function CampaignForm({ campaign, onClose }: { campaign?: Campaign; onClose: () => void }) {
+  const [body, setBody] = useState(campaign?.body ?? '')
+  const [aiBusy, setAiBusy] = useState(false)
+
   const [segment, setSegment] = useState(
     campaign ? parseSegment(campaign.segment) : { lifecycle: '', tag: '', source: '' }
   )
@@ -25,12 +29,12 @@ export default function CampaignForm({ campaign, onClose }: { campaign?: Campaig
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
 
-
-return (
+  return (
     <RecordForm
       title={campaign ? 'Editar campaña' : 'Nueva campaña'}
       onClose={onClose}
       submitLabel='Guardar borrador'
+      busy={aiBusy}
       onSave={values =>
         crmRequest(`campaigns${campaign ? `/${campaign.id}` : ''}`, { ...values, segment }, campaign ? 'PATCH' : 'POST')
       }
@@ -40,7 +44,8 @@ return (
         {
           name: 'body',
           label: 'Mensaje',
-          value: campaign?.body,
+          value: body,
+          onChange: setBody,
           required: true,
           multiline: true,
           helper:
@@ -48,6 +53,7 @@ return (
         }
       ]}
     >
+      <AiEmailAssistant action='campaign_email' onApply={setBody} onBusy={setAiBusy} />
       <Typography variant='subtitle1' fontWeight={600}>
         Segmento de destinatarios
       </Typography>
@@ -128,8 +134,7 @@ export function ScheduleCampaignForm({ campaign, onClose }: { campaign: Campaign
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
 
-
-return (
+  return (
     <RecordForm
       title='Revisar y programar campaña'
       submitLabel='Programar envío'
@@ -147,7 +152,7 @@ return (
       onSave={values => {
         if (!preview?.count) throw new Error('Revisa primero los destinatarios de la campaña.')
 
-return crmRequest(`campaigns/${campaign.id}/schedule`, {
+        return crmRequest(`campaigns/${campaign.id}/schedule`, {
           scheduledAt: new Date(String(values.scheduledAt)).toISOString()
         })
       }}

@@ -13,20 +13,11 @@ import RecordForm, { crmRequest } from './RecordForm'
 import EmptyState from './EmptyState'
 import type { ContactDetail } from '@/lib/crm/records-query'
 
-export default function ProposalsPanel({
-  contact,
-  canWrite,
-  aiReady
-}: {
-  contact: ContactDetail
-  canWrite: boolean
-  aiReady: boolean
-}) {
+export default function ProposalsPanel({ contact, canWrite }: { contact: ContactDetail; canWrite: boolean }) {
   const [editing, setEditing] = useState<ContactDetail['proposals'][number] | 'new' | 'ai' | null>(null)
   const proposal = typeof editing === 'object' ? editing : null
 
-
-return (
+  return (
     <Stack spacing={3}>
       <Alert severity='info'>
         Las propuestas son borradores para revisión. Generar con IA utiliza el objetivo, las notas y las últimas
@@ -34,23 +25,13 @@ return (
       </Alert>
       {canWrite ? (
         <Stack direction='row' spacing={2} useFlexGap flexWrap='wrap'>
-          <Button
-            variant='contained'
-            onClick={() => setEditing('ai')}
-            disabled={!aiReady}
-            startIcon={<i className='tabler-sparkles' />}
-          >
+          <Button variant='contained' onClick={() => setEditing('ai')} startIcon={<i className='tabler-sparkles' />}>
             Generar propuesta IA
           </Button>
           <Button variant='outlined' onClick={() => setEditing('new')}>
             Redactar propuesta
           </Button>
         </Stack>
-      ) : null}
-      {!aiReady ? (
-        <Typography variant='body2' color='text.secondary'>
-          La generación IA estará disponible cuando el administrador configure la integración.
-        </Typography>
       ) : null}
       {contact.proposals.length ? (
         contact.proposals.map(item => (

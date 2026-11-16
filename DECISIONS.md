@@ -1,5 +1,14 @@
 # Decisions
 
+## 2026-11-16: Visible CRM workflows and AI routing
+
+- Make customer creation explicit and separate from prospect creation. Open the saved contact and allow creating a contact within a lead form without losing the draft.
+- Keep direct section navigation and shareable contact-tab URLs; show Information as a full tab and individual timeline creation actions.
+- Use gpt-6-luna for emails and gpt-6.1-sol for proposals by default. Server environment overrides take precedence; preserve existing OPENAI_MODEL as a common fallback. Advanced routing remains an internal capability, not a customer-facing choice.
+- Keep AI and email infrastructure transparent to CRM users: no key status, model identifiers/selectors or provider setup instructions in the product. Public AI actions always use server selection and return draft content only. Retain technical configuration in repository documentation; expose operational errors without provider diagnostics.
+- AI generates editable drafts only. Marketing generation retains owner/admin checks, bounded input/output and provider timeout/error handling. No automatic fallback to a more expensive model.
+- Diagnose the public domain independently from local code. Its October 12 deployment is older than the November CRM implementation; database schema is already current. The user chose to keep changes local and handle publication. Do not deploy or change remote configuration as part of this task.
+
 ## 2026-11-13: Editable CRM and email marketing
 
 - Supersede the read-only CRM limitation with tenant-scoped mutations and separate lead/opportunity views. Keep existing records classified as opportunities; classify newly received WhatsApp leads as leads.

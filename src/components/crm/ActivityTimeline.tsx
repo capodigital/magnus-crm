@@ -40,7 +40,7 @@ const icons: Record<string, string> = {
 const emailLabels: Record<string, string> = {
   QUEUED: 'En cola',
   PROCESSING: 'Procesando',
-  SENT: 'Aceptado por Resend',
+  SENT: 'Enviado',
   SKIPPED: 'Omitido',
   FAILED: 'Fallido'
 }

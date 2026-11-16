@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma'
 
 const leadSelect = {
   id: true,
+  contactId: true,
   title: true,
   status: true,
   sourceChannel: true,

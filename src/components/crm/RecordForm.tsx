@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import { useRouter } from 'next/navigation'
@@ -26,6 +26,7 @@ export type Field = {
   multiline?: boolean
   helper?: string
   options?: { value: string; label: string }[]
+  onChange?: (value: string) => void
 }
 export type FormValues = Record<string, string | boolean>
 
@@ -49,7 +50,8 @@ export default function RecordForm({
   onClose,
   onSave,
   submitLabel = 'Guardar',
-  children
+  children,
+  busy = false
 }: {
   title: string
   fields: Field[]
@@ -57,16 +59,25 @@ export default function RecordForm({
   onSave: (values: FormValues) => Promise<unknown>
   submitLabel?: string
   children?: ReactNode
+  busy?: boolean
 }) {
+  const formId = useId()
   const router = useRouter()
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
 
   return (
-    <Dialog open onClose={() => !pending && onClose()} fullWidth maxWidth='sm' aria-labelledby='record-form-title'>
+    <Dialog
+      open
+      onClose={() => !pending && !busy && onClose()}
+      fullWidth
+      maxWidth='sm'
+      aria-labelledby={`${formId}-dialog-title`}
+    >
       <form
         onSubmit={async event => {
           event.preventDefault()
+          if (pending || busy) return
           const form = new FormData(event.currentTarget)
 
           const values = Object.fromEntries(
@@ -90,7 +101,7 @@ export default function RecordForm({
           }
         }}
       >
-        <DialogTitle id='record-form-title'>{title}</DialogTitle>
+        <DialogTitle id={`${formId}-dialog-title`}>{title}</DialogTitle>
         <DialogContent>
           <Stack spacing={3} sx={{ pt: 2 }}>
             {error ? <Alert severity='error'>{error}</Alert> : null}
@@ -105,10 +116,15 @@ export default function RecordForm({
               ) : (
                 <TextField
                   key={field.name}
-                  id={`crm-field-${field.name}`}
+                  id={`${formId}-${field.name}`}
                   name={field.name}
                   label={field.label}
-                  defaultValue={field.value ?? ''}
+                  {...(field.onChange
+                    ? {
+                        value: field.value ?? '',
+                        onChange: (event: React.ChangeEvent<HTMLInputElement>) => field.onChange?.(event.target.value)
+                      }
+                    : { defaultValue: field.value ?? '' })}
                   type={field.type ?? 'text'}
                   required={field.required}
                   disabled={pending}
@@ -133,10 +149,10 @@ export default function RecordForm({
           </Stack>
         </DialogContent>
         <DialogActions sx={{ p: 3 }}>
-          <Button onClick={onClose} disabled={pending}>
+          <Button onClick={onClose} disabled={pending || busy}>
             Cancelar
           </Button>
-          <Button type='submit' variant='contained' disabled={pending}>
+          <Button type='submit' variant='contained' disabled={pending || busy}>
             {pending ? 'Guardando…' : submitLabel}
           </Button>
         </DialogActions>

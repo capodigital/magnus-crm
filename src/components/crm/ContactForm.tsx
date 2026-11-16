@@ -17,12 +17,27 @@ type Contact = {
   marketingConsent: boolean
 }
 
-export default function ContactForm({ contact, onClose }: { contact?: Contact; onClose: () => void }) {
+export default function ContactForm({
+  contact,
+  onClose,
+  initialLifecycle = 'PROSPECT',
+  onCreated
+}: {
+  contact?: Contact
+  onClose: () => void
+  initialLifecycle?: string
+  onCreated?: (contact: { id: string; fullName: string | null; email: string | null }) => void
+}) {
   return (
     <RecordForm
-      title={contact ? 'Editar contacto' : 'Nuevo contacto'}
+      title={contact ? 'Editar contacto' : initialLifecycle === 'CUSTOMER' ? 'Nuevo cliente' : 'Nuevo contacto'}
       onClose={onClose}
-      onSave={values => crmRequest(`contacts${contact ? `/${contact.id}` : ''}`, values, contact ? 'PATCH' : 'POST')}
+      onSave={async values => {
+        const saved = await crmRequest(`contacts${contact ? `/${contact.id}` : ''}`, values, contact ? 'PATCH' : 'POST')
+
+        if (!contact)
+          onCreated?.({ id: saved.id, fullName: String(values.fullName), email: String(values.email || '') || null })
+      }}
       fields={[
         { name: 'fullName', label: 'Nombre completo', value: contact?.fullName, required: true },
         { name: 'email', label: 'Email', type: 'email', value: contact?.email },
@@ -37,7 +52,7 @@ export default function ContactForm({ contact, onClose }: { contact?: Contact; o
         {
           name: 'lifecycle',
           label: 'Relación',
-          value: contact?.lifecycle ?? 'PROSPECT',
+          value: contact?.lifecycle ?? initialLifecycle,
           options: optionsFrom(lifecycleLabels)
         },
         { name: 'source', label: 'Origen', value: contact?.source ?? 'MANUAL' },

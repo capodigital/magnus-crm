@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -16,21 +18,18 @@ import Typography from '@mui/material/Typography'
 import ActivityForm from './ActivityForm'
 import ActivityTimeline from './ActivityTimeline'
 import ContactForm from './ContactForm'
+import ContactInformation from './ContactInformation'
+import ContactActivityActions from './ContactActivityActions'
 import ProposalsPanel from './ProposalsPanel'
 import EmptyState from './EmptyState'
 import { displayName, lifecycleLabels, formatMoney, statusLabels } from '@/lib/crm/contracts'
 import type { ContactDetail } from '@/lib/crm/records-query'
 
-export default function ContactWorkspace({
-  contact,
-  canWrite,
-  aiReady
-}: {
-  contact: ContactDetail
-  canWrite: boolean
-  aiReady: boolean
-}) {
-  const [tab, setTab] = useState('timeline')
+export default function ContactWorkspace({ contact, canWrite }: { contact: ContactDetail; canWrite: boolean }) {
+  const router = useRouter()
+  const queryTab = useSearchParams().get('tab') ?? 'timeline'
+  const tab = ['timeline', 'info', 'chats', 'proposals', 'deals'].includes(queryTab) ? queryTab : 'timeline'
+  const setTab = (value: string) => router.replace(`/contacts/${contact.id}?tab=${value}`, { scroll: false })
   const [modal, setModal] = useState<'edit' | 'activity' | null>(null)
 
   const items = [
@@ -97,69 +96,27 @@ export default function ContactWorkspace({
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', lg: '280px minmax(0, 1fr)' },
+          gridTemplateColumns: 'minmax(0, 1fr)',
           gap: 4,
           alignItems: 'start'
         }}
       >
-        <Stack spacing={3} sx={{ order: { xs: 2, lg: 0 } }}>
-          <Card sx={{ p: 4 }}>
-            <Stack spacing={3}>
-              <Typography variant='h6'>Información de contacto</Typography>
-              {[
-                ['Email', contact.email],
-                ['Teléfono', contact.phoneE164],
-                ['Empresa', contact.company],
-                ['Origen', contact.source]
-              ].map(([label, value]) => (
-                <Stack key={label} spacing={0.5}>
-                  <Typography variant='caption' color='text.secondary'>
-                    {label}
-                  </Typography>
-                  <Typography variant='body2' sx={{ overflowWrap: 'anywhere' }}>
-                    {value || 'Sin especificar'}
-                  </Typography>
-                </Stack>
-              ))}
-              <Divider />
-              <Typography variant='caption' color='text.secondary'>
-                Email marketing
-              </Typography>
-              <Chip
-                size='small'
-                label={
-                  contact.unsubscribedAt
-                    ? 'Dado de baja'
-                    : contact.marketingConsent
-                      ? 'Consentimiento registrado'
-                      : 'Sin consentimiento'
-                }
-                variant='outlined'
-              />
-              <Typography variant='caption' color='text.secondary'>
-                Alta: {new Date(contact.createdAt).toLocaleDateString('es')}
-              </Typography>
-            </Stack>
-          </Card>
-          <Card sx={{ p: 4 }}>
-            <Typography variant='h6' sx={{ mb: 2 }}>
-              Notas
-            </Typography>
-            <Typography variant='body2' sx={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
-              {contact.notes || 'Añade contexto útil para tu equipo desde Editar contacto.'}
-            </Typography>
-          </Card>
-        </Stack>
         <Card sx={{ minWidth: 0 }}>
           <Tabs
             value={tab}
             onChange={(_, value) => setTab(value)}
-            variant='scrollable'
-            scrollButtons='auto'
+            variant='standard'
+            sx={{
+              '& .MuiTabs-list': { flexWrap: 'wrap', gap: 1, p: 1 },
+              '& .MuiTab-root': { minWidth: 0, px: { xs: 2, sm: 4 } },
+              '& .MuiTab-root.Mui-selected': { bgcolor: 'primary.lighterOpacity', borderRadius: 1 },
+              '& .MuiTabs-indicator': { display: 'none' }
+            }}
             aria-label='Detalles del contacto'
           >
             {[
               ['timeline', 'Interacciones'],
+              ['info', 'Información'],
               ['chats', 'Chats'],
               ['proposals', 'Propuestas IA'],
               ['deals', 'Negocios']
@@ -181,14 +138,20 @@ export default function ContactWorkspace({
             aria-labelledby={`contact-tab-${tab}`}
           >
             {tab === 'timeline' ? (
-              <Stack spacing={2}>
+              <Stack spacing={3}>
+                <Typography variant='h6'>Timeline de interacciones</Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  Llamadas, emails, reuniones, tareas y recordatorios de este contacto.
+                </Typography>
+                {canWrite ? <ContactActivityActions contactId={contact.id} /> : null}
                 <ActivityTimeline items={items} canWrite={canWrite} />
                 <Typography variant='caption' color='text.secondary'>
                   Últimas 100 interacciones y 100 emails. Consulta la agenda para ver todo el historial registrado.
                 </Typography>
               </Stack>
             ) : null}
-            {tab === 'proposals' ? <ProposalsPanel contact={contact} canWrite={canWrite} aiReady={aiReady} /> : null}
+            {tab === 'info' ? <ContactInformation contact={contact} /> : null}
+            {tab === 'proposals' ? <ProposalsPanel contact={contact} canWrite={canWrite} /> : null}
             {tab === 'chats' ? (
               <Stack spacing={3}>
                 {contact.conversations.length ? (

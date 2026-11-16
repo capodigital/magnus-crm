@@ -11,6 +11,7 @@ import HorizontalLayout from '@layouts/HorizontalLayout'
 // Component Imports
 import Providers from '@components/Providers'
 import WorkspaceIdentity from '@components/crm/WorkspaceIdentity'
+import CrmNavigation from '@components/crm/CrmNavigation'
 import Navigation from '@components/layout/vertical/Navigation'
 import Header from '@components/layout/horizontal/Header'
 import Navbar from '@components/layout/vertical/Navbar'
@@ -51,11 +52,13 @@ const Layout = async (props: ChildrenType) => {
           systemMode={systemMode}
           verticalLayout={
             <VerticalLayout navigation={<Navigation mode={mode} />} navbar={<Navbar />} footer={<VerticalFooter />}>
+              <CrmNavigation />
               {children}
             </VerticalLayout>
           }
           horizontalLayout={
             <HorizontalLayout header={<Header />} footer={<HorizontalFooter />}>
+              <CrmNavigation />
               {children}
             </HorizontalLayout>
           }

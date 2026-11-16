@@ -6,25 +6,32 @@ import ContactPicker from './ContactPicker'
 import RecordForm, { crmRequest, localDateTime, optionsFrom } from './RecordForm'
 import { activityLabels } from '@/lib/crm/contracts'
 
-export default function ActivityForm({ contactId, onClose }: { contactId?: string; onClose: () => void }) {
+export default function ActivityForm({
+  contactId,
+  onClose,
+  initialType = 'CALL'
+}: {
+  contactId?: string
+  onClose: () => void
+  initialType?: string
+}) {
   const [contact, setContact] = useState<{ id: string; fullName: string | null; email: string | null } | null>(null)
 
-
-return (
+  return (
     <RecordForm
       title='Registrar interacción'
       onClose={onClose}
       onSave={values => {
         if (!contactId && !contact) throw new Error('Selecciona un contacto.')
 
-return crmRequest('activities', {
+        return crmRequest('activities', {
           ...values,
           contactId: contactId || contact?.id,
           occursAt: new Date(String(values.occursAt)).toISOString()
         })
       }}
       fields={[
-        { name: 'type', label: 'Tipo de interacción', value: 'CALL', options: optionsFrom(activityLabels) },
+        { name: 'type', label: 'Tipo de interacción', value: initialType, options: optionsFrom(activityLabels) },
         { name: 'title', label: 'Título', required: true },
         {
           name: 'occursAt',
