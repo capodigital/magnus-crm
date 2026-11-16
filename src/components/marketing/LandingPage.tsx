@@ -1,252 +1,185 @@
 import Link from 'next/link'
 
-import styles from './public-site.module.css'
+import { publicSite } from '@/configs/publicSite'
 
-const softwareApplicationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Magnus CRM',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  url: 'https://crm.magnusecosystems.com',
-  description:
-    'CRM para equipos comerciales que necesitan organizar contactos, oportunidades, conversaciones e integraciones.',
-  provider: {
-    '@type': 'Organization',
-    name: 'Magnus Ecosystems',
-    url: 'https://crm.magnusecosystems.com'
-  }
-}
+import styles from './public-site.module.css'
 
 const features = [
   {
-    id: '01',
-    title: 'Contactos y conversaciones en un mismo lugar',
-    text: 'Centraliza conversaciones, identifica contexto del contacto y evita perder oportunidades entre mensajes sueltos.'
+    title: 'Clientes y contactos',
+    text: 'Crea clientes y consulta su información, conversaciones, propuestas e historial de interacciones desde una misma ficha.'
   },
   {
-    id: '02',
-    title: 'Pipeline listo para seguimiento',
-    text: 'Consulta tus oportunidades por etapa, identifica sus responsables y mantén una visión compartida del trabajo comercial.'
+    title: 'Leads y oportunidades',
+    text: 'Registra leads manualmente, organiza las etapas de venta y sigue el avance de cada oportunidad en tu pipeline.'
   },
   {
-    id: '03',
-    title: 'Tus herramientas, conectadas al CRM',
-    text: 'Administra tus conexiones desde Configuración → Integraciones. Empieza con WhatsApp Business y descubre nuevos canales a medida que estén disponibles.'
+    title: 'Conversaciones de WhatsApp',
+    text: 'Conecta tu cuenta de WhatsApp Business para recibir y responder mensajes con el contexto de cada contacto.'
+  },
+  {
+    title: 'Agenda y seguimiento',
+    text: 'Registra llamadas, emails y reuniones. Organiza tareas y recordatorios en el historial de cada cliente.'
+  },
+  {
+    title: 'Campañas y automatizaciones',
+    text: 'Segmenta tus contactos, prepara campañas de email y programa seguimientos para destinatarios con consentimiento.'
+  },
+  {
+    title: 'Asistencia para redactar',
+    text: 'Prepara borradores de propuestas y emails con IA a partir del contexto que aportas. Revísalos y edítalos antes de utilizarlos.'
   }
 ] as const
 
-const LandingPage = () => {
-  return (
-    <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
-      />
-
-      <main>
-        <section className={styles.shell}>
-          <div className={styles.hero}>
-            <div className={styles.heroCopy}>
-              <span className={styles.eyebrowPill}>CRM para equipos comerciales</span>
-
-              <div>
-                <h1 className={styles.heroTitle}>
-                  Tus clientes. Tu equipo. Tu negocio.
-                  <span className={styles.heroHighlight}>Todo en un mismo CRM.</span>
-                </h1>
-              </div>
-
-              <p className={styles.heroText}>
-                Magnus CRM reúne tus contactos, oportunidades y conversaciones para que tu equipo trabaje con contexto,
-                dé seguimiento a sus clientes y mantenga el negocio organizado.
-              </p>
-
-              <div className={styles.heroActions}>
-                <Link href='/register' className={styles.buttonPrimary}>
-                  Crear cuenta
-                </Link>
-                <Link href='/login' className={styles.buttonSecondary}>
-                  Iniciar sesion
-                </Link>
-              </div>
-
-              <div className={styles.heroMeta}>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaNumber}>1 inbox</span>
-                  <span className={styles.metaLabel}>Mensajes, seguimiento y contexto en un solo flujo.</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaNumber}>0 caos</span>
-                  <span className={styles.metaLabel}>
-                    Menos conversaciones perdidas y menos trabajo fuera de sistema.
-                  </span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaNumber}>100% SaaS</span>
-                  <span className={styles.metaLabel}>Base multi-tenant lista para crecimiento y clientes reales.</span>
-                </div>
-              </div>
+const LandingPage = () => (
+  <>
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: publicSite.name,
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          url: publicSite.url,
+          description: 'Gestión de clientes, oportunidades, conversaciones, campañas y seguimiento comercial.',
+          provider: { '@type': 'Organization', name: publicSite.operator, email: publicSite.contactEmail }
+        })
+      }}
+    />
+    <main id='contenido'>
+      <section className={styles.shell} aria-labelledby='product-title'>
+        <div className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <span className={styles.eyebrowPill}>Por Magnus Ecosystems</span>
+            <h1 id='product-title' className={styles.heroTitle}>
+              Magnus CRM
+              <span className={styles.heroHighlight}>Cada relación, una oportunidad.</span>
+            </h1>
+            <p className={styles.heroText}>
+              Un CRM para equipos comerciales que quieren gestionar clientes, leads y oportunidades, conversar por
+              WhatsApp y dar seguimiento con campañas de email, tareas y recordatorios desde un mismo lugar.
+            </p>
+            <div className={styles.heroActions}>
+              <Link href='/register' className={styles.buttonPrimary}>
+                Crear cuenta
+              </Link>
+              <Link href='/login' className={styles.buttonSecondary}>
+                Iniciar sesión
+              </Link>
             </div>
+            <p className={styles.sectionText}>
+              Conoce cómo tratamos tu información en nuestra <Link href='/privacy-policy'>política de privacidad</Link>.
+            </p>
+          </div>
+          <div className={styles.productVisual}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src='/images/illustrations/auth/magnus-login.webp'
+              width={1200}
+              height={1200}
+              alt=''
+              fetchPriority='high'
+            />
+            <p>Clientes, conversaciones y próximos pasos. Conectados.</p>
+          </div>
+        </div>
+      </section>
 
-            <div className={styles.heroPanel}>
-              <div className={styles.panelHeader}>
+      <section id='funciones' className={styles.section} aria-labelledby='features-title'>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeader}>
+            <h2 id='features-title' className={styles.sectionTitle}>
+              Del primer contacto al próximo acuerdo.
+            </h2>
+            <p className={styles.sectionText}>
+              Mantén el contexto de tus clientes y organiza el trabajo de tu equipo a lo largo de todo el proceso
+              comercial.
+            </p>
+          </div>
+          <div className={styles.featureGrid}>
+            {features.map((feature, index) => (
+              <article key={feature.title} className={styles.featureCard}>
+                <span className={styles.featureIndex} aria-hidden='true'>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className={styles.featureTitle}>{feature.title}</h3>
+                <p className={styles.featureText}>{feature.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id='google' className={styles.section} aria-labelledby='google-title'>
+        <div className={styles.shell}>
+          <div className={styles.sectionHeader}>
+            <h2 id='google-title' className={styles.sectionTitle}>
+              Tu acceso. Tus datos. Tu decisión.
+            </h2>
+            <p className={styles.sectionText}>
+              Puedes crear una cuenta con email y contraseña o elegir Continuar con Google.
+            </p>
+          </div>
+          <div className={styles.conversionPanel}>
+            <div className={styles.conversionChecklist}>
+              <div className={styles.checkItem}>
+                <span className={styles.checkDot} aria-hidden='true'>
+                  1
+                </span>
                 <div>
-                  <div className={styles.panelLabel}>Vista del workspace</div>
-                  <div className={styles.panelTitle}>Una visión compartida de tu actividad comercial</div>
+                  <h3>Google identifica tu cuenta</h3>
+                  <p className={styles.sectionText}>
+                    Recibimos tu nombre, correo verificado, foto de perfil e identificador de Google para crear o
+                    reconocer tu cuenta y permitirte entrar de forma segura. Nunca recibimos tu contraseña de Google.
+                  </p>
                 </div>
-                <div className={styles.panelBadge}>Magnus CRM</div>
               </div>
-
-              <div className={styles.conversationStack}>
-                <div className={styles.conversationCard}>
-                  <div>
-                    <div className={styles.conversationTitle}>Nuevo lead entrante</div>
-                    <div className={styles.conversationText}>
-                      El mensaje se registra, se asocia al contacto y cae al pipeline para respuesta inmediata.
-                    </div>
-                  </div>
-                  <div className={styles.conversationMeta}>
-                    <div className={styles.conversationValue}>08m</div>
-                    <div className={styles.conversationStatus}>objetivo de primera respuesta</div>
-                  </div>
+              <div className={styles.checkItem}>
+                <span className={styles.checkDot} aria-hidden='true'>
+                  2
+                </span>
+                <div>
+                  <h3>El acceso se limita a tu identidad</h3>
+                  <p className={styles.sectionText}>
+                    No solicitamos acceso a Gmail, Google Drive, Calendar ni a tus contactos de Google. Las campañas se
+                    envían desde el CRM, sin leer ni enviar mensajes desde tu cuenta de Gmail.
+                  </p>
                 </div>
-
-                <div className={styles.conversationCard}>
-                  <div>
-                    <div className={styles.conversationTitle}>Seguimiento y asignacion</div>
-                    <div className={styles.conversationText}>
-                      Cada hilo queda visible para el equipo correcto con estado, prioridad y actividad reciente.
-                    </div>
-                  </div>
-                  <div className={styles.conversationMeta}>
-                    <div className={styles.conversationValue}>Kanban</div>
-                    <div className={styles.conversationStatus}>pipeline comercial</div>
-                  </div>
-                </div>
-
-                <div className={styles.conversationCard}>
-                  <div>
-                    <div className={styles.conversationTitle}>Costos y control operativo</div>
-                    <div className={styles.conversationText}>
-                      Base preparada para trazabilidad de mensajes, entregas y costos relacionados con Meta.
-                    </div>
-                  </div>
-                  <div className={styles.conversationMeta}>
-                    <div className={styles.conversationValue}>Ledger</div>
-                    <div className={styles.conversationStatus}>base lista para billing</div>
-                  </div>
+              </div>
+              <div className={styles.checkItem}>
+                <span className={styles.checkDot} aria-hidden='true'>
+                  3
+                </span>
+                <div>
+                  <h3>Tú controlas la conexión</h3>
+                  <p className={styles.sectionText}>
+                    Puedes revocar el acceso desde tu cuenta de Google o solicitar la eliminación de tus datos. Consulta
+                    nuestra <Link href='/data-deletion'>guía de eliminación</Link>.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className={styles.proofBar}>
-            <div className={styles.proofItem}>
-              <div className={styles.proofTitle}>Conversion</div>
-              <div className={styles.proofText}>Registro directo o login sin rodeos para activar el workspace.</div>
-            </div>
-            <div className={styles.proofItem}>
-              <div className={styles.proofTitle}>Legal</div>
-              <div className={styles.proofText}>Paginas publicas de privacidad y terminos listas para publicacion.</div>
-            </div>
-            <div className={styles.proofItem}>
-              <div className={styles.proofTitle}>Compliance</div>
-              <div className={styles.proofText}>Ruta interna para eliminacion de datos por usuario autenticado.</div>
-            </div>
-            <div className={styles.proofItem}>
-              <div className={styles.proofTitle}>SEO basico</div>
-              <div className={styles.proofText}>Metadata, canonical, sitemap y robots preparados para lanzamiento.</div>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.shell}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Disenado para el tramo mas delicado del embudo</h2>
-              <p className={styles.sectionText}>
-                El problema no es solo responder mensajes. El problema es responderlos con contexto, asignarlos bien y
-                convertirlos en una operacion medible para el equipo.
+            <aside className={styles.ctaCard}>
+              <h3 className={styles.ctaTitle}>IA para tu trabajo comercial</h3>
+              <p className={styles.ctaText}>
+                La asistencia de Magnus CRM genera texto para propuestas y emails cuando la solicitas. No genera
+                imágenes ni utiliza los datos obtenidos del acceso con Google para generar contenido o entrenar modelos.
               </p>
-            </div>
-
-            <div className={styles.featureGrid}>
-              {features.map(feature => (
-                <article key={feature.id} className={styles.featureCard}>
-                  <span className={styles.featureIndex}>{feature.id}</span>
-                  <h3 className={styles.featureTitle}>{feature.title}</h3>
-                  <p className={styles.featureText}>{feature.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <div className={styles.shell}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Listo para llevar a produccion</h2>
-              <p className={styles.sectionText}>
-                Esta superficie publica existe para convertir visitas en acceso y para cubrir lo basico que te pediran
-                al publicar la app de Meta: identidad clara, documentos legales y rutas operativas coherentes.
+              <p className={styles.ctaText}>
+                Lee qué información se procesa y con qué finalidad en la{' '}
+                <Link href='/privacy-policy'>política de privacidad</Link>.
               </p>
-            </div>
-
-            <div className={styles.conversionPanel}>
-              <div className={styles.conversionChecklist}>
-                <div className={styles.checkItem}>
-                  <span className={styles.checkDot}>1</span>
-                  <div>
-                    <strong>Registro y login visibles</strong>
-                    <p className={styles.sectionText}>
-                      La landing lleva directo a las rutas de acceso del CRM sin esconder el siguiente paso.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.checkItem}>
-                  <span className={styles.checkDot}>2</span>
-                  <div>
-                    <strong>Politica y terminos enlazados</strong>
-                    <p className={styles.sectionText}>
-                      Documentos publicos, indexables y enlazados desde footer, registro y metadatos del sitio.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.checkItem}>
-                  <span className={styles.checkDot}>3</span>
-                  <div>
-                    <strong>Ruta interna de eliminacion de datos</strong>
-                    <p className={styles.sectionText}>
-                      Los usuarios autenticados pueden gestionar la eliminacion de su cuenta desde el propio CRM.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <aside className={styles.ctaCard}>
-                <h3 className={styles.ctaTitle}>Activa la entrada correcta al producto</h3>
-                <p className={styles.ctaText}>
-                  Si ya tienes acceso, entra al workspace. Si estas arrancando, crea tu cuenta y continua la
-                  configuracion del CRM desde el flujo de autenticacion.
-                </p>
-                <div className={styles.heroActions}>
-                  <Link href='/register' className={styles.buttonPrimary}>
-                    Ir al registro
-                  </Link>
-                  <Link href='/login' className={styles.buttonSecondary}>
-                    Ya tengo acceso
-                  </Link>
-                </div>
-              </aside>
-            </div>
+              <p className={styles.ctaText}>
+                ¿Necesitas ayuda? <a href={`mailto:${publicSite.contactEmail}`}>{publicSite.contactEmail}</a>
+              </p>
+            </aside>
           </div>
-        </section>
-      </main>
-    </>
-  )
-}
+        </div>
+      </section>
+    </main>
+  </>
+)
 
 export default LandingPage

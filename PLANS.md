@@ -1,5 +1,13 @@
 # Plans
 
+## Google brand verification — 2026-11-16
+
+- [x] Verify Google requirements, real data usage and public contact information.
+- [x] Correct public homepage, brand identity, privacy and deletion disclosures.
+- [x] Document exact Google Console fields and resubmission steps.
+- [x] Verify public/private routing, responsive rendering, lint, typecheck and production build.
+- [ ] User publishes and resubmits to Google after checking the live URLs.
+
 ## Authentication artwork — 2026-11-16
 
 - [x] Generate two original Magnus brand illustrations and save optimized assets inside the repo.

@@ -1,7 +1,10 @@
+import Link from 'next/link'
+
 import type { Metadata } from 'next'
 
 import LegalDocumentPage from '@/components/marketing/LegalDocumentPage'
 import PublicSiteShell from '@/components/marketing/PublicSiteShell'
+import { publicSite } from '@/configs/publicSite'
 
 export const metadata: Metadata = {
   title: 'Eliminar datos',
@@ -22,8 +25,8 @@ const DataDeletionInstructionsPage = () => {
     <PublicSiteShell>
       <LegalDocumentPage
         eyebrow='Datos de usuario'
-        title='Como eliminar tus datos'
-        description='Ultima actualizacion: 31 de julio de 2026. Esta pagina explica como un usuario de Magnus CRM puede eliminar su cuenta y solicitar la eliminacion de sus datos personales.'
+        title='Cómo eliminar tus datos'
+        description={`Última actualización: ${publicSite.policyUpdatedAt}. Puedes consultar estas instrucciones sin iniciar sesión. Para ejecutar la eliminación de una cuenta, necesitamos verificar su titularidad.`}
         sections={[
           {
             title: '1. Eliminar tu cuenta desde el CRM',
@@ -33,7 +36,7 @@ const DataDeletionInstructionsPage = () => {
                 <ul>
                   <li>Inicia sesion en Magnus CRM con la cuenta que deseas eliminar.</li>
                   <li>
-                    Abre la ruta interna <strong>/settings/data-deletion</strong>.
+                    Abre <Link href='/settings/data-deletion'>Configuración → Eliminar datos</Link>.
                   </li>
                   <li>Lee la advertencia de eliminacion y confirma escribiendo la palabra solicitada en pantalla.</li>
                   <li>Envia la solicitud. Cuando el proceso termine, la sesion se cerrara automaticamente.</li>
@@ -47,7 +50,8 @@ const DataDeletionInstructionsPage = () => {
               <>
                 <p>
                   La solicitud elimina tu usuario de autenticacion y tu acceso personal a Magnus CRM. Tambien se
-                  eliminan las sesiones asociadas a tu cuenta.
+                  eliminan las sesiones registradas, las vinculaciones con Google y los tokens almacenados de esas
+                  vinculaciones.
                 </p>
                 <p>
                   Si tu cuenta pertenece a un workspace administrado por una empresa, algunos registros comerciales,
@@ -62,12 +66,14 @@ const DataDeletionInstructionsPage = () => {
             content: (
               <>
                 <p>
-                  Si no puedes acceder a tu cuenta, contacta al administrador del workspace que te invito a Magnus CRM y
-                  solicita la eliminacion de tu usuario.
+                  Escribe a <a href={`mailto:${publicSite.contactEmail}`}>{publicSite.contactEmail}</a> con el asunto
+                  «Eliminación de datos de Magnus CRM». Indica el correo de tu cuenta, la empresa y qué datos deseas
+                  eliminar. Verificaremos tu identidad; no envíes contraseñas ni tokens.
                 </p>
                 <p>
-                  Cuando exista un canal publico de soporte para esta instancia, lo publicaremos en esta misma pagina y
-                  en la politica de privacidad.
+                  También puedes contactar al administrador de tu espacio de trabajo para revisar los datos comerciales
+                  de la empresa. Si la eliminación encuentra asignaciones pendientes, coordinaremos su resolución antes
+                  de volver a intentarlo.
                 </p>
               </>
             )
@@ -77,9 +83,10 @@ const DataDeletionInstructionsPage = () => {
             content: (
               <>
                 <p>
-                  Las solicitudes ejecutadas desde la ruta interna se procesan de forma inmediata para la cuenta de
-                  usuario. Algunas copias de seguridad, registros tecnicos o datos retenidos por motivos legales pueden
-                  tardar mas en expirar segun los ciclos normales de infraestructura.
+                  Cuando la operación se completa, la cuenta se elimina de la base activa. Las solicitudes por email
+                  requieren revisión de identidad y alcance. Las copias de seguridad y registros técnicos pueden
+                  persistir hasta su renovación o vencimiento, y los datos sujetos a obligaciones legales se conservan
+                  mientras sean necesarios. Puedes consultar el estado de tu solicitud en el mismo correo.
                 </p>
               </>
             )
@@ -89,8 +96,13 @@ const DataDeletionInstructionsPage = () => {
             content: (
               <>
                 <p>
-                  Para conocer como tratamos la informacion del servicio, revisa la politica de privacidad publicada en
-                  <strong> /privacy-policy</strong>.
+                  Puedes revocar el acceso en{' '}
+                  <a href='https://myaccount.google.com/connections'>las conexiones de tu cuenta de Google</a>. Revocar
+                  no elimina automáticamente los datos ya guardados en Magnus CRM; utiliza los pasos anteriores para
+                  solicitar su eliminación.
+                </p>
+                <p>
+                  Consulta también nuestra <Link href='/privacy-policy'>política de privacidad</Link>.
                 </p>
               </>
             )

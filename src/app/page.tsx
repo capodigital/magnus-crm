@@ -1,20 +1,17 @@
-import { redirect } from 'next/navigation'
-
 import type { Metadata } from 'next'
 
 import LandingPage from '@/components/marketing/LandingPage'
 import PublicSiteShell from '@/components/marketing/PublicSiteShell'
-import { auth } from '@/lib/auth'
 
 export const metadata: Metadata = {
-  title: 'CRM de WhatsApp para ventas',
+  title: { absolute: 'Magnus CRM | Clientes, ventas y conversaciones' },
   description:
-    'Landing oficial de Magnus CRM para crm.magnusecosystems.com con acceso al login, registro y documentos legales.',
+    'Magnus CRM, de Magnus Ecosystems: gestiona clientes, leads, oportunidades, WhatsApp, campañas de email y seguimiento comercial.',
   alternates: {
     canonical: '/'
   },
   openGraph: {
-    title: 'Magnus CRM | CRM de WhatsApp para ventas',
+    title: 'Magnus CRM | Clientes, ventas y conversaciones',
     description:
       'Centraliza conversaciones de WhatsApp, organiza leads y convierte mensajes en pipeline desde un solo CRM.',
     url: 'https://crm.magnusecosystems.com',
@@ -22,13 +19,7 @@ export const metadata: Metadata = {
   }
 }
 
-const RootPage = async () => {
-  const session = await auth()
-
-  if (session?.user) {
-    redirect('/home')
-  }
-
+const RootPage = () => {
   return (
     <PublicSiteShell>
       <LandingPage />

@@ -2,7 +2,14 @@
 
 ## Current objective
 
-Replace the stock login/register artwork with original Magnus CRM illustrations and a shared responsive authentication layout. User handles publication.
+Correct Google OAuth brand-verification findings: public homepage, consistent Magnus CRM identity and accurate privacy disclosures. User handles publication and resubmission.
+
+## Google brand verification — 2026-11-16
+
+- User reported five Google findings about privacy, homepage access/purpose, identity and API terms. Confirmed public contact email magnusecosystems@gmail.com; kept existing Magnus Ecosystems brand identity.
+- Read official Google requirements and mapped disclosures to current auth scopes, Prisma account records, AI context, email delivery and account deletion. Production anonymous HTTP currently returns 200 at / and /privacy-policy with old content; the reported access finding may reflect an earlier review or a different configured URL.
+- Removed the homepage session redirect, rewrote public product copy, expanded privacy and deletion guidance, added prohibited-content terms and exact resubmission instructions in docs/google-brand-verification.md. No OAuth credential, scope or database changes.
+- Validation passed: public-page HTTP checks cover all four public routes and private redirects, with a recognized synthetic local session confirming / stays public. TypeScript, targeted ESLint, diff check and production build pass. Browser QA checked desktop/mobile presentation and 390/768/1440px widths without horizontal overflow; privacy has 11 readable sections and functional navigation. Local preview stopped and viewport reset. No real Google flow tested. Changes remain local; user publishes and resubmits to Google using the documented fields.
 
 ## Custom authentication artwork — 2026-11-16
 

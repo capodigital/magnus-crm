@@ -1,5 +1,7 @@
 # Acceso y registro con Google
 
+Para corregir y reenviar la verificación de marca, consultar [la guía de verificación](google-brand-verification.md).
+
 ## Configuración de producción
 
 En `.env` para desarrollo y en Vercel → Settings → Environment Variables → Production para producción:

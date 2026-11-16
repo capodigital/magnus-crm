@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import LegalDocumentPage from '@/components/marketing/LegalDocumentPage'
 import PublicSiteShell from '@/components/marketing/PublicSiteShell'
+import { publicSite } from '@/configs/publicSite'
 
 export const metadata: Metadata = {
   title: 'Condiciones de servicio',
@@ -23,7 +24,7 @@ const TermsOfServicePage = () => {
       <LegalDocumentPage
         eyebrow='Legal'
         title='Condiciones de servicio'
-        description='Ultima actualizacion: 31 de julio de 2026. Estas condiciones regulan el acceso y uso de Magnus CRM en crm.magnusecosystems.com.'
+        description={`Última actualización: ${publicSite.policyUpdatedAt}. Estas condiciones regulan el acceso y uso de Magnus CRM, un servicio de Magnus Ecosystems en crm.magnusecosystems.com.`}
         sections={[
           {
             title: '1. Aceptacion',
@@ -45,6 +46,16 @@ const TermsOfServicePage = () => {
                   <li>No puedes usar el servicio para fraude, spam o actividades ilicitas.</li>
                   <li>No puedes intentar acceder a datos o workspaces que no te pertenecen.</li>
                   <li>No puedes interferir con la seguridad, estabilidad o disponibilidad de la plataforma.</li>
+                  <li>
+                    No puedes crear, compartir ni promover imágenes íntimas no consentidas (NCII), incluidas las
+                    generadas o manipuladas con IA, ni contenido que vulnere la privacidad o los derechos de otras
+                    personas.
+                  </li>
+                  <li>
+                    No puedes utilizar el servicio ni sus integraciones para actividades que infrinjan las condiciones
+                    de los proveedores, incluidas las{' '}
+                    <a href='https://developers.google.com/terms'>Condiciones del Servicio de las APIs de Google</a>.
+                  </li>
                 </ul>
               </>
             )
@@ -74,6 +85,11 @@ const TermsOfServicePage = () => {
                 <p>
                   Magnus CRM actua como plataforma operativa y puede procesar esa informacion solo en la medida
                   necesaria para prestar el servicio.
+                </p>
+                <p>
+                  Debes disponer de autorización para tratar los datos de tus contactos y enviarles comunicaciones,
+                  respetar las bajas y revisar los borradores generados con IA antes de usarlos. La asistencia de IA
+                  produce texto comercial y no genera imágenes.
                 </p>
               </>
             )
@@ -130,6 +146,15 @@ const TermsOfServicePage = () => {
                   La version vigente se publicara en esta pagina.
                 </p>
               </>
+            )
+          },
+          {
+            title: '9. Contacto',
+            content: (
+              <p>
+                Para soporte, consultas o reportes de uso indebido de Magnus CRM, contacta con Magnus Ecosystems en{' '}
+                <a href={`mailto:${publicSite.contactEmail}`}>{publicSite.contactEmail}</a>.
+              </p>
             )
           }
         ]}

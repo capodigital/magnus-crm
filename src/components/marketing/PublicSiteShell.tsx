@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 
 import MagnusLogoMark from '@core/svg/Logo'
+import { publicSite } from '@/configs/publicSite'
 
 import styles from './public-site.module.css'
 
@@ -23,21 +24,21 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
             </span>
           </Link>
 
-          <nav className={styles.navLinks} aria-label='Primary'>
+          <nav className={styles.navLinks} aria-label='Navegación pública'>
+            <Link href='/#funciones' className={styles.linkSoft}>
+              Funciones
+            </Link>
             <Link href='/privacy-policy' className={styles.linkSoft}>
               Privacidad
             </Link>
             <Link href='/terms-of-service' className={styles.linkSoft}>
-              Terminos
-            </Link>
-            <Link href='/data-deletion' className={styles.linkSoft}>
-              Eliminar datos
+              Términos
             </Link>
           </nav>
 
           <div className={styles.headerActions}>
             <Link href='/login' className={styles.buttonGhost}>
-              Iniciar sesion
+              Iniciar sesión
             </Link>
             <Link href='/register' className={styles.buttonPrimary}>
               Crear cuenta
@@ -60,16 +61,19 @@ const PublicSiteShell = ({ children }: PublicSiteShellProps) => {
                 </span>
               </div>
               <p className={styles.footerText}>
-                CRM de WhatsApp para equipos que necesitan responder, calificar y cerrar con mas orden desde un solo
-                workspace comercial.
+                Magnus CRM, de Magnus Ecosystems. Clientes, oportunidades, conversaciones y campañas para tu equipo
+                comercial.
+              </p>
+              <p className={styles.footerText}>
+                Soporte y privacidad: <a href={`mailto:${publicSite.contactEmail}`}>{publicSite.contactEmail}</a>
               </p>
             </div>
 
             <div className={styles.footerLinks}>
               <Link href='/'>Inicio</Link>
               <Link href='/register'>Registro</Link>
-              <Link href='/login'>Login</Link>
-              <Link href='/privacy-policy'>Politica de privacidad</Link>
+              <Link href='/login'>Iniciar sesión</Link>
+              <Link href='/privacy-policy'>Política de privacidad</Link>
               <Link href='/terms-of-service'>Condiciones de servicio</Link>
               <Link href='/data-deletion'>Eliminar datos</Link>
             </div>

@@ -1,5 +1,6 @@
 .page {
   min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
   background:
     radial-gradient(circle at top left, rgb(15 118 110 / 0.18), transparent 32%),
     radial-gradient(circle at top right, rgb(200 155 60 / 0.14), transparent 28%),
@@ -173,8 +174,8 @@
 
 .heroTitle {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(3rem, 7vw, 5.4rem);
-  line-height: 0.95;
+  font-size: clamp(2.8rem, 5vw, 4.3rem);
+  line-height: 1.03;
   letter-spacing: -0.04em;
   color: var(--magnus-brand-ink);
 }
@@ -182,6 +183,42 @@
 .heroHighlight {
   display: block;
   color: var(--magnus-brand-teal);
+}
+
+.productVisual {
+  min-width: 0;
+  text-align: center;
+  color: var(--magnus-brand-sea);
+}
+
+.productVisual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.productVisual p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.sectionText a,
+.ctaText a,
+.legalSection a {
+  color: var(--magnus-brand-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.footerText a {
+  color: inherit;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.section[id] {
+  scroll-margin-top: 110px;
 }
 
 .heroText {
@@ -519,6 +556,8 @@
 }
 
 .legalCard {
+  max-width: 920px;
+  margin-inline: auto;
   padding: 32px;
   border-radius: 30px;
   background: rgb(255 255 255 / 0.84);
@@ -583,6 +622,12 @@
   color: rgb(16 33 42 / 0.74);
 }
 
+.legalSection p + p,
+.legalSection ul + p,
+.legalSection p + ul {
+  margin-top: 12px;
+}
+
 .legalSection ul {
   padding-left: 20px;
   display: grid;
@@ -604,9 +649,15 @@
 
 @media (max-width: 760px) {
   .headerInner {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .header {
+    position: static;
   }
 
   .navLinks {
@@ -614,7 +665,6 @@
     flex-wrap: wrap;
   }
 
-  .headerActions,
   .heroActions,
   .footerCard {
     flex-direction: column;
@@ -622,7 +672,30 @@
   }
 
   .hero {
-    padding-top: 42px;
+    padding: 32px 0 16px;
+    gap: 12px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.6rem, 10vw, 3.8rem);
+    line-height: 1.06;
+  }
+
+  .productVisual {
+    max-width: 340px;
+    justify-self: center;
+  }
+
+  .section {
+    padding: 32px 0;
+  }
+
+  .legalMain {
+    padding: 24px 0 40px;
+  }
+
+  .legalTitle {
+    line-height: 1.08;
   }
 
   .heroMeta {
