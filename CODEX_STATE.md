@@ -2,7 +2,14 @@
 
 ## Current objective
 
-Google login, registration and secure account linking are implemented and validated locally. User handles OAuth credentials, publication and the final real Google consent test.
+Replace the stock login/register artwork with original Magnus CRM illustrations and a shared responsive authentication layout. User handles publication.
+
+## Custom authentication artwork — 2026-11-16
+
+- User reports configuring Google, adding credentials and publishing the previous changes. That supersedes the earlier pending-configuration status; no credentials were read in this visual task.
+- Generated two original transparent brand illustrations with the built-in image tool: a relationship hub for login and an ascending workspace for registration. Optimized WebP assets live under public/images/illustrations/auth/magnus-{login,register}.webp (about 132/115 KiB). Full prompts and provenance: docs/auth-illustrations.md.
+- Replaced template characters/background masks with AuthPageLayout, native branding and Spanish editorial copy. Mobile hides the visual panel and selects a data-URI pixel instead of downloading the illustrations. Added accessible password-toggle labels and corrected auth copy accents.
+- Desktop and 390px mobile visual checks verify asset loading, layout and no horizontal overflow. Typecheck, targeted lint and final production build pass. Local preview stopped; changes remain local for user publication.
 
 ## Google authentication — 2026-11-16
 

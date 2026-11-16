@@ -1,5 +1,12 @@
 # Plans
 
+## Authentication artwork — 2026-11-16
+
+- [x] Generate two original Magnus brand illustrations and save optimized assets inside the repo.
+- [x] Replace template artwork and unify responsive authentication presentation.
+- [x] Verify desktop/mobile layouts, asset selection, typecheck and lint.
+- [x] Complete final production build and hand off local changes.
+
 ## Google authentication — 2026-11-16
 
 - [x] Integrate Google login/register buttons and localized errors.
@@ -7,7 +14,8 @@
 - [x] Validate OAuth profile, redirects, tenant identity and concurrent registration.
 - [x] Document exact .env and Google Console fields without exposing secrets.
 - [x] Finish browser QA with local identity fixtures and production build.
-- [ ] User activation: configure Google credentials, publish and verify real Google consent/login.
+- [x] User reports configuring Google credentials and publishing the implementation.
+- [ ] Verify real Google consent/login if requested; previous automated checks used local identity fixtures.
 
 ## CRM navigation and AI by action — 2026-11-16
 

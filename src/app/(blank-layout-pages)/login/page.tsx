@@ -11,9 +11,6 @@ import { auth } from '@/lib/auth'
 import { hasGoogleProvider } from '@/lib/auth/google'
 import { authErrorMessage, safeCallbackPath } from '@/lib/auth/navigation'
 
-// Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
-
 export const metadata: Metadata = {
   title: 'Iniciar sesion',
   description: 'Accede a tu workspace de Magnus CRM.',
@@ -29,7 +26,6 @@ type Props = {
 
 const LoginPage = async ({ searchParams }: Props) => {
   // Vars
-  const mode = await getServerMode()
   const session = await auth()
   const resolvedSearchParams = (await searchParams) ?? {}
 
@@ -45,7 +41,6 @@ const LoginPage = async ({ searchParams }: Props) => {
 
   return (
     <Login
-      mode={mode}
       callbackUrl={safeCallbackUrl}
       hasGoogleProvider={hasGoogleProvider()}
       initialError={authErrorMessage(resolvedSearchParams.error)}
