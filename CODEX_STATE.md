@@ -2,7 +2,15 @@
 
 ## Current objective
 
-CRM creation, contact details, interactions, marketing navigation and action-based AI selection are implemented and validated locally. The user will handle publication and production configuration.
+Google login, registration and secure account linking are implemented and validated locally. User handles OAuth credentials, publication and the final real Google consent test.
+
+## Google authentication — 2026-11-16
+
+- User requested Google login/registration and exact .env / Google Console setup. Instructions are in docs/google-auth.md; no credential values were printed or modified. Local Google credentials were absent or placeholders at inspection.
+- Login/register now show Continue with Google. New Google users complete a company/terms form; the server creates tenant, branding, OWNER membership and pipeline atomically. Repeated/concurrent submissions preserve one workspace.
+- Existing password users link the same-email Google account from Settings after signing in. Email verification, default account-linking protection, PKCE/state/nonce and safe local redirects are retained. No automatic email-based merging.
+- Shared workspace creation now serves password and Google onboarding. Removed obsolete NextAuth ambient type shims so the installed library types validate the integration.
+- Google service/security tests, local HTTP checks, TypeScript, ESLint, diff validation and final production build pass. Browser QA verified login/register buttons, generic unavailable-service messaging, company onboarding through to the new workspace and linked-account settings using local identity fixtures. No real Google consent/code exchange was performed; this remains pending credentials. Preview seed removed and local services stopped. No remote writes, deployment, commit or push performed.
 
 ## Follow-up — 2026-11-16
 

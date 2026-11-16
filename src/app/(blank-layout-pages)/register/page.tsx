@@ -8,6 +8,8 @@ import Register from '@views/Register'
 
 // Auth Imports
 import { auth } from '@/lib/auth'
+import { hasGoogleProvider } from '@/lib/auth/google'
+import { safeCallbackPath } from '@/lib/auth/navigation'
 
 // Server Action Imports
 import { getServerMode } from '@core/utils/serverHelpers'
@@ -31,20 +33,13 @@ const RegisterPage = async ({ searchParams }: Props) => {
   const session = await auth()
   const resolvedSearchParams = (await searchParams) ?? {}
   const callbackUrl = typeof resolvedSearchParams.callbackUrl === 'string' ? resolvedSearchParams.callbackUrl : '/home'
-  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
+  const safeCallbackUrl = safeCallbackPath(callbackUrl)
 
   if (session?.user) {
     redirect(safeCallbackUrl)
   }
 
-  return (
-    <Register
-      mode={mode}
-      callbackUrl={safeCallbackUrl}
-      hasGoogleProvider={Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)}
-    />
-  )
+  return <Register mode={mode} callbackUrl={safeCallbackUrl} hasGoogleProvider={hasGoogleProvider()} />
 }
 
 export default RegisterPage
-

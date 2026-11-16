@@ -25,6 +25,7 @@
     "test:crm": "node --conditions=react-server --import tsx scripts/test-crm.ts",
     "test:crm:http": "node --import tsx scripts/test-crm-http.ts",
     "test:crm:ai": "node --conditions=react-server --import tsx scripts/test-crm-ai.ts",
+    "test:auth:google": "node --conditions=react-server --import tsx scripts/test-google-auth.ts",
     "db:backfill:crm": "tsx scripts/backfill-crm-classification.ts"
   },
   "dependencies": {

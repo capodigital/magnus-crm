@@ -1,5 +1,13 @@
 # Decisions
 
+## 2026-11-16: Google authentication
+
+- Use the installed NextAuth Google OAuth provider and Prisma Account records, with email verification and PKCE/state/nonce. Request only openid/email/profile.
+- Do not auto-merge an existing password user by matching email. Link Google explicitly from the authenticated user's settings, requiring the same email.
+- New identities complete company/terms onboarding. Lock the user row in the registration transaction and reuse existing memberships, preserving roles and preventing duplicate workspaces.
+- Share workspace creation with password registration. Technical credentials remain in deployment configuration and repository docs; end users see actions and understandable errors only.
+- User reports publishing the previous CRM changes. This request authorizes local implementation; the established user-managed publication workflow remains in force.
+
 ## 2026-11-16: Visible CRM workflows and AI routing
 
 - Make customer creation explicit and separate from prospect creation. Open the saved contact and allow creating a contact within a lead form without losing the draft.

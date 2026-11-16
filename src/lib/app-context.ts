@@ -161,7 +161,7 @@ export const getCurrentAppContext = async (): Promise<AppContext> => {
     session,
     requestTenant,
     tenant,
-    membership: tenant ? memberships.find(item => item.tenantId === tenant.id) ?? null : null,
+    membership: tenant ? (memberships.find(item => item.tenantId === tenant.id) ?? null) : null,
     memberships
   }
 }
@@ -180,6 +180,15 @@ export const requireTenantAccess = async (): Promise<AuthenticatedAppContext | T
   const context = await requireAppSession()
 
   if (context.requestTenant.isPlatformHost) {
+    if (!context.memberships.length) {
+      const googleAccount = await prisma.account.findFirst({
+        where: { userId: context.session.user.id, provider: 'google' },
+        select: { id: true }
+      })
+
+      if (googleAccount) redirect('/onboarding')
+    }
+
     return context
   }
 

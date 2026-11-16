@@ -10,13 +10,12 @@ import { signIn } from 'next-auth/react'
 
 // MUI Imports
 import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -31,6 +30,8 @@ import type { SystemMode } from '@core/types'
 import Link from '@components/Link'
 import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
+import GoogleSignInButton from '@/components/auth/GoogleSignInButton'
+import { safeCallbackPath } from '@/lib/auth/navigation'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
@@ -76,6 +77,7 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
   const [password, setPassword] = useState('')
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [googlePending, setGooglePending] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const darkImg = '/images/pages/auth-mask-dark.png'
@@ -99,16 +101,13 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
     borderedDarkIllustration
   )
 
-  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
-
-  const googleProviderMessage = hasGoogleProvider
-    ? 'El acceso con Google quedara para login de usuarios despues de crear el workspace.'
-    : 'Google tambien podra usarse mas adelante cuando carguemos esas credenciales.'
+  const safeCallbackUrl = safeCallbackPath(callbackUrl)
 
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (isSubmitting || googlePending) return
 
     if (!acceptedTerms) {
       setErrorMessage('Necesitas aceptar la politica de privacidad y las condiciones de servicio.')
@@ -181,11 +180,17 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
           <div className='flex flex-col gap-1'>
             <Typography variant='h4'>{`Registra tu empresa en ${themeConfig.templateName}`}</Typography>
             <Typography color='text.secondary'>
-              Crea el espacio de trabajo de tu empresa para organizar clientes, oportunidades y conversaciones. El pago
-              queda fuera de este primer flujo.
+              Crea el espacio de trabajo de tu empresa para organizar clientes, oportunidades y conversaciones.
             </Typography>
           </div>
 
+          <GoogleSignInButton
+            available={hasGoogleProvider}
+            callbackUrl={`/onboarding?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`}
+            disabled={isSubmitting}
+            onBusy={setGooglePending}
+          />
+          <Divider>o regístrate con tu email</Divider>
           <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
             <CustomTextField
               autoFocus
@@ -251,26 +256,18 @@ const Register = ({ mode, callbackUrl, hasGoogleProvider }: RegisterProps) => {
 
             {errorMessage ? <Alert severity='error'>{errorMessage}</Alert> : null}
 
-            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
+            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting || googlePending}>
               {isSubmitting ? 'Creando empresa...' : 'Crear empresa y entrar'}
             </Button>
-
-            <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
-              <Stack spacing={0.5}>
-                <Typography variant='body2' color='text.secondary'>
-                  Por ahora todos los workspaces entran desde el dominio principal del CRM; no se creara un subdominio
-                  para tu empresa.
-                </Typography>
-                <Typography variant='body2' color='text.secondary'>
-                  {googleProviderMessage}
-                </Typography>
-              </Stack>
-            </Box>
           </form>
 
           <Typography variant='body2' color='text.secondary'>
             Ya tienes acceso?{' '}
-            <Typography component={Link} href='/login' color='primary.main'>
+            <Typography
+              component={Link}
+              href={`/login?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`}
+              color='primary.main'
+            >
               Iniciar sesion
             </Typography>
           </Typography>

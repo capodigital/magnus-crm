@@ -51,6 +51,16 @@ async function main() {
   try {
     assert.equal((await request('/api/crm/contacts/search')).status, 401)
     assert.equal((await request('/api/cron/email')).status, 401)
+    assert.equal(
+      (
+        await request('/api/register/google', {
+          method: 'POST',
+          headers: { Origin: base, 'Content-Type': 'application/json' },
+          body: '{}'
+        })
+      ).status,
+      401
+    )
     const csrf = await (await request('/api/auth/csrf')).json()
 
     const login = await request('/api/auth/callback/credentials', {
@@ -128,6 +138,35 @@ async function main() {
 
     assert.equal(page.status, 200)
     assert.ok((await page.text()).includes('Local contact'))
+    const googleRegistration = { companyName: 'HTTP Google QA', acceptedTerms: true }
+
+    assert.equal(
+      (await mutate('/api/register/google', googleRegistration, 'POST', 'https://foreign.example.test')).status,
+      403
+    )
+    assert.equal(
+      (await mutate('/api/register/google', googleRegistration)).status,
+      403,
+      'Password-only accounts cannot use Google onboarding'
+    )
+    await prisma.account.create({
+      data: { userId: user.id, type: 'oauth', provider: 'google', providerAccountId: suffix }
+    })
+    assert.equal((await mutate('/api/register/google', { ...googleRegistration, acceptedTerms: false })).status, 400)
+
+    const onboarding = await mutate('/api/register/google', {
+      ...googleRegistration,
+      userId: 'foreign-user',
+      tenantId: foreign.id
+    })
+
+    assert.equal(onboarding.status, 200)
+    assert.equal(
+      (await onboarding.json()).result.tenantId,
+      tenant.id,
+      'Identity and workspace come from the session, not the request body'
+    )
+    assert.equal(await prisma.membership.count({ where: { userId: user.id } }), 1)
     console.log(
       'CRM HTTP: session authentication, cron protection, viewer/member/admin permissions, origin check, tenant isolation, contact persistence and authenticated rendering passed.'
     )

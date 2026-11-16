@@ -3,8 +3,21 @@ import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { resolveTenantContext } from '@/lib/tenant'
+import { safeCallbackPath } from '@/lib/auth/navigation'
 
-const protectedRoutes = ['/home', '/contacts', '/opportunities', '/activities', '/campaigns', '/automations', '/inbox', '/leads', '/pipeline', '/billing', '/settings']
+const protectedRoutes = [
+  '/home',
+  '/contacts',
+  '/opportunities',
+  '/activities',
+  '/campaigns',
+  '/automations',
+  '/inbox',
+  '/leads',
+  '/pipeline',
+  '/billing',
+  '/settings'
+]
 
 const isProtectedRoute = (pathname: string) =>
   protectedRoutes.some(route => pathname === route || pathname.startsWith(`${route}/`))
@@ -23,8 +36,11 @@ export async function proxy(req: NextRequest) {
   }
 
   if (isLoginRoute(pathname) && token) {
+    const error = req.nextUrl.searchParams.get('error')
+
+    if (error) return NextResponse.redirect(new URL(`/settings?error=${encodeURIComponent(error)}`, req.url))
     const callbackUrl = req.nextUrl.searchParams.get('callbackUrl')
-    const safeCallbackUrl = callbackUrl?.startsWith('/') ? callbackUrl : '/home'
+    const safeCallbackUrl = safeCallbackPath(callbackUrl)
     return NextResponse.redirect(new URL(safeCallbackUrl, req.url))
   }
 

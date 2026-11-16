@@ -10,7 +10,6 @@ import { signIn } from 'next-auth/react'
 
 // MUI Imports
 import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import Divider from '@mui/material/Divider'
@@ -32,6 +31,8 @@ import type { SystemMode } from '@core/types'
 import Link from '@components/Link'
 import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
+import GoogleSignInButton from '@/components/auth/GoogleSignInButton'
+import { safeCallbackPath } from '@/lib/auth/navigation'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
@@ -67,14 +68,16 @@ type LoginProps = {
   mode: SystemMode
   callbackUrl: string
   hasGoogleProvider: boolean
+  initialError?: string | null
 }
 
-const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
+const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider, initialError }: LoginProps) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(initialError ?? null)
+  const [googlePending, setGooglePending] = useState(false)
 
   const darkImg = '/images/pages/auth-mask-dark.png'
   const lightImg = '/images/pages/auth-mask-light.png'
@@ -97,12 +100,13 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
     borderedDarkIllustration
   )
 
-  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
+  const safeCallbackUrl = safeCallbackPath(callbackUrl)
 
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (isSubmitting || googlePending) return
     setIsSubmitting(true)
     setErrorMessage(null)
 
@@ -122,12 +126,6 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
 
     router.replace(response.url ?? safeCallbackUrl)
     router.refresh()
-  }
-
-  const handleGoogleSignIn = async () => {
-    await signIn('google', {
-      callbackUrl: safeCallbackUrl
-    })
   }
 
   return (
@@ -161,6 +159,13 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
             </Typography>
           </div>
 
+          <GoogleSignInButton
+            available={hasGoogleProvider}
+            callbackUrl={`/onboarding?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`}
+            disabled={isSubmitting}
+            onBusy={setGooglePending}
+          />
+          <Divider>o continúa con tu email</Divider>
           <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
             <CustomTextField
               autoFocus
@@ -203,38 +208,19 @@ const LoginV2 = ({ mode, callbackUrl, hasGoogleProvider }: LoginProps) => {
               </Typography>
             </div>
 
-            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting}>
+            <Button fullWidth variant='contained' type='submit' disabled={isSubmitting || googlePending}>
               {isSubmitting ? 'Iniciando sesion...' : 'Iniciar sesion'}
             </Button>
-
-            {hasGoogleProvider ? (
-              <>
-                <Divider className='gap-2 text-textPrimary'>o</Divider>
-                <Button
-                  fullWidth
-                  variant='outlined'
-                  type='button'
-                  onClick={handleGoogleSignIn}
-                  startIcon={<i className='tabler-brand-google-filled' />}
-                >
-                  Continuar con Google
-                </Button>
-              </>
-            ) : (
-              <Box className='rounded-lg border border-dashed border-textDisabled/30 px-4 py-3'>
-                <Stack spacing={0.5}>
-                  <Typography variant='body2' color='text.secondary'>
-                    Utiliza el correo y la contraseña de tu cuenta.
-                  </Typography>
-                </Stack>
-              </Box>
-            )}
           </form>
 
           <Stack spacing={1.5}>
             <Typography variant='body2' color='text.secondary'>
               No tienes cuenta todavia?{' '}
-              <Typography component={Link} href='/register' color='primary.main'>
+              <Typography
+                component={Link}
+                href={`/register?callbackUrl=${encodeURIComponent(safeCallbackUrl)}`}
+                color='primary.main'
+              >
                 Crear acceso
               </Typography>
             </Typography>

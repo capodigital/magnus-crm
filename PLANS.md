@@ -1,5 +1,14 @@
 # Plans
 
+## Google authentication — 2026-11-16
+
+- [x] Integrate Google login/register buttons and localized errors.
+- [x] Add transactional workspace onboarding and explicit account linking.
+- [x] Validate OAuth profile, redirects, tenant identity and concurrent registration.
+- [x] Document exact .env and Google Console fields without exposing secrets.
+- [x] Finish browser QA with local identity fixtures and production build.
+- [ ] User activation: configure Google credentials, publish and verify real Google consent/login.
+
 ## CRM navigation and AI by action — 2026-11-16
 
 - [x] Diagnose production UI mismatch: domain serves October 12 build.

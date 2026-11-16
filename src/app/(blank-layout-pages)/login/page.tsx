@@ -8,6 +8,8 @@ import Login from '@views/Login'
 
 // Auth Imports
 import { auth } from '@/lib/auth'
+import { hasGoogleProvider } from '@/lib/auth/google'
+import { authErrorMessage, safeCallbackPath } from '@/lib/auth/navigation'
 
 // Server Action Imports
 import { getServerMode } from '@core/utils/serverHelpers'
@@ -33,9 +35,11 @@ const LoginPage = async ({ searchParams }: Props) => {
 
   const callbackUrl = typeof resolvedSearchParams.callbackUrl === 'string' ? resolvedSearchParams.callbackUrl : '/home'
 
-  const safeCallbackUrl = callbackUrl.startsWith('/') ? callbackUrl : '/home'
+  const safeCallbackUrl = safeCallbackPath(callbackUrl)
 
   if (session?.user) {
+    if (typeof resolvedSearchParams.error === 'string')
+      redirect(`/settings?error=${encodeURIComponent(resolvedSearchParams.error)}`)
     redirect(safeCallbackUrl)
   }
 
@@ -43,7 +47,8 @@ const LoginPage = async ({ searchParams }: Props) => {
     <Login
       mode={mode}
       callbackUrl={safeCallbackUrl}
-      hasGoogleProvider={Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)}
+      hasGoogleProvider={hasGoogleProvider()}
+      initialError={authErrorMessage(resolvedSearchParams.error)}
     />
   )
 }

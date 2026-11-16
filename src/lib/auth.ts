@@ -8,8 +8,9 @@ import GoogleProvider from 'next-auth/providers/google'
 import type { JWT } from 'next-auth/jwt'
 
 import prisma from '@/lib/prisma'
+import { hasGoogleProvider, verifiedGoogleEmail } from '@/lib/auth/google'
 
-const hasGoogleCredentials = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)
+const hasGoogleCredentials = hasGoogleProvider()
 
 type AuthUser = {
   id: string
@@ -58,7 +59,14 @@ if (hasGoogleCredentials) {
   providers.push(
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      checks: ['pkce', 'state', 'nonce'],
+      authorization: { params: { scope: 'openid email profile', prompt: 'select_account' } },
+      // Existing password accounts must explicitly link Google while signed in.
+      allowDangerousEmailAccountLinking: false,
+      profile(profile) {
+        return { id: profile.sub, email: verifiedGoogleEmail(profile), name: profile.name, image: profile.picture }
+      }
     })
   )
 }
@@ -74,6 +82,18 @@ export const authOptions: NextAuthOptions = {
   },
   providers,
   callbacks: {
+    async signIn({ account, profile }) {
+      if (account?.provider !== 'google') return true
+      const email = verifiedGoogleEmail(profile)
+
+      if (!email) return false
+      const session = await getServerSession(authOptions)
+
+      if (session?.user?.email && session.user.email.trim().toLowerCase() !== email)
+        return '/settings?error=GoogleAccountMismatch'
+
+      return true
+    },
     async jwt({ token, user }: { token: JWT; user?: AuthUser }) {
       if (user) {
         token.id = user.id

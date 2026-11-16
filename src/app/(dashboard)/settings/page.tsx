@@ -5,15 +5,30 @@ import CardContent from '@mui/material/CardContent'
 import Divider from '@mui/material/Divider'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import Alert from '@mui/material/Alert'
 
 import Button from '@components/crm/LinkButton'
 
 import PageHeading from '@components/crm/PageHeading'
 
 import { requireTenantAccess } from '@/lib/app-context'
+import prisma from '@/lib/prisma'
+import GoogleSignInButton from '@/components/auth/GoogleSignInButton'
+import { hasGoogleProvider } from '@/lib/auth/google'
+import { authErrorMessage } from '@/lib/auth/navigation'
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   const context = await requireTenantAccess()
+
+  const [googleAccount, params] = await Promise.all([
+    prisma.account.findFirst({ where: { userId: context.session.user.id, provider: 'google' }, select: { id: true } }),
+    searchParams
+  ])
+
   const workspace = context.tenant ?? context.memberships[0]?.tenant
   const membership = context.membership ?? context.memberships[0]
 
@@ -88,6 +103,29 @@ export default async function SettingsPage() {
           </CardContent>
         </Card>
       </Box>
+      <Card>
+        <CardContent sx={{ p: 5 }}>
+          <Stack spacing={3}>
+            <Typography variant='h6'>Acceso con Google</Typography>
+            {params.error ? <Alert severity='error'>{authErrorMessage(params.error)}</Alert> : null}
+            {googleAccount ? (
+              <Typography>
+                Tu cuenta de Google está vinculada. Puedes utilizarla para entrar a tu espacio de trabajo.
+              </Typography>
+            ) : (
+              <>
+                <Typography color='text.secondary'>
+                  Vincula la cuenta de Google que usa {context.session.user.email} para entrar sin contraseña.
+                  Conservarás tus clientes y permisos.
+                </Typography>
+                <Box sx={{ maxWidth: 360 }}>
+                  <GoogleSignInButton available={hasGoogleProvider()} callbackUrl='/settings' />
+                </Box>
+              </>
+            )}
+          </Stack>
+        </CardContent>
+      </Card>
     </Stack>
   )
 }
