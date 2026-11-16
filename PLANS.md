@@ -6,7 +6,10 @@
 - [x] Correct public homepage, brand identity, privacy and deletion disclosures.
 - [x] Document exact Google Console fields and resubmission steps.
 - [x] Verify public/private routing, responsive rendering, lint, typecheck and production build.
-- [ ] User publishes and resubmits to Google after checking the live URLs.
+- [x] User published; live public routes, policy and access checks pass.
+- [x] Reconcile the projects and confirm corrected crm-magnus Branding values in Google Cloud.
+- [x] Identify the additional-review option and prepare supporting evidence and explanation.
+- [ ] User completes basic scope declarations and submits the additional brand review; Google approval remains external.
 
 ## Authentication artwork — 2026-11-16
 

@@ -2,9 +2,13 @@
 
 ## Current objective
 
-Correct Google OAuth brand-verification findings: public homepage, consistent Magnus CRM identity and accurate privacy disclosures. User handles publication and resubmission.
+Help resolve Google brand-verification findings after publication. Live website and corrected crm-magnus Branding values are confirmed; the console offers an additional review route for findings that do not match the published site. User handles the submission.
 
 ## Google brand verification — 2026-11-16
+
+- Follow-up after publication: user confirms a repeated result on clicking Verify. Live unauthenticated HTTP/browser checks confirm the new homepage, 11-section privacy policy, public documents, correct brand and protected internal routes. GET/HEAD, crawler User-Agent variants, robots/sitemap and public DNS show no general access block from this environment. These checks do not reproduce Google's actual review infrastructure or prove policy approval.
+- Project mismatch resolved by the user: original screen was sitio-web-502221; after correction, crm-magnus now has Magnus CRM, contact email, domain and the three correct public URLs saved. Direct browser inspection confirmed these values. The issues dialog labels findings as the prior attempt and offers “Corregí los problemas” or “Considero que los problemas detectados son incorrectos” (additional review); Continue requires a selection. No submission or remote settings change performed.
+- Data Access tables in crm-magnus were observed empty; app code requests openid/email/profile. Recommend declaring the basic scopes when completing the project without claiming they caused the brand findings. Evidence and an additional-review explanation are in docs/google-brand-verification.md. No further product code changes justified by the checks.
 
 - User reported five Google findings about privacy, homepage access/purpose, identity and API terms. Confirmed public contact email magnusecosystems@gmail.com; kept existing Magnus Ecosystems brand identity.
 - Read official Google requirements and mapped disclosures to current auth scopes, Prisma account records, AI context, email delivery and account deletion. Production anonymous HTTP currently returns 200 at / and /privacy-policy with old content; the reported access finding may reflect an earlier review or a different configured URL.
